@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@ngqp/core": [
+        "dist/ngqp/core"
+      ],
+      "@ngqp/core/*": [
+        "dist/ngqp/core/*"
+      ]
+    }
   }
 }
