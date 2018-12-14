@@ -1,9 +1,11 @@
 {
-  "name": "@ngqp/core",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^7.x.x",
-    "@angular/core": "^7.x.x",
-    "@angular/router": "^7.x.x"
-  }
+    "name": "@ngqp/core",
+    "version": "0.0.1",
+    "peerDependencies": {
+        "@angular/common": "^7.x.x",
+        "@angular/core": "^7.x.x",
+        "@angular/forms": "^7.x.x",
+        "@angular/router": "^7.x.x",
+        "rxjs": "^6.x.x"
+    }
 }
