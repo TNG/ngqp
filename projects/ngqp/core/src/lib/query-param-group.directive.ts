@@ -46,6 +46,8 @@ export class QueryParamGroupDirective implements OnDestroy {
             throw new Error(`No value accessor found for the control. Please make sure to implement ControlValueAccessor on this component.`);
         }
 
+        // Use the name defined in the control, but fall back to the name given
+        // to the control itself otherwise.
         const paramName = control.name || directive.name;
 
         // View -> Model
