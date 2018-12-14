@@ -47,7 +47,6 @@ export class QueryParamGroupDirective implements OnDestroy {
         }
 
         const paramName = control.name || directive.name;
-        directive.valueAccessor.writeValue(control.initialValue);
 
         // View -> Model
         directive.valueAccessor.registerOnChange((newModel: any) => {

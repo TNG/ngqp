@@ -46,9 +46,6 @@ export class QueryParamControl<T> {
     public name: string | null = null;
 
     /** TODO Documentation */
-    public initialValue!: T | null;
-
-    /** TODO Documentation */
     public serialize: (model: T) => string;
 
     /** TODO Documentation */
@@ -65,7 +62,6 @@ export class QueryParamControl<T> {
     constructor(config: QueryParamControlOpts<T>) {
         const {
             name = null,
-            initialValue = null,
             serialize = (model: any) => '' + model,
             deserialize = (value: string) => value as any,
         } = config;
@@ -79,7 +75,6 @@ export class QueryParamControl<T> {
         }
 
         this.name = name;
-        this.initialValue = initialValue;
 
         // TODO Wrap this into an error handler with proper error message
         this.serialize = serialize;
@@ -96,7 +91,6 @@ export class QueryParamControl<T> {
 // TODO combineWith: (previous: T, current: T): Params
 export interface QueryParamControlOpts<T> {
     name?: string;
-    initialValue?: T;
     serialize?: (model: T) => string | null;
     deserialize?: (value: string | null) => T;
 }
