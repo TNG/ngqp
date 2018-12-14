@@ -82,6 +82,8 @@ export class QueryParamControl<T> {
 
         this.name = name;
         this.initialValue = initialValue;
+
+        // TODO Wrap this into an error handler with proper error message
         this.serialize = serialize;
         this.deserialize = deserialize;
     }
@@ -92,10 +94,9 @@ export class QueryParamControl<T> {
  * TODO Documentation
  */
 // TODO multi: true
-// TODO "Default" value which is removed instead of added
 export interface QueryParamControlOpts<T> {
     name?: string;
     initialValue?: T;
-    serialize?: (model: T) => string;
-    deserialize?: (value: string) => T;
+    serialize?: (model: T) => string | null;
+    deserialize?: (value: string | null) => T;
 }
