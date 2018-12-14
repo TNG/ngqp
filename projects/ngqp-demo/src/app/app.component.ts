@@ -7,7 +7,7 @@ import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 })
 export class AppComponent {
 
-    private paramGroup: QueryParamGroup;
+    public paramGroup: QueryParamGroup;
 
     constructor(private queryParamBuilder: QueryParamBuilder) {
         this.paramGroup = queryParamBuilder.group({
