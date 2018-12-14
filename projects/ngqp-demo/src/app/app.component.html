@@ -1,12 +1,14 @@
 <div [queryParamGroup]="paramGroup">
-    <input type="text" placeholder="Search" ngModel queryParamName="search" />
+    <input type="text" placeholder="Search" queryParamName="search" />
     <button type="button" routerLink="./" [queryParams]="{q: 'foo'}" queryParamsHandling="merge">Go to ?q=foo</button>
 
     <br />
 
+    <!--
     <select queryParamName="type">
         <option [value]="1">Dog</option>
         <option [value]="2">Cat</option>
         <option [value]="3">Mouse</option>
     </select>
+    -->
 </div>

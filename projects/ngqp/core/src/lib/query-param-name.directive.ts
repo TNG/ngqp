@@ -1,6 +1,7 @@
 import { Directive, Host, Inject, Input, OnChanges, OnInit, Optional, Self, SimpleChanges, SkipSelf } from '@angular/core';
-import { ControlValueAccessor, DefaultValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryParamGroupDirective } from './query-param-group.directive';
+import { NgqpDefaultControlValueAccessorDirective } from './accessors/accessors';
 
 /**
  * TODO Documentation
@@ -53,12 +54,16 @@ export class QueryParamNameDirective implements OnInit, OnChanges {
             return null;
         }
 
-        const customAccessor = valueAccessors.find(valueAccessor => valueAccessor.constructor !== DefaultValueAccessor);
+        // TODO Check against all our custom accessors (similar to selectValueAccessor in @angular/forms)
+
+        const customAccessor = valueAccessors
+            .find(valueAccessor => valueAccessor.constructor !== NgqpDefaultControlValueAccessorDirective);
         if (customAccessor !== undefined) {
             return customAccessor;
         }
 
-        const defaultAccessor = valueAccessors.find(valueAccessor => valueAccessor.constructor === DefaultValueAccessor);
+        const defaultAccessor = valueAccessors
+            .find(valueAccessor => valueAccessor.constructor === NgqpDefaultControlValueAccessorDirective);
         if (defaultAccessor !== undefined) {
             return defaultAccessor;
         }

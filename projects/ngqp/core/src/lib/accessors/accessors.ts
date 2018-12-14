@@ -1,1 +1,2 @@
+export { NgqpDefaultControlValueAccessorDirective } from './default-control-value-accessor.directive';
 export { NgqpSelectControlValueAccessorDirective, NgqpSelectOptionDirective } from './select-control-value-accessor.directive';
