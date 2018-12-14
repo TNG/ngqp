@@ -37,6 +37,133 @@
                     }
                 }
             }
+        },
+        "ngqp-demo": {
+            "root": "projects/ngqp-demo/",
+            "sourceRoot": "projects/ngqp-demo/src",
+            "projectType": "application",
+            "prefix": "app",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/ngqp-demo",
+                        "index": "projects/ngqp-demo/src/index.html",
+                        "main": "projects/ngqp-demo/src/main.ts",
+                        "polyfills": "projects/ngqp-demo/src/polyfills.ts",
+                        "tsConfig": "projects/ngqp-demo/tsconfig.app.json",
+                        "assets": [
+                            "projects/ngqp-demo/src/favicon.ico",
+                            "projects/ngqp-demo/src/assets"
+                        ],
+                        "styles": [
+                            "projects/ngqp-demo/src/styles.css"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "projects/ngqp-demo/src/environments/environment.ts",
+                                    "with": "projects/ngqp-demo/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "ngqp-demo:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "ngqp-demo:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "ngqp-demo:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "projects/ngqp-demo/src/test.ts",
+                        "polyfills": "projects/ngqp-demo/src/polyfills.ts",
+                        "tsConfig": "projects/ngqp-demo/tsconfig.spec.json",
+                        "karmaConfig": "projects/ngqp-demo/karma.conf.js",
+                        "styles": [
+                            "projects/ngqp-demo/src/styles.css"
+                        ],
+                        "scripts": [],
+                        "assets": [
+                            "projects/ngqp-demo/src/favicon.ico",
+                            "projects/ngqp-demo/src/assets"
+                        ]
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "projects/ngqp-demo/tsconfig.app.json",
+                            "projects/ngqp-demo/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
+        },
+        "ngqp-demo-e2e": {
+            "root": "projects/ngqp-demo-e2e/",
+            "projectType": "application",
+            "prefix": "",
+            "architect": {
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "projects/ngqp-demo-e2e/protractor.conf.js",
+                        "devServerTarget": "ngqp-demo:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "ngqp-demo:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": "projects/ngqp-demo-e2e/tsconfig.e2e.json",
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                }
+            }
         }
     },
     "defaultProject": "@ngqp/core"
