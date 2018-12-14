@@ -91,6 +91,8 @@ export class QueryParamControl<T> {
 /**
  * TODO Documentation
  */
+// TODO multi: true
+// TODO "Default" value which is removed instead of added
 export interface QueryParamControlOpts<T> {
     name?: string;
     initialValue?: T;
