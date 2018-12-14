@@ -43,14 +43,6 @@ export class QueryParamGroup {
 export class QueryParamControl<T> {
 
     /** TODO Documentation */
-    public value: T = null;
-
-    // TODO Who completes this?
-    private _valueChanges$ = new Subject<T>();
-    /** TODO Documentation */
-    public readonly valueChanges$ = this._valueChanges$.asObservable();
-
-    /** TODO Documentation */
     public name: string | null = null;
 
     /** TODO Documentation */
@@ -62,7 +54,13 @@ export class QueryParamControl<T> {
     /** TODO Documentation */
     public deserialize: (value: string) => T;
 
-    // TODO Add combineWith(previousValue: T, currentValue: T): Params
+    // TODO Who completes this?
+    private _valueChanges$ = new Subject<T>();
+    /** TODO Documentation */
+    public readonly valueChanges$ = this._valueChanges$.asObservable();
+
+    /** TODO Documentation */
+    public value: T = null;
 
     constructor(config: QueryParamControlOpts<T>) {
         const {
@@ -93,7 +91,9 @@ export class QueryParamControl<T> {
 /**
  * TODO Documentation
  */
-// TODO multi: true
+// TODO debounce: number
+// TODO multi: boolean
+// TODO combineWith: (previous: T, current: T): Params
 export interface QueryParamControlOpts<T> {
     name?: string;
     initialValue?: T;
