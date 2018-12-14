@@ -14,6 +14,10 @@ export class AppComponent {
             search: queryParamBuilder.param({
                 name: 'q',
             }),
+            type: queryParamBuilder.param({
+                serialize: (value: number | null) => value === null ? null : `V${value}`,
+                deserialize: (value: string | null) => value ? +value[1] : 1,
+            }),
         });
     }
 
