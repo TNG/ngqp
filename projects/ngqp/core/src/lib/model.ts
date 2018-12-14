@@ -45,8 +45,9 @@ export class QueryParamControl<T> {
     /** TODO Documentation */
     public value: T = null;
 
+    // TODO Who completes this?
+    private _valueChanges$ = new Subject<T>();
     /** TODO Documentation */
-    // @ts-ignore
     public readonly valueChanges$ = this._valueChanges$.asObservable();
 
     /** TODO Documentation */
@@ -62,9 +63,6 @@ export class QueryParamControl<T> {
     public deserialize: (value: string) => T;
 
     // TODO Add combineWith(previousValue: T, currentValue: T): Params
-
-    // TODO Who completes this?
-    private _valueChanges$ = new Subject<T>();
 
     constructor(config: QueryParamControlOpts<T>) {
         const {
