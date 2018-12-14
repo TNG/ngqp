@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { concatMap, map, takeUntil } from 'rxjs/operators';
+import { concatMap, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { QueryParamControl, QueryParamGroup } from './model';
 import { QueryParamNameDirective } from './query-param-name.directive';
 
@@ -36,6 +36,7 @@ export class QueryParamGroupDirective implements OnDestroy {
         this.destroy$.complete();
     }
 
+    // TODO Let control's host implement an interface for serialize / deserialize
     public addControl(directive: QueryParamNameDirective): void {
         const control: QueryParamControl<any> = this.queryParamGroup.controls[directive.name];
         if (!control) {
@@ -58,6 +59,7 @@ export class QueryParamGroupDirective implements OnDestroy {
         // Model -> View
         this.route.queryParamMap.pipe(
             map(queryParamMap => queryParamMap.get(paramName)),
+            distinctUntilChanged(),
             map(param => control.deserialize(param)),
         ).subscribe(newModel => {
             if (control.serialize(newModel) === control.serialize(control.value)) {
