@@ -70,8 +70,8 @@ export class QueryParamControl<T> {
         const {
             name = null,
             initialValue = null,
-            serialize = model => '' + model,
-            deserialize = value => value as any,
+            serialize = (model: any) => '' + model,
+            deserialize = (value: string) => value as any,
         } = config;
 
         if (!isOptionalFunction(serialize)) {
