@@ -45,18 +45,19 @@ export class QueryParamGroupDirective implements OnDestroy {
             throw new Error(`No value accessor found for the control. Please make sure to implement ControlValueAccessor on this component.`);
         }
 
+        const paramName = control.name || directive.name;
         directive.valueAccessor.writeValue(control.initialValue);
 
         // View -> Model
         directive.valueAccessor.registerOnChange((newModel: any) => {
             this.enqueueNavigation({
-                [control.name]: control.serialize(newModel)
+                [paramName]: control.serialize(newModel)
             });
         });
 
         // Model -> View
         this.route.queryParamMap.pipe(
-            map(queryParamMap => queryParamMap.get(control.name)),
+            map(queryParamMap => queryParamMap.get(paramName)),
             map(param => control.deserialize(param)),
         ).subscribe(newModel => {
             if (control.serialize(newModel) === control.serialize(control.value)) {
