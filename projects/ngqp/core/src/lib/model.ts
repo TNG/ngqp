@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { isOptionalFunction } from './util';
+import { isOptionalFunction, wrapTryCatch } from './util';
 
 /**
  * TODO Documentation
@@ -76,9 +76,8 @@ export class QueryParamControl<T> {
 
         this.name = name;
 
-        // TODO Wrap this into an error handler with proper error message
-        this.serialize = serialize;
-        this.deserialize = deserialize;
+        this.serialize = wrapTryCatch(serialize, `Error while serializing value for ${name || 'control'}`);
+        this.deserialize = wrapTryCatch(deserialize, `Error while deserializing value for ${name || 'control'}`);
     }
 
 }
