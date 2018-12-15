@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng lint && ng build",
     "build-core": "ng build @ngqp/core",
     "serve-demo": "ng serve ngqp-demo",
     "release": "cd projects/ngqp/core && standard-version --infile ../../../CHANGELOG.md",

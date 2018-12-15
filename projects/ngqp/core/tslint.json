@@ -10,8 +10,6 @@
             true,
             "element",
             "kebab-case"
-        ],
-        "max-line-length": false,
-        "eofline": false
+        ]
     }
 }

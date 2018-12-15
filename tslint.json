@@ -14,7 +14,7 @@
         "deprecation": {
             "severity": "warn"
         },
-        "eofline": true,
+        "eofline": false,
         "forin": true,
         "import-blacklist": [
             true,
@@ -27,10 +27,7 @@
         ],
         "interface-over-type-literal": true,
         "label-position": true,
-        "max-line-length": [
-            true,
-            140
-        ],
+        "max-line-length": false,
         "member-access": false,
         "member-ordering": [
             true,
@@ -73,7 +70,7 @@
         "no-trailing-whitespace": true,
         "no-unnecessary-initializer": true,
         "no-unused-expression": true,
-        "no-use-before-declare": true,
+        "no-use-before-declare": false,
         "no-var-keyword": true,
         "object-literal-sort-keys": false,
         "one-line": [
@@ -121,8 +118,8 @@
         "use-input-property-decorator": true,
         "use-output-property-decorator": true,
         "use-host-property-decorator": true,
-        "no-input-rename": true,
-        "no-output-rename": true,
+        "no-input-rename": false,
+        "no-output-rename": false,
         "use-life-cycle-interface": true,
         "use-pipe-transform-interface": true,
         "component-class-suffix": true,
