@@ -13,28 +13,6 @@ export class QueryParamGroup {
         this.controls = controls;
     }
 
-    /**
-     * TODO Documentation
-     */
-    public setValue(/* TODO { emitEvent? } */): void {
-        // TODO
-    }
-
-    /**
-     * TODO Documentation
-     */
-    public patchValue(/* TODO { emitEvent? } */): void {
-        // TODO
-    }
-
-    /**
-     * TODO Documentation
-     */
-    public get valueChanges(): Observable<any> {
-        // TODO Implement and turn into a property
-        return null;
-    }
-
 }
 
 /**
@@ -85,9 +63,6 @@ export class QueryParamControl<T> {
 /**
  * TODO Documentation
  */
-// TODO debounce: number
-// TODO multi: boolean
-// TODO combineWith: (previous: T, current: T): Params
 export interface QueryParamControlOpts<T> {
     name?: string;
     serialize?: (model: T) => string | null;

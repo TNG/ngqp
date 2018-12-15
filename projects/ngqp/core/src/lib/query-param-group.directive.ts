@@ -36,7 +36,6 @@ export class QueryParamGroupDirective implements OnDestroy {
         this.destroy$.complete();
     }
 
-    // TODO Let control's host implement an interface for serialize / deserialize
     public addControl(directive: QueryParamNameDirective): void {
         const control: QueryParamControl<any> = this.queryParamGroup.controls[directive.name];
         if (!control) {
@@ -75,13 +74,11 @@ export class QueryParamGroupDirective implements OnDestroy {
     }
 
     private setupNavigationQueue() {
-        // TODO Use bufferReduceMap (https://stackoverflow.com/questions/53732408)
         this.queue$.pipe(
             takeUntil(this.destroy$),
             concatMap(params => this.router.navigate([], {
                 relativeTo: this.route,
                 queryParamsHandling: 'merge',
-                // TODO Allow specifying skipLocationChange / replaceUrl
                 queryParams: params,
             })),
         ).subscribe();
