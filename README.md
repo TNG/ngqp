@@ -3,7 +3,8 @@
 # ngqp – Synchronizing form controls with the URL for Angular
 
 @ngqp makes it easy to synchronize form controls with query parameters in your URL. Examples include pagination information
-or the current settings of filters in a data view.
+or the current settings of filters in a data view. ngqp is designed to resemble the Forms API from `@angular/forms`, making
+it intuitive to work with.
 
 # Installation
 
@@ -15,7 +16,6 @@ import { QueryParamModule } from '@ngqp/core';
 
 @NgModule({
     imports: [
-        // …
         QueryParamModule
     ],
 })
@@ -23,6 +23,10 @@ export class AppModule {}
 ```
 
 Make sure that your app is set up to use routing (i.e., using `RouterModule`).
+
+# Usage
+
+This section is a work in progress since ngqp is still in an early development stage.
 
 # Contributing
 
