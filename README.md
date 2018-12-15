@@ -4,7 +4,7 @@
 # ngqp – Synchronizing form controls with the URL for Angular
 
 <p align="center">
-  <img width="auto" height="240" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg">
+  <img width="auto" height="240" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg?sanitize=true">
 </p>
 
 @ngqp makes it easy to synchronize form controls with query parameters in your URL. Examples include pagination information
