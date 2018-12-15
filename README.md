@@ -53,5 +53,5 @@ filter settings (search query, selections, …)
 
 [Licensed under the MIT License][license]
 
-[license]: https://www.github.com/Airblader/ngqp/LICENSE
-[contributing]: https://www.github.com/Airblader/ngqp/CONTRIBUTING.md
+[license]: https://www.github.com/Airblader/ngqp/blob/master/LICENSE
+[contributing]: https://www.github.com/Airblader/ngqp/blob/master/CONTRIBUTING.md
