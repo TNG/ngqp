@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "description": "Synchronizing form controls with the URL for Angular",
     "homepage": "https://github.com/Airblader/ngqp",
+    "author": "Ingo Bürk",
     "license": "MIT",
     "bugs": "https://github.com/Airblader/ngqp/issues",
     "repository": {
