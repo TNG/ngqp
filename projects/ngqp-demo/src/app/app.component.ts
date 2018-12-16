@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
     selector: 'app-root',
@@ -13,6 +14,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+    public faGithub = faGithub;
     public isNavbarExpanded = false;
 
 }
