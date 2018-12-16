@@ -36,41 +36,41 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public param(config: QueryParamControlOptsInput<string>): QueryParamControl<string> {
+    public param(opts: QueryParamControlOptsInput<string>): QueryParamControl<string> {
         return new QueryParamControl({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
-            ...config,
+            ...opts,
         });
     }
 
     /**
      * TODO Documentation
      */
-    public numericParam(config: QueryParamControlOptsInput<number>): QueryParamControl<number> {
+    public numericParam(opts: QueryParamControlOptsInput<number>): QueryParamControl<number> {
         return new QueryParamControl({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
-            ...config,
+            ...opts,
         });
     }
 
     /**
      * TODO Documentation
      */
-    public booleanParam(config: QueryParamControlOptsInput<boolean>): QueryParamControl<boolean> {
+    public booleanParam(opts: QueryParamControlOptsInput<boolean>): QueryParamControl<boolean> {
         return new QueryParamControl({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
-            ...config,
+            ...opts,
         });
     }
 
     /**
      * TODO Documentation
      */
-    public customParam<T>(config: QueryParamControlOpts<T>): QueryParamControl<T> {
-        return new QueryParamControl(config);
+    public customParam<T>(opts: QueryParamControlOpts<T>): QueryParamControl<T> {
+        return new QueryParamControl(opts);
     }
 
     private createControl<T>(controlName: string, controlConfig: QueryParamControl<T> | string): QueryParamControl<T | string> {
