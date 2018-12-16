@@ -1,4 +1,7 @@
 language: node_js
+dist: trusty
+node_js:
+    - lts/*
 script:
     - yarn lint
     - yarn build @ngqp/core
