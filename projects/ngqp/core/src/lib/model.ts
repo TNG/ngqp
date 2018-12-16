@@ -11,9 +11,9 @@ export type ParamDeserializer<T> = (value: string | null) => T | null;
  */
 export interface QueryParamControlOpts<T> {
     name: string;
-    serialize?: ParamSerializer<T>;
-    deserialize?: ParamDeserializer<T>;
-    debounceTime?: number;
+    serialize: ParamSerializer<T>;
+    deserialize: ParamDeserializer<T>;
+    debounceTime?: number | null;
 }
 
 /**

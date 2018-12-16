@@ -9,6 +9,9 @@ import {
     DEFAULT_STRING_SERIALIZER
 } from './serializers';
 
+type OverwritePartial<T1, T2 extends keyof T1> = Pick<T1, Exclude<keyof T1, T2>> & Partial<Pick<T1, T2>>;
+export type QueryParamControlOptsInput<T> = OverwritePartial<QueryParamControlOpts<T>, 'serialize' | 'deserialize'>;
+
 /**
  * TODO Documentation
  */
@@ -32,7 +35,7 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public param(config: QueryParamControlOpts<string>): QueryParamControl<string> {
+    public param(config: QueryParamControlOptsInput<string>): QueryParamControl<string> {
         return new QueryParamControl({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
@@ -43,7 +46,7 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public numericParam(config: QueryParamControlOpts<number>): QueryParamControl<number> {
+    public numericParam(config: QueryParamControlOptsInput<number>): QueryParamControl<number> {
         return new QueryParamControl({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
@@ -54,7 +57,7 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public booleanParam(config: QueryParamControlOpts<boolean>): QueryParamControl<boolean> {
+    public booleanParam(config: QueryParamControlOptsInput<boolean>): QueryParamControl<boolean> {
         return new QueryParamControl({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
