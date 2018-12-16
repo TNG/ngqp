@@ -9,6 +9,7 @@
     "serve-demo": "ng serve ngqp-demo",
     "release": "cd projects/ngqp/core && standard-version --infile ../../../CHANGELOG.md",
     "publish": "yarn build-core && cd dist/ngqp/core && npm publish --access public",
+    "publish-demo": "yarn build-core && ng build ngqp-demo --prod --base-href=\"https://Airblader.github.io/ngqp/\" && npx ngh --dir=dist/ngqp-demo",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -40,6 +41,7 @@
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "angular-cli-ghpages": "^0.5.3",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
