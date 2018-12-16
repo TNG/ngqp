@@ -1,26 +1,24 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
 
-export const NGQP_RANGE_VALUE_ACCESSOR: any = {
+export const NGQP_CHECKBOX_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => RangeControlValueAccessorDirective),
+    useExisting: forwardRef(() => CheckboxControlValueAccessorDirective),
     multi: true
 };
 
 @Directive({
-    selector: 'input[type=range][queryParamName]',
-    providers: [NGQP_RANGE_VALUE_ACCESSOR],
+    selector: 'input[type=checkbox][queryParamName]',
+    providers: [NGQP_CHECKBOX_VALUE_ACCESSOR],
 })
-export class RangeControlValueAccessorDirective implements ControlValueAccessor {
+export class CheckboxControlValueAccessorDirective implements ControlValueAccessor {
 
-    private fnChange = (_: number) => {};
+    private fnChange = (_: boolean) => {};
     private fnTouched = () => {};
 
-    @HostListener('input', ['$event'])
     @HostListener('change', ['$event'])
     public onInput(event: UIEvent) {
-        const value = (event.target as HTMLInputElement).value;
-        this.fnChange(value === '' ? null : parseFloat(value));
+        this.fnChange((event.target as HTMLInputElement).checked);
     }
 
     @HostListener('blur')
@@ -32,7 +30,7 @@ export class RangeControlValueAccessorDirective implements ControlValueAccessor 
     }
 
     public writeValue(value: any) {
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', parseFloat(value));
+        this.renderer.setProperty(this.elementRef.nativeElement, 'checked', value);
     }
 
     public registerOnChange(fn: any) {
