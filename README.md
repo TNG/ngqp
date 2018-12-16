@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Airblader/ngqp.svg?branch=master)](https://travis-ci.org/Airblader/ngqp)
 [![npm version](https://badge.fury.io/js/%40ngqp%2Fcore.svg)](https://www.npmjs.com/@ngqp/core)
 [![devDependency Status](https://david-dm.org/Airblader/ngqp/dev-status.svg?branch=master)](https://david-dm.org/Airblader/ngqp#info=devDependencies)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
