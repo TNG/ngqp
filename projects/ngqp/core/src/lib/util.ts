@@ -1,15 +1,15 @@
 /**
  * TODO Documentation
  */
-export function isDefined(obj: any): boolean {
-    return obj !== undefined && obj !== null;
+export function isMissing(obj: any): obj is null | undefined {
+    return obj === undefined || obj === null;
 }
 
 /**
  * TODO Documentation
  */
 export function isOptionalFunction(obj: any): boolean {
-    return !isDefined(obj) || typeof obj === 'function';
+    return isMissing(obj) || typeof obj === 'function';
 }
 
 /**

@@ -11,7 +11,8 @@ export class PlaygroundComponent {
     constructor(private queryParamBuilder: QueryParamBuilder) {
         this.paramGroup = queryParamBuilder.group({
             searchText: queryParamBuilder.param({
-                name: 'q'
+                name: 'q',
+                debounceTime: 1000,
             }),
         });
     }

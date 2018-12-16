@@ -1,9 +1,10 @@
 import { Directive, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { concatMap, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
-import { QueryParamControl, QueryParamGroup } from './model';
+import { concatMap, debounceTime, distinctUntilChanged, map, takeUntil, tap } from 'rxjs/operators';
 import { QueryParamNameDirective } from './query-param-name.directive';
+import { QueryParamControl, QueryParamGroup } from './model';
+import { isMissing } from './util';
 
 /**
  * TODO Documentation
@@ -49,9 +50,17 @@ export class QueryParamGroupDirective implements OnDestroy {
         // to the control itself otherwise.
         const paramName = control.name || directive.name;
 
+        const paramQueue$ = new Subject<Params>();
+        paramQueue$
+            .pipe(
+                !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(params => this.enqueueNavigation(params));
+
         // View -> Model
         directive.valueAccessor.registerOnChange((newModel: any) => {
-            this.enqueueNavigation({
+            paramQueue$.next({
                 [paramName]: control.serialize(newModel)
             });
         });

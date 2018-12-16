@@ -1,5 +1,20 @@
-import { Observable, Subject } from 'rxjs';
 import { isOptionalFunction, wrapTryCatch } from './util';
+
+/** TODO Documentation */
+export type ParamSerializer<T> = (model: T | null) => string | null;
+
+/** TODO Documentation */
+export type ParamDeserializer<T> = (value: string | null) => T | null;
+
+/**
+ * TODO Documentation
+ */
+export interface QueryParamControlOpts<T> {
+    name: string;
+    serialize?: ParamSerializer<T>;
+    deserialize?: ParamDeserializer<T>;
+    debounceTime?: number;
+}
 
 /**
  * TODO Documentation
@@ -24,25 +39,19 @@ export class QueryParamControl<T> {
     public name: string | null = null;
 
     /** TODO Documentation */
-    public serialize: (model: T) => string;
+    public serialize: ParamSerializer<T>;
 
     /** TODO Documentation */
-    public deserialize: (value: string) => T;
+    public deserialize: ParamDeserializer<T>;
 
-    // TODO Who completes this?
-    private _valueChanges$ = new Subject<T>();
     /** TODO Documentation */
-    public readonly valueChanges$ = this._valueChanges$.asObservable();
+    public debounceTime: number | null = null;
 
     /** TODO Documentation */
     public value: T = null;
 
     constructor(config: QueryParamControlOpts<T>) {
-        const {
-            name = null,
-            serialize = (model: any) => '' + model,
-            deserialize = (value: string) => value as any,
-        } = config;
+        const { name, serialize, deserialize, debounceTime } = config;
 
         if (!isOptionalFunction(serialize)) {
             throw new Error(`serialize must be a function, but received ${serialize}`);
@@ -53,18 +62,9 @@ export class QueryParamControl<T> {
         }
 
         this.name = name;
-
         this.serialize = wrapTryCatch(serialize, `Error while serializing value for ${name || 'control'}`);
         this.deserialize = wrapTryCatch(deserialize, `Error while deserializing value for ${name || 'control'}`);
+        this.debounceTime = debounceTime;
     }
 
-}
-
-/**
- * TODO Documentation
- */
-export interface QueryParamControlOpts<T> {
-    name?: string;
-    serialize?: (model: T) => string | null;
-    deserialize?: (value: string | null) => T;
 }
