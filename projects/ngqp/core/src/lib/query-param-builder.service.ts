@@ -34,9 +34,17 @@ export class QueryParamBuilder {
     }
 
     /**
-     * TODO Documentation
+     * Redirects to {@link stringParam}.
+     * @see stringParam
      */
     public param(opts: QueryParamControlOptsInput<string>): QueryParamControl<string> {
+        return this.stringParam(opts);
+    }
+
+    /**
+     * TODO Documentation
+     */
+    public stringParam(opts: QueryParamControlOptsInput<string>): QueryParamControl<string> {
         return new QueryParamControl({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
