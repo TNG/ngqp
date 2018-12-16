@@ -12,16 +12,20 @@ export class PlaygroundComponent {
         this.paramGroup = queryParamBuilder.group({
             searchText: queryParamBuilder.param({
                 name: 'q',
-                debounceTime: 1000,
+                debounceTime: 250,
+                emptyOn: 'foo'
             }),
             checker: queryParamBuilder.booleanParam({
                 name: 'yesOrNo',
+                emptyOn: true,
             }),
             counter: queryParamBuilder.numericParam({
                 name: 'ctr',
+                emptyOn: 5,
             }),
             range: queryParamBuilder.numericParam({
                 name: 'range',
+                emptyOn: 5,
             }),
         });
     }

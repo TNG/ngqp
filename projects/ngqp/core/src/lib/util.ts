@@ -1,3 +1,10 @@
+/** TODO Documentation */
+export type Comparator<T> = (a: T, b: T) => boolean;
+
+/** TODO Documentation */
+// tslint:disable-next-line:triple-equals
+export const LOOSE_IDENTITY_COMPARATOR = <T>(a: T, b: T) => a == b;
+
 /**
  * TODO Documentation
  */

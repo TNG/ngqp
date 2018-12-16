@@ -1,5 +1,19 @@
 import { ParamDeserializer, ParamSerializer } from './model';
-import { isMissing } from './util';
+import { Comparator, isMissing } from './util';
+
+/**
+ * TODO Documentation
+ */
+export function createEmptyOnSerializer<T>(serializer: ParamSerializer<T>, emptyOn: T, compareWith: Comparator<T>): ParamSerializer<T> {
+    return (model: T | null) => compareWith(model, emptyOn) ? null : serializer(model);
+}
+
+/**
+ * TODO Documentation
+ */
+export function createEmptyOnDeserializer<T>(deserializer: ParamDeserializer<T>, emptyOn: T): ParamDeserializer<T> {
+    return (value: string | null) => isMissing(value) ? emptyOn : deserializer(value);
+}
 
 /**
  * TODO Documentation

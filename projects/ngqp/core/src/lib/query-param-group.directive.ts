@@ -69,7 +69,7 @@ export class QueryParamGroupDirective implements OnDestroy {
             distinctUntilChanged(),
             map(param => control.deserialize(param)),
         ).subscribe(newModel => {
-            if (control.serialize(newModel) === control.serialize(control.value)) {
+            if (control.compareWith(newModel, control.value)) {
                 return;
             }
 

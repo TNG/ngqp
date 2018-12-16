@@ -5,6 +5,7 @@ export { QueryParamBuilder } from './query-param-builder.service';
 export { QueryParamModule } from './query-param.module';
 
 export {
+    createEmptyOnSerializer,
     createStringSerializer,
     createStringDeserializer,
     createNumberSerializer,

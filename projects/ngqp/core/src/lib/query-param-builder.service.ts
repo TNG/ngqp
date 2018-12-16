@@ -8,9 +8,10 @@ import {
     DEFAULT_STRING_DESERIALIZER,
     DEFAULT_STRING_SERIALIZER
 } from './serializers';
+import { LOOSE_IDENTITY_COMPARATOR } from './util';
 
 type OverwritePartial<T1, T2 extends keyof T1> = Pick<T1, Exclude<keyof T1, T2>> & Partial<Pick<T1, T2>>;
-export type QueryParamControlOptsInput<T> = OverwritePartial<QueryParamControlOpts<T>, 'serialize' | 'deserialize'>;
+export type QueryParamControlOptsInput<T> = OverwritePartial<QueryParamControlOpts<T>, 'serialize' | 'deserialize' | 'compareWith'>;
 
 /**
  * TODO Documentation
@@ -48,6 +49,7 @@ export class QueryParamBuilder {
         return new QueryParamControl({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
+            compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
         });
     }
@@ -59,6 +61,7 @@ export class QueryParamBuilder {
         return new QueryParamControl({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
+            compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
         });
     }
@@ -70,6 +73,7 @@ export class QueryParamBuilder {
         return new QueryParamControl({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
+            compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
         });
     }
@@ -88,8 +92,6 @@ export class QueryParamBuilder {
 
         return this.param({
             name: controlName,
-            serialize: DEFAULT_STRING_SERIALIZER,
-            deserialize: DEFAULT_STRING_DESERIALIZER,
         });
     }
 
