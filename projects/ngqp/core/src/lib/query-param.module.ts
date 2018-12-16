@@ -2,9 +2,10 @@ import { NgModule, Type } from '@angular/core';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamGroupDirective } from './query-param-group.directive';
 import {
-    NgqpDefaultControlValueAccessorDirective,
-    NgqpSelectControlValueAccessorDirective,
-    NgqpSelectOptionDirective
+    DefaultControlValueAccessorDirective,
+    NgqpSelectOptionDirective,
+    NumberControlValueAccessorDirective,
+    SelectControlValueAccessorDirective
 } from './accessors/accessors';
 
 const DIRECTIVES: Type<any>[] = [
@@ -12,8 +13,9 @@ const DIRECTIVES: Type<any>[] = [
     QueryParamGroupDirective,
 
     // Accessors
-    NgqpDefaultControlValueAccessorDirective,
-    NgqpSelectControlValueAccessorDirective,
+    DefaultControlValueAccessorDirective,
+    NumberControlValueAccessorDirective,
+    SelectControlValueAccessorDirective,
     NgqpSelectOptionDirective,
 ];
 

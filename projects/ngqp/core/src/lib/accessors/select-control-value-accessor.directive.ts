@@ -14,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export const NGQP_SELECT_VALUE_ACCESSOR: StaticProvider = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NgqpSelectControlValueAccessorDirective),
+    useExisting: forwardRef(() => SelectControlValueAccessorDirective),
     multi: true
 };
 
@@ -22,7 +22,7 @@ export const NGQP_SELECT_VALUE_ACCESSOR: StaticProvider = {
     selector: 'select:not([multiple])[queryParamName]',
     providers: [NGQP_SELECT_VALUE_ACCESSOR],
 })
-export class NgqpSelectControlValueAccessorDirective<T> implements ControlValueAccessor {
+export class SelectControlValueAccessorDirective<T> implements ControlValueAccessor {
 
     public value: T | null = null;
     private selectedId: string | null = null;
@@ -108,7 +108,7 @@ export class NgqpSelectOptionDirective<T> implements OnDestroy {
     private readonly id: string | null = null;
 
     constructor(
-        @Optional() @Host() private parent: NgqpSelectControlValueAccessorDirective<T>,
+        @Optional() @Host() private parent: SelectControlValueAccessorDirective<T>,
         private renderer: Renderer2,
         private elementRef: ElementRef,
     ) {

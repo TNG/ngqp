@@ -4,7 +4,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 export const NGQP_DEFAULT_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NgqpDefaultControlValueAccessorDirective),
+    useExisting: forwardRef(() => DefaultControlValueAccessorDirective),
     multi: true
 };
 
@@ -16,7 +16,7 @@ function isAndroid(navigator: Navigator): boolean {
     selector: 'input:not([type=checkbox]):not([type=radio])[queryParamName],textarea[queryParamName]',
     providers: [NGQP_DEFAULT_VALUE_ACCESSOR],
 })
-export class NgqpDefaultControlValueAccessorDirective implements ControlValueAccessor {
+export class DefaultControlValueAccessorDirective implements ControlValueAccessor {
 
     private readonly supportsComposition: boolean;
     private composing = false;
