@@ -36,6 +36,7 @@ export class QueryParamGroup {
         this.controls = controls;
     }
 
+    /** TODO Documentation */
     public get(controlName: string): QueryParamControl<any> {
         return this.controls[ controlName ];
     }
