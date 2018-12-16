@@ -1,22 +1,21 @@
-import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
 
-export const NGQP_NUMBER_VALUE_ACCESSOR: any = {
+export const NGQP_RANGE_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NumberControlValueAccessorDirective),
+    useExisting: forwardRef(() => RangeControlValueAccessorDirective),
     multi: true
 };
 
 @Directive({
-    selector: 'input[type=number][queryParamName]',
-    providers: [NGQP_NUMBER_VALUE_ACCESSOR],
+    selector: 'input[type=range][queryParamName]',
+    providers: [NGQP_RANGE_VALUE_ACCESSOR],
 })
-export class NumberControlValueAccessorDirective implements ControlValueAccessor {
+export class RangeControlValueAccessorDirective implements ControlValueAccessor {
 
     private fnChange = (_: number) => {};
     private fnTouched = () => {};
 
-    @HostListener('change', ['$event'])
     @HostListener('input', ['$event'])
     public onInput(event: UIEvent) {
         const value = (event.target as HTMLInputElement).value;
@@ -32,8 +31,7 @@ export class NumberControlValueAccessorDirective implements ControlValueAccessor
     }
 
     public writeValue(value: any) {
-        const normalizedValue = value === null ? '' : value;
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', normalizedValue);
+        this.renderer.setProperty(this.elementRef.nativeElement, 'value', parseFloat(value));
     }
 
     public registerOnChange(fn: any) {

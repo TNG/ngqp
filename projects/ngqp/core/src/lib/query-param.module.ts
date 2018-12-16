@@ -5,6 +5,7 @@ import {
     DefaultControlValueAccessorDirective,
     NgqpSelectOptionDirective,
     NumberControlValueAccessorDirective,
+    RangeControlValueAccessorDirective,
     SelectControlValueAccessorDirective
 } from './accessors/accessors';
 
@@ -15,6 +16,7 @@ const DIRECTIVES: Type<any>[] = [
     // Accessors
     DefaultControlValueAccessorDirective,
     NumberControlValueAccessorDirective,
+    RangeControlValueAccessorDirective,
     SelectControlValueAccessorDirective,
     NgqpSelectOptionDirective,
 ];
