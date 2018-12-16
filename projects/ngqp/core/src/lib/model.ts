@@ -1,4 +1,4 @@
-import { Comparator, isOptionalFunction, wrapTryCatch } from './util';
+import { Comparator, isFunction, wrapTryCatch } from './util';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from './serializers';
 
 /** TODO Documentation */
@@ -65,15 +65,15 @@ export class QueryParamControl<T> {
     constructor(opts: QueryParamControlOpts<T>) {
         const { name, serialize, deserialize, debounceTime, emptyOn, compareWith } = opts;
 
-        if (!isOptionalFunction(serialize)) {
+        if (!isFunction(serialize)) {
             throw new Error(`serialize must be a function, but received ${serialize}`);
         }
 
-        if (!isOptionalFunction(deserialize)) {
+        if (!isFunction(deserialize)) {
             throw new Error(`deserialize must be a function, but received ${deserialize}`);
         }
 
-        if (!isOptionalFunction(compareWith)) {
+        if (!isFunction(compareWith)) {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 

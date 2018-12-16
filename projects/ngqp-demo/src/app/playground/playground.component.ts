@@ -25,7 +25,7 @@ export class PlaygroundComponent {
             }),
             range: queryParamBuilder.numericParam({
                 name: 'range',
-                emptyOn: 5,
+                emptyOn: 2,
             }),
         });
     }

@@ -15,8 +15,8 @@ export function isMissing(obj: any): obj is null | undefined {
 /**
  * TODO Documentation
  */
-export function isOptionalFunction(obj: any): boolean {
-    return isMissing(obj) || typeof obj === 'function';
+export function isFunction(obj: any): boolean {
+    return !isMissing(obj) && typeof obj === 'function';
 }
 
 /**
