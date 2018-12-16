@@ -69,6 +69,7 @@ export class QueryParamGroupDirective implements OnDestroy {
             distinctUntilChanged(),
             map(param => control.deserialize(param)),
         ).subscribe(newModel => {
+            // TODO We can probably replace this with the history state in Angular 7.2.0+
             if (control.compareWith(newModel, control.value)) {
                 return;
             }
