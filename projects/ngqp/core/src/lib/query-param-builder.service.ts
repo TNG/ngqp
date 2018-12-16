@@ -23,14 +23,14 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public group(config: { [ name: string ]: QueryParamControl<any> | string }): QueryParamGroup {
-        const controls: { [ controlName: string ]: QueryParamControl<any> } = {};
-        Object.keys(config).forEach(controlName => {
-            controls[ controlName ] = this.createControl(controlName, config[ controlName ]);
+    public group(controls: { [ name: string ]: QueryParamControl<any> | string }): QueryParamGroup {
+        const mappedControls: { [ controlName: string ]: QueryParamControl<any> } = {};
+        Object.keys(controls).forEach(controlName => {
+            mappedControls[ controlName ] = this.createControl(controlName, controls[ controlName ]);
         });
 
         // TODO Maybe we should first validate that no two controls defined the same "name".
-        return new QueryParamGroup(controls);
+        return new QueryParamGroup(mappedControls);
     }
 
     /**
