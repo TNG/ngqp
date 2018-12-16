@@ -6,4 +6,3 @@ script:
     - yarn lint
     - yarn build @ngqp/core
     - yarn build --prod ngqp-demo
-    - yarn test
