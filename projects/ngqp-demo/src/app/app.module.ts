@@ -1,18 +1,22 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { QueryParamModule } from '@ngqp/core';
-import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QueryParamModule } from '@ngqp/core';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { PlaygroundComponent } from './playground/playground.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        PlaygroundComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot([]),
+        AppRoutingModule,
+        NgbModule,
         QueryParamModule
     ],
     providers: [],

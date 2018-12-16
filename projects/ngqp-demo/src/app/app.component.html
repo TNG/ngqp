@@ -1,12 +1,23 @@
-<div [queryParamGroup]="paramGroup">
-    <input type="text" placeholder="Search" queryParamName="search" />
-    <button type="button" routerLink="./" [queryParams]="{q: 'foo'}" queryParamsHandling="merge">Go to ?q=foo</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="assets/logo.svg" height="48" width="auto" />
+    <a class="navbar-brand" routerLink="/">@ngqp</a>
+    <button class="navbar-toggler" type="button" (click)="isNavbarExpanded = !isNavbarExpanded">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <br />
+    <div class="navbar-collapse" [class.collapse]="!isNavbarExpanded">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/playground">Playground</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <select queryParamName="type">
-        <option [value]="1">Dog</option>
-        <option [value]="2">Cat</option>
-        <option [value]="3">Mouse</option>
-    </select>
+<div class="alert alert-danger" role="alert">
+    @ngqp is still under early development. This website currently serves only as a playground.
 </div>
+
+<main role="main" class="container mt-5">
+    <router-outlet></router-outlet>
+</main>
