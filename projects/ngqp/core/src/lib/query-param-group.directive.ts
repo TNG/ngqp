@@ -51,12 +51,10 @@ export class QueryParamGroupDirective implements OnDestroy {
         const paramName = control.name || directive.name;
 
         const paramQueue$ = new Subject<Params>();
-        paramQueue$
-            .pipe(
-                !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => this.enqueueNavigation(params));
+        paramQueue$.pipe(
+            !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
+            takeUntil(this.destroy$),
+        ).subscribe(params => this.enqueueNavigation(params));
 
         // View -> Model
         directive.valueAccessor.registerOnChange((newModel: any) => {
