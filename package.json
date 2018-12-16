@@ -11,8 +11,7 @@
     "publish": "yarn build-core && cd dist/ngqp/core && npm publish --access public",
     "publish-demo": "yarn build-core && ng build ngqp-demo --prod --base-href=\"https://Airblader.github.io/ngqp/\" && npx ngh --dir=dist/ngqp-demo",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {

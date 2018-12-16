@@ -137,34 +137,6 @@
                     }
                 }
             }
-        },
-        "ngqp-demo-e2e": {
-            "root": "projects/ngqp-demo-e2e/",
-            "projectType": "application",
-            "prefix": "",
-            "architect": {
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "projects/ngqp-demo-e2e/protractor.conf.js",
-                        "devServerTarget": "ngqp-demo:serve"
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "ngqp-demo:serve:production"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": "projects/ngqp-demo-e2e/tsconfig.e2e.json",
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
-                    }
-                }
-            }
         }
     },
     "defaultProject": "@ngqp/core"
