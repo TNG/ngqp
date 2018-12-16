@@ -50,8 +50,8 @@ export class QueryParamControl<T> {
     /** TODO Documentation */
     public value: T = null;
 
-    constructor(config: QueryParamControlOpts<T>) {
-        const { name, serialize, deserialize, debounceTime } = config;
+    constructor(opts: QueryParamControlOpts<T>) {
+        const { name, serialize, deserialize, debounceTime } = opts;
 
         if (!isOptionalFunction(serialize)) {
             throw new Error(`serialize must be a function, but received ${serialize}`);
