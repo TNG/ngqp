@@ -30,11 +30,14 @@ export interface QueryParamControlOpts<T> {
  */
 export class QueryParamGroup {
 
-    /** @internal Maps each control name to the corresponding control. */
-    public controls: {[controlName: string]: QueryParamControl<any>} = {};
+    private readonly controls: { [ controlName: string ]: QueryParamControl<any> };
 
     constructor(controls: {[controlName: string]: QueryParamControl<any>}) {
         this.controls = controls;
+    }
+
+    public get(controlName: string): QueryParamControl<any> {
+        return this.controls[ controlName ];
     }
 
 }

@@ -38,7 +38,7 @@ export class QueryParamGroupDirective implements OnDestroy {
     }
 
     public addControl(directive: QueryParamNameDirective): void {
-        const control: QueryParamControl<any> = this.queryParamGroup.controls[directive.name];
+        const control: QueryParamControl<any> = this.queryParamGroup.get(directive.name);
         if (!control) {
             throw new Error(`Could not find control ${directive.name}. Did you forget to add it to your QueryParamGroup?`);
         }
