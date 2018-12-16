@@ -4,7 +4,7 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 [![Gitter](https://img.shields.io/gitter/room/Airblader/ngqp.svg?style=flat-square)](https://gitter.im/ngqp)
 
-# @ngqp – Synchronizing form controls with the URL for Angular
+# @ngqp – Declaratively synchronize form controls with the URL
 
 <p align="center">
   <img width="auto" height="240" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg?sanitize=true">
