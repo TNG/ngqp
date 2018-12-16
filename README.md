@@ -2,14 +2,14 @@
 [![devDependency Status](https://david-dm.org/Airblader/ngqp/dev-status.svg?branch=master)](https://david-dm.org/Airblader/ngqp#info=devDependencies)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 
-# ngqp – Synchronizing form controls with the URL for Angular
+# @ngqp – Synchronizing form controls with the URL for Angular
 
 <p align="center">
   <img width="auto" height="240" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg?sanitize=true">
 </p>
 
 @ngqp makes it easy to synchronize form controls with query parameters in your URL. Examples include pagination information
-or the current settings of filters in a data view. ngqp is designed to resemble the Forms API from `@angular/forms`, making
+or the current settings of filters in a data view. @ngqp is designed to resemble the Forms API from `@angular/forms`, making
 it intuitive to work with.
 
 # Installation
@@ -32,7 +32,7 @@ Make sure that your app is set up to use routing (i.e., using `RouterModule`).
 
 # Usage
 
-This section is a work in progress since ngqp is still in an early development stage.
+This section is a work in progress since @ngqp is still in an early development stage.
 
 # Contributing
 
@@ -46,13 +46,13 @@ Angular's router system makes it easy to organize different views under differen
 route is not reflected in the URL. This makes it impossible to bookmark or share them as on every new page load the user has
 to set these states manually.
 
-With ngqp, you can easily synchronize the state of form controls such as input boxes, dropdowns or your own custom controls
+With @ngqp, you can easily synchronize the state of form controls such as input boxes, dropdowns or your own custom controls
 with a query parameter on the current URL. This way the URL becomes the single source of truth for this information, which
 allows users to share or bookmark these links and reload your page without having to worry about losing their current state.
 
 ## What can this be used for?
 
-ngqp will work with any kind of control, but the common scenario would be pagination (i.e., which page a user is on) or
+@ngqp will work with any kind of control, but the common scenario would be pagination (i.e., which page a user is on) or
 filter settings (search query, selections, …)
 
 ---
