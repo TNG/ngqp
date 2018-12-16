@@ -2,6 +2,7 @@
 [![npm version](https://badge.fury.io/js/%40ngqp%2Fcore.svg)](https://www.npmjs.com/@ngqp/core)
 [![devDependency Status](https://david-dm.org/Airblader/ngqp/dev-status.svg?branch=master)](https://david-dm.org/Airblader/ngqp#info=devDependencies)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
+[![Gitter](https://img.shields.io/gitter/room/Airblader/ngqp.svg?style=flat-square)](https://gitter.im/ngqp)
 
 # @ngqp – Synchronizing form controls with the URL for Angular
 
