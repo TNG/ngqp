@@ -8,9 +8,9 @@
   <img width="auto" height="240" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg?sanitize=true">
 </p>
 
-@ngqp makes it easy to synchronize form controls with query parameters in your URL. Examples include pagination information
-or the current settings of filters in a data view. @ngqp is designed to resemble the Forms API from `@angular/forms`, making
-it intuitive to work with.
+@ngqp makes it easy to synchronize form controls with query parameters in your URL by using a declarative approach. Examples
+include pagination information or the current settings of filters in a data view. @ngqp is designed to resemble the Forms API
+from `@angular/forms`, making it intuitive to work with.
 
 # Installation
 

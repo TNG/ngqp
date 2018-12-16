@@ -29,6 +29,7 @@ export class QueryParamBuilder {
             controls[ controlName ] = this.createControl(controlName, config[ controlName ]);
         });
 
+        // TODO Maybe we should first validate that no two controls defined the same "name".
         return new QueryParamGroup(controls);
     }
 
