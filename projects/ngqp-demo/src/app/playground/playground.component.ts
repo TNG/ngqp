@@ -14,6 +14,15 @@ export class PlaygroundComponent {
                 name: 'q',
                 debounceTime: 1000,
             }),
+            checker: queryParamBuilder.booleanParam({
+                name: 'yesOrNo',
+            }),
+            counter: queryParamBuilder.numericParam({
+                name: 'ctr',
+            }),
+            range: queryParamBuilder.numericParam({
+                name: 'range',
+            }),
         });
     }
 
