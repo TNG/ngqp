@@ -29,6 +29,20 @@ export function createNumberDeserializer(defaultValue: number | null = null): Pa
     return (value: string | null) => isMissing(value) ? defaultValue : parseFloat(value);
 }
 
+/**
+ * TODO Documentation
+ */
+export function createBooleanSerializer(defaultValue: string | null = null): ParamSerializer<boolean> {
+    return (model: boolean | null) => isMissing(model) ? defaultValue : `${model}`;
+}
+
+/**
+ * TODO Documentation
+ */
+export function createBooleanDeserializer(defaultValue: boolean | null = null): ParamDeserializer<boolean> {
+    return (value: string | null) => isMissing(value) ? defaultValue : (value === 'true' || value === '1');
+}
+
 /** TODO Documentation */
 export const DEFAULT_STRING_SERIALIZER = createStringSerializer();
 
@@ -40,3 +54,9 @@ export const DEFAULT_NUMBER_SERIALIZER = createNumberSerializer();
 
 /** TODO Documentation */
 export const DEFAULT_NUMBER_DESERIALIZER = createNumberDeserializer();
+
+/** TODO Documentation */
+export const DEFAULT_BOOLEAN_SERIALIZER = createBooleanSerializer();
+
+/** TODO Documentation */
+export const DEFAULT_BOOLEAN_DESERIALIZER = createBooleanDeserializer();
