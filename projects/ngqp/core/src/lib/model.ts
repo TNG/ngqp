@@ -11,6 +11,11 @@ export type ParamDeserializer<T> = (value: string | null) => T | null;
 /** TODO Documentation */
 export type OnChangeFunction<T> = (value: T) => void;
 
+/** TODO Documentation */
+export interface QueryParamGroupValue {
+    [ controlName: string ]: any;
+}
+
 /**
  * TODO Documentation
  */
@@ -34,10 +39,10 @@ export interface QueryParamControlOpts<T> {
  */
 export class QueryParamGroup {
 
-    private _valueChanges = new Subject<any>();
+    private _valueChanges = new Subject<QueryParamGroupValue>();
 
     /** TODO Documentation */
-    public readonly valueChanges: Observable<any> = this._valueChanges.asObservable();
+    public readonly valueChanges: Observable<QueryParamGroupValue> = this._valueChanges.asObservable();
 
     /** TODO Documentation */
     public readonly controls: { [ controlName: string ]: QueryParamControl<any> };
@@ -53,11 +58,32 @@ export class QueryParamGroup {
     }
 
     /** TODO Documentation */
-    public get value(): any {
-        const value: any = {};
+    public get value(): QueryParamGroupValue {
+        const value: QueryParamGroupValue = {};
         Object.keys(this.controls).forEach(controlName => value[ controlName ] = this.controls[ controlName ].value);
 
         return value;
+    }
+
+    /**
+     * TODO Documentation
+     */
+    public patchValue(value: QueryParamGroupValue): void {
+        Object.keys(value).forEach(controlName => {
+            const control = this.controls[ controlName ];
+            if (isMissing(control)) {
+                return;
+            }
+
+            control.setValue(value[ controlName ]);
+        });
+    }
+
+    /**
+     * TODO Documentation
+     */
+    public setValue(value: QueryParamGroupValue): void {
+        Object.keys(this.controls).forEach(controlName => this.controls[ controlName ].setValue(value[ controlName ]));
     }
 
     /**

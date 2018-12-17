@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { concatMap, debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { bufferTime, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamControl, QueryParamGroup } from './model';
 import { isMissing } from './util';
@@ -101,6 +101,12 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
+            // This buffers multiple synchronous events together to only execute a single navigation
+            bufferTime(0),
+            map(paramsList => paramsList.reduce((a: Params, b: Params): Params => {
+                return { ...a, ...b };
+            }, {})),
+
             concatMap(params => this.router.navigate([], {
                 relativeTo: this.route,
                 queryParamsHandling: 'merge',

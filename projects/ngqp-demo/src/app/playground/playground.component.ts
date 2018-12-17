@@ -55,4 +55,20 @@ export class PlaygroundComponent {
         });
     }
 
+    public patchGroupValue() {
+        this.paramGroup.patchValue({
+            checker: false,
+            counter: 1337,
+            range: 9,
+        });
+    }
+
+    public setGroupValue() {
+        this.paramGroup.setValue({
+            checker: false,
+            counter: 1337,
+            range: 9,
+        });
+    }
+
 }
