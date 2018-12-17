@@ -1,4 +1,4 @@
-import { Directive, Host, Inject, Input, OnChanges, OnInit, Optional, Self, SimpleChanges, SkipSelf } from '@angular/core';
+import { Directive, Host, Inject, Input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryParamGroupDirective } from './query-param-group.directive';
 import { DefaultControlValueAccessorDirective } from './accessors/accessors';
@@ -9,7 +9,7 @@ import { DefaultControlValueAccessorDirective } from './accessors/accessors';
 @Directive({
     selector: '[queryParamName]',
 })
-export class QueryParamNameDirective implements OnInit, OnChanges {
+export class QueryParamNameDirective implements OnInit {
 
     /** TODO Documentation */
     @Input('queryParamName')
@@ -17,8 +17,6 @@ export class QueryParamNameDirective implements OnInit, OnChanges {
 
     /** TODO Documentation */
     public valueAccessor: ControlValueAccessor | null = null;
-
-    private added = false;
 
     constructor(
         @Optional() @Host() @SkipSelf() private parent: QueryParamGroupDirective,
@@ -35,12 +33,8 @@ export class QueryParamNameDirective implements OnInit, OnChanges {
         if (!this.name) {
             throw new Error(`queryParamName has been added, but without specifying the name.`);
         }
-    }
 
-    public ngOnChanges(changes: SimpleChanges) {
-        if (!this.added) {
-            this.setupControl();
-        }
+        this.setupControl();
     }
 
     /**
@@ -73,7 +67,6 @@ export class QueryParamNameDirective implements OnInit, OnChanges {
 
     private setupControl(): void {
         this.parent.addControl(this);
-        this.added = true;
     }
 
 }

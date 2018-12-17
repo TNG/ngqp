@@ -1,7 +1,7 @@
-import { Directive, Input, OnDestroy } from '@angular/core';
+import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { concatMap, debounceTime, distinctUntilChanged, map, takeUntil, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamControl, QueryParamGroup } from './model';
 import { isMissing } from './util';
@@ -12,7 +12,7 @@ import { isMissing } from './util';
 @Directive({
     selector: '[queryParamGroup]',
 })
-export class QueryParamGroupDirective implements OnDestroy {
+export class QueryParamGroupDirective implements OnInit, OnDestroy {
 
     /** TODO Documentation */
     @Input('queryParamGroup')
@@ -21,7 +21,7 @@ export class QueryParamGroupDirective implements OnDestroy {
     /** TODO Documentation */
     private directives: QueryParamNameDirective[] = [];
 
-    /** TODO Documentation */
+    /** TODO Documentation @internal */
     private queue$ = new Subject<Params>();
     private destroy$ = new Subject<void>();
 
@@ -32,11 +32,41 @@ export class QueryParamGroupDirective implements OnDestroy {
         this.setupNavigationQueue();
     }
 
+    public ngOnInit() {
+        Object.keys(this.queryParamGroup.controls).forEach(controlName => {
+            const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
+            control.registerOnChange((newModel: any) => this.enqueueNavigation(this.getParamsForModel(control, newModel)));
+        });
+
+        this.route.queryParamMap.subscribe(queryParamMap => {
+            Object.keys(this.queryParamGroup.controls).forEach(controlName => {
+                const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
+                const newModel = control.deserialize(queryParamMap.get(control.name));
+
+                // Get the directive, if it has been initialized yet.
+                const directive = this.directives.find(dir => dir.name === controlName);
+                if (!isMissing(directive)) {
+                    directive.valueAccessor.writeValue(newModel);
+                }
+
+                control.value = newModel;
+                control.updateValue({ emitEvent: true, onlySelf: true });
+            });
+
+            // We used onlySelf on the controls so that we can emit only once on the entire group.
+            this.queryParamGroup.updateValue({ emitEvent: true });
+        });
+    }
+
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
+    /**
+     * TODO Documentation
+     * @internal
+     */
     public addControl(directive: QueryParamNameDirective): void {
         const control: QueryParamControl<any> = this.queryParamGroup.get(directive.name);
         if (!control) {
@@ -46,41 +76,28 @@ export class QueryParamGroupDirective implements OnDestroy {
             throw new Error(`No value accessor found for the control. Please make sure to implement ControlValueAccessor on this component.`);
         }
 
-        if (isMissing(control.name)) {
-            control.name = directive.name;
-        }
+        // Chances are that we read the initial route before a directive has been registered here.
+        // The value in the control will be correct, but we need to sync it to the view once initially.
+        directive.valueAccessor.writeValue(control.value);
 
+        // We proxy updates from the view to debounce them (if needed).
         const paramQueue$ = new Subject<Params>();
         paramQueue$.pipe(
             !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(params));
 
-        // View -> Model
-        directive.valueAccessor.registerOnChange((newModel: any) => {
-            paramQueue$.next({
-                [control.name]: control.serialize(newModel)
-            });
-        });
-
-        // Model -> View
-        this.route.queryParamMap.pipe(
-            map(queryParamMap => queryParamMap.get(control.name)),
-            distinctUntilChanged(),
-            map(param => control.deserialize(param)),
-        ).subscribe(newModel => {
-            // TODO We can probably replace this with the history state in Angular 7.2.0+
-            if (control.compareWith(newModel, control.value)) {
-                return;
-            }
-
-            directive.valueAccessor.writeValue(newModel);
-            control.value = newModel;
-        });
+        directive.valueAccessor.registerOnChange((newModel: any) =>
+            paramQueue$.next(this.getParamsForModel(control, newModel))
+        );
 
         this.directives.push(directive);
     }
 
+    /**
+     * TODO Documentation
+     * @internal
+     */
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
@@ -94,6 +111,12 @@ export class QueryParamGroupDirective implements OnDestroy {
 
     private enqueueNavigation(params: Params): void {
         this.queue$.next(params);
+    }
+
+    private getParamsForModel(control: QueryParamControl<any>, model: any): Params {
+        return {
+            [ control.name ]: control.serialize(model)
+        };
     }
 
 }

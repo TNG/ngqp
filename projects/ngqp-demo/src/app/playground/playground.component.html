@@ -1,6 +1,11 @@
 <ng-container [queryParamGroup]="paramGroup">
     <input type="text" class="form-control" placeholder="Search" queryParamName="searchText" />
 
+    <button type="button" (click)="setSearchTextValue('bar')">Set 'bar' with setValue</button>
+    <button type="button" (click)="setSearchTextRoute('bar')">Set 'bar' with router</button>
+
+    <br />
+
     <input type="checkbox" class="form-control" queryParamName="checker" />
 
     <input type="number" class="form-control" queryParamName="counter" />

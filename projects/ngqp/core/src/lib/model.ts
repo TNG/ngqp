@@ -1,4 +1,5 @@
-import { Comparator, isFunction, wrapTryCatch } from './util';
+import { Observable, Subject } from 'rxjs';
+import { Comparator, isFunction, isMissing, wrapTryCatch } from './util';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from './serializers';
 
 /** TODO Documentation */
@@ -6,6 +7,9 @@ export type ParamSerializer<T> = (model: T | null) => string | null;
 
 /** TODO Documentation */
 export type ParamDeserializer<T> = (value: string | null) => T | null;
+
+/** TODO Documentation */
+export type OnChangeFunction<T> = (value: T) => void;
 
 /**
  * TODO Documentation
@@ -30,15 +34,41 @@ export interface QueryParamControlOpts<T> {
  */
 export class QueryParamGroup {
 
-    private readonly controls: { [ controlName: string ]: QueryParamControl<any> };
+    private _valueChanges = new Subject<any>();
 
-    constructor(controls: {[controlName: string]: QueryParamControl<any>}) {
+    /** TODO Documentation */
+    public readonly valueChanges: Observable<any> = this._valueChanges.asObservable();
+
+    /** TODO Documentation */
+    public readonly controls: { [ controlName: string ]: QueryParamControl<any> };
+
+    constructor(controls: { [ controlName: string ]: QueryParamControl<any> }) {
         this.controls = controls;
+        Object.values(this.controls).forEach(control => control.setParent(this));
     }
 
     /** TODO Documentation */
     public get(controlName: string): QueryParamControl<any> {
         return this.controls[ controlName ];
+    }
+
+    /** TODO Documentation */
+    public get value(): any {
+        const value: any = {};
+        Object.keys(this.controls).forEach(controlName => value[ controlName ] = this.controls[ controlName ].value);
+
+        return value;
+    }
+
+    /**
+     * TODO Documentation
+     */
+    public updateValue(opts: {
+        emitEvent?: boolean,
+    } = {}): void {
+        if (opts.emitEvent !== false) {
+            this._valueChanges.next(this.value);
+        }
     }
 
 }
@@ -47,6 +77,14 @@ export class QueryParamGroup {
  * TODO Documentation
  */
 export class QueryParamControl<T> {
+
+    private _valueChanges = new Subject<T>();
+
+    /** TODO Documentation */
+    public readonly valueChanges: Observable<T> = this._valueChanges.asObservable();
+
+    /** TODO Documentation */
+    public value: T = null;
 
     /** TODO Documentation See QueryParamControlOpts */
     public name: string | null;
@@ -63,8 +101,8 @@ export class QueryParamControl<T> {
     /** TODO Documentation See QueryParamControlOpts */
     public debounceTime: number | null;
 
-    /** TODO Documentation */
-    public value: T = null;
+    private parent: QueryParamGroup;
+    private changeFunctions: OnChangeFunction<T>[] = [];
 
     constructor(opts: QueryParamControlOpts<T>) {
         const { name, serialize, deserialize, debounceTime, emptyOn, compareWith } = opts;
@@ -92,6 +130,45 @@ export class QueryParamControl<T> {
         );
         this.compareWith = compareWith;
         this.debounceTime = debounceTime;
+    }
+
+    /**
+     * TODO Documentation
+     * @internal
+     */
+    public registerOnChange(fn: OnChangeFunction<T>): void {
+        this.changeFunctions.push(fn);
+    }
+
+    /**
+     * TODO Documentation
+     */
+    public setValue(value: T | null): void {
+        this.changeFunctions.forEach(changeFn => changeFn(value));
+    }
+
+    /**
+     * TODO Documentation
+     */
+    public updateValue(opts: {
+        emitEvent?: boolean,
+        onlySelf?: boolean,
+    } = {}): void {
+        if (opts.emitEvent !== false) {
+            this._valueChanges.next(this.value);
+        }
+
+        if (!isMissing(this.parent) && !opts.onlySelf) {
+            this.parent.updateValue(opts);
+        }
+    }
+
+    /**
+     * TODO Documentation
+     * @internal
+     */
+    public setParent(parent: QueryParamGroup): void {
+        this.parent = parent;
     }
 
 }
