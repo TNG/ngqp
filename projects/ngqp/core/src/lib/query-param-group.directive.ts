@@ -1,10 +1,10 @@
 import { Directive, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
-import { bufferTime, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { NGQP_ROUTER_ADAPTER, RouterAdapter } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
-import { QueryParamControl, QueryParamGroup } from './model';
+import { QueryParamControl, QueryParamGroup, QueryParamGroupValue } from './model';
 import { isMissing } from './util';
 
 /**
@@ -35,9 +35,25 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             throw new Error(`You added the queryParamGroup directive, but haven't supplied a group to use.`);
         }
 
+        this.queryParamGroup._registerOnChange((value: QueryParamGroupValue) => {
+            const params: Params = {};
+            Object.keys(value).forEach(controlName => {
+                const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
+                if (isMissing(control)) {
+                    return;
+                }
+
+                params[ control.name ] = control.serialize(value[ controlName ]);
+            });
+
+            this.enqueueNavigation(params);
+        });
+
         Object.keys(this.queryParamGroup.controls).forEach(controlName => {
             const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-            control.registerOnChange((newModel: any) => this.enqueueNavigation(this.getParamsForModel(control, newModel)));
+            control._registerOnChange((newModel: any) =>
+                this.enqueueNavigation(this.getParamsForModel(control, newModel))
+            );
         });
 
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
@@ -52,11 +68,11 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
                 }
 
                 control.value = newModel;
-                control.updateValue({ emitEvent: true, onlySelf: true });
+                control._updateValue({ emitEvent: true, onlySelf: true });
             });
 
             // We used onlySelf on the controls so that we can emit only once on the entire group.
-            this.queryParamGroup.updateValue({ emitEvent: true });
+            this.queryParamGroup._updateValue({ emitEvent: true });
         });
     }
 
@@ -82,7 +98,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         // The value in the control will be correct, but we need to sync it to the view once initially.
         directive.valueAccessor.writeValue(control.value);
 
-        // We proxy updates from the view to debounce them (if needed).
+        // Proxy updates from the view to debounce them (if needed).
         const paramQueue$ = new Subject<Params>();
         paramQueue$.pipe(
             !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
@@ -103,12 +119,6 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
-            // This buffers multiple synchronous events together to only execute a single navigation
-            bufferTime(0),
-            map(paramsList => paramsList.reduce((a: Params, b: Params): Params => {
-                return { ...a, ...b };
-            }, {})),
-
             concatMap(params => this.routerAdapter.navigate(params)),
         ).subscribe();
     }

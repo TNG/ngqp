@@ -47,9 +47,19 @@ export class QueryParamGroup {
     /** TODO Documentation */
     public readonly controls: { [ controlName: string ]: QueryParamControl<any> };
 
+    private changeFunctions: OnChangeFunction<QueryParamGroupValue>[] = [];
+
     constructor(controls: { [ controlName: string ]: QueryParamControl<any> }) {
         this.controls = controls;
-        Object.values(this.controls).forEach(control => control.setParent(this));
+        Object.values(this.controls).forEach(control => control._setParent(this));
+    }
+
+    /**
+     * TODO Documentation
+     * @internal
+     */
+    public _registerOnChange(fn: OnChangeFunction<QueryParamGroupValue>): void {
+        this.changeFunctions.push(fn);
     }
 
     /** TODO Documentation */
@@ -68,28 +78,38 @@ export class QueryParamGroup {
     /**
      * TODO Documentation
      */
-    public patchValue(value: QueryParamGroupValue): void {
+    public patchValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } = {}): void {
         Object.keys(value).forEach(controlName => {
             const control = this.controls[ controlName ];
             if (isMissing(control)) {
                 return;
             }
 
-            control.setValue(value[ controlName ]);
+            control.setValue(value[ controlName ], { emitEvent: false });
         });
+
+        if (opts.emitEvent !== false) {
+            this.changeFunctions.forEach(changeFn => changeFn(this.value));
+        }
     }
 
     /**
      * TODO Documentation
      */
-    public setValue(value: QueryParamGroupValue): void {
-        Object.keys(this.controls).forEach(controlName => this.controls[ controlName ].setValue(value[ controlName ]));
+    public setValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } = {}): void {
+        Object.keys(this.controls).forEach(controlName => {
+            this.controls[ controlName ].setValue(value[ controlName ], { emitEvent: false });
+        });
+
+        if (opts.emitEvent !== false) {
+            this.changeFunctions.forEach(changeFn => changeFn(this.value));
+        }
     }
 
     /**
      * TODO Documentation
      */
-    public updateValue(opts: {
+    public _updateValue(opts: {
         emitEvent?: boolean,
     } = {}): void {
         if (opts.emitEvent !== false) {
@@ -162,21 +182,25 @@ export class QueryParamControl<T> {
      * TODO Documentation
      * @internal
      */
-    public registerOnChange(fn: OnChangeFunction<T>): void {
+    public _registerOnChange(fn: OnChangeFunction<T>): void {
         this.changeFunctions.push(fn);
     }
 
     /**
      * TODO Documentation
      */
-    public setValue(value: T | null): void {
-        this.changeFunctions.forEach(changeFn => changeFn(value));
+    public setValue(value: T | null, opts: { emitEvent?: boolean } = {}): void {
+        this.value = value;
+
+        if (opts.emitEvent !== false) {
+            this.changeFunctions.forEach(changeFn => changeFn(value));
+        }
     }
 
     /**
      * TODO Documentation
      */
-    public updateValue(opts: {
+    public _updateValue(opts: {
         emitEvent?: boolean,
         onlySelf?: boolean,
     } = {}): void {
@@ -185,7 +209,7 @@ export class QueryParamControl<T> {
         }
 
         if (!isMissing(this.parent) && !opts.onlySelf) {
-            this.parent.updateValue(opts);
+            this.parent._updateValue(opts);
         }
     }
 
@@ -193,7 +217,7 @@ export class QueryParamControl<T> {
      * TODO Documentation
      * @internal
      */
-    public setParent(parent: QueryParamGroup): void {
+    public _setParent(parent: QueryParamGroup): void {
         this.parent = parent;
     }
 
