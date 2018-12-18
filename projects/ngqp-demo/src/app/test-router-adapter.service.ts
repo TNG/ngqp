@@ -43,6 +43,11 @@ export class TestRouterAdapter implements RouterAdapter {
 
         const urlSearchParams = new URLSearchParams();
         Object.entries(this.params).forEach(([paramName, value]) => {
+            if (value === undefined || value === null) {
+                urlSearchParams.delete(paramName);
+                return;
+            }
+
             if (Array.isArray(value)) {
                 // TODO Support non-string values using JSON.stringify
                 value.forEach(item => urlSearchParams.append(paramName, '' + item));
