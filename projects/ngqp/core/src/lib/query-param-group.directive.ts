@@ -36,14 +36,14 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         }
 
         this.queryParamGroup._registerOnChange((value: QueryParamGroupValue) => {
-            const params: Params = {};
+            let params: Params = {};
             Object.keys(value).forEach(controlName => {
                 const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
                 if (isMissing(control)) {
                     return;
                 }
 
-                params[ control.name ] = control.serialize(value[ controlName ]);
+                params = { ...params, ...this.getParamsForModel(control, value[ controlName ]) };
             });
 
             this.enqueueNavigation(params);
