@@ -1,14 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button class="navbar-toggler" type="button" (click)="isNavbarExpanded = !isNavbarExpanded">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <a class="navbar-brand" routerLink="/">
         <div class="d-inline-block align-middle  logo-container">
             <img src="assets/logo.svg" height="48" width="auto" />
         </div>
         @ngqp
     </a>
-    <button class="navbar-toggler" type="button" (click)="isNavbarExpanded = !isNavbarExpanded">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
     <div class="navbar-collapse" [class.collapse]="!isNavbarExpanded">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -25,8 +24,7 @@
             </li>
         </ul>
     </div>
-
-    <a href="https://www.github.com/Airblader/ngqp" rel="nofollow noopener">
+    <a href="https://www.github.com/Airblader/ngqp" rel="nofollow noopener" [class.collapse]="isNavbarExpanded">
         <fa-icon [icon]="faGithub" size="2x" class="text-light"></fa-icon>
     </a>
 </nav>
