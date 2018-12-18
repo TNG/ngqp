@@ -31,6 +31,10 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     }
 
     public ngOnInit() {
+        if (!this.queryParamGroup) {
+            throw new Error(`You added the queryParamGroup directive, but haven't supplied a group to use.`);
+        }
+
         Object.keys(this.queryParamGroup.controls).forEach(controlName => {
             const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
             control.registerOnChange((newModel: any) => this.enqueueNavigation(this.getParamsForModel(control, newModel)));
