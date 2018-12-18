@@ -11,9 +11,10 @@ export class TestRouterAdapter implements RouterAdapter {
 
     public url: string;
 
-    private _params: Params = {};
+    private _params: Params;
 
     constructor() {
+        this.params = {};
         this.emitQueryParamMap();
     }
 
