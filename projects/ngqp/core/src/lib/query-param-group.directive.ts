@@ -1,7 +1,8 @@
-import { Directive, Input, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Directive, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { bufferTime, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { NGQP_ROUTER_ADAPTER, RouterAdapter } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamControl, QueryParamGroup } from './model';
 import { isMissing } from './util';
@@ -25,10 +26,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     private queue$ = new Subject<Params>();
     private destroy$ = new Subject<void>();
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-    ) {
+    constructor(@Inject(NGQP_ROUTER_ADAPTER) private routerAdapter: RouterAdapter) {
         this.setupNavigationQueue();
     }
 
@@ -38,7 +36,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             control.registerOnChange((newModel: any) => this.enqueueNavigation(this.getParamsForModel(control, newModel)));
         });
 
-        this.route.queryParamMap.subscribe(queryParamMap => {
+        this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
             Object.keys(this.queryParamGroup.controls).forEach(controlName => {
                 const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
                 const newModel = control.deserialize(queryParamMap.get(control.name));
@@ -107,11 +105,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
                 return { ...a, ...b };
             }, {})),
 
-            concatMap(params => this.router.navigate([], {
-                relativeTo: this.route,
-                queryParamsHandling: 'merge',
-                queryParams: params,
-            })),
+            concatMap(params => this.routerAdapter.navigate(params)),
         ).subscribe();
     }
 

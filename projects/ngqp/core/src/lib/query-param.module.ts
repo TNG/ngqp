@@ -9,6 +9,7 @@ import {
     RangeControlValueAccessorDirective,
     SelectControlValueAccessorDirective
 } from './accessors/accessors';
+import { DefaultRouterAdapter, NGQP_ROUTER_ADAPTER } from './router-adapter/router-adapter';
 
 const DIRECTIVES: Type<any>[] = [
     QueryParamNameDirective,
@@ -27,6 +28,9 @@ const DIRECTIVES: Type<any>[] = [
     imports: [],
     declarations: [ DIRECTIVES ],
     exports: [ DIRECTIVES ],
+    providers: [
+        { provide: NGQP_ROUTER_ADAPTER, useClass: DefaultRouterAdapter },
+    ],
 })
 export class QueryParamModule {
 }

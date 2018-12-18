@@ -21,3 +21,4 @@ export {
 } from './serializers';
 
 export * from './accessors/accessors';
+export * from './router-adapter/router-adapter';
