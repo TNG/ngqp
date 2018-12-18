@@ -1,5 +1,12 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "packageRules": [
+    {
+        "packagePatterns": ["^@angular"],
+        "enabled": false
+    }
   ]
 }
