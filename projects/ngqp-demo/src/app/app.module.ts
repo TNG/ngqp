@@ -24,7 +24,7 @@ import { TestRouterAdapter } from './test-router-adapter.service';
     ],
     providers: [
         // TODO Sandbox this
-        // { provide: NGQP_ROUTER_ADAPTER, useClass: TestRouterAdapter },
+        { provide: NGQP_ROUTER_ADAPTER, useClass: TestRouterAdapter },
     ],
     bootstrap: [ AppComponent ]
 })

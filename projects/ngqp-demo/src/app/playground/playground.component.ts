@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
+import { Component, Inject } from '@angular/core';
+import { NGQP_ROUTER_ADAPTER, QueryParamBuilder, QueryParamGroup, RouterAdapter } from '@ngqp/core';
 
 @Component({
     templateUrl: './playground.component.html',
@@ -11,8 +10,7 @@ export class PlaygroundComponent {
 
     constructor(
         private queryParamBuilder: QueryParamBuilder,
-        private router: Router,
-        private route: ActivatedRoute,
+        @Inject(NGQP_ROUTER_ADAPTER) public routerAdapter: RouterAdapter,
     ) {
         this.paramGroup = queryParamBuilder.group({
             searchText: queryParamBuilder.param({
@@ -46,13 +44,7 @@ export class PlaygroundComponent {
     }
 
     public setSearchTextRoute(value: string) {
-        this.router.navigate([], {
-            relativeTo: this.route,
-            queryParamsHandling: 'merge',
-            queryParams: {
-                q: value,
-            }
-        });
+        this.routerAdapter.navigate({ q: value });
     }
 
     public patchGroupValue() {
