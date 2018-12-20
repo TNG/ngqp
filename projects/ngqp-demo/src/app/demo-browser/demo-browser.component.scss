@@ -32,32 +32,6 @@
         padding: 4px 8px;
     }
 
-    &__refresh {
-        flex-grow: 0;
-
-        @include btn-reset();
-        outline: 0;
-        cursor: pointer;
-        margin-right: 8px;
-
-        width: 24px;
-        height: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        background: transparent;
-        border-radius: 50%;
-
-        &:hover {
-            background: #e0e0e0;
-        }
-
-        &:active {
-            background: #bdbdbd;
-        }
-    }
-
     &__url {
         flex-grow: 1;
 

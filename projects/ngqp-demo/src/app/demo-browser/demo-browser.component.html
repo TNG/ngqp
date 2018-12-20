@@ -1,10 +1,4 @@
 <div class="demo-browser__toolbar">
-    <!-- TODO Maybe display history state? -->
-
-    <button class="demo-browser__refresh" (click)="refresh()" [disabled]="refreshing">
-        <fa-icon [icon]="faRedo" size="xs"></fa-icon>
-    </button>
-
     <div class="demo-browser__url">
         <span class="demo-browser__url__domain" (click)="urlInput.focus()">https://www.app.io</span>
         <input #urlInput type="text" class="demo-browser__url__input"
