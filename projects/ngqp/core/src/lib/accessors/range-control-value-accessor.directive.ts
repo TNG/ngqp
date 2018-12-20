@@ -17,7 +17,6 @@ export class RangeControlValueAccessorDirective implements ControlValueAccessor 
     private fnTouched = () => {};
 
     @HostListener('input', ['$event'])
-    @HostListener('change', ['$event'])
     public onInput(event: UIEvent) {
         const value = (event.target as HTMLInputElement).value;
         this.fnChange(value === '' ? null : parseFloat(value));

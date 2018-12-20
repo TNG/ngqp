@@ -24,10 +24,6 @@ export class TestRouterAdapter implements RouterAdapter {
             ...queryParams,
         };
 
-        if (JSON.stringify(newParams) === JSON.stringify(this.params)) {
-            return Promise.resolve(false);
-        }
-
         this.params = newParams;
         this.emitQueryParamMap();
         return Promise.resolve(true);

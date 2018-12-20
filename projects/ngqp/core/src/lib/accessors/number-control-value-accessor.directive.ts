@@ -16,7 +16,6 @@ export class NumberControlValueAccessorDirective implements ControlValueAccessor
     private fnChange = (_: number) => {};
     private fnTouched = () => {};
 
-    @HostListener('change', ['$event'])
     @HostListener('input', ['$event'])
     public onInput(event: UIEvent) {
         const value = (event.target as HTMLInputElement).value;
