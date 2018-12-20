@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
+    selector: 'demo-root',
+    templateUrl: './demo.component.html',
     styles: [`
         .logo-container {
             background-color: white;
@@ -12,7 +12,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
         }
     `],
 })
-export class AppComponent {
+export class DemoComponent {
 
     public faGithub = faGithub;
     public isNavbarExpanded = false;

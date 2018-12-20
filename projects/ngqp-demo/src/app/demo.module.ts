@@ -4,20 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QueryParamModule, NGQP_ROUTER_ADAPTER } from '@ngqp/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { DemoRoutingModule } from './demo-routing.module';
+import { DemoComponent } from './demo.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { TestRouterAdapter } from './test-router-adapter.service';
 
 @NgModule({
     declarations: [
-        AppComponent,
+        DemoComponent,
         PlaygroundComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule,
+        DemoRoutingModule,
         NgbModule,
         FontAwesomeModule,
         QueryParamModule
@@ -26,7 +26,7 @@ import { TestRouterAdapter } from './test-router-adapter.service';
         // TODO Sandbox this
         { provide: NGQP_ROUTER_ADAPTER, useClass: TestRouterAdapter },
     ],
-    bootstrap: [ AppComponent ]
+    bootstrap: [ DemoComponent ]
 })
-export class AppModule {
+export class DemoModule {
 }
