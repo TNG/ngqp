@@ -1,0 +1,97 @@
+:host {
+    display: block;
+    border: 1px solid #bdbdbd;
+}
+
+@mixin btn-reset() {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    -webkit-appearance: none;
+
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
+
+.demo-browser {
+    &__toolbar {
+        display: flex;
+
+        background: #eeeeee;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 4px 8px;
+    }
+
+    &__refresh {
+        flex-grow: 0;
+
+        @include btn-reset();
+        outline: 0;
+        cursor: pointer;
+        margin-right: 8px;
+
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: transparent;
+        border-radius: 50%;
+
+        &:hover {
+            background: #e0e0e0;
+        }
+
+        &:active {
+            background: #bdbdbd;
+        }
+    }
+
+    &__url {
+        flex-grow: 1;
+
+        font-family: monospace;
+        height: 24px;
+        line-height: 24px;
+
+        cursor: not-allowed;
+        background: #fff;
+        border-radius: 16px;
+        padding: 0 16px;
+
+        display: flex;
+
+        &__domain {
+            flex-grow: 0;
+
+            vertical-align: middle;
+            color: #9e9e9e;
+        }
+
+        &__input {
+            flex-grow: 1;
+
+            border: none;
+            outline: none;
+            background: transparent;
+
+            vertical-align: middle;
+        }
+    }
+
+    &__content {
+        padding: 16px;
+        min-height: 120px;
+    }
+}

@@ -319,6 +319,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.10"
 
+"@fortawesome/free-solid-svg-icons@^5.6.1":
+  version "5.6.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.6.1.tgz#5f6888639c8564a7ba98f4f295807ca5bc250e2c"
+  integrity sha512-J5es6So1zoT234XkYVkuDtHKeeNe7gvTM9VHdEwG8wSKwSIbdMixoNAMBbL88haGUolj0YjEmZwov4NMTx3Srw==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.10"
+
 "@ng-bootstrap/ng-bootstrap@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-4.0.0.tgz#e56aafc8e3ae900b88d528303a5962cc363088ed"

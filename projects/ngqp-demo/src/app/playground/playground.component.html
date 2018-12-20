@@ -1,19 +1,21 @@
-<strong>https://your-app.biz{{ routerAdapter.url }}</strong>
-
-<ng-container [queryParamGroup]="paramGroup">
-    <input type="text" class="form-control" placeholder="Search" queryParamName="searchText" />
-
-    <button type="button" (click)="setSearchTextValue('bar')">Set 'bar' with setValue</button>
-    <button type="button" (click)="setSearchTextRoute('bar')">Set 'bar' with router</button>
-
-    <br />
-
-    <input type="checkbox" class="form-control" queryParamName="checker" />
-
-    <input type="number" class="form-control" queryParamName="counter" />
-
-    <input type="range" class="form-control" min="1" max="10" queryParamName="range" />
-</ng-container>
-
+<!--
 <button type="button" (click)="patchGroupValue()">Patch Group</button>
 <button type="button" (click)="setGroupValue()">Set Group</button>
+-->
+
+<demo-browser initialQueryParams="?q=Hello+World">
+    <ng-container [queryParamGroup]="paramGroup">
+        <input type="text" class="form-control" placeholder="Search" queryParamName="searchText" />
+
+        <button type="button" (click)="setSearchTextValue('bar')">Set 'bar' with setValue</button>
+        <button type="button" (click)="setSearchTextRoute('bar')">Set 'bar' with router</button>
+
+        <br />
+
+        <input type="checkbox" class="form-control" queryParamName="checker" />
+
+        <input type="number" class="form-control" queryParamName="counter" />
+
+        <input type="range" class="form-control" min="1" max="10" queryParamName="range" />
+    </ng-container>
+</demo-browser>
