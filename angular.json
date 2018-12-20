@@ -58,7 +58,7 @@
                             "projects/ngqp-demo/src/assets"
                         ],
                         "styles": [
-                            "projects/ngqp-demo/src/styles.css",
+                            "projects/ngqp-demo/src/styles.scss",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css"
                         ],
                         "scripts": []
@@ -115,7 +115,7 @@
                         "tsConfig": "projects/ngqp-demo/tsconfig.spec.json",
                         "karmaConfig": "projects/ngqp-demo/karma.conf.js",
                         "styles": [
-                            "projects/ngqp-demo/src/styles.css"
+                            "projects/ngqp-demo/src/styles.scss"
                         ],
                         "scripts": [],
                         "assets": [
@@ -139,5 +139,10 @@
             }
         }
     },
-    "defaultProject": "@ngqp/core"
+    "defaultProject": "@ngqp/core",
+    "schematics": {
+        "@schematics/angular:component": {
+            "styleext": "scss"
+        }
+    }
 }
