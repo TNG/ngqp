@@ -19,23 +19,18 @@ export class TestRouterAdapter implements RouterAdapter {
     }
 
     public navigate(queryParams: Params): Promise<boolean> {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                const newParams = {
-                    ...this.params,
-                    ...queryParams,
-                };
+        const newParams = {
+            ...this.params,
+            ...queryParams,
+        };
 
-                if (JSON.stringify(newParams) === JSON.stringify(this.params)) {
-                    resolve(false);
-                    return;
-                }
+        if (JSON.stringify(newParams) === JSON.stringify(this.params)) {
+            return Promise.resolve(false);
+        }
 
-                this.params = newParams;
-                this.emitQueryParamMap();
-                resolve(true);
-            }, 1);
-        });
+        this.params = newParams;
+        this.emitQueryParamMap();
+        return Promise.resolve(true);
     }
 
     private set params(params: Params) {
