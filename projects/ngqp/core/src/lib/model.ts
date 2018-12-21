@@ -32,7 +32,7 @@ export interface QueryParamControlOpts<T> {
     multi?: boolean;
     /** TODO Documentation */
     debounceTime?: number | null;
-    /** TODO Documentation */
+    /** TODO Documentation (+ not supported in multi-mode) */
     emptyOn?: T | null;
 }
 
@@ -156,7 +156,8 @@ export class QueryParamControl<T> {
     private changeFunctions: OnChangeFunction<T>[] = [];
 
     constructor(opts: QueryParamControlOpts<T>) {
-        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith, multi } = opts;
+        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith } = opts;
+        const multi = opts.multi === true;
 
         if (isMissing(name)) {
             throw new Error(`Please provide a name for each query parameter control.`);
@@ -174,6 +175,10 @@ export class QueryParamControl<T> {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 
+        if (multi && !isMissing(emptyOn)) {
+            throw new Error(`emptyOn is only supported for single-value parameters, but ${name} is a multi-value parameter.`);
+        }
+
         this.name = name;
         this.serialize = wrapTryCatch(
             createEmptyOnSerializer(serialize, emptyOn, compareWith),
@@ -184,7 +189,7 @@ export class QueryParamControl<T> {
             `Error while deserializing value for ${name}`
         );
         this.compareWith = compareWith;
-        this.multi = multi === true;
+        this.multi = multi;
         this.debounceTime = debounceTime;
     }
 
