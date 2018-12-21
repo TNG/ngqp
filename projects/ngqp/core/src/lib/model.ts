@@ -158,6 +158,10 @@ export class QueryParamControl<T> {
     constructor(opts: QueryParamControlOpts<T>) {
         const { name, serialize, deserialize, debounceTime, emptyOn, compareWith, multi } = opts;
 
+        if (isMissing(name)) {
+            throw new Error(`Please provide a name for each query parameter control.`);
+        }
+
         if (!isFunction(serialize)) {
             throw new Error(`serialize must be a function, but received ${serialize}`);
         }
@@ -173,11 +177,11 @@ export class QueryParamControl<T> {
         this.name = name;
         this.serialize = wrapTryCatch(
             createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            `Error while serializing value for ${name || 'control'}`
+            `Error while serializing value for ${name}`
         );
         this.deserialize = wrapTryCatch(
             createEmptyOnDeserializer(deserialize, emptyOn),
-            `Error while deserializing value for ${name || 'control'}`
+            `Error while deserializing value for ${name}`
         );
         this.compareWith = compareWith;
         this.multi = multi === true;
