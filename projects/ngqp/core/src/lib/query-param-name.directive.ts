@@ -1,7 +1,8 @@
 import { Directive, Host, Inject, Input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryParamGroupDirective } from './query-param-group.directive';
-import { DefaultControlValueAccessorDirective } from './accessors/accessors';
+import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from './accessors/accessors';
+import { isMissing } from './util';
 
 /**
  * TODO Documentation
@@ -44,25 +45,44 @@ export class QueryParamNameDirective implements OnInit {
      * any accessor is good enough for our purposes.
      */
     private selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor | null {
-        if (!valueAccessors) {
+        if (!valueAccessors || !Array.isArray(valueAccessors)) {
             return null;
         }
 
-        // TODO Check against all our custom accessors (similar to selectValueAccessor in @angular/forms)
+        let defaultAccessor: ControlValueAccessor | null = null;
+        let builtInAccessor: ControlValueAccessor | null = null;
+        let customAccessor: ControlValueAccessor | null = null;
+        valueAccessors.forEach(valueAccessor => {
+            if (valueAccessor.constructor === DefaultControlValueAccessorDirective) {
+                defaultAccessor = valueAccessor;
+            } else if (NGQP_BUILT_IN_ACCESSORS.some(current => valueAccessor.constructor === current)) {
+                if (builtInAccessor !== null) {
+                    throw new Error(`More than one built-in control value accessor matches`);
+                }
 
-        const customAccessor = valueAccessors
-            .find(valueAccessor => valueAccessor.constructor !== DefaultControlValueAccessorDirective);
-        if (customAccessor !== undefined) {
+                builtInAccessor = valueAccessor;
+            } else {
+                if (customAccessor !== null) {
+                    throw new Error(`More than one custom ControlValueAccessor has been found on the control`);
+                }
+
+                customAccessor = valueAccessor;
+            }
+        });
+
+        if (customAccessor !== null) {
             return customAccessor;
         }
 
-        const defaultAccessor = valueAccessors
-            .find(valueAccessor => valueAccessor.constructor === DefaultControlValueAccessorDirective);
-        if (defaultAccessor !== undefined) {
+        if (builtInAccessor !== null) {
+            return builtInAccessor;
+        }
+
+        if (defaultAccessor !== null) {
             return defaultAccessor;
         }
 
-        return null;
+        throw new Error(`No matching control value accessor has been found for this form control`);
     }
 
     private setupControl(): void {

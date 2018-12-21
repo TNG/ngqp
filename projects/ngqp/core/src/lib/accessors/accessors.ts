@@ -4,3 +4,5 @@ export { RangeControlValueAccessorDirective } from './range-control-value-access
 export { CheckboxControlValueAccessorDirective } from './checkbox-control-value-accessor.directive';
 export { SelectControlValueAccessorDirective, SelectOptionDirective } from './select-control-value-accessor.directive';
 export { MultiSelectControlValueAccessorDirective, MultiSelectOptionDirective } from './multi-select-control-value-accessor.directive';
+
+export { NGQP_BUILT_IN_ACCESSORS } from './ngqp-accessors';
