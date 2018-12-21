@@ -115,20 +115,28 @@ export class MultiSelectOptionDirective<T> implements OnInit, OnDestroy {
         private renderer: Renderer2,
         private elementRef: ElementRef,
     ) {
-        this.id = this.parent.registerOption(this);
+        if (this.parent) {
+            this.id = this.parent.registerOption(this);
+        }
     }
 
     public ngOnInit() {
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.id);
+        if (this.parent) {
+            this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.id);
+        }
     }
 
     public ngOnDestroy() {
-        this.parent.deregisterOption(this.id);
+        if (this.parent) {
+            this.parent.deregisterOption(this.id);
+        }
     }
 
     @Input('value')
     public set value(value: T) {
-        this.parent.updateOptionValue(this.id, value);
+        if (this.parent) {
+            this.parent.updateOptionValue(this.id, value);
+        }
     }
 
     public get selected(): boolean {
@@ -136,7 +144,9 @@ export class MultiSelectOptionDirective<T> implements OnInit, OnDestroy {
     }
 
     public set selected(selected: boolean) {
-        this.renderer.setProperty(this.elementRef.nativeElement, 'selected', this.selected);
+        if (this.parent) {
+            this.renderer.setProperty(this.elementRef.nativeElement, 'selected', selected);
+        }
     }
 
 }

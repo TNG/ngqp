@@ -38,14 +38,18 @@ export class QueryParamBuilder {
      * Redirects to {@link stringParam}.
      * @see stringParam
      */
-    public param(opts: QueryParamControlOptsInput<string>): QueryParamControl<string> {
+    public param(opts: QueryParamControlOptsInput<string> & { multi: true }): QueryParamControl<string[]>;
+    public param(opts: QueryParamControlOptsInput<string>): QueryParamControl<string>;
+    public param(opts: QueryParamControlOptsInput<string>): QueryParamControl<string | string[]> {
         return this.stringParam(opts);
     }
 
     /**
      * TODO Documentation
      */
-    public stringParam(opts: QueryParamControlOptsInput<string>): QueryParamControl<string> {
+    public stringParam(opts: QueryParamControlOptsInput<string> & { multi: true }): QueryParamControl<string[]>;
+    public stringParam(opts: QueryParamControlOptsInput<string>): QueryParamControl<string>;
+    public stringParam(opts: QueryParamControlOptsInput<string>): QueryParamControl<string | string[]> {
         return new QueryParamControl({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
@@ -57,7 +61,9 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public numericParam(opts: QueryParamControlOptsInput<number>): QueryParamControl<number> {
+    public numericParam(opts: QueryParamControlOptsInput<number> & { multi: true }): QueryParamControl<number[]>;
+    public numericParam(opts: QueryParamControlOptsInput<number>): QueryParamControl<number>;
+    public numericParam(opts: QueryParamControlOptsInput<number>): QueryParamControl<number | number[]> {
         return new QueryParamControl({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
@@ -69,7 +75,9 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public booleanParam(opts: QueryParamControlOptsInput<boolean>): QueryParamControl<boolean> {
+    public booleanParam(opts: QueryParamControlOptsInput<boolean> & { multi: true }): QueryParamControl<boolean[]>;
+    public booleanParam(opts: QueryParamControlOptsInput<boolean>): QueryParamControl<boolean>;
+    public booleanParam(opts: QueryParamControlOptsInput<boolean>): QueryParamControl<boolean | boolean[]> {
         return new QueryParamControl({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
@@ -81,7 +89,9 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public customParam<T>(opts: QueryParamControlOpts<T>): QueryParamControl<T> {
+    public customParam<T>(opts: QueryParamControlOpts<T> & { multi: true }): QueryParamControl<T[]>;
+    public customParam<T>(opts: QueryParamControlOpts<T>): QueryParamControl<T>;
+    public customParam<T>(opts: QueryParamControlOpts<T>): QueryParamControl<T | T[]> {
         return new QueryParamControl(opts);
     }
 

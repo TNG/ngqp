@@ -112,21 +112,29 @@ export class SelectOptionDirective<T> implements OnInit, OnDestroy {
         private renderer: Renderer2,
         private elementRef: ElementRef,
     ) {
-        this.id = this.parent.registerOption();
+        if (this.parent) {
+            this.id = this.parent.registerOption();
+        }
     }
 
     public ngOnInit() {
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.id);
+        if (this.parent) {
+            this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.id);
+        }
     }
 
     public ngOnDestroy() {
-        this.parent.deregisterOption(this.id);
-        this.parent.writeValue(this.parent.value);
+        if (this.parent) {
+            this.parent.deregisterOption(this.id);
+            this.parent.writeValue(this.parent.value);
+        }
     }
 
     @Input('value')
     public set value(value: T) {
-        this.parent.updateOptionValue(this.id, value);
+        if (this.parent) {
+            this.parent.updateOptionValue(this.id, value);
+        }
     }
 
 }

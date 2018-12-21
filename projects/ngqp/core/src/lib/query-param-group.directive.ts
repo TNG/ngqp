@@ -59,7 +59,9 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
             Object.keys(this.queryParamGroup.controls).forEach(controlName => {
                 const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-                const newModel = control.deserialize(queryParamMap.get(control.name));
+                const newModel = control.multi
+                    ? queryParamMap.getAll(control.name).map(control.deserialize)
+                    : control.deserialize(queryParamMap.get(control.name));
 
                 // Get the directive, if it has been initialized yet.
                 const directive = this.directives.find(dir => dir.name === controlName);
@@ -129,7 +131,9 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
 
     private getParamsForModel(control: QueryParamControl<any>, model: any): Params {
         return {
-            [ control.name ]: control.serialize(model)
+            [ control.name ]: control.multi
+                ? (model || <any[]>[]).map(control.serialize)
+                : control.serialize(model)
         };
     }
 

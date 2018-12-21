@@ -18,42 +18,10 @@ export class PlaygroundComponent {
                 debounceTime: 1000,
                 emptyOn: 'foo'
             }),
-            checker: queryParamBuilder.booleanParam({
-                name: 'yesOrNo',
-                emptyOn: true,
+            animals: queryParamBuilder.stringParam({
+                name: 'animal',
+                multi: true,
             }),
-            counter: queryParamBuilder.numericParam({
-                name: 'ctr',
-                emptyOn: 5,
-            }),
-            range: queryParamBuilder.numericParam({
-                name: 'range',
-                emptyOn: 2,
-            }),
-        });
-    }
-
-    public setSearchTextValue(value: string) {
-        this.paramGroup.get('searchText').setValue(value);
-    }
-
-    public setSearchTextRoute(value: string) {
-        this.routerAdapter.navigate({ q: value });
-    }
-
-    public patchGroupValue() {
-        this.paramGroup.patchValue({
-            checker: false,
-            counter: 1337,
-            range: 9,
-        });
-    }
-
-    public setGroupValue() {
-        this.paramGroup.setValue({
-            checker: false,
-            counter: 1337,
-            range: 9,
         });
     }
 

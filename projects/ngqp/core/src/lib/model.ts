@@ -29,6 +29,8 @@ export interface QueryParamControlOpts<T> {
     /** TODO Documentation */
     compareWith: Comparator<T>;
     /** TODO Documentation */
+    multi?: boolean;
+    /** TODO Documentation */
     debounceTime?: number | null;
     /** TODO Documentation */
     emptyOn?: T | null;
@@ -145,13 +147,16 @@ export class QueryParamControl<T> {
     public compareWith: Comparator<T>;
 
     /** TODO Documentation See QueryParamControlOpts */
+    public multi: boolean;
+
+    /** TODO Documentation See QueryParamControlOpts */
     public debounceTime: number | null;
 
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
 
     constructor(opts: QueryParamControlOpts<T>) {
-        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith } = opts;
+        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith, multi } = opts;
 
         if (!isFunction(serialize)) {
             throw new Error(`serialize must be a function, but received ${serialize}`);
@@ -175,6 +180,7 @@ export class QueryParamControl<T> {
             `Error while deserializing value for ${name || 'control'}`
         );
         this.compareWith = compareWith;
+        this.multi = multi === true;
         this.debounceTime = debounceTime;
     }
 
