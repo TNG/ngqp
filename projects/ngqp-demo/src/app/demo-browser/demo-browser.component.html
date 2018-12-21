@@ -11,5 +11,6 @@
 </div>
 
 <div *ngIf="group" class="demo-browser__console">
-    ({{ changeCounter }}) <ng-container *ngIf="lastChange">{{ lastChange }}</ng-container>
+    <span>{{ lastChange }}</span>
+    <span>({{ changeCounter }})</span>
 </div>
