@@ -31,12 +31,6 @@ export class PlaygroundComponent {
                 emptyOn: 2,
             }),
         });
-
-        this.paramGroup.valueChanges
-            .subscribe(value => console.log('group', { paramGroup: value }));
-
-        // this.paramGroup.get('searchText').valueChanges
-        //    .subscribe(value => console.log('searchText', { searchText: value }));
     }
 
     public setSearchTextValue(value: string) {

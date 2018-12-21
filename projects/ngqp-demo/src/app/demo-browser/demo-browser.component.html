@@ -6,12 +6,10 @@
     </div>
 </div>
 
-<div *ngIf="refreshing" class="progress" [style.height.px]="1">
-    <div class="progress-bar" role="progressbar" [style.width.%]="refreshProgress"></div>
+<div class="demo-browser__content">
+    <ng-content></ng-content>
 </div>
 
-<div class="demo-browser__content">
-    <ng-container *ngIf="!refreshing">
-        <ng-content></ng-content>
-    </ng-container>
+<div *ngIf="group" class="demo-browser__console">
+    ({{ changeCounter }}) <ng-container *ngIf="lastChange">{{ lastChange }}</ng-container>
 </div>

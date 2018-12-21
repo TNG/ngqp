@@ -3,7 +3,7 @@
 <button type="button" (click)="setGroupValue()">Set Group</button>
 -->
 
-<demo-browser initialQueryParams="?q=Hello+World">
+<demo-browser [group]="paramGroup" initialQueryParams="?q=Hello+World">
     <ng-container [queryParamGroup]="paramGroup">
         <input type="text" class="form-control" placeholder="Search" queryParamName="searchText" />
 

@@ -1,7 +1,9 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Params } from '@angular/router';
-import { NGQP_ROUTER_ADAPTER, RouterAdapter } from '@ngqp/core';
+import { Subject } from 'rxjs';
+import { NGQP_ROUTER_ADAPTER, QueryParamGroup, RouterAdapter } from '@ngqp/core';
 import { TestRouterAdapter } from '../test-router-adapter.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'demo-browser',
@@ -11,14 +13,36 @@ import { TestRouterAdapter } from '../test-router-adapter.service';
         { provide: NGQP_ROUTER_ADAPTER, useClass: TestRouterAdapter },
     ],
 })
-export class DemoBrowserComponent {
+export class DemoBrowserComponent implements OnInit, OnDestroy {
 
     @Input()
     public set initialQueryParams(value: string) {
         this.updateQueryParams(value);
     }
 
+    @Input()
+    public group: QueryParamGroup;
+
+    public changeCounter = 0;
+    public lastChange: string;
+
+    private destroy$ = new Subject<void>();
+
     constructor(@Inject(NGQP_ROUTER_ADAPTER) public routerAdapter: RouterAdapter) {
+    }
+
+    public ngOnInit() {
+        if (this.group) {
+            this.group.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => {
+                this.changeCounter++;
+                this.lastChange = JSON.stringify(value);
+            });
+        }
+    }
+
+    public ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     public updateQueryParams(value: string) {

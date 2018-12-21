@@ -68,4 +68,13 @@
         padding: 16px;
         min-height: 120px;
     }
+
+    &__console {
+        background: #eeeeee;
+        border-top: 1px solid #e0e0e0;
+        padding: 4px 8px;
+
+        font-size: small;
+        color: #616161;
+    }
 }
