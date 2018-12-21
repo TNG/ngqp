@@ -5,7 +5,7 @@ import {
     Host,
     HostListener,
     Input,
-    OnDestroy,
+    OnDestroy, OnInit,
     Optional,
     Renderer2,
     StaticProvider
@@ -103,7 +103,7 @@ export class SelectControlValueAccessorDirective<T> implements ControlValueAcces
 @Directive({
     selector: 'option',
 })
-export class NgqpSelectOptionDirective<T> implements OnDestroy {
+export class SelectOptionDirective<T> implements OnInit, OnDestroy {
 
     private readonly id: string | null = null;
 
@@ -112,9 +112,11 @@ export class NgqpSelectOptionDirective<T> implements OnDestroy {
         private renderer: Renderer2,
         private elementRef: ElementRef,
     ) {
-        if (this.parent) {
-            this.id = this.parent.registerOption();
-        }
+        this.id = this.parent.registerOption();
+    }
+
+    public ngOnInit() {
+        this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.id);
     }
 
     public ngOnDestroy() {
@@ -124,7 +126,6 @@ export class NgqpSelectOptionDirective<T> implements OnDestroy {
 
     @Input('value')
     public set value(value: T) {
-        this.renderer.setProperty(this.elementRef.nativeElement, 'value', this.id);
         this.parent.updateOptionValue(this.id, value);
     }
 

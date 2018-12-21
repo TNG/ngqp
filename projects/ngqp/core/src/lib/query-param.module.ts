@@ -4,10 +4,12 @@ import { QueryParamGroupDirective } from './query-param-group.directive';
 import {
     CheckboxControlValueAccessorDirective,
     DefaultControlValueAccessorDirective,
-    NgqpSelectOptionDirective,
+    MultiSelectControlValueAccessorDirective,
+    MultiSelectOptionDirective,
     NumberControlValueAccessorDirective,
     RangeControlValueAccessorDirective,
-    SelectControlValueAccessorDirective
+    SelectControlValueAccessorDirective,
+    SelectOptionDirective
 } from './accessors/accessors';
 import { DefaultRouterAdapter, NGQP_ROUTER_ADAPTER } from './router-adapter/router-adapter';
 
@@ -21,7 +23,9 @@ const DIRECTIVES: Type<any>[] = [
     RangeControlValueAccessorDirective,
     CheckboxControlValueAccessorDirective,
     SelectControlValueAccessorDirective,
-    NgqpSelectOptionDirective,
+    SelectOptionDirective,
+    MultiSelectControlValueAccessorDirective,
+    MultiSelectOptionDirective,
 ];
 
 @NgModule({
