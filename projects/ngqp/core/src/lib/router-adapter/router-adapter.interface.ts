@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ParamMap, Params } from '@angular/router';
+import { NavigationExtras, ParamMap, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 
 /**
@@ -27,4 +27,14 @@ export interface RouterAdapter {
 /**
  * TODO Documentation
  */
+export type RouterAdapterOptions = Pick<NavigationExtras, 'replaceUrl'>;
+
+/**
+ * TODO Documentation
+ */
 export const NGQP_ROUTER_ADAPTER = new InjectionToken<RouterAdapter>('NGQP_ROUTER_ADAPTER');
+
+/**
+ * TODO Documentation
+ */
+export const NGQP_ROUTER_OPTIONS = new InjectionToken<RouterAdapterOptions>('NGQP_ROUTER_OPTIONS');

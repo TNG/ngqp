@@ -1,11 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { RouterAdapter } from './router-adapter.interface';
+import { NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './router-adapter.interface';
 
+/**
+ * TODO Documentation
+ */
+export const DefaultRouterAdapterOptions: RouterAdapterOptions = {
+    replaceUrl: false,
+};
+
+/**
+ * TODO Documentation
+ */
 @Injectable()
 export class DefaultRouterAdapter implements RouterAdapter {
 
-    constructor(private router: Router, private route: ActivatedRoute) {
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private options: RouterAdapterOptions
+    ) {
     }
 
     public get url() {
@@ -21,6 +35,7 @@ export class DefaultRouterAdapter implements RouterAdapter {
             relativeTo: this.route,
             queryParamsHandling: 'merge',
             queryParams: queryParams,
+            ...this.options,
         });
     }
 
