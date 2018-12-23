@@ -144,22 +144,22 @@ export class QueryParamControl<T> {
     public value: T = null;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public name: string | null;
+    public readonly name: string | null;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public serialize: ParamSerializer<T>;
+    public readonly serialize: ParamSerializer<T>;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public deserialize: ParamDeserializer<T>;
+    public readonly deserialize: ParamDeserializer<T>;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public compareWith: Comparator<T>;
+    public readonly compareWith: Comparator<T>;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public multi: boolean;
+    public readonly multi: boolean;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public debounceTime: number | null;
+    public readonly debounceTime: number | null;
 
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
