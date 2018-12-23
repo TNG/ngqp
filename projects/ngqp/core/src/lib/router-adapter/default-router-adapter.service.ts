@@ -6,7 +6,7 @@ import { NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './rout
  * TODO Documentation
  */
 export const DefaultRouterAdapterOptions: RouterAdapterOptions = {
-    replaceUrl: false,
+    replaceUrl: true,
 };
 
 /**
