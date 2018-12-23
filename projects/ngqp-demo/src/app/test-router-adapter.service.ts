@@ -39,13 +39,7 @@ export class TestRouterAdapter implements RouterAdapter {
                 return;
             }
 
-            if (Array.isArray(value)) {
-                // TODO Support non-string values using JSON.stringify
-                value.forEach(item => urlSearchParams.append(paramName, '' + item));
-            } else {
-                // TODO Support non-string values using JSON.stringify
-                urlSearchParams.append(paramName, '' + value);
-            }
+            this.appendToSearchParams(urlSearchParams, paramName, value);
         });
 
         this.url = '?' + urlSearchParams.toString();
@@ -57,6 +51,14 @@ export class TestRouterAdapter implements RouterAdapter {
 
     private emitQueryParamMap(): void {
         this._queryParamMap.next(convertToParamMap(this.params));
+    }
+
+    private appendToSearchParams(searchParams: URLSearchParams, name: string, value: any): void {
+        if (Array.isArray(value)) {
+            value.forEach(item => this.appendToSearchParams(searchParams, name, item));
+        } else {
+            searchParams.append(name, `${value}`);
+        }
     }
 
 }
