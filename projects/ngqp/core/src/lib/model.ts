@@ -1,6 +1,7 @@
 import { Observable, Subject } from 'rxjs';
 import { Comparator, isFunction, isMissing, wrapTryCatch } from './util';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from './serializers';
+import { RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 
 /** TODO Documentation */
 export type ParamSerializer<T> = (model: T | null) => string | null;
@@ -49,10 +50,18 @@ export class QueryParamGroup {
     /** TODO Documentation */
     public readonly controls: { [ controlName: string ]: QueryParamControl<any> };
 
+    /** TODO Documentation */
+    public readonly routerOptions: RouterAdapterOptions;
+
     private changeFunctions: OnChangeFunction<QueryParamGroupValue>[] = [];
 
-    constructor(controls: { [ controlName: string ]: QueryParamControl<any> }) {
+    constructor(
+        controls: { [ controlName: string ]: QueryParamControl<any> },
+        extras: RouterAdapterOptions = {}
+    ) {
         this.controls = controls;
+        this.routerOptions = extras;
+
         Object.values(this.controls).forEach(control => control._setParent(this));
     }
 

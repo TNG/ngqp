@@ -9,6 +9,7 @@ import {
     DEFAULT_STRING_SERIALIZER
 } from './serializers';
 import { LOOSE_IDENTITY_COMPARATOR } from './util';
+import { RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 
 type OverwritePartial<T1, T2 extends keyof T1> = Pick<T1, Exclude<keyof T1, T2>> & Partial<Pick<T1, T2>>;
 export type QueryParamControlOptsInput<T> = OverwritePartial<QueryParamControlOpts<T>, 'serialize' | 'deserialize' | 'compareWith'>;
@@ -24,14 +25,17 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public group(controls: { [ name: string ]: QueryParamControl<any> | string }): QueryParamGroup {
+    public group(
+        controls: { [ name: string ]: QueryParamControl<any> | string },
+        extras: RouterAdapterOptions = {}
+    ): QueryParamGroup {
         const mappedControls: { [ controlName: string ]: QueryParamControl<any> } = {};
         Object.keys(controls).forEach(controlName => {
             mappedControls[ controlName ] = this.createControl(controlName, controls[ controlName ]);
         });
 
         // TODO Maybe we should first validate that no two controls defined the same "name".
-        return new QueryParamGroup(mappedControls);
+        return new QueryParamGroup(mappedControls, extras);
     }
 
     /**

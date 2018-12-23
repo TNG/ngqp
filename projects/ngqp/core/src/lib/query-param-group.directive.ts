@@ -1,8 +1,8 @@
-import { Directive, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { concatMap, debounceTime, takeUntil, tap } from 'rxjs/operators';
-import { NGQP_ROUTER_ADAPTER, RouterAdapter } from './router-adapter/router-adapter.interface';
+import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamControl, QueryParamGroup, QueryParamGroupValue } from './model';
 import { isMissing } from './util';
@@ -26,7 +26,10 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     private queue$ = new Subject<Params>();
     private destroy$ = new Subject<void>();
 
-    constructor(@Inject(NGQP_ROUTER_ADAPTER) private routerAdapter: RouterAdapter) {
+    constructor(
+        @Inject(NGQP_ROUTER_ADAPTER) private routerAdapter: RouterAdapter,
+        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private globalRouterOptions: RouterAdapterOptions
+    ) {
         this.setupNavigationQueue();
     }
 
@@ -121,7 +124,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
-            concatMap(params => this.routerAdapter.navigate(params)),
+            concatMap(params => this.routerAdapter.navigate(params, this.routerOptions)),
         ).subscribe();
     }
 
@@ -134,6 +137,15 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             [ control.name ]: control.multi
                 ? (model || <any[]>[]).map(control.serialize)
                 : control.serialize(model)
+        };
+    }
+
+    private get routerOptions(): RouterAdapterOptions {
+        const groupOptions = this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
+
+        return {
+            ...this.globalRouterOptions,
+            ...groupOptions,
         };
     }
 

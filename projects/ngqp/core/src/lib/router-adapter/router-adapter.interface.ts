@@ -20,7 +20,7 @@ export interface RouterAdapter {
     /**
      * TODO Documentation
      */
-    navigate(queryParams: Params): Promise<boolean>;
+    navigate(queryParams: Params, extras?: RouterAdapterOptions): Promise<boolean>;
 
 }
 
