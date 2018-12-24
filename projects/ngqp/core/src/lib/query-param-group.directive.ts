@@ -1,7 +1,7 @@
 import { Directive, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
-import { concatMap, debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamControl, QueryParamGroup, QueryParamGroupValue } from './model';
@@ -104,15 +104,14 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         directive.valueAccessor.writeValue(control.value);
 
         // Proxy updates from the view to debounce them (if needed).
-        const paramQueue$ = new Subject<Params>();
-        paramQueue$.pipe(
+        const debouncedQueue$ = new Subject<any>();
+        debouncedQueue$.pipe(
             !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
+            map((newModel: any) => this.getParamsForModel(control, newModel)),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(params));
 
-        directive.valueAccessor.registerOnChange((newModel: any) =>
-            paramQueue$.next(this.getParamsForModel(control, newModel))
-        );
+        directive.valueAccessor.registerOnChange((newModel: any) => debouncedQueue$.next(newModel));
 
         this.directives.push(directive);
     }
@@ -133,10 +132,16 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     }
 
     private getParamsForModel(control: QueryParamControl<any>, model: any): Params {
+        const newValue = control.multi
+            ? (model || <any[]>[]).map(control.serialize)
+            : control.serialize(model);
+
+        const combinedParams: Params = isMissing(control.combineWith)
+            ? {} : control.combineWith(control.value, newValue);
+
         return {
-            [ control.name ]: control.multi
-                ? (model || <any[]>[]).map(control.serialize)
-                : control.serialize(model)
+            ...combinedParams,
+            [ control.name ]: newValue,
         };
     }
 

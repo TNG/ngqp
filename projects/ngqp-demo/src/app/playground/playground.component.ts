@@ -16,13 +16,28 @@ export class PlaygroundComponent {
             searchText: queryParamBuilder.param({
                 name: 'q',
                 debounceTime: 1000,
-                emptyOn: 'foo'
+                emptyOn: 'foo',
+                combineWith: (previous, current) => {
+                    switch (current) {
+                        case 'woof': return {
+                            animal: ['Dog']
+                        };
+                        case 'meow': return {
+                            animal: ['Cat']
+                        };
+                        case 'null': return {
+                            animal: null
+                        };
+                    }
+
+                    return {};
+                },
             }),
             animals: queryParamBuilder.stringParam({
                 name: 'animal',
                 multi: true,
             }),
-        });
+        }, { replaceUrl: false });
     }
 
 }

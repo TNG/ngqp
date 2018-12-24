@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { Comparator, isFunction, isMissing, wrapTryCatch } from './util';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from './serializers';
@@ -11,6 +12,9 @@ export type ParamDeserializer<T> = (value: string | null) => T | null;
 
 /** TODO Documentation */
 export type OnChangeFunction<T> = (value: T) => void;
+
+/** TODO Documentation */
+export type ParamCombinator<T> = (previousValue: T, newValue: T) => Params;
 
 /** TODO Documentation */
 export interface QueryParamGroupValue {
@@ -35,6 +39,8 @@ export interface QueryParamControlOpts<T> {
     debounceTime?: number | null;
     /** TODO Documentation (+ not supported in multi-mode) */
     emptyOn?: T | null;
+    /** TODO Documentation (note: no controls / serializers, but finished values and non-recursive) */
+    combineWith?: ParamCombinator<T>;
 }
 
 /**
@@ -161,11 +167,14 @@ export class QueryParamControl<T> {
     /** TODO Documentation See QueryParamControlOpts */
     public readonly debounceTime: number | null;
 
+    /** TODO Documentation See QueryParamControlOpts */
+    public readonly combineWith: ParamCombinator<T>;
+
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
 
     constructor(opts: QueryParamControlOpts<T>) {
-        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith } = opts;
+        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith, combineWith } = opts;
         const multi = opts.multi === true;
 
         if (isMissing(name)) {
@@ -184,6 +193,10 @@ export class QueryParamControl<T> {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 
+        if (!isMissing(combineWith) && !isFunction(combineWith)) {
+            throw new Error(`combineWith must be a function, but received ${combineWith}`);
+        }
+
         if (multi && !isMissing(emptyOn)) {
             throw new Error(`emptyOn is only supported for single-value parameters, but ${name} is a multi-value parameter.`);
         }
@@ -200,6 +213,7 @@ export class QueryParamControl<T> {
         this.compareWith = compareWith;
         this.multi = multi;
         this.debounceTime = debounceTime;
+        this.combineWith = combineWith;
     }
 
     /**
