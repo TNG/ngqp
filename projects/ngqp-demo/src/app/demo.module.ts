@@ -21,7 +21,7 @@ import { DemoBrowserComponent } from './demo-browser/demo-browser.component';
         DemoRoutingModule,
         NgbModule,
         FontAwesomeModule,
-        QueryParamModule
+        QueryParamModule.forRoot(),
     ],
     bootstrap: [ DemoComponent ]
 })
