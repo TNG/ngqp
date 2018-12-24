@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { RouterAdapter } from '@ngqp/core';
+import { RouterAdapterOptions } from '../../../ngqp/core/src/lib/router-adapter/router-adapter.interface';
 
 @Injectable()
 export class TestRouterAdapter implements RouterAdapter {
@@ -10,23 +11,61 @@ export class TestRouterAdapter implements RouterAdapter {
     public readonly queryParamMap = this._queryParamMap.asObservable();
 
     public url: string;
+    public history: string[] = [];
 
     private _params: Params;
 
-    constructor() {
-        this.params = {};
-        this.emitQueryParamMap();
-    }
+    public navigate(queryParams: Params, extras: RouterAdapterOptions = {}): Promise<boolean> {
+        const previousUrl = this.url;
 
-    public navigate(queryParams: Params): Promise<boolean> {
         const newParams = {
             ...this.params,
             ...queryParams,
         };
 
         this.params = newParams;
+        if (previousUrl && extras.replaceUrl !== true) {
+            this.history.push(previousUrl);
+        }
+
         this.emitQueryParamMap();
         return Promise.resolve(true);
+    }
+
+    public navigateToQueryParamString(value: string) {
+        const params: Params = {};
+
+        const searchParams = new URLSearchParams(value);
+        const it = (<any>searchParams).keys();
+        let current = it.next();
+        while (!current.done) {
+            const paramName = current.value;
+            params[ paramName ] = searchParams.getAll(paramName);
+            current = it.next();
+        }
+
+        return this.navigate(params);
+    }
+
+    public goBack(): Promise<boolean> {
+        if (this.history.length === 0) {
+            return Promise.resolve(false);
+        }
+
+        // Get the previous URL
+        const previous = this.history.pop();
+
+        // We need this to not be a "queryParamsHandling: merge" navigation,
+        // so we fake this by removing the currently set params first.
+        this._params = {};
+
+        const result = this.navigateToQueryParamString(previous);
+
+        // Since this navigation added another state to the history, we
+        // have to remove it again
+        this.history.pop();
+
+        return result;
     }
 
     private set params(params: Params) {

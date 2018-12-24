@@ -1,8 +1,13 @@
 <div class="demo-browser__toolbar">
+    <button class="demo-browser__button" title="{{ routerAdapter.history.length }} previous routes"
+            (click)="routerAdapter.goBack()" [disabled]="routerAdapter.history.length === 0">
+        <fa-icon [icon]="faArrowLeft" size="sm"></fa-icon>
+    </button>
+
     <div class="demo-browser__url">
         <span class="demo-browser__url__domain" (click)="urlInput.focus()">https://www.app.io</span>
         <input #urlInput type="text" class="demo-browser__url__input"
-               [ngModel]="routerAdapter.url" (keyup.enter)="updateQueryParams($event.target.value)" />
+               [ngModel]="routerAdapter.url" (keyup.enter)="routerAdapter.navigateToQueryParamString($event.target.value)" />
     </div>
 </div>
 

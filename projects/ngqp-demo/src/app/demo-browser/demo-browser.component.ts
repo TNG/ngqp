@@ -1,9 +1,10 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
-import { NGQP_ROUTER_ADAPTER, QueryParamGroup, RouterAdapter } from '@ngqp/core';
-import { TestRouterAdapter } from '../test-router-adapter.service';
 import { takeUntil } from 'rxjs/operators';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { NGQP_ROUTER_ADAPTER, QueryParamGroup } from '@ngqp/core';
+import { TestRouterAdapter } from '../test-router-adapter.service';
 
 @Component({
     selector: 'demo-browser',
@@ -15,10 +16,10 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DemoBrowserComponent implements OnInit, OnDestroy {
 
+    public faArrowLeft = faArrowLeft;
+
     @Input()
-    public set initialQueryParams(value: string) {
-        this.updateQueryParams(value);
-    }
+    public initialQueryParams: string;
 
     @Input()
     public group: QueryParamGroup;
@@ -28,7 +29,7 @@ export class DemoBrowserComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<void>();
 
-    constructor(@Inject(NGQP_ROUTER_ADAPTER) public routerAdapter: RouterAdapter) {
+    constructor(@Inject(NGQP_ROUTER_ADAPTER) public routerAdapter: TestRouterAdapter) {
     }
 
     public ngOnInit() {
@@ -38,26 +39,13 @@ export class DemoBrowserComponent implements OnInit, OnDestroy {
                 this.lastChange = JSON.stringify(value);
             });
         }
+
+        this.routerAdapter.navigateToQueryParamString(this.initialQueryParams);
     }
 
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
-    }
-
-    public updateQueryParams(value: string) {
-        const params: Params = {};
-
-        const searchParams = new URLSearchParams(value);
-        const it = (<any>searchParams).keys();
-        let current = it.next();
-        while (!current.done) {
-            const paramName = current.value;
-            params[ paramName ] = searchParams.getAll(paramName);
-            current = it.next();
-        }
-
-        return this.routerAdapter.navigate(params);
     }
 
 }
