@@ -44,6 +44,10 @@ export class TestRouterAdapter implements RouterAdapter {
             current = it.next();
         }
 
+        // We need this to not be a "queryParamsHandling: merge" navigation,
+        // so we fake this by removing the currently set params first.
+        this._params = {};
+
         return this.navigate(params);
     }
 
@@ -54,11 +58,6 @@ export class TestRouterAdapter implements RouterAdapter {
 
         // Get the previous URL
         const previous = this.history.pop();
-
-        // We need this to not be a "queryParamsHandling: merge" navigation,
-        // so we fake this by removing the currently set params first.
-        this._params = {};
-
         const result = this.navigateToQueryParamString(previous);
 
         // Since this navigation added another state to the history, we
