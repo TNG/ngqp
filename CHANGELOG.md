@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/Airblader/ngqp/compare/v0.2.3...v0.2.4) (2018-12-25)
+
+
+### Bug Fixes
+
+* **core:** Set providers outside of forRoot ([131508b](https://github.com/Airblader/ngqp/commit/131508b))
+* **other:** Fix travis config ([d2c1d08](https://github.com/Airblader/ngqp/commit/d2c1d08))
+* **other:** Make scripts executable and let the shebang do its work ([b2435af](https://github.com/Airblader/ngqp/commit/b2435af))
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/Airblader/ngqp/compare/v0.2.2...v0.2.3) (2018-12-25)
 
