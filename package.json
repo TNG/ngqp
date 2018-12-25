@@ -12,8 +12,8 @@
         "demo:serve": "ng serve ngqp-demo",
         "schematics:build": "sh scripts/build-schematics.sh",
         "changelog:build": "cd projects/ngqp/core && standard-version --infile ../../../CHANGELOG.md",
+        "release": "sh scripts/release.sh",
 
-        "//publish": "yarn build:core && cd dist/ngqp/core && npm publish --access public",
         "//publish:demo": "yarn build:core && ng build ngqp-demo --prod --base-href=\"https://Airblader.github.io/ngqp/\" && npx ngh --dir=dist/ngqp-demo"
     },
     "private": true,
