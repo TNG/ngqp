@@ -37,6 +37,9 @@ export class PlaygroundComponent {
                 name: 'animal',
                 multi: true,
             }),
+            page: queryParamBuilder.numericParam({
+                name: 'page',
+            }),
         }, { replaceUrl: false });
     }
 

@@ -1,4 +1,4 @@
-<demo-browser [group]="paramGroup" initialQueryParams="?q=Hello+World">
+<demo-browser [group]="paramGroup" initialQueryParams="?q=Hello+World&page=5">
     <ng-container [queryParamGroup]="paramGroup">
         <div class="form-group">
             <input type="text" id="searchInput" class="form-control" placeholder="Search" queryParamName="searchText" />
@@ -10,6 +10,14 @@
                 <option value="Cat">Cat</option>
                 <option value="Mouse">Mouse</option>
             </select>
+        </div>
+        <div class="form-group">
+            <demo-pagination #paginator [numberOfPages]="5"
+                             controlValueAccessor #accessor="controlValueAccessor"
+                             (currentPageChange)="accessor.notifyChange($event)"
+                             (valueChange)="paginator.currentPage = $event"
+                             queryParamName="page">
+            </demo-pagination>
         </div>
     </ng-container>
 </demo-browser>

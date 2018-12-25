@@ -8,12 +8,14 @@ import { DemoRoutingModule } from './demo-routing.module';
 import { DemoComponent } from './demo.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { DemoBrowserComponent } from './demo-browser/demo-browser.component';
+import { DemoPaginationComponent } from './demo-pagination/demo-pagination.component';
 
 @NgModule({
     declarations: [
         DemoComponent,
         PlaygroundComponent,
-        DemoBrowserComponent
+        DemoBrowserComponent,
+        DemoPaginationComponent,
     ],
     imports: [
         BrowserModule,
