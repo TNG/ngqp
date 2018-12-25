@@ -40,6 +40,16 @@ const DIRECTIVES: Type<any>[] = [
     imports: [],
     declarations: [ DIRECTIVES ],
     exports: [ DIRECTIVES ],
+    providers: [
+        {
+            provide: NGQP_ROUTER_ADAPTER,
+            useClass: DefaultRouterAdapter
+        },
+        {
+            provide: NGQP_ROUTER_OPTIONS,
+            useValue: DefaultRouterAdapterOptions,
+        },
+    ],
 })
 export class QueryParamModule {
 
@@ -47,10 +57,6 @@ export class QueryParamModule {
         return {
             ngModule: QueryParamModule,
             providers: [
-                {
-                    provide: NGQP_ROUTER_ADAPTER,
-                    useClass: DefaultRouterAdapter
-                },
                 {
                     provide: NGQP_ROUTER_OPTIONS,
                     useValue: config.routerOptions ? config.routerOptions : DefaultRouterAdapterOptions,
