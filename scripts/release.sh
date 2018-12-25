@@ -7,5 +7,4 @@ yarn run changelog:build || exit 1
 yarn run core:build || exit 1
 yarn run schematics:build || exit 1
 
-cd dist/ngqp/core
-npm publish
+cd dist/ngqp/core && npm publish
