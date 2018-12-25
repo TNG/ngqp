@@ -72,7 +72,9 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
             Object.keys(this.queryParamGroup.controls).forEach(controlName => {
                 const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-                const newModel = this.deserialize(control, queryParamMap.getAll(control.name));
+                const newModel = this.deserialize(control,
+                    control.multi ? queryParamMap.getAll(control.name) : queryParamMap.get(control.name)
+                );
 
                 // Get the directive, if it has been initialized yet.
                 const directive = this.directives.find(dir => dir.name === controlName);
@@ -157,9 +159,12 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             : [control.serialize(model)];
     }
 
-    private deserialize<T = any>(control: QueryParamControl<T>, values: string[]): Unpack<T> | Unpack<T>[] {
-        const deserialized: Unpack<T>[] = values.map(control.deserialize);
-        return isMultiControl(control) ? deserialized : deserialized[0];
+    private deserialize<T = any>(control: QueryParamControl<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
+        if (Array.isArray(values)) {
+            return values.map(control.deserialize);
+        } else {
+            return control.deserialize(values);
+        }
     }
 
     private get routerOptions(): RouterAdapterOptions {
