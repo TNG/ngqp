@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/Airblader/ngqp/compare/v0.1.1...v0.2.0) (2018-12-25)
+
+
+### Bug Fixes
+
+* **other:** Move collection file into correct location ([4518232](https://github.com/Airblader/ngqp/commit/4518232))
+
+
+### Features
+
+* **other:** Create release script ([3ed6e3e](https://github.com/Airblader/ngqp/commit/3ed6e3e))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/Airblader/ngqp/compare/v0.1.0...v0.1.1) (2018-12-25)
 
