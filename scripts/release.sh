@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# TODO: Copy README, LICENSE
 # TODO: Update website
 # TODO: --dry-run (changelog, no publish)
 
@@ -21,8 +20,12 @@ yarn run core:build
 echo "[5] Building schematics"
 yarn run schematics:build
 
-echo "[6] Pushing to remote"
+echo "[6] Copy README and LICENSE"
+cp README.md dist/ngqp/core
+cp LICENSE dist/ngqp/core
+
+echo "[7] Pushing to remote"
 git push
 
-echo "[7] Publishing to npm"
+echo "[8] Publishing to npm"
 cd dist/ngqp/core && npm publish --access public && cd -
