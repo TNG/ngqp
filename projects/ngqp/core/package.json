@@ -17,7 +17,7 @@
     "queryparams",
     "query-params"
   ],
-  "schematics": "./schematics/collection.json",
+  "schematics": "./collection.json",
   "peerDependencies": {
     "@angular/common": "^7.x.x",
     "@angular/core": "^7.x.x",
