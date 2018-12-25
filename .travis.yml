@@ -4,5 +4,5 @@ node_js:
     - lts/*
 script:
     - yarn lint
-    - yarn build @ngqp/core
-    - yarn build --prod ngqp-demo
+    - yarn core:build
+    - yarn demo:build:prod
