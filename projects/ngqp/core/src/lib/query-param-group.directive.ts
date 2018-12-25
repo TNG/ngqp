@@ -137,7 +137,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             : control.serialize(model);
 
         const combinedParams: Params = isMissing(control.combineWith)
-            ? {} : control.combineWith(control.value, newValue);
+            ? {} : control.combineWith(control.value, model);
 
         return {
             ...combinedParams,
