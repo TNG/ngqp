@@ -4,8 +4,18 @@ import { Subject } from 'rxjs';
 import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
-import { QueryParamControl, QueryParamGroup, QueryParamGroupValue } from './model';
+import { QueryParamControl, QueryParamGroup, QueryParamGroupValue, Unpack } from './model';
 import { isMissing } from './util';
+
+/** TODO Documentation */
+function isMultiControl<T>(control: QueryParamControl<T | T[]>): control is QueryParamControl<T[]> {
+    return control.multi;
+}
+
+/** TODO Documentation */
+function hasArrayModel<T>(control: QueryParamControl<T | T[]>, model: T | T[]): model is T[] {
+    return isMultiControl(control);
+}
 
 /**
  * TODO Documentation
@@ -62,9 +72,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
             Object.keys(this.queryParamGroup.controls).forEach(controlName => {
                 const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-                const newModel = control.multi
-                    ? queryParamMap.getAll(control.name).map(control.deserialize)
-                    : control.deserialize(queryParamMap.get(control.name));
+                const newModel = this.deserialize(control, queryParamMap.getAll(control.name));
 
                 // Get the directive, if it has been initialized yet.
                 const directive = this.directives.find(dir => dir.name === controlName);
@@ -131,10 +139,8 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.queue$.next(params);
     }
 
-    private getParamsForModel(control: QueryParamControl<any>, model: any): Params {
-        const newValue = control.multi
-            ? (model || <any[]>[]).map(control.serialize)
-            : control.serialize(model);
+    private getParamsForModel<T = any>(control: QueryParamControl<T | T[]>, model: T): Params {
+        const newValue = this.serialize(control, model);
 
         const combinedParams: Params = isMissing(control.combineWith)
             ? {} : control.combineWith(control.value, model);
@@ -143,6 +149,17 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             ...combinedParams,
             [ control.name ]: newValue,
         };
+    }
+
+    private serialize<T = any>(control: QueryParamControl<T | T[]>, model: T): string[] {
+        return hasArrayModel(control, model)
+            ? (model || <T[]>[]).map(control.serialize)
+            : [control.serialize(model)];
+    }
+
+    private deserialize<T = any>(control: QueryParamControl<T>, values: string[]): Unpack<T> | Unpack<T>[] {
+        const deserialized: Unpack<T>[] = values.map(control.deserialize);
+        return isMultiControl(control) ? deserialized : deserialized[0];
     }
 
     private get routerOptions(): RouterAdapterOptions {

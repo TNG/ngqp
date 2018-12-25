@@ -17,6 +17,9 @@ export type OnChangeFunction<T> = (value: T) => void;
 export type ParamCombinator<T> = (previousValue: T, newValue: T) => Params;
 
 /** TODO Documentation */
+export type Unpack<T> = T extends (infer U)[] ? U : T;
+
+/** TODO Documentation */
 export interface QueryParamGroupValue {
     [ controlName: string ]: any;
 }
@@ -28,17 +31,17 @@ export interface QueryParamControlOpts<T> {
     /** TODO Documentation */
     name: string;
     /** TODO Documentation */
-    serialize: ParamSerializer<T>;
+    serialize: ParamSerializer<Unpack<T>>;
     /** TODO Documentation */
-    deserialize: ParamDeserializer<T>;
+    deserialize: ParamDeserializer<Unpack<T>>;
     /** TODO Documentation */
-    compareWith: Comparator<T>;
+    compareWith: Comparator<Unpack<T>>;
     /** TODO Documentation */
     multi?: boolean;
     /** TODO Documentation */
     debounceTime?: number | null;
     /** TODO Documentation (+ not supported in multi-mode) */
-    emptyOn?: T | null;
+    emptyOn?: Unpack<T>;
     /** TODO Documentation (note: no controls / serializers, but finished values and non-recursive) */
     combineWith?: ParamCombinator<T>;
 }
@@ -153,13 +156,10 @@ export class QueryParamControl<T> {
     public readonly name: string | null;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public readonly serialize: ParamSerializer<T>;
+    public readonly serialize: ParamSerializer<Unpack<T>>;
 
     /** TODO Documentation See QueryParamControlOpts */
-    public readonly deserialize: ParamDeserializer<T>;
-
-    /** TODO Documentation See QueryParamControlOpts */
-    public readonly compareWith: Comparator<T>;
+    public readonly deserialize: ParamDeserializer<Unpack<T>>;
 
     /** TODO Documentation See QueryParamControlOpts */
     public readonly multi: boolean;
@@ -210,7 +210,6 @@ export class QueryParamControl<T> {
             createEmptyOnDeserializer(deserialize, emptyOn),
             `Error while deserializing value for ${name}`
         );
-        this.compareWith = compareWith;
         this.multi = multi;
         this.debounceTime = debounceTime;
         this.combineWith = combineWith;
