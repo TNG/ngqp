@@ -13,12 +13,6 @@ export {
     createNumberDeserializer,
     createBooleanSerializer,
     createBooleanDeserializer,
-    DEFAULT_STRING_SERIALIZER,
-    DEFAULT_STRING_DESERIALIZER,
-    DEFAULT_NUMBER_SERIALIZER,
-    DEFAULT_NUMBER_DESERIALIZER,
-    DEFAULT_BOOLEAN_SERIALIZER,
-    DEFAULT_BOOLEAN_DESERIALIZER,
 } from './serializers';
 
 export * from './accessors/accessors';
