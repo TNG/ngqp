@@ -42,7 +42,7 @@
             "root": "projects/ngqp-demo/",
             "sourceRoot": "projects/ngqp-demo/src",
             "projectType": "application",
-            "prefix": "app",
+            "prefix": "demo",
             "schematics": {},
             "architect": {
                 "build": {
