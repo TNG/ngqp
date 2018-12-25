@@ -2,7 +2,7 @@
 name: Feature request
 about: Share your ideas for @ngqp
 title: "[Feature]"
-labels: feature-request
+labels: feature-request, discussion
 assignees: ''
 
 ---
