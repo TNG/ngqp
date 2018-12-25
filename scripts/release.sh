@@ -1,11 +1,28 @@
 #!/usr/bin/env bash
-# TODO: Copy README
+# TODO: Copy README, LICENSE
+# TODO: Update website
+# TODO: --dry-run (changelog, no publish)
 
-yarn run lint || exit 1
+# If any command fails, stop immediately
+set -e -o pipefail
 
+echo "[1] Linting"
+yarn run lint
+
+echo "[2] Removing dist folder"
 rm -rf dist/
-yarn run changelog:build || exit 1
-yarn run core:build || exit 1
-yarn run schematics:build || exit 1
 
-cd dist/ngqp/core && npm publish
+echo "[3] Updating CHANGELOG"
+cd projects/ngqp/core && standard-version --infile ../../../CHANGELOG.md && cd -
+
+echo "[4] Building @ngqp/core"
+yarn run core:build
+
+echo "[5] Building schematics"
+yarn run schematics:build
+
+echo "[6] Pushing to remote"
+git push
+
+echo "[7] Publishing to npm"
+cd dist/ngqp/core && npm publish --access public && cd -
