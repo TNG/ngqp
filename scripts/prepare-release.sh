@@ -25,9 +25,3 @@ cp LICENSE dist/ngqp/core
 
 echo "[7] Pushing to remote"
 git push
-
-echo "[8] Publishing to npm"
-cd dist/ngqp/core; npm publish --access public; cd -
-
-echo "[9] Deploying website"
-yarn run demo:publish

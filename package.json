@@ -7,12 +7,15 @@
         "test": "ng test",
         "core:build": "ng build @ngqp/core",
         "core:build:prod": "yarn core:build",
+        "core:release:prepare": "scripts/prepare-release.sh",
+        "core:release:publish": "yarn core:release:prepare && cd dist/ngqp/core && npm publish --access public",
         "demo:build": "ng build ngqp-demo",
         "demo:build:prod": "yarn demo:build --prod",
-        "demo:publish": "yarn core:build && yarn demo:build:prod --base-href=\"https://Airblader.github.io/ngqp/\" && npx ngh --dir=dist/ngqp-demo",
+        "demo:release:prepare": "yarn core:build && yarn demo:build:prod --base-href=\"https://Airblader.github.io/ngqp/\"",
+        "demo:release:publish": "yarn demo:release:prepare && npx ngh --dir=dist/ngqp-demo",
         "demo:serve": "ng serve ngqp-demo",
         "schematics:build": "scripts/build-schematics.sh",
-        "release": "scripts/release.sh"
+        "release": "yarn core:release:publish && yarn demo:release:publish"
     },
     "private": true,
     "dependencies": {
