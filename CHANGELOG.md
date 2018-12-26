@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/Airblader/ngqp/compare/v0.2.7...v0.2.8) (2018-12-26)
+
+
+### Bug Fixes
+
+* **scripts:** Explicitly add npm registry ([5e2e50c](https://github.com/Airblader/ngqp/commit/5e2e50c))
+
+
+
 <a name="0.2.7"></a>
 ## [0.2.7](https://github.com/Airblader/ngqp/compare/v0.2.6...v0.2.7) (2018-12-26)
 
