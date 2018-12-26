@@ -16,6 +16,10 @@
 </div>
 
 <div *ngIf="group" class="demo-browser__console">
-    <span>{{ lastChange }}</span>
-    <span>({{ changeCounter }})</span>
+    <span class="cursor-default" title="Last value change event of the QueryParamGroup">
+        {{ lastChange }}
+    </span>
+    <span class="cursor-default no-select" title="Total number of value change events of the QueryParamGroup">
+        ({{ changeCounter }})
+    </span>
 </div>
