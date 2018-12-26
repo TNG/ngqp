@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# TODO: Update website
 # TODO: --dry-run (changelog, no publish)
 
 # If any command fails, stop immediately
