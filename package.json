@@ -12,7 +12,7 @@
         "demo:publish": "yarn core:build && yarn demo:build:prod --base-href=\"https://Airblader.github.io/ngqp/\" && npx ngh --dir=dist/ngqp-demo",
         "demo:serve": "ng serve ngqp-demo",
         "schematics:build": "scripts/build-schematics.sh",
-        "release": "scripts/release.sh && yarn demo:publish"
+        "release": "scripts/release.sh"
     },
     "private": true,
     "dependencies": {
