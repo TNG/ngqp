@@ -11,10 +11,23 @@
         </div>
     </section>
 
-    <!--
-Easy to use: minimum setup, intuitive API based on Forms
-Powerful: feature-rich, highly customisable
-Free: Open source on Github, MIT license, forever free
-Well-Documented, Tested
--->
+    <section class="benefits container-fluid">
+        <div class="benefits__content">
+            <div class="row">
+                <div *ngFor="let benefit of benefits" class="col-12 col-sm-6 d-flex flex-wrap">
+                    <div class="benefit__icon">
+                        <fa-icon [icon]="benefit.icon" size="3x" class="text-primary"></fa-icon>
+                    </div>
+                    <div class="benefit__text">
+                        <h4>{{ benefit.title }}</h4>
+                        <p>{{ benefit.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
+
+<footer class="footer">
+    Design inspired by <a href="https://valor-software.com/ngx-bootstrap">ngx-bootstrap</a>.
+</footer>
