@@ -5,6 +5,7 @@
         "ng": "ng",
         "lint": "ng lint",
         "test": "ng test",
+        "serve": "yarn core:build && yarn demo:serve",
         "core:build": "ng build @ngqp/core",
         "core:build:prod": "yarn core:build",
         "core:release:prepare": "scripts/prepare-release.sh",
