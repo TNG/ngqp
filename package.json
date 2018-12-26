@@ -12,8 +12,8 @@
         "core:release:publish": "yarn core:release:prepare && scripts/publish-release.sh",
         "demo:build": "ng build ngqp-demo",
         "demo:build:prod": "yarn demo:build --prod",
-        "demo:release:prepare": "yarn core:build && yarn demo:build:prod --base-href=\"https://Airblader.github.io/ngqp/\"",
-        "demo:release:publish": "yarn demo:release:prepare && npx ngh --dir=dist/ngqp-demo",
+        "demo:release:prepare": "yarn core:build && yarn demo:build:prod --base-href=\"https://www.ngqp.io\"",
+        "demo:release:publish": "yarn demo:release:prepare && npx ngh --dir=dist/ngqp-demo --cname=\"www.ngqp.io\"",
         "demo:serve": "ng serve ngqp-demo",
         "schematics:build": "scripts/build-schematics.sh",
         "release": "yarn core:release:publish && yarn demo:release:publish"

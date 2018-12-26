@@ -2,7 +2,7 @@
   "name": "@ngqp/core",
   "version": "0.2.8",
   "description": "Synchronizing form controls with the URL for Angular",
-  "homepage": "https://github.com/Airblader/ngqp",
+  "homepage": "https://ngqp.io",
   "author": "Ingo Bürk",
   "license": "MIT",
   "bugs": "https://github.com/Airblader/ngqp/issues",
