@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/Airblader/ngqp/compare/v0.2.5...v0.2.6) (2018-12-26)
+
+
+### Bug Fixes
+
+* **scripts:** Clean up release targets ([b706777](https://github.com/Airblader/ngqp/commit/b706777))
+* **scripts:** Make cd independent of command success ([7ee98f3](https://github.com/Airblader/ngqp/commit/7ee98f3))
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/Airblader/ngqp/compare/v0.2.4...v0.2.5) (2018-12-26)
 
