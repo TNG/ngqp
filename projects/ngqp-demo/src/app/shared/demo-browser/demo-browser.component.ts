@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NGQP_ROUTER_ADAPTER, QueryParamGroup } from '@ngqp/core';
-import { TestRouterAdapter } from '../test-router-adapter.service';
+import { TestRouterAdapter } from '../../test-router-adapter.service';
 
 @Component({
     selector: 'demo-browser',
