@@ -58,8 +58,7 @@
                             "projects/ngqp-demo/src/assets"
                         ],
                         "styles": [
-                            "projects/ngqp-demo/src/styles.scss",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css"
+                            "projects/ngqp-demo/src/styles.scss"
                         ],
                         "scripts": []
                     },

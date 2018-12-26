@@ -1,0 +1,32 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.intro {
+    h1 {
+        font-family: Roboto, Droid, sans-serif;
+    }
+
+    .btn-block {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+
+        .btn {
+            min-width: 240px;
+            margin: 0 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        .btn-block .btn {
+            display: block;
+            margin: 0 auto;
+
+            &:not(:last-child) {
+                margin-bottom: 16px;
+            }
+        }
+    }
+}

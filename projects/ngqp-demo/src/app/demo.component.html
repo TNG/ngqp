@@ -3,18 +3,18 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" routerLink="/">
-        <div class="d-inline-block align-middle  logo-container">
+        <div class="d-inline-block align-middle logo-container">
             <img src="assets/logo.svg" height="48" width="auto" />
         </div>
-        @ngqp
+        <span>ngqp</span>
     </a>
     <div class="navbar-collapse" [class.collapse]="!isNavbarExpanded">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" routerLink="/playground">Playground</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/">Getting started</a>
+                <a class="nav-link" routerLink="/guide">Getting started</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="/">Tutorial</a>
@@ -29,6 +29,4 @@
     </a>
 </nav>
 
-<main role="main" class="container mt-5">
-    <router-outlet></router-outlet>
-</main>
+<router-outlet></router-outlet>

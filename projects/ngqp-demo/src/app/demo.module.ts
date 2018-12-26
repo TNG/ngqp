@@ -9,6 +9,7 @@ import { DemoComponent } from './demo.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import { DemoBrowserComponent } from './shared/demo-browser/demo-browser.component';
 import { DemoPaginationComponent } from './shared/demo-pagination/demo-pagination.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { DemoPaginationComponent } from './shared/demo-pagination/demo-paginatio
         PlaygroundComponent,
         DemoBrowserComponent,
         DemoPaginationComponent,
+        HomeComponent,
     ],
     imports: [
         BrowserModule,
