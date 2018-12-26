@@ -8,7 +8,7 @@
         "core:build": "ng build @ngqp/core",
         "core:build:prod": "yarn core:build",
         "core:release:prepare": "scripts/prepare-release.sh",
-        "core:release:publish": "yarn core:release:prepare && cd dist/ngqp/core && npm publish --access public",
+        "core:release:publish": "yarn core:release:prepare && cd dist/ngqp/core && npm publish --access public --registry https://registry.npmjs.org/",
         "demo:build": "ng build ngqp-demo",
         "demo:build:prod": "yarn demo:build --prod",
         "demo:release:prepare": "yarn core:build && yarn demo:build:prod --base-href=\"https://Airblader.github.io/ngqp/\"",
