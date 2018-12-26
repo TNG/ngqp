@@ -6,7 +6,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QueryParamModule } from '@ngqp/core';
 import { DemoRoutingModule } from './demo-routing.module';
 import { DemoComponent } from './demo.component';
-import { PlaygroundComponent } from './playground/playground.component';
 import { DemoBrowserComponent } from './shared/demo-browser/demo-browser.component';
 import { DemoPaginationComponent } from './shared/demo-pagination/demo-pagination.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +13,6 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
     declarations: [
         DemoComponent,
-        PlaygroundComponent,
         DemoBrowserComponent,
         DemoPaginationComponent,
         HomeComponent,
