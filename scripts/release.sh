@@ -11,7 +11,7 @@ echo "[2] Removing dist folder"
 rm -rf dist/
 
 echo "[3] Updating CHANGELOG"
-cd projects/ngqp/core && standard-version --infile ../../../CHANGELOG.md && cd -
+cd projects/ngqp/core; standard-version --infile ../../../CHANGELOG.md; cd -
 
 echo "[4] Building @ngqp/core"
 yarn run core:build
@@ -27,7 +27,7 @@ echo "[7] Pushing to remote"
 git push
 
 echo "[8] Publishing to npm"
-cd dist/ngqp/core && npm publish --access public && cd -
+cd dist/ngqp/core; npm publish --access public; cd -
 
 echo "[9] Deploying website"
 yarn run demo:publish
