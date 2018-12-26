@@ -16,7 +16,9 @@ from `@angular/forms`, making it intuitive to work with.
 
 # Installation
 
-All you need is to `yarn add @ngqp/core` (or `npm install --save @ngqp/core`) and import the `QueryParamModule` into your app module:
+Simply run `ng add @ngqp/core` – that's it! We will automatically install ngqp and import it into your app.
+
+If you want, you can also avoid running schematics. Just run `yarn add @ngqp/core` (or `npm install --save @ngqp/core`) and import the `QueryParamModule` into your app module:
 
 ```typescript
 import { NgModule } from '@angular/core';
