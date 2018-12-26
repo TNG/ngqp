@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/Airblader/ngqp/compare/v0.2.4...v0.2.5) (2018-12-26)
+
+
+### Bug Fixes
+
+* **core:** Fix deserialization on non-multi controls ([4fdcfe1](https://github.com/Airblader/ngqp/commit/4fdcfe1))
+* **docs:** Navigating by URL always needs to be non-merge ([c4787a4](https://github.com/Airblader/ngqp/commit/c4787a4))
+* **docs:** Remove unnecessary dependency to [@ngqp](https://github.com/ngqp)/core from demo ([76ad096](https://github.com/Airblader/ngqp/commit/76ad096))
+* **other:** Copy README and LICENSE on release ([04b2c8c](https://github.com/Airblader/ngqp/commit/04b2c8c))
+* **other:** Deploy website on release ([f837240](https://github.com/Airblader/ngqp/commit/f837240))
+* **other:** Fail on errors when building schematics ([4865d5f](https://github.com/Airblader/ngqp/commit/4865d5f))
+* **other:** Improve release script ([91cb7f7](https://github.com/Airblader/ngqp/commit/91cb7f7))
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/Airblader/ngqp/compare/v0.2.3...v0.2.4) (2018-12-25)
 
