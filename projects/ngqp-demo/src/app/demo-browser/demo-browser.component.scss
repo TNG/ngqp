@@ -1,3 +1,7 @@
+$panel-background: #f0f0f0;
+$panel-accent: #d1d1d1;
+$panel-content-height: 27px;
+
 :host {
     display: block;
     border: 1px solid #bdbdbd;
@@ -27,9 +31,10 @@
     &__toolbar {
         display: flex;
 
-        background: #eeeeee;
-        border-bottom: 1px solid #e0e0e0;
-        padding: 4px 8px;
+        background: $panel-background;
+        border-bottom: 1px solid $panel-accent;
+        padding: 6px;
+        box-shadow: -1px 1px 2px rgba(0, 0, 0, .1);
     }
 
     &__button {
@@ -39,16 +44,21 @@
     &__url {
         flex-grow: 1;
 
-        font-family: monospace;
-        height: 24px;
-        line-height: 24px;
+        font-family: Roboto, Droid Sans, Helvetica Neue, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+
+        height: $panel-content-height;
+        line-height: $panel-content-height;
 
         cursor: not-allowed;
         background: #fff;
-        border-radius: 16px;
-        padding: 0 16px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        padding: 0 8px;
 
         display: flex;
+        align-items: center;
 
         &__domain {
             flex-grow: 0;
@@ -74,12 +84,13 @@
     }
 
     &__console {
-        background: #eeeeee;
-        border-top: 1px solid #e0e0e0;
-        padding: 4px 8px;
+        background: $panel-background;
+        border-top: 1px solid $panel-accent;
+        padding: 6px;
+        box-shadow: 1px -1px 2px rgba(0, 0, 0, .1);
 
-        font-size: small;
-        color: #616161;
+        font-size: 12px;
+        color: #5f615f;
 
         display: flex;
         justify-content: space-between;
@@ -90,18 +101,18 @@ button.demo-browser__button {
     @include btn-reset();
     outline: 0;
     cursor: pointer;
-    margin-right: 8px;
+    margin-right: 4px;
 
-    width: 24px;
-    height: 24px;
+    width: $panel-content-height;
+    height: $panel-content-height;
     display: flex;
     justify-content: center;
     align-items: center;
     background: transparent;
-    border-radius: 50%;
+    border-radius: 4px;
 
     &:not(:disabled) {
-        &:hover {
+        &:hover, &:focus {
             background: #e0e0e0;
         }
 
