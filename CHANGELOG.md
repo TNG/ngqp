@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/Airblader/ngqp/compare/v0.3.1...v0.3.2) (2018-12-27)
+
+
+### Bug Fixes
+
+* **core:** Do not consider undefined for emptyOn ([91a75ba](https://github.com/Airblader/ngqp/commit/91a75ba))
+* **docs:** Disable autocomplete in example ([d1d0a1b](https://github.com/Airblader/ngqp/commit/d1d0a1b))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/Airblader/ngqp/compare/v0.3.0...v0.3.1) (2018-12-27)
 
