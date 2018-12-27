@@ -12,7 +12,7 @@ export function createEmptyOnSerializer<T>(serializer: ParamSerializer<T>, empty
  * TODO Documentation
  */
 export function createEmptyOnDeserializer<T>(deserializer: ParamDeserializer<T>, emptyOn: T): ParamDeserializer<T> {
-    return (value: string | null) => isMissing(value) ? emptyOn : deserializer(value);
+    return (value: string | null) => value === null ? emptyOn : deserializer(value);
 }
 
 /**

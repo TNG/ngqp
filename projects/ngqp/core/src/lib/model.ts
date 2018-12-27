@@ -174,7 +174,8 @@ export class QueryParamControl<T> {
     private changeFunctions: OnChangeFunction<T>[] = [];
 
     constructor(opts: QueryParamControlOpts<T>) {
-        const { name, serialize, deserialize, debounceTime, emptyOn, compareWith, combineWith } = opts;
+        const { name, serialize, deserialize, debounceTime, compareWith, combineWith } = opts;
+        const { emptyOn = null } = opts;
         const multi = opts.multi === true;
 
         if (isMissing(name)) {
