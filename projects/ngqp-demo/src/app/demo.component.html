@@ -9,17 +9,17 @@
         <span>ngqp</span>
     </a>
     <div class="navbar-collapse" [class.collapse]="!isNavbarExpanded">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/guide">Getting started</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/">Tutorial</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/">API Documentation</a>
-            </li>
-        </ul>
+        <div class="navbar-nav mr-auto">
+            <a class="nav-item" routerLink="/getting-started" routerLinkActive="active">
+                <span class="nav-link">Getting started</span>
+            </a>
+            <a class="nav-item" routerLink="/tutorial" routerLinkActive="active">
+                <span class="nav-link">Tutorial</span>
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-link">API Documentation</span>
+            </a>
+        </div>
     </div>
     <a href="https://ngqp.io" rel="nofollow noopener" [class.collapse]="isNavbarExpanded">
         <fa-icon [icon]="faGithub" size="2x" class="text-light"></fa-icon>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { GettingStartedComponent } from './getting-started/getting-started.component';
 
 const routes: Routes = [
     {
@@ -9,8 +10,8 @@ const routes: Routes = [
         component: HomeComponent,
     },
     {
-        path: 'guide',
-        component: HomeComponent,
+        path: 'getting-started',
+        component: GettingStartedComponent,
     },
     {
         path: '**',

@@ -9,6 +9,8 @@ import { DemoComponent } from './demo.component';
 import { DemoBrowserComponent } from './shared/demo-browser/demo-browser.component';
 import { DemoPaginationComponent } from './shared/demo-pagination/demo-pagination.component';
 import { HomeComponent } from './home/home.component';
+import { GettingStartedComponent } from './getting-started/getting-started.component';
+import { DemoSnippetComponent } from './shared/demo-snippet/demo-snippet.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +18,8 @@ import { HomeComponent } from './home/home.component';
         DemoBrowserComponent,
         DemoPaginationComponent,
         HomeComponent,
+        GettingStartedComponent,
+        DemoSnippetComponent,
     ],
     imports: [
         BrowserModule,
