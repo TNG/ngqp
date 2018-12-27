@@ -11,7 +11,9 @@ const SNIPPETS: { [ key: string ]: string } = {
         })
         export class AppModule {}`,
     DEMO_MARKUP: `
+        <!-- Provide the QueryParamGroup somewhere on a parent element using queryParamGroup. -->
         <ng-container [queryParamGroup]="paramGroup">
+            <!-- Using the queryParamName directive to reference a specific control of your group. -->
             <input type="text" placeholder="Search" queryParamName="searchText" />
         </ng-container>
     `,
@@ -21,10 +23,14 @@ const SNIPPETS: { [ key: string ]: string } = {
         @Component({ /* … */ })
         export class ExampleComponent {
 
+            // This group holds the definition of our URL parameters we want to manage.
             public paramGroup: QueryParamGroup;
 
             constructor(private queryParamBuilder: QueryParamBuilder) {
                 this.paramGroup = queryParamBuilder.group({
+                    // Defines a simple string-typed parameter which will use the query
+                    // parameter "q". Changes in the form control will be debounced by
+                    // 250ms to avoid too frequent updates.
                     searchText: queryParamBuilder.stringParam({
                         name: 'q',
                         debounceTime: 250,
