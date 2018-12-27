@@ -19,11 +19,11 @@
   ],
   "schematics": "./collection.json",
   "peerDependencies": {
-    "@angular/common": "^7.x.x",
-    "@angular/core": "^7.x.x",
-    "@angular/forms": "^7.x.x",
-    "@angular/router": "^7.x.x",
-    "rxjs": "^6.x.x"
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular/forms": "^7.0.0",
+    "@angular/router": "^7.0.0",
+    "rxjs": "^6.0.0"
   },
   "dependencies": {
     "schematics-utilities": "^1.1.1"
