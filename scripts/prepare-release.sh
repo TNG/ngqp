@@ -24,4 +24,4 @@ cp README.md dist/ngqp/core
 cp LICENSE dist/ngqp/core
 
 echo "[7] Pushing to remote"
-git push
+git push --tags
