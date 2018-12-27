@@ -10,7 +10,7 @@ import {
 
 const NGQP_MODULE_NAME = 'QueryParamModule';
 
-function getAngularMajorVersion(): number {
+function getAngularMajorVersion(): number | null {
     try {
         const version = '' + require('@angular/core/package.json').version;
         const major = +version.split(/\./)[ 0 ];
@@ -78,6 +78,7 @@ function addModuleToImports(options: any): Rule {
 
 export default function(options: any): Rule {
     return chain([
+        addMatchingVersion(),
         options && options.skipModuleImport ? noop() : addModuleToImports(options),
     ]);
 }
