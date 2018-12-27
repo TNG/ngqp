@@ -13,7 +13,7 @@ const SNIPPETS: { [ key: string ]: string } = {
     DEMO_MARKUP: `
         <!-- Provide the QueryParamGroup somewhere on a parent element using queryParamGroup. -->
         <ng-container [queryParamGroup]="paramGroup">
-            <!-- Using the queryParamName directive to reference a specific control of your group. -->
+            <!-- Use the queryParamName directive to reference a specific control of your group. -->
             <input type="text" placeholder="Search" queryParamName="searchText" />
         </ng-container>
     `,
