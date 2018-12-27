@@ -60,16 +60,13 @@
             <ng-template ngbTabContent>
                 <demo-browser [group]="paramGroup">
                     <ng-container [queryParamGroup]="paramGroup">
-                        <p>
-                            Welcome to our demo browser! You'll be seeing this a lot in the rest of the documentation.
-                            It works mostly like a real browser, just <em>inside</em> of your actual browser, and allows us
-                            to encapsulate examples.
-                        </p>
-                        <p>
-                            You can change the URL directly and hit Enter to simulate a navigation, and on the bottom
-                            you can see the last emitted value of the <code>QueryParamGroup</code> as well as the number of
-                            value change events observed so far.
-                        </p>
+                        <div class="alert alert-success">
+                            This in-browser browser is pretty neat, huh? It allows us to encapsulate examples and interact
+                            with them, so you'll be seeing much more of it in the rest of the documentation. You can
+                            change the URL and hit Enter and track value changes of the <code>QueryParamGroup</code> on
+                            the bottom.
+                        </div>
+
                         <p>
                             The URL is automatically synchronized with the value of the following search input. Try typing
                             in here to see how the URL automatically updates. This input is slightly debounced to avoid
