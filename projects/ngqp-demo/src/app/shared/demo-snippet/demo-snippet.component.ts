@@ -22,8 +22,6 @@ export class DemoSnippetComponent implements AfterViewInit {
 
     public ngAfterViewInit() {
         const code = this.normalizeIndentation(this.code).trim();
-        console.log(this.code);
-        console.log(code);
         this.container.nativeElement.innerHTML = this.prism.highlight(code, this.type);
     }
 
