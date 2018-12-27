@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const SNIPPETS: { [ key: string ]: string } = {
     MODULE_IMPORT: `
@@ -43,6 +44,8 @@ const SNIPPETS: { [ key: string ]: string } = {
 export class GettingStartedComponent {
 
     public snippets = SNIPPETS;
+    public faSearch = faSearch;
+
     public paramGroup: QueryParamGroup;
 
     constructor(private queryParamBuilder: QueryParamBuilder) {

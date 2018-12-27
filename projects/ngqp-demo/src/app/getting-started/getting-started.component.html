@@ -73,7 +73,12 @@
                             updating the URL <em>too</em> often.
                         </p>
 
-                        <input type="text" placeholder="Search" queryParamName="searchText" autocomplete="off" class="form-control" />
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
+                            </div>
+                            <input type="text" placeholder="Search" queryParamName="searchText" autocomplete="off" class="form-control" />
+                        </div>
                     </ng-container>
                 </demo-browser>
             </ng-template>
