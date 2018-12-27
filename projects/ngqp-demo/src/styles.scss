@@ -4,4 +4,19 @@ $theme-colors: (
 );
 
 @import "~bootstrap/scss/bootstrap";
-@import '~prismjs/themes/prism.css';
+@import "~prismjs/themes/prism.css";
+
+ngb-tabset {
+    .tab-content {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    &.bordered .tab-content {
+        border: 1px solid gray("300");
+        border-top: none;
+
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}

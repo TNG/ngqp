@@ -1,31 +1,49 @@
 <main class="container mt-5">
     <h1>Installation</h1>
-    ngqp supports schematics, so simply run the following command in your project:
-    <demo-snippet type="bash" code="ng add @ngqp/core"></demo-snippet>
 
-    <hr />
+    <ngb-tabset class="bordered">
+        <ngb-tab title="ng add">
+            <ng-template ngbTabContent>
+                We support schematics for minimum setup effort. Just run the following command:
+                <demo-snippet type="bash" code="ng add @ngqp/core"></demo-snippet>
+                This will take care of installing the appropriate version of ngqp and seting it up in your app.
+            </ng-template>
+        </ngb-tab>
 
-    You can also install ngqp manually by using
-    <demo-snippet type="bash" code="yarn add @ngqp/core"></demo-snippet>
+        <ngb-tab title="npm / yarn">
+            <ng-template ngbTabContent>
+                You can install ngqp manually by installing the package into your app, e.g.:
+                <demo-snippet type="bash" code="npm install --save @ngqp/core"></demo-snippet>
+                or
+                <demo-snippet type="bash" code="yarn add @ngqp/core"></demo-snippet>
 
-    and then importing it to your app's root module:
-    <demo-snippet type="typescript" [code]="snippets['MODULE_IMPORT']"></demo-snippet>
+                Afterwards, import the module into your app like this:
+                <demo-snippet type="typescript" [code]="snippets['MODULE_IMPORT']"></demo-snippet>
+            </ng-template>
+        </ngb-tab>
 
-    <h2 class="mt-5">Versions</h2>
-    In this table you can find the version of ngqp you should install based on the version of Angular you are using:
-    <div class="d-flex justify-content-center mt-3">
-        <table class="table table-bordered d-inline-block w-auto">
-            <thead>
-            <th scope="col" class="shrink">@angular/core</th>
-            <th scope="col">@ngqp/core</th>
-            </thead>
+        <ngb-tab title="Version Compatibility">
+            <ng-template ngbTabContent>
+                When installing using <code>ng add</code>, we will take care of installing the correct version based
+                on the version of Angular you are using. Otherwise, or if you update Angular, make sure to use the
+                correct version of ngqp given the following compatibility table:
 
-            <tbody>
-            <tr>
-                <td class="shrink">7.x</td>
-                <td>1.x</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <table class="table table-bordered d-inline-block w-auto">
+                        <thead>
+                        <th scope="col" class="shrink">@angular/core</th>
+                        <th scope="col">@ngqp/core</th>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td class="shrink">7.x</td>
+                            <td>1.x</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
 </main>
