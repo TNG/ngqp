@@ -1,4 +1,4 @@
-<main class="container mt-5">
+<main class="container mt-5 mb-5">
     <h1>Installation</h1>
 
     <ngb-tabset class="bordered">
@@ -43,6 +43,54 @@
                         </tbody>
                     </table>
                 </div>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+
+    <h1 class="mt-5">Usage</h1>
+
+    <p>
+        To get started, inject <code>QueryParamBuilder</code> into your component to define a <code>QueryParamGroup</code>.
+        You can now hook this up into your component's template using <code>queryParamGroup</code> and <code>queryParamName</code>.
+        Here's a basic example to get you started:
+    </p>
+
+    <ngb-tabset [destroyOnHide]="false" class="bordered no-padding">
+        <ngb-tab title="Demo">
+            <ng-template ngbTabContent>
+                <demo-browser [group]="paramGroup">
+                    <ng-container [queryParamGroup]="paramGroup">
+                        <p>
+                            Welcome to our demo browser! You'll be seeing this a lot in the rest of the documentation.
+                            It works mostly like a real browser, just <em>inside</em> of your actual browser, and allows us
+                            to encapsulate examples.
+                        </p>
+                        <p>
+                            You can change the URL directly and hit Enter to simulate a navigation, and on the bottom
+                            you can see the last emitted value of the <code>QueryParamGroup</code> as well as the number of
+                            value change events observed so far.
+                        </p>
+                        <p>
+                            The URL is automatically synchronized with the value of the following search input. Try typing
+                            in here to see how the URL automatically updates. This input is slightly debounced to avoid
+                            updating the URL <em>too</em> often.
+                        </p>
+
+                        <input type="text" placeholder="Search" queryParamName="searchText" class="form-control" />
+                    </ng-container>
+                </demo-browser>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="HTML">
+            <ng-template ngbTabContent>
+                <demo-snippet type="html" [code]="snippets['DEMO_MARKUP']" class="m-0"></demo-snippet>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Typescript">
+            <ng-template ngbTabContent>
+                <demo-snippet type="typescript" [code]="snippets['DEMO_TYPESCRIPT']" class="m-0"></demo-snippet>
             </ng-template>
         </ngb-tab>
     </ngb-tabset>

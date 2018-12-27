@@ -1,10 +1,12 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
 $panel-background: #f0f0f0;
-$panel-accent: #d1d1d1;
+$panel-accent: gray("300");
 $panel-content-height: 27px;
 
 :host {
     display: block;
-    border: 1px solid #bdbdbd;
 }
 
 @mixin btn-reset() {
@@ -34,7 +36,7 @@ $panel-content-height: 27px;
         background: $panel-background;
         border-bottom: 1px solid $panel-accent;
         padding: 6px;
-        box-shadow: -1px 1px 2px rgba(0, 0, 0, .1);
+        // box-shadow: -1px 1px 2px rgba(0, 0, 0, .1);
     }
 
     &__button {
@@ -81,13 +83,16 @@ $panel-content-height: 27px;
     &__content {
         padding: 16px;
         min-height: 120px;
+
+        // border-left: 1px solid $panel-accent;
+        // border-right: 1px solid $panel-accent;
     }
 
     &__console {
         background: $panel-background;
         border-top: 1px solid $panel-accent;
         padding: 6px;
-        box-shadow: 1px -1px 2px rgba(0, 0, 0, .1);
+        // box-shadow: 1px -1px 2px rgba(0, 0, 0, .1);
 
         font-size: 12px;
         color: #5f615f;
