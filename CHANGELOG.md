@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/Airblader/ngqp/compare/v0.2.8...v0.3.0) (2018-12-27)
+
+
+### Bug Fixes
+
+* **demo:** Remove console.log ([3dd2028](https://github.com/Airblader/ngqp/commit/3dd2028))
+* **docs:** Fix wording ([6ebdc96](https://github.com/Airblader/ngqp/commit/6ebdc96))
+* **docs:** Improve demo-browser styling ([52ec93a](https://github.com/Airblader/ngqp/commit/52ec93a))
+* **docs:** Improve responsiveness of landing page ([35bd383](https://github.com/Airblader/ngqp/commit/35bd383))
+* **docs:** Provide explanation of console elements in demo-browser ([a746ac3](https://github.com/Airblader/ngqp/commit/a746ac3))
+* **docs:** Update wording ([79a340d](https://github.com/Airblader/ngqp/commit/79a340d))
+* **readme:** [@ngqp](https://github.com/ngqp) -> ngqp ([6481613](https://github.com/Airblader/ngqp/commit/6481613))
+* **readme:** Mention "ng add" in instructions ([bad6c06](https://github.com/Airblader/ngqp/commit/bad6c06))
+* **schematics:** Try to infer the correct version to install ([5e0ab8b](https://github.com/Airblader/ngqp/commit/5e0ab8b)), closes [#31](https://github.com/Airblader/ngqp/issues/31)
+
+
+### Features
+
+* **docs:** Added benefits & attribution to ngx-bootstrap ([a1997c7](https://github.com/Airblader/ngqp/commit/a1997c7))
+* **docs:** Added first version of landing page ([a0de621](https://github.com/Airblader/ngqp/commit/a0de621))
+* **docs:** Added installation guide ([8037a39](https://github.com/Airblader/ngqp/commit/8037a39))
+* **docs:** Added versions table ([397635d](https://github.com/Airblader/ngqp/commit/397635d))
+* **docs:** Update to use new ngqp.io domain ([da0f162](https://github.com/Airblader/ngqp/commit/da0f162))
+
+
+
 <a name="0.2.8"></a>
 ## [0.2.8](https://github.com/Airblader/ngqp/compare/v0.2.7...v0.2.8) (2018-12-26)
 
