@@ -39,12 +39,12 @@
     </p>
 
     <demo-tutorial-fragment fragment="simple-example">
-        <h2>First example</h2>
+        <h2>Our first example</h2>
     </demo-tutorial-fragment>
 
     <p>
         You might be thinking »That sounds great, but what does this look like in practice?« To answer this question,
-        we'll just take a look at our first example; and we'll just use our URL from earlier to demonstrate it!
+        we'll just take a look at our first example; and we'll use the URL we discussed above to demonstrate it!
     </p>
     <ngb-tabset [destroyOnHide]="false" class="bordered no-padding">
         <ngb-tab title="Demo">
@@ -53,17 +53,19 @@
                     <ng-container [queryParamGroup]="paramGroup">
                         <div class="row">
                             <div class="col col-9">
+                                <label for="search">Keywords</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
                                     </div>
-                                    <input type="text" placeholder="Search" queryParamName="search" autocomplete="off"
-                                           class="form-control" />
+                                    <input id="search" type="text" placeholder="Search" queryParamName="search"
+                                           autocomplete="off" class="form-control" />
                                 </div>
                             </div>
                             <div class="col col-3">
                                 <div class="form-group">
-                                    <select class="form-control" queryParamName="manufacturer">
+                                    <label for="manufacturer">Manufacturer</label>
+                                    <select id="manufacturer" class="form-control" queryParamName="manufacturer">
                                         <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
                                             {{ manufacturer }}
                                         </option>
