@@ -1,0 +1,10 @@
+ul.checkmark-list {
+    list-style: none;
+
+    li {
+        &:before {
+            content: "✓";
+            padding-right: 1ch;
+        }
+    }
+}

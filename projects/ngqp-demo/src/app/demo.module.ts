@@ -16,6 +16,7 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
 import { TutorialItemComponent } from './shared/tutorial-item/tutorial-item.component';
 import { BasicsTutorialComponent } from './tutorials/basics-tutorial/basics-tutorial.component';
 import { TutorialFragmentComponent } from './shared/tutorial-item/tutorial-fragment.component';
+import { IntroTutorialComponent } from './tutorials/intro-tutorial/intro-tutorial.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { TutorialFragmentComponent } from './shared/tutorial-item/tutorial-fragm
         TutorialItemComponent,
         BasicsTutorialComponent,
         TutorialFragmentComponent,
+        IntroTutorialComponent,
     ],
     imports: [
         BrowserModule,

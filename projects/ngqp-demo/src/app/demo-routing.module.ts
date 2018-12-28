@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
 import { TutorialComponent } from './shared/tutorial/tutorial.component';
 import { BasicsTutorialComponent } from './tutorials/basics-tutorial/basics-tutorial.component';
+import { IntroTutorialComponent } from './tutorials/intro-tutorial/intro-tutorial.component';
 
 const routes: Routes = [
     {
@@ -22,7 +23,7 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'basics',
+                component: IntroTutorialComponent,
             },
             {
                 path: 'basics',
