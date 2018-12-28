@@ -83,8 +83,6 @@ export class SelectControlValueAccessorDirective<T> implements ControlValueAcces
 
         if (this.selectedId === id) {
             this.fnChange(value);
-        } else if (this.value === value) {
-            this.writeValue(value);
         }
     }
 
@@ -134,6 +132,7 @@ export class SelectOptionDirective<T> implements OnInit, OnDestroy {
     public set value(value: T) {
         if (this.parent) {
             this.parent.updateOptionValue(this.id, value);
+            this.parent.writeValue(this.parent.value);
         }
     }
 
