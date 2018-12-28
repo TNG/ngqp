@@ -54,7 +54,7 @@ export class DefaultControlValueAccessorDirective implements ControlValueAccesso
     constructor(
         @Optional() @Inject(PLATFORM_ID) private platformId: string | null,
         private renderer: Renderer2,
-        private elementRef: ElementRef
+        private elementRef: ElementRef<HTMLInputElement | HTMLTextAreaElement>
     ) {
         this.supportsComposition = isPlatformBrowser(this.platformId || '') && !isAndroid(window.navigator);
     }

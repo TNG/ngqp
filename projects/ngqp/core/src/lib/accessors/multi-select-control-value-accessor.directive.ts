@@ -47,7 +47,7 @@ export class MultiSelectControlValueAccessorDirective<T> implements ControlValue
         this.fnTouched();
     }
 
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
+    constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLSelectElement>) {
     }
 
     public writeValue(values: T[]) {

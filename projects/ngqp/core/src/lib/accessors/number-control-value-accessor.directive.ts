@@ -27,7 +27,7 @@ export class NumberControlValueAccessorDirective implements ControlValueAccessor
         this.fnTouched();
     }
 
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {
+    constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLInputElement>) {
     }
 
     public writeValue(value: any) {
