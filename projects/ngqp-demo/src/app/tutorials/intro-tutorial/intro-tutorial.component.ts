@@ -14,6 +14,57 @@ export class IntroTutorialComponent {
 
     public manufacturers: string[] = [ 'Apple', 'Asus', 'Dell', 'Lenovo', 'Toshiba' ];
 
+    public markup = `
+<!-- NOTE: This markup has been stripped off any Bootstrap layouts you see in the demo. -->
+<ng-container [queryParamGroup]="paramGroup">
+    <label for="search">Keywords</label>
+    <input id="search" type="text" placeholder="Search" queryParamName="search" />
+
+    <label for="manufacturer">Manufacturer</label>
+    <select id="manufacturer" queryParamName="manufacturer">
+        <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
+            {{ manufacturer }}
+        </option>
+    </select>
+
+    <label for="priceCap">Price less than</label>
+    <input id="priceCap" type="number" min="500" max="3000" step="100" queryParamName="priceCap" />
+</ng-container>
+    `;
+
+    public typescript = `
+import { QueryParamGroup, QueryParamBuilder } from '@ngqp/core';
+
+@Component({ /* … */ })
+export class ExampleComponent {
+
+    public paramGroup: QueryParamGroup;
+    public manufacturers: string[] = [ 'Apple', 'Asus', 'Dell', 'Lenovo', 'Toshiba' ];
+
+    constructor(private qpb: QueryParamBuilder) {
+        this.paramGroup = qpb.group({
+            // We name the control "search", but in the URL we want it to be "q";
+            // also, we want this input to be debounced by 300ms.
+            search: qpb.stringParam({
+                name: 'q',
+                debounceTime: 300,
+            }),
+
+            // If all we need is a simple string parameter, we can also use
+            // this shorthand notation.
+            manufacturer: 'manufacturer',
+
+            // The price cap is a numeric parameter, and we want the default value
+            // to be 0
+            priceCap: qpb.numericParam({
+                name: 'costsLessThan',
+                emptyOn: 0,
+            }),
+        });
+    }
+
+}`;
+
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
             search: qpb.stringParam({

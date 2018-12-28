@@ -46,7 +46,7 @@
         You might be thinking »That sounds great, but what does this look like in practice?« To answer this question,
         we'll just take a look at our first example; and we'll use the URL we discussed above to demonstrate it!
     </p>
-    <demo-example>
+    <demo-example [markup]="markup" [typescript]="typescript">
         <demo-browser [group]="paramGroup" initialQueryParams="?q=X1&manufacturer=Lenovo&costsLessThan=1500">
             <ng-container [queryParamGroup]="paramGroup">
                 <div class="row">
