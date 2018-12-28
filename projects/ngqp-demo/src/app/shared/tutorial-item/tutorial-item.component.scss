@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+a.nav-link {
+    padding: 0.25rem;
+    color: inherit;
+    font-size: 90%;
+
+    &:hover {
+        color: $link-color !important;
+    }
+
+    @for $i from 1 through 3 {
+        &[data-indent='#{$i}'] {
+            padding-left: 0.25rem + ($i - 2) * 1rem;
+        }
+    }
+}
+
+.toc {
+    position: sticky;
+    top: 1rem;
+
+    &__hr {
+        margin: 0.25rem 0;
+        width: 50%;
+    }
+}

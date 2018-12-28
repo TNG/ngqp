@@ -1,0 +1,27 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.sidebar {
+    &__container {
+        padding: 0;
+        border-right: 1px solid $border-color;
+    }
+
+    &__trigger {
+        width: 100%;
+        padding: 0.5rem 1.5rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        border-bottom: 1px solid $border-color;
+        text-decoration: none !important;
+        color: $body-color;
+    }
+
+    &__content {
+        position: sticky;
+        top: 1rem;
+    }
+}

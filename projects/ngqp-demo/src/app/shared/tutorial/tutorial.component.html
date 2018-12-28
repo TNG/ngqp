@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="sidebar__container col-12 col-lg-2">
+            <button class="sidebar__trigger d-lg-none btn btn-link" (click)="navigationCollapsed = !navigationCollapsed">
+                <span>Table of Content</span>
+                <fa-icon [icon]="menuIcon" class="text-dark"></fa-icon>
+            </button>
+
+            <demo-navigation
+                [ngbCollapse]="navigationCollapsed" (navigate)="navigationCollapsed = true"
+                class="d-lg-block collapse sidebar__content">
+            </demo-navigation>
+        </div>
+
+        <div class="col-12 col-lg-10 p-0">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

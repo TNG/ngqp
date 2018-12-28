@@ -1,0 +1,24 @@
+<header class="d-flex align-items-center d-md-block bg-light py-3 px-4 px-lg-5 position-relative">
+    <h1 class="mr-auto mr-md-none">{{ pageTitle }}</h1>
+</header>
+
+<section class="d-flex flex-wrap py-5 px-2 px-md-4 px-lg-5">
+    <div class="col-12 col-xl-9 px-md-0 pr-xl-4">
+        <ng-content></ng-content>
+    </div>
+
+    <div *ngIf="fragmentService.fragments.length !== 0" class="col-12 col-xl-3 d-none d-xl-block">
+        <div class="toc">
+            <a class="nav-link text-muted" routerLink="." [preserveFragment]="false">{{ pageTitle }}</a>
+            <hr class="toc__hr" />
+
+            <ul class="nav flex-column text-muted pt-1">
+                <li *ngFor="let fragment of fragmentService.fragments" class="nav-item">
+                    <a class="nav-link" [attr.data-indent]="fragment.indent" routerLink="." [fragment]="fragment.id">
+                        {{ fragment.name }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

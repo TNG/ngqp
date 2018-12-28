@@ -11,6 +11,11 @@ import { DemoPaginationComponent } from './shared/demo-pagination/demo-paginatio
 import { HomeComponent } from './home/home.component';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
 import { DemoSnippetComponent } from './shared/demo-snippet/demo-snippet.component';
+import { TutorialComponent } from './shared/tutorial/tutorial.component';
+import { NavigationComponent } from './shared/navigation/navigation.component';
+import { TutorialItemComponent } from './shared/tutorial-item/tutorial-item.component';
+import { BasicsTutorialComponent } from './tutorials/basics-tutorial/basics-tutorial.component';
+import { TutorialFragmentComponent } from './shared/tutorial-item/tutorial-fragment.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +25,11 @@ import { DemoSnippetComponent } from './shared/demo-snippet/demo-snippet.compone
         HomeComponent,
         GettingStartedComponent,
         DemoSnippetComponent,
+        TutorialComponent,
+        NavigationComponent,
+        TutorialItemComponent,
+        BasicsTutorialComponent,
+        TutorialFragmentComponent,
     ],
     imports: [
         BrowserModule,

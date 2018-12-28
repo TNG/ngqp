@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
+import { TutorialComponent } from './shared/tutorial/tutorial.component';
+import { BasicsTutorialComponent } from './tutorials/basics-tutorial/basics-tutorial.component';
 
 const routes: Routes = [
     {
@@ -14,6 +16,21 @@ const routes: Routes = [
         component: GettingStartedComponent,
     },
     {
+        path: 'docs',
+        component: TutorialComponent,
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'basics',
+            },
+            {
+                path: 'basics',
+                component: BasicsTutorialComponent,
+            }
+        ],
+    },
+    {
         path: '**',
         redirectTo: '/',
     },
@@ -21,7 +38,11 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, { useHash: true }),
+        RouterModule.forRoot(routes, {
+            useHash: true,
+            scrollPositionRestoration: 'enabled',
+            anchorScrolling: 'enabled',
+        }),
     ],
     exports: [ RouterModule ],
 })

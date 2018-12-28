@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 8px;
+
+    &:not(:hover) .fragment__icon {
+        visibility: hidden;
+    }
+}
+
+.fragment__icon, .fragment__content {
+    display: inline-block;
+}
+
+.fragment__icon {
+    margin-left: 12px;
+}
+
+.fragment__content {
+    ::ng-deep h1, ::ng-deep h2, ::ng-deep h3, ::ng-deep h4, ::ng-deep h5, ::ng-deep h6 {
+        margin-bottom: 0;
+    }
+}

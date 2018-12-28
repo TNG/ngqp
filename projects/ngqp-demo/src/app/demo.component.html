@@ -10,11 +10,11 @@
     </a>
     <div class="navbar-collapse" [class.collapse]="!isNavbarExpanded">
         <div class="navbar-nav mr-auto">
-            <a class="nav-item" routerLink="/getting-started" routerLinkActive="active">
+            <a class="nav-item" routerLink="/getting-started" routerLinkActive="active" (click)="closeNav()">
                 <span class="nav-link">Getting started</span>
             </a>
-            <a class="nav-item" routerLink="/tutorial" routerLinkActive="active">
-                <span class="nav-link">Tutorial</span>
+            <a class="nav-item" routerLink="/docs" routerLinkActive="active" (click)="closeNav()">
+                <span class="nav-link">Docs</span>
             </a>
             <a class="nav-item" href="#">
                 <span class="nav-link">API Documentation</span>

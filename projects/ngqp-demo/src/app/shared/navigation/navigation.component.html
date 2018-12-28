@@ -1,0 +1,16 @@
+<nav class="py-3">
+    <div class="item">
+        <a class="item__link" routerLink="/">Home</a>
+    </div>
+    <div class="item">
+        <a class="item__link" routerLink="/getting-started">Getting Started</a>
+    </div>
+
+    <hr />
+
+    <div *ngFor="let item of items" class="item">
+        <a class="item__link" [routerLink]="['/docs', item.route]" routerLinkActive="active" (click)="navigate.emit()">
+            {{ item.name }}
+        </a>
+    </div>
+</nav>

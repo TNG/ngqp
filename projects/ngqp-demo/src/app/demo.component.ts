@@ -11,4 +11,8 @@ export class DemoComponent {
     public faGithub = faGithub;
     public isNavbarExpanded = false;
 
+    public closeNav() {
+        this.isNavbarExpanded = false;
+    }
+
 }

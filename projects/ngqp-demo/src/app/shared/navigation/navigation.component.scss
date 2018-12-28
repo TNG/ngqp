@@ -1,0 +1,19 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+:host {
+    display: block;
+}
+
+nav .item {
+    a.item__link {
+        display: block;
+        padding: 0.25rem 1.5rem;
+
+        color: gray('700');
+
+        &.active {
+            font-weight: bold;
+        }
+    }
+}

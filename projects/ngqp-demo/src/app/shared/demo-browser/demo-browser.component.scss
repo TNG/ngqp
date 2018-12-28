@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/variables";
 
 $panel-background: #f0f0f0;
-$panel-accent: gray("300");
+$panel-accent: $border-color;
 $panel-content-height: 27px;
 
 :host {

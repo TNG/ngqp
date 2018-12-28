@@ -12,11 +12,11 @@ ngb-tabset {
     }
 
     &.no-padding .nav-tabs .nav-link.active {
-        border-color: gray("300");
+        border-color: $border-color;
     }
 
     &.bordered .tab-pane {
-        border: 1px solid gray("300");
+        border: 1px solid $border-color;
         border-top: none;
     }
 }

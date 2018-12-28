@@ -1,0 +1,7 @@
+<a [id]="fragment" class="d-none"></a>
+<div #content class="fragment__content">
+    <ng-content></ng-content>
+</div>
+<a routerLink="." [fragment]="fragment">
+    <fa-icon [icon]="faLink" size="lg" class="fragment__icon"></fa-icon>
+</a>
