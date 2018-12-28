@@ -1,0 +1,19 @@
+<ngb-tabset [destroyOnHide]="false" class="bordered no-padding">
+    <ngb-tab title="Demo">
+        <ng-template ngbTabContent>
+            <ng-content></ng-content>
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab *ngIf="markup" title="HTML">
+        <ng-template ngbTabContent>
+            <demo-snippet type="html" [code]="markup" class="m-0"></demo-snippet>
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab *ngIf="typescript" title="Typescript">
+        <ng-template ngbTabContent>
+            <demo-snippet type="typescript" [code]="typescript" class="m-0"></demo-snippet>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

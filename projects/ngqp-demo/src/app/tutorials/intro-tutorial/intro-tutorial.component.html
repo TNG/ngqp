@@ -46,57 +46,37 @@
         You might be thinking »That sounds great, but what does this look like in practice?« To answer this question,
         we'll just take a look at our first example; and we'll use the URL we discussed above to demonstrate it!
     </p>
-    <ngb-tabset [destroyOnHide]="false" class="bordered no-padding">
-        <ngb-tab title="Demo">
-            <ng-template ngbTabContent>
-                <demo-browser [group]="paramGroup" initialQueryParams="?q=X1&manufacturer=Lenovo&costsLessThan=1500">
-                    <ng-container [queryParamGroup]="paramGroup">
-                        <div class="row">
-                            <div class="col col-9">
-                                <label for="search">Keywords</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
-                                    </div>
-                                    <input id="search" type="text" placeholder="Search" queryParamName="search"
-                                           autocomplete="off" class="form-control" />
-                                </div>
+    <demo-example>
+        <demo-browser [group]="paramGroup" initialQueryParams="?q=X1&manufacturer=Lenovo&costsLessThan=1500">
+            <ng-container [queryParamGroup]="paramGroup">
+                <div class="row">
+                    <div class="col col-9">
+                        <label for="search">Keywords</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
                             </div>
-                            <div class="col col-3">
-                                <div class="form-group">
-                                    <label for="manufacturer">Manufacturer</label>
-                                    <select id="manufacturer" class="form-control" queryParamName="manufacturer">
-                                        <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
-                                            {{ manufacturer }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                            <input id="search" type="text" placeholder="Search" queryParamName="search"
+                                   autocomplete="off" class="form-control" />
                         </div>
+                    </div>
+                    <div class="col col-3">
                         <div class="form-group">
-                            <label for="priceCap">Price less than</label>
-                            <input id="priceCap" type="number" min="500" max="3000" step="100" class="form-control"
-                                   queryParamName="priceCap" />
+                            <label for="manufacturer">Manufacturer</label>
+                            <select id="manufacturer" class="form-control" queryParamName="manufacturer">
+                                <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
+                                    {{ manufacturer }}
+                                </option>
+                            </select>
                         </div>
-                    </ng-container>
-                </demo-browser>
-            </ng-template>
-        </ngb-tab>
-
-        <ngb-tab title="HTML">
-            <ng-template ngbTabContent>
-                <!--
-                <demo-snippet type="html" [code]="snippets['DEMO_MARKUP']" class="m-0"></demo-snippet>
-                -->
-            </ng-template>
-        </ngb-tab>
-
-        <ngb-tab title="Typescript">
-            <ng-template ngbTabContent>
-                <!--
-                <demo-snippet type="typescript" [code]="snippets['DEMO_TYPESCRIPT']" class="m-0"></demo-snippet>
-                -->
-            </ng-template>
-        </ngb-tab>
-    </ngb-tabset>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="priceCap">Price less than</label>
+                    <input id="priceCap" type="number" min="500" max="3000" step="100" class="form-control"
+                           queryParamName="priceCap" />
+                </div>
+            </ng-container>
+        </demo-browser>
+    </demo-example>
 </demo-tutorial-item>

@@ -54,45 +54,29 @@
         features step by step.
     </p>
 
-    <ngb-tabset [destroyOnHide]="false" class="bordered no-padding">
-        <ngb-tab title="Demo">
-            <ng-template ngbTabContent>
-                <demo-browser [group]="paramGroup">
-                    <ng-container [queryParamGroup]="paramGroup">
-                        <div class="alert alert-success">
-                            This in-browser browser is pretty neat, huh? It allows us to encapsulate examples and interact
-                            with them, so you'll be seeing much more of it in the rest of the documentation. You can
-                            change the query parameters in the URL (hit Enter) or track value changes of the
-                            <code>QueryParamGroup</code> on the bottom.
-                        </div>
+    <demo-example [markup]="snippets['DEMO_MARKUP']" [typescript]="snippets['DEMO_TYPESCRIPT']">
+        <demo-browser [group]="paramGroup">
+            <ng-container [queryParamGroup]="paramGroup">
+                <div class="alert alert-success">
+                    This in-browser browser is pretty neat, huh? It allows us to encapsulate examples and interact
+                    with them, so you'll be seeing much more of it in the rest of the documentation. You can
+                    change the query parameters in the URL (hit Enter) or track value changes of the
+                    <code>QueryParamGroup</code> on the bottom.
+                </div>
 
-                        <p>
-                            The URL is automatically synchronized with the value of the following search input. Try typing
-                            in here to see how the URL automatically updates. This input is slightly debounced to avoid
-                            updating the URL <em>too</em> often.
-                        </p>
+                <p>
+                    The URL is automatically synchronized with the value of the following search input. Try typing
+                    in here to see how the URL automatically updates. This input is slightly debounced to avoid
+                    updating the URL <em>too</em> often.
+                </p>
 
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
-                            </div>
-                            <input type="text" placeholder="Search" queryParamName="searchText" autocomplete="off" class="form-control" />
-                        </div>
-                    </ng-container>
-                </demo-browser>
-            </ng-template>
-        </ngb-tab>
-
-        <ngb-tab title="HTML">
-            <ng-template ngbTabContent>
-                <demo-snippet type="html" [code]="snippets['DEMO_MARKUP']" class="m-0"></demo-snippet>
-            </ng-template>
-        </ngb-tab>
-
-        <ngb-tab title="Typescript">
-            <ng-template ngbTabContent>
-                <demo-snippet type="typescript" [code]="snippets['DEMO_TYPESCRIPT']" class="m-0"></demo-snippet>
-            </ng-template>
-        </ngb-tab>
-    </ngb-tabset>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
+                    </div>
+                    <input type="text" placeholder="Search" queryParamName="searchText" autocomplete="off" class="form-control" />
+                </div>
+            </ng-container>
+        </demo-browser>
+    </demo-example>
 </main>
