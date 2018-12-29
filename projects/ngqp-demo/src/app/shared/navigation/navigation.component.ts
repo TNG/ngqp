@@ -21,17 +21,19 @@ export class NavigationComponent {
 
     public items: TutorialItem[] = [
         { name: 'Usage Guide', route: 'usage' },
+        { name: 'Getting Help', route: 'getting-help' },
         {
             name: 'Fundamentals',
             children: [
-                { name: 'Configuring the Model', route: 'model' },
+                { name: 'Configuring the Model', route: 'model-configuration' },
+                { name: 'Using the Model', route: 'model-usage' },
                 { name: 'Global Configuration', route: 'global-configuration' },
             ],
         },
         {
             name: 'Advanced',
             children: [
-                { name: 'Form controls without ControlValueAccessor', route: 'todo' },
+                { name: 'Form controls without ControlValueAccessor', route: 'custom-control-value-accessor' },
             ],
         },
     ];
