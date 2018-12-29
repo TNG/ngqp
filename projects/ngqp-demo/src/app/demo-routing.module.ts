@@ -25,10 +25,6 @@ const routes: Routes = [
                 pathMatch: 'full',
                 component: IntroTutorialComponent,
             },
-            {
-                path: 'basics',
-                component: BasicsTutorialComponent,
-            }
         ],
     },
     {

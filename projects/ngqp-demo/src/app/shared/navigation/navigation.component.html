@@ -1,16 +1,37 @@
 <nav class="py-3">
     <div class="item">
-        <a class="item__link" routerLink="/">Home</a>
+        <a class="item__text" routerLink="/">Home</a>
     </div>
     <div class="item">
-        <a class="item__link" routerLink="/getting-started">Getting Started</a>
+        <a class="item__text" routerLink="/getting-started">Getting Started</a>
     </div>
 
     <hr />
 
     <div *ngFor="let item of items" class="item">
-        <a class="item__link" [routerLink]="['/docs', item.route]" routerLinkActive="active" (click)="navigate.emit()">
-            {{ item.name }}
-        </a>
+        <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{$implicit: item}"></ng-container>
+
+        <div *ngIf="item.children" class="item__children">
+            <ng-container *ngFor="let childItem of item.children"
+                          [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{$implicit: childItem}">
+            </ng-container>
+        </div>
     </div>
 </nav>
+
+<ng-template #itemTemplate let-item>
+    <ng-container *ngIf="item.route; then linkItemTemplate; else nonLinkItemTemplate"></ng-container>
+
+    <ng-template #linkItemTemplate>
+        <a class="item__text" [routerLink]="['/docs', item.route]" routerLinkActive="active" (click)="navigate.emit()">
+            {{ item.name }}
+        </a>
+    </ng-template>
+
+    <ng-template #nonLinkItemTemplate>
+        <div class="item__text d-flex">
+            <span class="flex-grow-1">{{ item.name }}</span>
+            <fa-icon [icon]="faCaretDown" class="flex-grow-0"></fa-icon>
+        </div>
+    </ng-template>
+</ng-template>

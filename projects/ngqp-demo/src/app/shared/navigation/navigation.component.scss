@@ -6,14 +6,24 @@
 }
 
 nav .item {
-    a.item__link {
+    .item__text {
         display: block;
         padding: 0.25rem 1.5rem;
 
         color: gray('700');
+    }
 
+    a.item__text {
         &.active {
             font-weight: bold;
         }
+    }
+
+    :not(a).item__text {
+        background: gray('200');
+    }
+
+    .item__children {
+        padding-left: 1rem;
     }
 }
