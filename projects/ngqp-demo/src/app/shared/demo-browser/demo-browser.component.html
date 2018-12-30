@@ -1,8 +1,10 @@
 <div class="demo-browser__toolbar">
-    <button class="demo-browser__button" title="{{ routerAdapter.history.length }} previous route(s)"
-            (click)="routerAdapter.goBack()" [disabled]="routerAdapter.history.length === 0">
-        <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
-    </button>
+    <div class="demo-browser__buttons">
+        <button class="demo-browser__button" title="{{ routerAdapter.history.length }} previous route(s)"
+                (click)="routerAdapter.goBack()" [disabled]="routerAdapter.history.length === 0">
+            <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
+        </button>
+    </div>
 
     <div class="demo-browser__url">
         <span class="demo-browser__url__domain" (click)="urlInput.focus()">https://www.app.io</span>
