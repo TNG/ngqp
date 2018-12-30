@@ -3,7 +3,7 @@ import { NumberControlValueAccessorDirective } from './number-control-value-acce
 import { DefaultControlValueAccessorDirective } from './default-control-value-accessor.directive';
 import { CheckboxControlValueAccessorDirective } from './checkbox-control-value-accessor.directive';
 import { SelectControlValueAccessorDirective } from './select-control-value-accessor.directive';
-import { MultiSelectOptionDirective } from './multi-select-control-value-accessor.directive';
+import { MultiSelectControlValueAccessorDirective } from './multi-select-control-value-accessor.directive';
 
 export const NGQP_BUILT_IN_ACCESSORS = [
     DefaultControlValueAccessorDirective,
@@ -11,5 +11,5 @@ export const NGQP_BUILT_IN_ACCESSORS = [
     RangeControlValueAccessorDirective,
     CheckboxControlValueAccessorDirective,
     SelectControlValueAccessorDirective,
-    MultiSelectOptionDirective,
+    MultiSelectControlValueAccessorDirective,
 ];
