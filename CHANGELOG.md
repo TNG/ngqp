@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/Airblader/ngqp/compare/v0.3.2...v0.4.0) (2018-12-30)
+
+
+### Bug Fixes
+
+* **core:** Fix select accessor which didn't write the value in some cases ([91d4c8a](https://github.com/Airblader/ngqp/commit/91d4c8a))
+* **core:** Provide proper generic to ElementRef in accessors ([35a48be](https://github.com/Airblader/ngqp/commit/35a48be))
+* **docs:** Make fragment scrolling work ([5eea3ea](https://github.com/Airblader/ngqp/commit/5eea3ea))
+* **docs:** Phrasing ([2bffb73](https://github.com/Airblader/ngqp/commit/2bffb73))
+* **docs:** Remove line that was forgotten ([466c39c](https://github.com/Airblader/ngqp/commit/466c39c))
+* **scripts:** Push tags on release ([63d6358](https://github.com/Airblader/ngqp/commit/63d6358))
+
+
+### Features
+
+* **docs:** Added GitHub widget ([0351f05](https://github.com/Airblader/ngqp/commit/0351f05))
+* **docs:** Skeleton for docs pages ([5d65a55](https://github.com/Airblader/ngqp/commit/5d65a55))
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/Airblader/ngqp/compare/v0.3.1...v0.3.2) (2018-12-27)
 
