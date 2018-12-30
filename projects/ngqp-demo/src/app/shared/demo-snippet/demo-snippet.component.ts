@@ -15,7 +15,7 @@ export class DemoSnippetComponent implements AfterViewInit {
     public code: string;
 
     @Input()
-    public type: 'typescript' | 'html' | 'bash' = 'typescript';
+    public type: 'none' | 'typescript' | 'html' | 'bash' = 'typescript';
 
     constructor(private prism: PrismService) {
     }

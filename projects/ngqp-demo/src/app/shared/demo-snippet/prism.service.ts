@@ -11,6 +11,10 @@ import 'prismjs/components/prism-bash';
 export class PrismService {
 
     public highlight(code: string, language: string): string {
+        if (language === 'none') {
+            return code;
+        }
+
         return prism.highlight(code, prism.languages[ language ]);
     }
 
