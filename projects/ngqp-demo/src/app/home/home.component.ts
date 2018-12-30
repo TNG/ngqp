@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IconDefinition, faGlassCheers, faCogs, faHeart, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 interface BenefitItem {
     icon: IconDefinition;
@@ -14,6 +15,7 @@ interface BenefitItem {
 })
 export class HomeComponent {
 
+    public faGithub = faGithub;
     public benefits: BenefitItem[] = [
         {
             icon: faGlassCheers,
