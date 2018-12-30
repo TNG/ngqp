@@ -36,8 +36,11 @@ const routes: Routes = [
     imports: [
         RouterModule.forRoot(routes, {
             useHash: true,
-            scrollPositionRestoration: 'enabled',
-            anchorScrolling: 'enabled',
+            // FIXME: These don't work as expected at the moment, but we can revisit activating them later.
+            // We explicitly disable them as they will become enabled by default in the future, and as long
+            // as we have our own solution, we need to avoid that.
+            scrollPositionRestoration: 'disabled',
+            anchorScrolling: 'disabled',
         }),
     ],
     exports: [ RouterModule ],
