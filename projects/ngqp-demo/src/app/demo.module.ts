@@ -13,7 +13,7 @@ import { GettingStartedComponent } from './getting-started/getting-started.compo
 import { DemoSnippetComponent } from './shared/demo-snippet/demo-snippet.component';
 import { TutorialComponent } from './shared/tutorial/tutorial.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
-import { TutorialFragmentComponent } from './shared/tutorial-item/tutorial-fragment.component';
+import { TutorialFragmentComponent } from './shared/tutorial-fragment/tutorial-fragment.component';
 import { IntroTutorialComponent } from './tutorials/intro-tutorial/intro-tutorial.component';
 import { DemoExampleComponent } from './shared/demo-example/demo-example.component';
 
