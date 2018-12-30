@@ -2,6 +2,12 @@ language: node_js
 dist: trusty
 node_js:
     - lts/*
+notifications:
+    email:
+        on_success: change
+        on_failure: always
+        recipients:
+            - ci@ngqp.io
 script:
     - yarn run lint
     - yarn run core:build
