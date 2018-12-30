@@ -2,28 +2,6 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
-.intro {
-    h1 {
-        font-family: Roboto, Droid, sans-serif;
-    }
-
-    .btn-block {
-        margin: 2rem 0;
-
-        .btn {
-            min-width: 240px;
-            margin: 0 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-    }
-
-    .social {
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-}
-
 .benefits {
     background: #f5f5f5;
 

@@ -1,38 +1,53 @@
-<main class="d-flex flex-wrap">
-    <section class="intro container-fluid text-center mt-5">
-        <div class="content-logo">
-            <img src="assets/logo.svg" height="144" width="auto" />
-        </div>
-        <h1>ngqp</h1>
-        <p>Declaratively synchronize form controls with the URL</p>
-        <div class="btn-block">
-            <a class="btn btn-lg btn-primary" routerLink="/getting-started">Get started</a>
-            <a class="btn btn-lg btn-outline-secondary" routerLink="/docs">Docs</a>
-        </div>
-        <div class="social">
-            <a class="btn btn-link" href="https://www.github.com/Airblader/ngqp">
-                <fa-icon [icon]="faGithub" size="lg"></fa-icon>
-                Visit on GitHub
-            </a>
-        </div>
-    </section>
-
-    <section class="benefits container-fluid">
-        <div class="benefits__content">
-            <div class="row">
-                <div *ngFor="let benefit of benefits" class="col-12 col-sm-6 d-flex flex-wrap">
-                    <div class="benefit__icon">
-                        <fa-icon [icon]="benefit.icon" size="3x" class="text-primary"></fa-icon>
+<main class="bd-masthead" role="main">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-6 mx-auto col-md-6 order-md-2">
+                <img src="assets/logo.svg" class="img-fluid mb-3 mb-md-0" />
+            </div>
+            <div class="col-md-6 order-md-1 text-center text-md-left pr-md-5">
+                <h1 class="mb-3 bd-text-purple-bright">ngqp</h1>
+                <p class="lead">
+                    Declaratively synchronize form controls with the URL
+                </p>
+                <p class="mb-4">
+                    ngqp is an open source library which connects form controls with query parameters and keeps them
+                    synchronized in both directions, making it easy to serialize state into the URL for shareable
+                    links and worry-free page reloading.
+                </p>
+                <div class="row mx-n2">
+                    <div class="col-md px-4 px-md-2">
+                        <a class="btn btn-lg btn-primary w-100 mb-3" routerLink="/getting-started">Get started</a>
                     </div>
-                    <div class="benefit__text">
-                        <h4>{{ benefit.title }}</h4>
-                        <p>{{ benefit.description }}</p>
+                    <div class="col-md px-4 px-md-2">
+                        <a class="btn btn-lg btn-outline-secondary w-100 mb-3" routerLink="/docs">Docs</a>
                     </div>
+                </div>
+                <div class="social">
+                    <a class="btn btn-link w-100 mb-3" href="https://www.github.com/Airblader/ngqp">
+                        <fa-icon [icon]="faGithub" size="lg"></fa-icon>
+                        Visit on GitHub
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </main>
+
+<section class="benefits container-fluid">
+    <div class="benefits__content">
+        <div class="row">
+            <div *ngFor="let benefit of benefits" class="col-12 col-sm-6 d-flex flex-wrap">
+                <div class="benefit__icon">
+                    <fa-icon [icon]="benefit.icon" size="3x" class="text-primary"></fa-icon>
+                </div>
+                <div class="benefit__text">
+                    <h4>{{ benefit.title }}</h4>
+                    <p>{{ benefit.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <footer class="footer small">
     Code licensed <a href="https://github.com/Airblader/ngqp/blob/master/LICENSE">MIT</a>, docs <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
