@@ -103,6 +103,8 @@ $panel-content-height: 27px;
 
         display: flex;
         justify-content: space-between;
+
+        overflow: hidden;
     }
 }
 

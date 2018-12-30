@@ -7,7 +7,7 @@
     </div>
 
     <div class="demo-browser__url">
-        <span class="demo-browser__url__domain" (click)="urlInput.focus()">https://www.app.io</span>
+        <span class="demo-browser__url__domain d-none d-md-inline-block" (click)="urlInput.focus()">https://www.app.io</span>
         <input #urlInput type="text" class="demo-browser__url__input"
                [ngModel]="routerAdapter.url" (keyup.enter)="routerAdapter.navigateToQueryParamString($event.target.value)" />
     </div>
@@ -18,9 +18,9 @@
 </div>
 
 <div *ngIf="group" class="demo-browser__console">
-    <span class="cursor-default" title="Last value change event of the QueryParamGroup">
-        {{ lastChange }}
-    </span>
+    <div class="cursor-default" title="Last value change event of the QueryParamGroup">
+        <span class="d-none d-md-inline-block">{{ lastChange }}</span>
+    </div>
     <span class="cursor-default no-select" title="Total number of value change events of the QueryParamGroup">
         ({{ changeCounter }})
     </span>
