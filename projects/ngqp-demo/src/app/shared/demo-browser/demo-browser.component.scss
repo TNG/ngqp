@@ -86,6 +86,8 @@ $panel-content-height: 27px;
 
         // border-left: 1px solid $panel-accent;
         // border-right: 1px solid $panel-accent;
+
+        overflow: auto;
     }
 
     &__console {
