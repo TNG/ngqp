@@ -3,6 +3,7 @@ dist: trusty
 node_js:
     - lts/*
 script:
-    - yarn lint
-    - yarn core:build
-    - yarn demo:build:prod
+    - yarn run lint
+    - yarn run core:build
+    - yarn run demo:build:prod
+    - yarn run api-docs:build
