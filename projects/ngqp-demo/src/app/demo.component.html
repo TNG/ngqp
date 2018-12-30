@@ -1,19 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <button class="navbar-toggler" type="button" (click)="isNavbarExpanded = !isNavbarExpanded">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" routerLink="/">
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bg-primary">
+    <a class="navbar-brand" routerLink="/" aria-label="ngqp.io">
         <div class="d-inline-block align-middle logo-container">
-            <img src="assets/logo.svg" height="40" width="auto" />
+            <img src="assets/logo.svg" height="32" width="auto" />
         </div>
         <span>ngqp</span>
     </a>
-    <div class="navbar-collapse" [class.collapse]="!isNavbarExpanded">
-        <div class="navbar-nav mr-auto">
-            <a class="nav-item" routerLink="/getting-started" routerLinkActive="active" (click)="closeNav()">
+
+    <div class="navbar-nav-scroll">
+        <div class="navbar-nav flex-row">
+            <a class="nav-item" routerLink="/getting-started" routerLinkActive="active">
                 <span class="nav-link">Getting started</span>
             </a>
-            <a class="nav-item" routerLink="/docs" routerLinkActive="active" (click)="closeNav()">
+            <a class="nav-item" routerLink="/docs" routerLinkActive="active">
                 <span class="nav-link">Docs</span>
             </a>
             <a class="nav-item" href="/api-docs">
@@ -21,9 +19,12 @@
             </a>
         </div>
     </div>
-    <a href="https://www.github.com/Airblader/ngqp" rel="nofollow noopener" [class.collapse]="isNavbarExpanded">
-        <fa-icon [icon]="faGithub" size="lg" class="text-light"></fa-icon>
-    </a>
-</nav>
+
+    <div class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <a class="nav-item" href="https://www.github.com/Airblader/ngqp" rel="nofollow noopener">
+            <fa-icon [icon]="faGithub" size="lg" class="text-light"></fa-icon>
+        </a>
+    </div>
+</header>
 
 <router-outlet></router-outlet>

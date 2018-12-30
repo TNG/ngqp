@@ -7,6 +7,7 @@ import { filter, map } from 'rxjs/operators';
 export class FragmentScrollService {
 
     constructor(private scroller: ViewportScroller) {
+        this.configureOffset();
     }
 
     public startFragmentScroller(router: Router): void {
@@ -22,6 +23,20 @@ export class FragmentScrollService {
 
             setTimeout(() => this.scroller.scrollToAnchor(fragment), 0);
         });
+    }
+
+    private configureOffset(): void {
+        if (!window || !window.matchMedia) {
+            return this.updateOffset(true);
+        }
+
+        const matcher = window.matchMedia('(min-width: 768px)');
+        this.updateOffset(matcher.matches);
+        matcher.onchange = ({ matches }) => this.updateOffset(matches);
+    }
+
+    private updateOffset(matches: boolean): void {
+        this.scroller.setOffset([ 0, matches ? 64 : 0 ]);
     }
 
 }

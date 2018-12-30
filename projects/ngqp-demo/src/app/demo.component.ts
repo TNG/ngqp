@@ -17,7 +17,6 @@ import { AnalyticsService } from './shared/analytics.service';
 export class DemoComponent {
 
     public faGithub = faGithub;
-    public isNavbarExpanded = false;
 
     constructor(
         private fragmentScroller: FragmentScrollService,
@@ -26,10 +25,6 @@ export class DemoComponent {
     ) {
         fragmentScroller.startFragmentScroller(router);
         analytics.startTracking(router);
-    }
-
-    public closeNav() {
-        this.isNavbarExpanded = false;
     }
 
 }

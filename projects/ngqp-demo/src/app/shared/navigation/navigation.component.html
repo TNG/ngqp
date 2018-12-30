@@ -20,18 +20,17 @@
 </nav>
 
 <ng-template #itemTemplate let-item>
-    <ng-container *ngIf="item.route; then linkItemTemplate; else nonLinkItemTemplate"></ng-container>
+    <ng-container *ngIf="!item.children; then linkItemTemplate; else nonLinkItemTemplate"></ng-container>
 
     <ng-template #linkItemTemplate>
-        <a class="item__text" [routerLink]="['/docs', item.route]" routerLinkActive="active" (click)="navigate.emit()">
+        <a class="item__text" (click)="navigate.emit()"
+           [routerLink]="item.route.length !== 0 ? ['/docs', item.route] : ['/docs']" routerLinkActive="active"
+        >
             {{ item.name }}
         </a>
     </ng-template>
 
     <ng-template #nonLinkItemTemplate>
-        <div class="item__text d-flex">
-            <span class="flex-grow-1">{{ item.name }}</span>
-            <fa-icon [icon]="faCaretDown" class="flex-grow-0"></fa-icon>
-        </div>
+        <div class="item__text">{{ item.name }}</div>
     </ng-template>
 </ng-template>

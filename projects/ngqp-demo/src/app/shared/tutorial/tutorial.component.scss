@@ -1,27 +1,73 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$header-height: 4rem;
+
+@mixin sticky-sidebar() {
+    @supports (position: sticky) {
+        position: sticky;
+        top: $header-height;
+        height: calc(100vh - #{$header-height});
+        overflow-y: auto;
+    }
+}
 
 .sidebar {
-    &__container {
-        padding: 0;
+    order: 0;
+    border-bottom: 1px solid $border-color;
+
+    @include media-breakpoint-up(md) {
+        @include sticky-sidebar();
+        z-index: 1000;
+
         border-right: 1px solid $border-color;
+    }
+
+    @include media-breakpoint-up(xl) {
+        flex: 0 1 320px;
     }
 
     &__trigger {
         width: 100%;
-        padding: 0.5rem 1.5rem;
+        padding: 0.5rem 0;
 
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        border-bottom: 1px solid $border-color;
         text-decoration: none !important;
         color: $body-color;
     }
+}
+
+a.nav-link {
+    padding: 0.25rem;
+    color: inherit;
+    font-size: 90%;
+
+    &:hover {
+        color: $link-color !important;
+    }
+
+    @for $i from 1 through 3 {
+        &[data-indent='#{$i}'] {
+            padding-left: 0.25rem + ($i - 2) * 1rem;
+        }
+    }
+}
+
+.toc {
+    @include sticky-sidebar();
+    padding-top: 1.5rem;
 
     &__content {
-        position: sticky;
-        top: 1rem;
+        border-left: 1px solid $border-color;
+        padding-left: 1rem;
+    }
+
+    &__hr {
+        margin: 0.25rem 0;
+        width: 50%;
     }
 }

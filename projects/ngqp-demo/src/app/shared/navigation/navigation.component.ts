@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 interface TutorialItem {
     name: string;
@@ -14,12 +13,11 @@ interface TutorialItem {
 })
 export class NavigationComponent {
 
-    public faCaretDown = faCaretDown;
-
     @Output()
     public navigate = new EventEmitter<void>();
 
     public items: TutorialItem[] = [
+        { name: 'Introduction', route: '' },
         { name: 'Usage Guide', route: 'usage' },
         { name: 'Getting Help', route: 'getting-help' },
         {
@@ -33,6 +31,7 @@ export class NavigationComponent {
         {
             name: 'Advanced',
             children: [
+                { name: 'Validating query parameters', route: 'validation' },
                 { name: 'Form controls without ControlValueAccessor', route: 'custom-control-value-accessor' },
             ],
         },

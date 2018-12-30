@@ -1,19 +1,36 @@
 <div class="container-fluid">
     <div class="row flex-xl-nowrap">
-        <div class="sidebar__container col-12 col-lg-2">
-            <button class="sidebar__trigger d-lg-none btn btn-link" (click)="navigationCollapsed = !navigationCollapsed">
-                <span>Table of Content</span>
+        <div class="sidebar col-12 col-md-3 col-xl-2">
+            <button class="sidebar__trigger d-md-none btn btn-link" (click)="navigationCollapsed = !navigationCollapsed">
+                <span>Table of Contents</span>
                 <fa-icon [icon]="menuIcon" class="text-dark"></fa-icon>
             </button>
 
             <demo-navigation
                 [ngbCollapse]="navigationCollapsed" (navigate)="navigationCollapsed = true"
-                class="d-lg-block collapse sidebar__content">
+                class="d-md-block collapse">
             </demo-navigation>
         </div>
 
-        <div class="col-12 col-lg-10 p-0">
-            <router-outlet></router-outlet>
+        <div *ngIf="fragmentService.fragments.length !== 0"  class="order-2 d-none d-xl-block col-xl-2 toc">
+            <div class="toc__content">
+                <a class="nav-link text-muted" routerLink="." [preserveFragment]="false">{{ pageTitle }}</a>
+                <hr class="toc__hr" />
+
+                <ul class="nav flex-column text-muted pt-1">
+                    <li *ngFor="let fragment of fragmentService.fragments" class="nav-item">
+                        <a class="nav-link" [attr.data-indent]="fragment.indent" routerLink="." [fragment]="fragment.id">
+                            {{ fragment.name }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+        <main class="order-1 col-12 col-md-9 col-xl-8 py-3 pl-md-5" role="main">
+            <h1 class="mb-3">{{ pageTitle }}</h1>
+
+            <ng-content></ng-content>
+        </main>
     </div>
 </div>
