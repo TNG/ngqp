@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>@ngqp/core documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">@ngqp/core documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<p><a href="https://travis-ci.org/Airblader/ngqp"><img src="https://travis-ci.org/Airblader/ngqp.svg?branch=master" alt="Build Status" class="img-responsive"></a>
+<a href="https://www.npmjs.com/@ngqp/core"><img src="https://badge.fury.io/js/%40ngqp%2Fcore.svg" alt="npm version" class="img-responsive"></a>
+<a href="https://david-dm.org/Airblader/ngqp#info=devDependencies"><img src="https://david-dm.org/Airblader/ngqp/dev-status.svg?branch=master" alt="devDependency Status" class="img-responsive"></a>
+<a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg" alt="Conventional Commits" class="img-responsive"></a>
+<a href="https://gitter.im/ngqp"><img src="https://img.shields.io/gitter/room/Airblader/ngqp.svg?style=flat-square" alt="Gitter" class="img-responsive"></a></p>
+<h1 id="ngqp-declaratively-synchronize-form-controls-with-the-url">ngqp – Declaratively synchronize form controls with the URL</h1>
+<p align="center">
+  <img width="auto" height="240" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg?sanitize=true">
+</p>
+
+<p>ngqp makes it easy to synchronize form controls with query parameters in your URL by using a declarative approach. Examples
+include pagination information or the current settings of filters in a data view. ngqp is designed to resemble the Forms API
+from <code>@angular/forms</code>, making it intuitive to work with.</p>
+<h1 id="installation">Installation</h1>
+<p>Simply run <code>ng add @ngqp/core</code> – that&#39;s it! We will automatically install ngqp and import it into your app.</p>
+<p>If you want, you can also avoid running schematics. Just run <code>yarn add @ngqp/core</code> (or <code>npm install --save @ngqp/core</code>) and import the <code>QueryParamModule</code> into your app module:</p>
+<div><pre class="line-numbers"><code class="language-typescript">import { NgModule } from &#39;&#64;angular/core&#39;;
+import { QueryParamModule } from &#39;&#64;ngqp/core&#39;;
+
+&#64;NgModule({
+    imports: [
+        QueryParamModule
+    ],
+})
+export class AppModule {}</code></pre></div><p>Make sure that your app is set up to use routing (i.e., using <code>RouterModule</code>).</p>
+<h1 id="usage">Usage</h1>
+<p>This section is a work in progress since ngqp is still in an early development stage.</p>
+<h1 id="contributing">Contributing</h1>
+<p><a href="https://www.github.com/Airblader/ngqp/blob/master/CONTRIBUTING.md">Please see CONTRIBUTING.md</a>.</p>
+<h1 id="i-want-to-know-more">I want to know more</h1>
+<h2 id="why-should-i-care-">Why should I care?</h2>
+<p>Angular&#39;s router system makes it easy to organize different views under different routes, but often the state of a specific
+route is not reflected in the URL. This makes it impossible to bookmark or share them as on every new page load the user has
+to set these states manually.</p>
+<p>With ngqp, you can easily synchronize the state of form controls such as input boxes, dropdowns or your own custom controls
+with a query parameter on the current URL. This way the URL becomes the single source of truth for this information, which
+allows users to share or bookmark these links and reload your page without having to worry about losing their current state.</p>
+<h2 id="what-can-this-be-used-for-">What can this be used for?</h2>
+<p>ngqp will work with any kind of control, but the common scenario would be pagination (i.e., which page a user is on) or
+filter settings (search query, selections, …)</p>
+<hr>
+<p><a href="https://www.github.com/Airblader/ngqp/blob/master/LICENSE">Licensed under the MIT License</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
