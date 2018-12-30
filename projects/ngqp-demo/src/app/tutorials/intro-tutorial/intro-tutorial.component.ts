@@ -36,10 +36,12 @@ export class IntroTutorialComponent {
 import { QueryParamGroup, QueryParamBuilder } from '@ngqp/core';
 
 @Component({ /* … */ })
-export class ExampleComponent {
+export class ExampleComponent implements OnInit, OnDestroy {
 
     public paramGroup: QueryParamGroup;
     public manufacturers: string[] = [ 'Apple', 'Asus', 'Dell', 'Lenovo', 'Toshiba' ];
+
+    private destroy$ = new Subject<void>();
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
@@ -61,6 +63,19 @@ export class ExampleComponent {
                 emptyOn: 0,
             }),
         });
+    }
+
+    public ngOnInit() {
+        // We can use valueChanges on our model to update our state whenever the parameters change
+        this.paramGroup.valueChanges.pipe(
+            takeUntil(this.destroy$),
+            switchMap(({ search, manufacturer, priceCap }) => this.productsApi.find(search, manufacturer, priceCap)),
+        ).subscribe(products => /* … */);
+    }
+
+    public ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
 }`;
