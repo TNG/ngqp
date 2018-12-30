@@ -50,17 +50,19 @@
         <demo-browser [group]="paramGroup" initialQueryParams="?q=X1&manufacturer=Lenovo&costsLessThan=1500">
             <ng-container [queryParamGroup]="paramGroup">
                 <div class="row">
-                    <div class="col col-9">
-                        <label for="search">Keywords</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
+                    <div class="col col-12 col-md-9">
+                        <div class="form-group">
+                            <label for="search">Keywords</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
+                                </div>
+                                <input id="search" type="text" placeholder="Search" queryParamName="search"
+                                       autocomplete="off" class="form-control" />
                             </div>
-                            <input id="search" type="text" placeholder="Search" queryParamName="search"
-                                   autocomplete="off" class="form-control" />
                         </div>
                     </div>
-                    <div class="col col-3">
+                    <div class="col col-12 col-md-3">
                         <div class="form-group">
                             <label for="manufacturer">Manufacturer</label>
                             <select id="manufacturer" class="form-control" queryParamName="manufacturer">
