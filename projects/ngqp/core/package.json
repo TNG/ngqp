@@ -15,7 +15,9 @@
     "router",
     "url",
     "queryparams",
-    "query-params"
+    "query-params",
+    "declarative",
+    "reactive"
   ],
   "schematics": "./collection.json",
   "peerDependencies": {
