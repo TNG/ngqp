@@ -19,6 +19,7 @@ import { DemoExampleComponent } from './shared/demo-example/demo-example.compone
 import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-docs.component';
 import { DocsPageNamePipe, DocsPageRoutePipe } from './shared/docs-page.pipes';
 import { DocsLinkComponent } from './shared/docs-link/docs-link.component';
+import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { DocsLinkComponent } from './shared/docs-link/docs-link.component';
 
         IntroductionDocsComponent,
         UsageGuideDocsComponent,
+        GettingHelpDocsComponent,
     ],
     imports: [
         BrowserModule,

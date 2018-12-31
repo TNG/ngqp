@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FragmentsService } from '../docs-fragment/fragments.service';
+import { ActivatedRoute } from '@angular/router';
+import { getPageForRoute } from '../../demo-docs.routes';
+import { DocsPage } from '../../docs-page';
 
 @Component({
     selector: 'docs-item',
@@ -10,12 +13,14 @@ import { FragmentsService } from '../docs-fragment/fragments.service';
 })
 export class DocsItemComponent {
 
-    @Input()
-    public pageTitle: string;
+    public docsPage: DocsPage;
 
     public menuIcon = faBars;
     public navigationCollapsed = true;
 
-    constructor(public fragmentService: FragmentsService) {}
+    constructor(public fragmentService: FragmentsService,
+                private route: ActivatedRoute) {
+        this.docsPage = getPageForRoute(this.route.snapshot.url[0]);
+    }
 
 }

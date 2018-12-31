@@ -5,7 +5,6 @@ declare const require: Function;
 
 @Component({
     templateUrl: './usage-guide-docs.component.html',
-    styleUrls: [ './usage-guide-docs.component.scss' ]
 })
 export class UsageGuideDocsComponent {
 

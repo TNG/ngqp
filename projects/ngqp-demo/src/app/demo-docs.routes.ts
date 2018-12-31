@@ -1,7 +1,8 @@
-import { Routes } from '@angular/router';
+import { Routes, UrlSegment } from '@angular/router';
+import { DocsPage } from './docs-page';
 import { IntroductionDocsComponent } from './docs-items/introduction/introduction-docs.component';
 import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-docs.component';
-import { DocsPage } from './docs-page';
+import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -26,8 +27,7 @@ export const DOCS_ROUTES: Routes = [
     },
     {
         path: 'getting-help',
-        // TODO
-        component: IntroductionDocsComponent,
+        component: GettingHelpDocsComponent,
         data: {
             docsPage: DocsPage.GETTING_HELP,
         },
@@ -81,4 +81,13 @@ export function getRouteForPage(page: DocsPage): string {
     }
 
     return `/docs/${foundRoute.path}`;
+}
+
+export function getPageForRoute(segment: UrlSegment): DocsPage {
+    const foundPage = DOCS_ROUTES.find(route => route.path === segment.path);
+    if (!foundPage) {
+        throw new Error(`Cannot find route for segment ${segment.path}`);
+    }
+
+    return foundPage.data.docsPage as DocsPage;
 }
