@@ -1,0 +1,68 @@
+<docs-item pageTitle="Introduction">
+    <p>
+        Let's take a look at the three basic steps you should follow to use ngqp. This will show you the basic usage
+        of ngqp in order to synchronize your controls with the URL and how to connect this to your application so that
+        you can actually perform actions when parameters change.
+    </p>
+
+    <docs-fragment fragment="define-model">
+        <h2>Defining the Model</h2>
+    </docs-fragment>
+    <p>
+        First, we need to define what our model, the <code>QueryParamGroup</code>, looks like. In here you define which
+        query parameters you need as well as how they are defined: what type do they have, how are the values
+        (de-)serialized to and from the URL as well as a bunch of other options.
+    </p>
+    <p>
+        In order to define the model, you can inject the <code>QueryParamBuilder</code> into your component and use its
+        <code>group</code> method to create the model. Inside the group, you can use its other methods to create the
+        individual models for each query parameter.
+    </p>
+    <p>
+        Here's a simple example of what this looks like in an application. To learn about the features we ship and how
+        to configure them, see <docs-link [page]="DocsPage.MODEL_CONFIGURATION"></docs-link>.
+    </p>
+    <demo-snippet type="typescript" [code]="defineModelSnippet"></demo-snippet>
+
+    <docs-fragment fragment="connect-model">
+        <h2>Connecting the Model</h2>
+    </docs-fragment>
+    <p>
+        Now that we define what the model for our parameters looks like, it's time to wire this model up with the form
+        controls that the user interacts with. To do this, we need a parent with <code>queryParamGroup</code> and then
+        the individual form controls which are wired up using <code>queryParamName</code>.
+    </p>
+    <div class="alert alert-info">
+        To wire a component with the model, the component has to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
+        provided to it. ngqp ships standard implementations for basic form elements such as inputs, but if you have custom
+        components you may need to implement this. For more information, see <docs-link [page]="DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR"></docs-link>.
+    </div>
+    <demo-snippet type="html" [code]="connectModelSnippet"></demo-snippet>
+    <p>
+        As you can see, <code>queryParamName</code> refers to the name we gave to the control in the model. The
+        <code>name</code> attribute specified inside the model is the name of the parameter we will actually see in the URL.
+    </p>
+
+    <docs-fragment fragment="use-model">
+        <h2>Using the Model</h2>
+    </docs-fragment>
+    <p>
+        At this point, the synchronization is already working: if we change the form controls, the URL will update and
+        vice versa. However, we want to actually <em>do</em> something with these values &mdash; like re-fetching some
+        resources based on these settings.
+    </p>
+    <p>
+        In order to do this, we can use the <code>valueChanges</code> observable exposed by the <code>QueryParamGroup</code>.
+        It will emit whenever the values change, so we don't need to worry about tracking the URL ourselves. Every value
+        it emits contains the current value of each parameter in our model.
+    </p>
+    <div class="alert alert-warning">
+        As with most observables, don't forget to unsubscribe from this observable, e.g., by using a <code>takeUntil</code> operator.
+    </div>
+    <div class="alert alert-info">
+        For the common use-case of fetching resources from an API, you should pipe the <code>valueChanges</code> observable
+        to your API using an operator such as <code>switchMap</code>. This avoids race conditions if the values change
+        multiple times in quick succession.
+    </div>
+    <demo-snippet type="typescript" [code]="usingModelSnippet"></demo-snippet>
+</docs-item>

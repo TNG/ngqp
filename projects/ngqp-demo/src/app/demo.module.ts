@@ -11,25 +11,36 @@ import { DemoPaginationComponent } from './shared/demo-pagination/demo-paginatio
 import { HomeComponent } from './home/home.component';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
 import { DemoSnippetComponent } from './shared/demo-snippet/demo-snippet.component';
-import { TutorialComponent } from './shared/tutorial/tutorial.component';
-import { NavigationComponent } from './shared/navigation/navigation.component';
-import { TutorialFragmentComponent } from './shared/tutorial-fragment/tutorial-fragment.component';
-import { IntroTutorialComponent } from './tutorials/intro-tutorial/intro-tutorial.component';
+import { DocsItemComponent } from './shared/docs-item/docs-item.component';
+import { DocsNavigationComponent } from './shared/navigation/docs-navigation.component';
+import { DocsFragmentComponent } from './shared/docs-fragment/docs-fragment.component';
+import { IntroductionDocsComponent } from './docs-items/introduction/introduction-docs.component';
 import { DemoExampleComponent } from './shared/demo-example/demo-example.component';
+import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-docs.component';
+import { DocsPageNamePipe, DocsPageRoutePipe } from './shared/docs-page.pipes';
+import { DocsLinkComponent } from './shared/docs-link/docs-link.component';
 
 @NgModule({
     declarations: [
         DemoComponent,
+
         DemoBrowserComponent,
         DemoPaginationComponent,
+        DemoSnippetComponent,
+        DemoExampleComponent,
+
+        DocsItemComponent,
+        DocsNavigationComponent,
+        DocsFragmentComponent,
+        DocsPageNamePipe,
+        DocsPageRoutePipe,
+        DocsLinkComponent,
+
         HomeComponent,
         GettingStartedComponent,
-        DemoSnippetComponent,
-        TutorialComponent,
-        NavigationComponent,
-        TutorialFragmentComponent,
-        IntroTutorialComponent,
-        DemoExampleComponent,
+
+        IntroductionDocsComponent,
+        UsageGuideDocsComponent,
     ],
     imports: [
         BrowserModule,

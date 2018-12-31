@@ -5,11 +5,10 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 declare const require: Function;
 
 @Component({
-    selector: 'demo-intro-tutorial',
-    templateUrl: './intro-tutorial.component.html',
-    styleUrls: [ './intro-tutorial.component.scss' ]
+    templateUrl: './introduction-docs.component.html',
+    styleUrls: [ './introduction-docs.component.scss' ]
 })
-export class IntroTutorialComponent {
+export class IntroductionDocsComponent {
 
     public faSearch = faSearch;
     public paramGroup: QueryParamGroup;

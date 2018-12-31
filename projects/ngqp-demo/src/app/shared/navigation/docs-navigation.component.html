@@ -23,10 +23,8 @@
     <ng-container *ngIf="!item.children; then linkItemTemplate; else nonLinkItemTemplate"></ng-container>
 
     <ng-template #linkItemTemplate>
-        <a class="item__text" (click)="navigate.emit()"
-           [routerLink]="item.route.length !== 0 ? ['/docs', item.route] : ['/docs']" routerLinkActive="active"
-        >
-            {{ item.name }}
+        <a class="item__text" (click)="navigate.emit()" [routerLink]="item.page | docsPageRoute" routerLinkActive="active">
+            {{ item.page | docsPageName }}
         </a>
     </ng-template>
 

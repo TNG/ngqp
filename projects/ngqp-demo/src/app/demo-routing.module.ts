@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GettingStartedComponent } from './getting-started/getting-started.component';
-import { IntroTutorialComponent } from './tutorials/intro-tutorial/intro-tutorial.component';
+import { DOCS_ROUTES } from './demo-docs.routes';
 
 const routes: Routes = [
     {
@@ -16,13 +16,7 @@ const routes: Routes = [
     },
     {
         path: 'docs',
-        children: [
-            {
-                path: '',
-                pathMatch: 'full',
-                component: IntroTutorialComponent,
-            },
-        ],
+        children: DOCS_ROUTES,
     },
     {
         path: '**',

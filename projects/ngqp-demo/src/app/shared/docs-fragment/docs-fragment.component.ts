@@ -5,11 +5,11 @@ import { faLink } from '@fortawesome/free-solid-svg-icons';
 const MAX_LEVEL = 3;
 
 @Component({
-    selector: 'demo-tutorial-fragment',
-    templateUrl: './tutorial-fragment.component.html',
-    styleUrls: ['./tutorial-fragment.component.scss'],
+    selector: 'docs-fragment',
+    templateUrl: './docs-fragment.component.html',
+    styleUrls: ['./docs-fragment.component.scss'],
 })
-export class TutorialFragmentComponent implements AfterContentInit {
+export class DocsFragmentComponent implements AfterContentInit {
 
     public faLink = faLink;
 
