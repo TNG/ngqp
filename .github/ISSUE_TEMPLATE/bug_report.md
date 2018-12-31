@@ -2,7 +2,7 @@
 name: Bug report
 about: Help improvde @ngqp by reporting issues and problems
 title: ''
-labels: 'Type: Bug, Status: Needs Triage'
+labels: 'Status: Needs Triage, Type: Bug'
 assignees: ''
 
 ---
