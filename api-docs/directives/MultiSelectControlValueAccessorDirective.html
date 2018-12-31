@@ -170,7 +170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -246,7 +246,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -275,7 +275,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -313,7 +313,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:83</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:72</a></div>
                             </td>
                         </tr>
 
@@ -384,7 +384,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:65</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -455,7 +455,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:69</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -526,7 +526,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:77</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -597,7 +597,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:73</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -668,7 +668,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:87</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:76</a></div>
                             </td>
                         </tr>
 
@@ -751,7 +751,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:53</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/accessors/multi-select-control-value-accessor.directive.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -806,20 +806,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-    Directive,
-    ElementRef,
-    forwardRef,
-    Host,
-    HostListener,
-    Input,
-    OnDestroy,
-    OnInit,
-    Optional,
-    Renderer2,
-    StaticProvider
-} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, ElementRef, forwardRef, HostListener, Renderer2, StaticProvider } from &#x27;@angular/core&#x27;;
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
+import { MultiSelectOptionDirective } from &#x27;./multi-select-option.directive&#x27;;
 
 export const NGQP_MULTI_SELECT_VALUE_ACCESSOR: StaticProvider &#x3D; {
     provide: NG_VALUE_ACCESSOR,
@@ -907,54 +896,6 @@ export class MultiSelectControlValueAccessorDirective&lt;T&gt; implements Contro
         }
 
         return null;
-    }
-
-}
-
-@Directive({
-    selector: &#x27;option&#x27;,
-})
-export class MultiSelectOptionDirective&lt;T&gt; implements OnInit, OnDestroy {
-
-    private readonly id: string | null &#x3D; null;
-
-    constructor(
-        @Optional() @Host() private parent: MultiSelectControlValueAccessorDirective&lt;T&gt;,
-        private renderer: Renderer2,
-        private elementRef: ElementRef,
-    ) {
-        if (this.parent) {
-            this.id &#x3D; this.parent.registerOption(this);
-        }
-    }
-
-    public ngOnInit() {
-        if (this.parent) {
-            this.renderer.setProperty(this.elementRef.nativeElement, &#x27;value&#x27;, this.id);
-        }
-    }
-
-    public ngOnDestroy() {
-        if (this.parent) {
-            this.parent.deregisterOption(this.id);
-        }
-    }
-
-    @Input(&#x27;value&#x27;)
-    public set value(value: T) {
-        if (this.parent) {
-            this.parent.updateOptionValue(this.id, value);
-        }
-    }
-
-    public get selected(): boolean {
-        return (this.elementRef.nativeElement as HTMLOptionElement).selected;
-    }
-
-    public set selected(selected: boolean) {
-        if (this.parent) {
-            this.renderer.setProperty(this.elementRef.nativeElement, &#x27;selected&#x27;, selected);
-        }
     }
 
 }</code></pre>
