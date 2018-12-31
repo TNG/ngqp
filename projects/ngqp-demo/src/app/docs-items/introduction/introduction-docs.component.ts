@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { QueryParamGroup, QueryParamBuilder } from '@ngqp/core';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { DocsPage } from '../../docs-page';
 
 declare const require: Function;
 
@@ -11,6 +12,8 @@ declare const require: Function;
 export class IntroductionDocsComponent {
 
     public faSearch = faSearch;
+    public DocsPage = DocsPage;
+
     public paramGroup: QueryParamGroup;
 
     public manufacturers: string[] = [ 'Apple', 'Asus', 'Dell', 'Lenovo', 'Toshiba' ];
