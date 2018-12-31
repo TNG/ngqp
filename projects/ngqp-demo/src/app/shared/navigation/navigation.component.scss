@@ -8,7 +8,7 @@
 nav .item {
     .item__text {
         display: block;
-        padding: 0.25rem 1.5rem;
+        padding: 0.25rem 0.5rem;
 
         color: gray('700');
     }
@@ -16,14 +16,18 @@ nav .item {
     a.item__text {
         &.active {
             font-weight: bold;
+            color: $link-color;
         }
     }
 
     :not(a).item__text {
-        margin-top: 0.25rem;
+        margin-top: 0.5rem;
+        color: gray("600");
+        font-weight: bold;
+        user-select: none;
     }
 
     .item__children {
-        padding-left: 1rem;
+        padding-left: 0.5rem;
     }
 }
