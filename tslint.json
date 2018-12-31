@@ -2,11 +2,6 @@
     "rulesDirectory": [
         "codelyzer"
     ],
-    "linterOptions": {
-        "exclude": [
-            "**/*.example.ts"
-        ]
-    },
     "rules": {
         "arrow-return-shorthand": true,
         "callable-types": true,
