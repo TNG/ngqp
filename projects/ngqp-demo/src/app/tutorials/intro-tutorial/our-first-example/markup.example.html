@@ -1,0 +1,15 @@
+<!-- NOTE: This markup has been stripped off any Bootstrap layouts you see in the demo. -->
+<ng-container [queryParamGroup]="paramGroup">
+    <label for="search">Keywords</label>
+    <input id="search" type="text" placeholder="Search" queryParamName="search" />
+
+    <label for="manufacturer">Manufacturer</label>
+    <select id="manufacturer" queryParamName="manufacturer">
+        <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
+            {{ manufacturer }}
+        </option>
+    </select>
+
+    <label for="priceCap">Price less than</label>
+    <input id="priceCap" type="number" min="500" max="3000" step="100" queryParamName="priceCap" />
+</ng-container>
