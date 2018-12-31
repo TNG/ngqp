@@ -1,8 +1,8 @@
 ---
 name: Bug report
 about: Help improvde @ngqp by reporting issues and problems
-title: "[Bug]"
-labels: bug
+title: ''
+labels: 'Type: Bug, Status: Needs Triage'
 assignees: ''
 
 ---

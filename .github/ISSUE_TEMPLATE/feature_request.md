@@ -1,8 +1,8 @@
 ---
 name: Feature request
 about: Share your ideas for @ngqp
-title: "[Feature]"
-labels: feature-request, discussion
+title: ''
+labels: 'Type: Feature Request, Status: Needs Triage'
 assignees: ''
 
 ---
