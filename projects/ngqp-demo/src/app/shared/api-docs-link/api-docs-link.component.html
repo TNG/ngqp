@@ -1,4 +1,4 @@
 <a [href]="url" target="_blank" rel="noopener nofollow">
     <fa-icon [icon]="icon" size="sm" class="mx-1"></fa-icon>
-    <code>{{ name }}</code>
+    <code #content><ng-content></ng-content></code>
 </a>

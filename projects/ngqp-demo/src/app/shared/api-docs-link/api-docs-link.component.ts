@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 export type ApiDocType = 'classes' | 'injectables';
@@ -10,23 +10,28 @@ const LOOKUP: { [ name: string ]: ApiDocType } = {
 };
 
 @Component({
-    selector: 'api-docs-link',
+    selector: '[apiDocsLink]',
     templateUrl: './api-docs-link.component.html',
-    styleUrls: [ './api-docs-link.component.scss' ]
+    styleUrls: [ './api-docs-link.component.scss' ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiDocsLinkComponent {
+export class ApiDocsLinkComponent implements AfterContentInit {
 
     public icon = faExternalLinkAlt;
+    public url: string;
 
-    @Input()
-    public type: ApiDocType;
+    @ViewChild('content', { read: ElementRef })
+    private contentNode: ElementRef<HTMLElement>;
 
-    @Input()
-    public name: string;
+    public ngAfterContentInit(): void {
+        const [ name, fragment = '' ] = this.contentNode.nativeElement.innerText.split('#');
+        const type = this.getTypeByName(name);
 
-    public get url(): string {
-        const [ name, fragment = '' ] = this.name.split('#');
-        return `/api-docs/${this.type ? this.type : LOOKUP[ name ]}/${name}.html#${fragment}`;
+        this.url = `/api-docs/${type}/${name}.html#${fragment}`;
+    }
+
+    private getTypeByName(name: string): ApiDocType {
+        return LOOKUP[ name ];
     }
 
 }
