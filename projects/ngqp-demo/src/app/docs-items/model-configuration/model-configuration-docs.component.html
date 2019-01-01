@@ -60,7 +60,7 @@
         and provide your own (de-)serializers.
     </p>
     <docs-fragment fragment="QueryParam-param">
-        <h3>Parameter name</h3>
+        <h3>Naming parameters</h3>
     </docs-fragment>
     <p>
         ngqp separates the name of the parameter model from the name used in the URL because, for example, you may want
@@ -68,10 +68,11 @@
         name such as <code>searchText</code>.
     </p>
     <p>
-        The <code>param</code> option of the parameter definition defines the parameter name used for the URL.
+        The <span apiDocsLink="QueryParam#param">param</span> option of the parameter definition defines the parameter
+        name used for the URL.
     </p>
     <docs-fragment fragment="QueryParam-serialize">
-        <h3>Converting between form control and parameter value</h3>
+        <h3>Serializing and deserializing</h3>
     </docs-fragment>
     <p>
         (De-)Serializers determine how the value of the form control is serialized into a string for the URL and, vice
@@ -84,8 +85,8 @@
     </docs-fragment>
     <p>
         If your form control's model is array-typed, such as <code>&lt;select multiple&gt;</code>, you can set the
-        <code>multi</code> option to <code>true</code>. This will use the default behavior of the router to have
-        query parameters with multiple values.
+        <span apiDocsLink="QueryParam#multi">multi</span> option to <code>true</code>. This will use the default
+        behavior of the router to have query parameters with multiple values.
     </p>
     <!-- TODO Example -->
     <docs-fragment fragment="QueryParam-debounceTime">

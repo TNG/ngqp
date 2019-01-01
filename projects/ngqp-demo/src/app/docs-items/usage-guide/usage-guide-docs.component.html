@@ -9,14 +9,14 @@
         <h2>Step 1: Defining the Model</h2>
     </docs-fragment>
     <p>
-        First, we need to define what our model, the <code>QueryParamGroup</code>, looks like. In here you define which
-        query parameters you need as well as how they are defined: what type do they have, how are the values
+        First, we need to define what our model, the <span apiDocsLink>QueryParamGroup</span>, looks like. In here you
+        define which query parameters you need as well as how they are defined: what type do they have, how are the values
         (de-)serialized to and from the URL as well as a bunch of other options.
     </p>
     <p>
-        In order to define the model, you can inject the <code>QueryParamBuilder</code> into your component and use its
-        <code>group</code> method to create the model. Inside the group, you can use its other methods to create the
-        individual models for each query parameter.
+        In order to define the model, you can inject the <span apiDocsLink>QueryParamBuilder</span> into your component
+        and use its <code>group</code> method to create the model. Inside the group, you can use its other methods to
+        create the individual models for each query parameter.
     </p>
     <p>
         Here's a simple example of what this looks like in an application. To learn about the features we ship and how
@@ -29,8 +29,9 @@
     </docs-fragment>
     <p>
         Now that we define what the model for our parameters looks like, it's time to wire this model up with the form
-        controls that the user interacts with. To do this, we need a parent with <code>queryParamGroup</code> and then
-        the individual form controls which are wired up using <code>queryParamName</code>.
+        controls that the user interacts with. To do this, we need a parent with
+        <span apiDocsLink="QueryParamGroupDirective">queryParamGroup</span> and then the individual form controls which
+        are wired up using <span apiDocsLink="QueryParamNameDirective">queryParamName</span>.
     </p>
     <div class="alert alert-info">
         To wire a component with the model, the component has to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
@@ -40,8 +41,9 @@
     </div>
     <demo-snippet type="html" [code]="connectModelSnippet"></demo-snippet>
     <p>
-        As you can see, <code>queryParamName</code> refers to the name we gave to the query param model. The
-        <code>param</code> attribute specified inside the model is the name of the parameter we will actually see in the URL.
+        As you can see, <span apiDocsLink="QueryParamNameDirective">queryParamName</span> refers to the name we gave to
+        the query param model. The <span apiDocsLink="QueryParam">param</span> attribute specified inside the model is
+        the name of the parameter we will actually see in the URL.
     </p>
 
     <docs-fragment fragment="use-model">
@@ -53,7 +55,7 @@
         resources based on these settings.
     </p>
     <p>
-        In order to do this, we can use the <code>valueChanges</code> observable exposed by the <code>QueryParamGroup</code>.
+        In order to do this, we can use the <span apiDocsLink>QueryParamGroup#valueChanges</span> observable.
         It will emit whenever the values change, so we don't need to worry about tracking the URL ourselves. Every value
         it emits contains the current value of each parameter in our model.
     </p>

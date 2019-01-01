@@ -1,12 +1,14 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
-export type ApiDocType = 'classes' | 'injectables';
+export type ApiDocType = 'classes' | 'directives' | 'injectables';
 
 const LOOKUP: { [ name: string ]: ApiDocType } = {
     'QueryParam': 'classes',
     'QueryParamGroup': 'classes',
     'QueryParamBuilder': 'injectables',
+    'QueryParamGroupDirective': 'directives',
+    'QueryParamNameDirective': 'directives',
 };
 
 @Component({
@@ -23,8 +25,12 @@ export class ApiDocsLinkComponent implements AfterContentInit {
     @ViewChild('content', { read: ElementRef })
     private contentNode: ElementRef<HTMLElement>;
 
+    @Input()
+    public apiDocsLink: string;
+
     public ngAfterContentInit(): void {
-        const [ name, fragment = '' ] = this.contentNode.nativeElement.innerText.split('#');
+        const [ name, fragment = '' ] = (this.apiDocsLink ? this.apiDocsLink : this.contentNode.nativeElement.innerText)
+            .split('#');
         const type = this.getTypeByName(name);
 
         this.url = `/api-docs/${type}/${name}.html#${fragment}`;
