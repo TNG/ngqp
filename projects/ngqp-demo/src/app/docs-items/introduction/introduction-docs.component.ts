@@ -24,12 +24,12 @@ export class IntroductionDocsComponent {
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
             search: qpb.stringParam({
-                name: 'q',
+                param: 'q',
                 debounceTime: 300,
             }),
             manufacturer: 'manufacturer',
             priceCap: qpb.numericParam({
-                name: 'costsLessThan',
+                param: 'costsLessThan',
                 emptyOn: 0,
             }),
         });

@@ -1,4 +1,4 @@
-export { QueryParamGroup, QueryParamControl, QueryParamControlOpts } from './model';
+export { QueryParamGroup, QueryParam, QueryParamOpts } from './model';
 export { QueryParamNameDirective } from './query-param-name.directive';
 export { QueryParamGroupDirective }  from './query-param-group.directive';
 export { QueryParamBuilder } from './query-param-builder.service';

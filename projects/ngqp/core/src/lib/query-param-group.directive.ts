@@ -4,17 +4,17 @@ import { Subject } from 'rxjs';
 import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
-import { QueryParamControl, QueryParamGroup, QueryParamGroupValue, Unpack } from './model';
+import { QueryParam, QueryParamGroup, QueryParamGroupValue, Unpack } from './model';
 import { isMissing } from './util';
 
 /** TODO Documentation */
-function isMultiControl<T>(control: QueryParamControl<T | T[]>): control is QueryParamControl<T[]> {
-    return control.multi;
+function isMultiQueryParam<T>(queryParam: QueryParam<T | T[]>): queryParam is QueryParam<T[]> {
+    return queryParam.multi;
 }
 
 /** TODO Documentation */
-function hasArrayModel<T>(control: QueryParamControl<T | T[]>, model: T | T[]): model is T[] {
-    return isMultiControl(control);
+function hasArrayValue<T>(queryParam: QueryParam<T | T[]>, value: T | T[]): value is T[] {
+    return isMultiQueryParam(queryParam);
 }
 
 /**
@@ -50,43 +50,43 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
 
         this.queryParamGroup._registerOnChange((value: QueryParamGroupValue) => {
             let params: Params = {};
-            Object.keys(value).forEach(controlName => {
-                const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-                if (isMissing(control)) {
+            Object.keys(value).forEach(queryParamName => {
+                const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+                if (isMissing(queryParam)) {
                     return;
                 }
 
-                params = { ...params, ...this.getParamsForModel(control, value[ controlName ]) };
+                params = { ...params, ...this.getParamsForValue(queryParam, value[ queryParamName ]) };
             });
 
             this.enqueueNavigation(params);
         });
 
-        Object.keys(this.queryParamGroup.controls).forEach(controlName => {
-            const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-            control._registerOnChange((newModel: any) =>
-                this.enqueueNavigation(this.getParamsForModel(control, newModel))
+        Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
+            const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+            queryParam._registerOnChange((newValue: any) =>
+                this.enqueueNavigation(this.getParamsForValue(queryParam, newValue))
             );
         });
 
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
-            Object.keys(this.queryParamGroup.controls).forEach(controlName => {
-                const control: QueryParamControl<any> = this.queryParamGroup.get(controlName);
-                const newModel = this.deserialize(control,
-                    control.multi ? queryParamMap.getAll(control.name) : queryParamMap.get(control.name)
+            Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
+                const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+                const newValue = this.deserialize(queryParam,
+                    queryParam.multi ? queryParamMap.getAll(queryParam.param) : queryParamMap.get(queryParam.param)
                 );
 
                 // Get the directive, if it has been initialized yet.
-                const directive = this.directives.find(dir => dir.name === controlName);
+                const directive = this.directives.find(dir => dir.name === queryParamName);
                 if (!isMissing(directive)) {
-                    directive.valueAccessor.writeValue(newModel);
+                    directive.valueAccessor.writeValue(newValue);
                 }
 
-                control.value = newModel;
-                control._updateValue({ emitEvent: true, onlySelf: true });
+                queryParam.value = newValue;
+                queryParam._updateValue({ emitEvent: true, onlySelf: true });
             });
 
-            // We used onlySelf on the controls so that we can emit only once on the entire group.
+            // We used onlySelf on the queryParams so that we can emit only once on the entire group.
             this.queryParamGroup._updateValue({ emitEvent: true });
         });
     }
@@ -100,28 +100,28 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
      * TODO Documentation
      * @internal
      */
-    public addControl(directive: QueryParamNameDirective): void {
-        const control: QueryParamControl<any> = this.queryParamGroup.get(directive.name);
-        if (!control) {
-            throw new Error(`Could not find control ${directive.name}. Did you forget to add it to your QueryParamGroup?`);
+    public addQueryParam(directive: QueryParamNameDirective): void {
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
+        if (!queryParam) {
+            throw new Error(`Could not find query param with name ${directive.name}. Did you forget to add it to your QueryParamGroup?`);
         }
         if (!directive.valueAccessor) {
-            throw new Error(`No value accessor found for the control. Please make sure to implement ControlValueAccessor on this component.`);
+            throw new Error(`No value accessor found for the form control. Please make sure to implement ControlValueAccessor on this component.`);
         }
 
         // Chances are that we read the initial route before a directive has been registered here.
-        // The value in the control will be correct, but we need to sync it to the view once initially.
-        directive.valueAccessor.writeValue(control.value);
+        // The value in the model will be correct, but we need to sync it to the view once initially.
+        directive.valueAccessor.writeValue(queryParam.value);
 
         // Proxy updates from the view to debounce them (if needed).
         const debouncedQueue$ = new Subject<any>();
         debouncedQueue$.pipe(
-            !isMissing(control.debounceTime) ? debounceTime(control.debounceTime) : tap(),
-            map((newModel: any) => this.getParamsForModel(control, newModel)),
+            !isMissing(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
+            map((newValue: any) => this.getParamsForValue(queryParam, newValue)),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(params));
 
-        directive.valueAccessor.registerOnChange((newModel: any) => debouncedQueue$.next(newModel));
+        directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
 
         this.directives.push(directive);
     }
@@ -141,29 +141,29 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.queue$.next(params);
     }
 
-    private getParamsForModel<T = any>(control: QueryParamControl<T | T[]>, model: T): Params {
-        const newValue = this.serialize(control, model);
+    private getParamsForValue<T = any>(queryParam: QueryParam<T | T[]>, value: T): Params {
+        const newValue = this.serialize(queryParam, value);
 
-        const combinedParams: Params = isMissing(control.combineWith)
-            ? {} : control.combineWith(control.value, model);
+        const combinedParams: Params = isMissing(queryParam.combineWith)
+            ? {} : queryParam.combineWith(queryParam.value, value);
 
         return {
             ...combinedParams,
-            [ control.name ]: newValue,
+            [ queryParam.param ]: newValue,
         };
     }
 
-    private serialize<T = any>(control: QueryParamControl<T | T[]>, model: T): string[] {
-        return hasArrayModel(control, model)
-            ? (model || <T[]>[]).map(control.serialize)
-            : [control.serialize(model)];
+    private serialize<T = any>(queryParam: QueryParam<T | T[]>, value: T): string[] {
+        return hasArrayValue(queryParam, value)
+            ? (value || <T[]>[]).map(queryParam.serialize)
+            : [queryParam.serialize(value)];
     }
 
-    private deserialize<T = any>(control: QueryParamControl<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
+    private deserialize<T = any>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
         if (Array.isArray(values)) {
-            return values.map(control.deserialize);
+            return values.map(queryParam.deserialize);
         } else {
-            return control.deserialize(values);
+            return queryParam.deserialize(values);
         }
     }
 

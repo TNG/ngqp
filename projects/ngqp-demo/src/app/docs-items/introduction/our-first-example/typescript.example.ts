@@ -14,10 +14,10 @@ export class ExampleComponent implements OnInit, OnDestroy {
     constructor(private qpb: QueryParamBuilder,
                 private productsApi: any) {
         this.paramGroup = qpb.group({
-            // We name the control "search", but in the URL we want it to be "q";
+            // We name the model "search", but in the URL we want it to be "q";
             // also, we want this input to be debounced by 300ms.
             search: qpb.stringParam({
-                name: 'q',
+                param: 'q',
                 debounceTime: 300,
             }),
 
@@ -28,7 +28,7 @@ export class ExampleComponent implements OnInit, OnDestroy {
             // The price cap is a numeric parameter, and we want the default value
             // to be 0
             priceCap: qpb.numericParam({
-                name: 'costsLessThan',
+                param: 'costsLessThan',
                 emptyOn: 0,
             }),
         });

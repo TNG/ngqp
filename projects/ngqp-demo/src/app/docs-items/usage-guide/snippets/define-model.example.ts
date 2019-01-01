@@ -10,10 +10,10 @@ export class ExampleComponent {
         this.paramGroup = qpb.group({
             simple: 'p1',
             stringParam: qpb.stringParam({
-                name: 'p2'
+                param: 'p2'
             }),
             boolParam: qpb.booleanParam({
-                name: 'p3',
+                param: 'p3',
             }),
         });
     }

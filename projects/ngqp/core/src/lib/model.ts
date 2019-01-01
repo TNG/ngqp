@@ -21,15 +21,15 @@ export type Unpack<T> = T extends (infer U)[] ? U : T;
 
 /** TODO Documentation */
 export interface QueryParamGroupValue {
-    [ controlName: string ]: any;
+    [ queryParamName: string ]: any;
 }
 
 /**
  * TODO Documentation
  */
-export interface QueryParamControlOpts<T> {
+export interface QueryParamOpts<T> {
     /** TODO Documentation */
-    name: string;
+    param: string;
     /** TODO Documentation */
     serialize: ParamSerializer<Unpack<T>>;
     /** TODO Documentation */
@@ -42,7 +42,7 @@ export interface QueryParamControlOpts<T> {
     debounceTime?: number | null;
     /** TODO Documentation (+ not supported in multi-mode) */
     emptyOn?: Unpack<T>;
-    /** TODO Documentation (note: no controls / serializers, but finished values and non-recursive) */
+    /** TODO Documentation (note: no queryParams / serializers, but finished values and non-recursive) */
     combineWith?: ParamCombinator<T>;
 }
 
@@ -57,7 +57,7 @@ export class QueryParamGroup {
     public readonly valueChanges: Observable<QueryParamGroupValue> = this._valueChanges.asObservable();
 
     /** TODO Documentation */
-    public readonly controls: { [ controlName: string ]: QueryParamControl<any> };
+    public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> };
 
     /** TODO Documentation */
     public readonly routerOptions: RouterAdapterOptions;
@@ -65,13 +65,13 @@ export class QueryParamGroup {
     private changeFunctions: OnChangeFunction<QueryParamGroupValue>[] = [];
 
     constructor(
-        controls: { [ controlName: string ]: QueryParamControl<any> },
+        queryParams: { [ queryParamName: string ]: QueryParam<any> },
         extras: RouterAdapterOptions = {}
     ) {
-        this.controls = controls;
+        this.queryParams = queryParams;
         this.routerOptions = extras;
 
-        Object.values(this.controls).forEach(control => control._setParent(this));
+        Object.values(this.queryParams).forEach(queryParam => queryParam._setParent(this));
     }
 
     /**
@@ -83,14 +83,14 @@ export class QueryParamGroup {
     }
 
     /** TODO Documentation */
-    public get(controlName: string): QueryParamControl<any> {
-        return this.controls[ controlName ];
+    public get(queryParamName: string): QueryParam<any> {
+        return this.queryParams[ queryParamName ];
     }
 
     /** TODO Documentation */
     public get value(): QueryParamGroupValue {
         const value: QueryParamGroupValue = {};
-        Object.keys(this.controls).forEach(controlName => value[ controlName ] = this.controls[ controlName ].value);
+        Object.keys(this.queryParams).forEach(queryParamName => value[ queryParamName ] = this.queryParams[ queryParamName ].value);
 
         return value;
     }
@@ -99,13 +99,13 @@ export class QueryParamGroup {
      * TODO Documentation
      */
     public patchValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } = {}): void {
-        Object.keys(value).forEach(controlName => {
-            const control = this.controls[ controlName ];
-            if (isMissing(control)) {
+        Object.keys(value).forEach(queryParamName => {
+            const queryParam = this.queryParams[ queryParamName ];
+            if (isMissing(queryParam)) {
                 return;
             }
 
-            control.setValue(value[ controlName ], { emitEvent: false });
+            queryParam.setValue(value[ queryParamName ], { emitEvent: false });
         });
 
         if (opts.emitEvent !== false) {
@@ -117,8 +117,8 @@ export class QueryParamGroup {
      * TODO Documentation
      */
     public setValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } = {}): void {
-        Object.keys(this.controls).forEach(controlName => {
-            this.controls[ controlName ].setValue(value[ controlName ], { emitEvent: false });
+        Object.keys(this.queryParams).forEach(queryParamName => {
+            this.queryParams[ queryParamName ].setValue(value[ queryParamName ], { emitEvent: false });
         });
 
         if (opts.emitEvent !== false) {
@@ -142,7 +142,7 @@ export class QueryParamGroup {
 /**
  * TODO Documentation
  */
-export class QueryParamControl<T> {
+export class QueryParam<T> {
 
     private _valueChanges = new Subject<T>();
 
@@ -152,34 +152,34 @@ export class QueryParamControl<T> {
     /** TODO Documentation */
     public value: T = null;
 
-    /** TODO Documentation See QueryParamControlOpts */
-    public readonly name: string | null;
+    /** TODO Documentation See QueryParamOpts */
+    public readonly param: string | null;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly serialize: ParamSerializer<Unpack<T>>;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly deserialize: ParamDeserializer<Unpack<T>>;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly multi: boolean;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly debounceTime: number | null;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly combineWith: ParamCombinator<T>;
 
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
 
-    constructor(opts: QueryParamControlOpts<T>) {
-        const { name, serialize, deserialize, debounceTime, compareWith, combineWith } = opts;
+    constructor(opts: QueryParamOpts<T>) {
+        const { param, serialize, deserialize, debounceTime, compareWith, combineWith } = opts;
         const { emptyOn = null } = opts;
         const multi = opts.multi === true;
 
-        if (isMissing(name)) {
-            throw new Error(`Please provide a name for each query parameter control.`);
+        if (isMissing(param)) {
+            throw new Error(`Please provide a parameter name for each query parameter.`);
         }
 
         if (!isFunction(serialize)) {
@@ -199,17 +199,17 @@ export class QueryParamControl<T> {
         }
 
         if (multi && !isMissing(emptyOn)) {
-            throw new Error(`emptyOn is only supported for single-value parameters, but ${name} is a multi-value parameter.`);
+            throw new Error(`emptyOn is only supported for single-value parameters, but ${param} is a multi-value parameter.`);
         }
 
-        this.name = name;
+        this.param = param;
         this.serialize = wrapTryCatch(
             createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            `Error while serializing value for ${name}`
+            `Error while serializing value for ${param}`
         );
         this.deserialize = wrapTryCatch(
             createEmptyOnDeserializer(deserialize, emptyOn),
-            `Error while deserializing value for ${name}`
+            `Error while deserializing value for ${param}`
         );
         this.multi = multi;
         this.debounceTime = debounceTime;
