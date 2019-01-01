@@ -24,6 +24,7 @@
     <ul class="checkmark-list">
         <li>The state can be persisted across reloads</li>
         <li>URLs can be bookmarked and shared</li>
+        <li>If the user navigates away and comes back using the back button, the state will remain active</li>
     </ul>
     <p>
         However, keeping these parameters in sync with your application's state can be tricky, particularly if you want
@@ -78,6 +79,31 @@
             </ng-container>
         </demo-browser>
     </demo-example>
+
+    <docs-fragment fragment="when-to-use">
+        <h2>When should I use ngqp?</h2>
+    </docs-fragment>
+    <p>
+        ngqp is a great choice for use-cases which fit the following criteria:
+    </p>
+    <ul>
+        <li>You have form controls that represent some transient user settings (search, filter, sort, …)</li>
+        <li>These form controls are not hooked up with some form (using <code>ngModel</code> or reactive forms)</li>
+        <li>You want these settings to be persisted across reloads</li>
+        <li>You want your link to be shareable such that these settings are part of it</li>
+    </ul>
+
+    <docs-fragment fragment="when-not-to-use">
+        <h2>When should I <em>not</em> use ngqp?</h2>
+    </docs-fragment>
+    <p>
+        If it isn't a nail, don't use a hammer &mdash; ngqp might not be the best choice for all use-cases. Here are
+        some indicators for situations where you might not want to use ngqp:
+    </p>
+    <ul>
+        <li>You need to submit this state in a form (there's no need to real-time synchronize parameters here)</li>
+        <li>You need to use the Forms API or Reactive Forms API (this unfortunately interferes with ngqp)</li>
+    </ul>
 
     <docs-fragment fragment="next">
         <h2>What's next?</h2>
