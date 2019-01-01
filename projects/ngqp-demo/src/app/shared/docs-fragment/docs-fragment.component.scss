@@ -8,7 +8,7 @@
         visibility: hidden;
     }
 
-    h1, h2, h3 {
+    ::ng-deep h1, ::ng-deep h2, ::ng-deep h3 {
         margin-top: 2rem;
     }
 }
