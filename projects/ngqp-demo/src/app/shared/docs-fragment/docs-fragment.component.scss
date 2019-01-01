@@ -2,14 +2,11 @@
     display: flex;
     align-items: center;
 
+    margin-top: 2rem;
     margin-bottom: 0.5rem;
 
     &:not(:hover) .fragment__icon {
         visibility: hidden;
-    }
-
-    ::ng-deep h1, ::ng-deep h2, ::ng-deep h3 {
-        margin-top: 2rem;
     }
 }
 
