@@ -1,0 +1,7 @@
+<a [href]="'/api-docs/' + docsLink" target="_blank" rel="noopener nofollow">
+    <fa-icon [icon]="icon" size="sm" class="mx-1"></fa-icon>
+    <code>
+        <ng-content *ngIf="customText; else automaticTextTemplate"></ng-content>
+        <ng-template #automaticTextTemplate>{{ automaticText }}</ng-template>
+    </code>
+</a>

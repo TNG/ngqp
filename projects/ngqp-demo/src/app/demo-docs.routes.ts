@@ -3,6 +3,7 @@ import { DocsPage } from './docs-page';
 import { IntroductionDocsComponent } from './docs-items/introduction/introduction-docs.component';
 import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-docs.component';
 import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
+import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -34,8 +35,7 @@ export const DOCS_ROUTES: Routes = [
     },
     {
         path: 'model-configuration',
-        // TODO
-        component: IntroductionDocsComponent,
+        component: ModelConfigurationDocsComponent,
         data: {
             docsPage: DocsPage.MODEL_CONFIGURATION,
         },

@@ -21,7 +21,12 @@ export class DemoSnippetComponent implements AfterViewInit {
     }
 
     public ngAfterViewInit() {
-        const code = this.normalizeIndentation(this.code).trim();
+        let code = this.code;
+        code = this.removeDocsReferences(code);
+        code = this.removeDoubleEmptyLines(code);
+        code = this.normalizeIndentation(code);
+        code = code.trim();
+
         this.container.nativeElement.innerHTML = this.prism.highlight(code, this.type);
     }
 
@@ -35,6 +40,30 @@ export class DemoSnippetComponent implements AfterViewInit {
         const indent = Math.min(...indents);
 
         return lines.map(line => line.substr(indent)).join('\n').trim();
+    }
+
+    private removeDocsReferences(text: string): string {
+        switch (this.type) {
+            case 'html':
+                return text
+                    .split('\n')
+                    .filter(line => !line.includes('demo-example') && !line.includes('demo-browser'))
+                    .join('\n');
+            case 'typescript':
+                return text
+                    .split('\n')
+                    .filter(line => !line.includes('require'))
+                    .join('\n');
+            default:
+                return text;
+        }
+    }
+
+    private removeDoubleEmptyLines(text: string): string {
+        return text
+            .split('\n')
+            .filter((line, idx, lines) => idx === 0 || line.trim().length !== 0 || lines[idx - 1].trim().length !== 0)
+            .join('\n');
     }
 
 }

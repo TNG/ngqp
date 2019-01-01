@@ -1,0 +1,34 @@
+<docs-item>
+    <p>
+        The <em>model</em> defines which parameters you want to synchronize as well as <em>how</em> they are defined.
+        A model is an instance of <code>QueryParamGroup</code> and is best created by using the <code>QueryParamBuilder</code>
+        service. In this article, we will explain the different features exposed by the model.
+    </p>
+
+    <docs-fragment fragment="group">
+        <h2>The QueryParamGroup</h2>
+    </docs-fragment>
+    <p>
+        <code>QueryParamGroup</code> serves as a container for the parameters. Having this container around your parameters
+        is required as ngqp uses it to orchestrate its parameters as a unit. You can create a group by using the
+        <api-docs-link docsLink="injectables/QueryParamBuilder.html#group"></api-docs-link> method.
+    </p>
+
+    <docs-fragment fragment="group">
+        <h3>Group Settings</h3>
+    </docs-fragment>
+    <p>
+        By passing a second argument to <api-docs-link docsLink="injectables/QueryParamBuilder.html#group"></api-docs-link>,
+        you can define additional settings which affect the entire group.
+    </p>
+    <docs-fragment fragment="group">
+        <h4>replaceUrl</h4>
+    </docs-fragment>
+    <p>
+        When form control values change, ngqp synchronizes their values to the URL using router navigation. This parameter
+        mirrors the Router API and defines how ngqp should set this parameter on such navigations. If not set, ngqp falls
+        back to the globally defined default (see <docs-link [page]="DocsPage.GLOBAL_CONFIGURATION"></docs-link>), which
+        itself defaults to <code>true</code>, meaning that the history stack remains unchanged.
+    </p>
+    <demo-replace-url-example></demo-replace-url-example>
+</docs-item>

@@ -1,0 +1,17 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser>
+        <div class="alert alert-info">
+            See the back button next to the URL? If you start typing in either input field, the URL will synchronize.
+            However, only changes to the second input will cause an event on the history stack, meaning a back button
+            click will undo them. Changes to the first input won't allow this.
+        </div>
+
+        <div [queryParamGroup]="replaceParamGroup" class="form-group">
+            <input type="text" placeholder="Type here" autocomplete="off" class="form-control" queryParamName="text" />
+        </div>
+
+        <div [queryParamGroup]="noReplaceParamGroup" class="form-group">
+            <input type="text" placeholder="Type here" autocomplete="off" class="form-control" queryParamName="text" />
+        </div>
+    </demo-browser>
+</demo-example>

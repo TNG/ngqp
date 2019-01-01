@@ -20,6 +20,9 @@ import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-do
 import { DocsPageNamePipe, DocsPageRoutePipe } from './shared/docs-page.pipes';
 import { DocsLinkComponent } from './shared/docs-link/docs-link.component';
 import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
+import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
+import { ApiDocsLinkComponent } from './shared/api-docs-link/api-docs-link.component';
+import { ReplaceUrlExampleComponent } from './docs-items/model-configuration/examples/replace-url-example/replace-url-example.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +46,9 @@ import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help
         IntroductionDocsComponent,
         UsageGuideDocsComponent,
         GettingHelpDocsComponent,
+        ModelConfigurationDocsComponent,
+        ApiDocsLinkComponent,
+        ReplaceUrlExampleComponent,
     ],
     imports: [
         BrowserModule,

@@ -2,11 +2,14 @@
     display: flex;
     align-items: center;
 
-    margin-top: 2rem;
     margin-bottom: 0.5rem;
 
     &:not(:hover) .fragment__icon {
         visibility: hidden;
+    }
+
+    h1, h2, h3 {
+        margin-top: 2rem;
     }
 }
 
