@@ -105,7 +105,7 @@ export class QueryParamBuilder {
         }
 
         return this.param({
-            name: controlName,
+            name: controlConfig,
         });
     }
 
