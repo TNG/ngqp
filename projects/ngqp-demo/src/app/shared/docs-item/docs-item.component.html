@@ -14,7 +14,7 @@
 
         <div *ngIf="fragmentService.fragments.length !== 0"  class="order-2 d-none d-xl-block col-xl-2 toc">
             <div class="toc__content">
-                <a class="nav-link text-muted" routerLink="." [preserveFragment]="false">{{ pageTitle }}</a>
+                <a class="nav-link text-muted" routerLink="." [preserveFragment]="false">{{ docsPage | docsPageName }}</a>
                 <hr class="toc__hr" />
 
                 <ul class="nav flex-column text-muted pt-1">
