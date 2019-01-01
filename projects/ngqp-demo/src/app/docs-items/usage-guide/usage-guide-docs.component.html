@@ -34,8 +34,9 @@
     </p>
     <div class="alert alert-info">
         To wire a component with the model, the component has to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
-        provided to it. ngqp ships standard implementations for basic form elements such as inputs, but if you have custom
-        components you may need to implement this. For more information, see <docs-link [page]="DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR"></docs-link>.
+        provided to it (the same mechanism that is used in the Forms API). ngqp ships standard implementations for basic
+        form elements such as inputs, but if you have custom components you may need to implement this.
+        For more information, see <docs-link [page]="DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR"></docs-link>.
     </div>
     <demo-snippet type="html" [code]="connectModelSnippet"></demo-snippet>
     <p>
