@@ -1,6 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
+export type ApiDocType = 'classes' | 'injectables';
+
+const LOOKUP: { [ name: string ]: ApiDocType } = {
+    'QueryParam': 'classes',
+    'QueryParamGroup': 'classes',
+    'QueryParamBuilder': 'injectables',
+};
+
 @Component({
     selector: 'api-docs-link',
     templateUrl: './api-docs-link.component.html',
@@ -11,22 +19,14 @@ export class ApiDocsLinkComponent {
     public icon = faExternalLinkAlt;
 
     @Input()
-    public docsLink: string;
+    public type: ApiDocType;
 
     @Input()
-    public customText = false;
+    public name: string;
 
-    public get automaticText(): string {
-        if (!this.docsLink) {
-            return null;
-        }
-
-        const part = this.docsLink.split('/').pop();
-        if (!part) {
-            return this.docsLink;
-        }
-
-        return part.replace(/\.html/, '');
+    public get url(): string {
+        const [ name, fragment = '' ] = this.name.split('#');
+        return `/api-docs/${this.type ? this.type : LOOKUP[ name ]}/${name}.html#${fragment}`;
     }
 
 }

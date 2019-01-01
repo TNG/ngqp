@@ -1,34 +1,103 @@
 <docs-item>
     <p>
         The <em>model</em> defines which parameters you want to synchronize as well as <em>how</em> they are defined.
-        A model is an instance of <code>QueryParamGroup</code> and is best created by using the <code>QueryParamBuilder</code>
-        service. In this article, we will explain the different features exposed by the model.
+        A model is an instance of <api-docs-link name="QueryParamGroup"></api-docs-link> and is best created by using
+        the <api-docs-link name="QueryParamBuilder"></api-docs-link> service. In this article, we will explain the
+        different features exposed by the model.
     </p>
 
-    <docs-fragment fragment="group">
-        <h2>The QueryParamGroup</h2>
+    <docs-fragment fragment="QueryParamGroup">
+        <h2>QueryParamGroup</h2>
     </docs-fragment>
     <p>
-        <code>QueryParamGroup</code> serves as a container for the parameters. Having this container around your parameters
-        is required as ngqp uses it to orchestrate its parameters as a unit. You can create a group by using the
-        <api-docs-link docsLink="injectables/QueryParamBuilder.html#group"></api-docs-link> method.
+        <api-docs-link name="QueryParamGroup"></api-docs-link> serves as a container for the parameters. Having this
+        container around your parameters is required as ngqp uses it to orchestrate its parameters as a unit. You can
+        create a group by using the <api-docs-link name="QueryParamBuilder#group"></api-docs-link> method.
     </p>
-
-    <docs-fragment fragment="group">
-        <h3>Group Settings</h3>
-    </docs-fragment>
     <p>
-        By passing a second argument to <api-docs-link docsLink="injectables/QueryParamBuilder.html#group"></api-docs-link>,
+        By passing a second argument to <api-docs-link name="QueryParamBuilder#group"></api-docs-link>,
         you can define additional settings which affect the entire group.
     </p>
-    <docs-fragment fragment="group">
-        <h4>replaceUrl</h4>
+    <docs-fragment fragment="QueryParamGroup-replaceUrl">
+        <h3>Controlling history state</h3>
     </docs-fragment>
     <p>
-        When form control values change, ngqp synchronizes their values to the URL using router navigation. This parameter
-        mirrors the Router API and defines how ngqp should set this parameter on such navigations. If not set, ngqp falls
-        back to the globally defined default (see <docs-link [page]="DocsPage.GLOBAL_CONFIGURATION"></docs-link>), which
-        itself defaults to <code>true</code>, meaning that the history stack remains unchanged.
+        When form control values change, ngqp synchronizes their values to the URL by navigating to the updated URL. By
+        default, this will replace the current state in the history rather than appending to it such that it doesn't
+        interfere with navigating back using, e.g., the back button.
+    </p>
+    <p>
+        By passing <code>replaceUrl</code>, this value can be overridden. Note that in ngqp this can be defined both
+        globally (see <docs-link [page]="DocsPage.GLOBAL_CONFIGURATION"></docs-link>) and per
+        <api-docs-link name="QueryParamGroup"></api-docs-link>, with the latter taking precedence over the former, if
+        defined.
     </p>
     <demo-replace-url-example></demo-replace-url-example>
+
+    <docs-fragment fragment="QueryParam">
+        <h2>QueryParam</h2>
+    </docs-fragment>
+    <p>
+        A <api-docs-link name="QueryParam"></api-docs-link> model represents a specific query parameter in the URL. It
+        contains defining information such as the name of the query parameter and how the form control values are
+        (de-)serialized to and from the URL.
+    </p>
+    <docs-fragment fragment="QueryParam-param">
+        <h3>Query parameter name</h3>
+    </docs-fragment>
+    <p>
+        ngqp separates the name of the parameter model from the name used in the URL because, for example, you may want
+        to use <code>?q=…</code> in the URL for a search input, but refer to it in your code with a more descriptive
+        name such as <code>searchText</code>.
+    </p>
+    <p>
+        The <code>param</code> option of the parameter definition defines the parameter name used for the URL.
+    </p>
+    <docs-fragment fragment="QueryParam-serialize">
+        <h3>Converting between form control and parameter value</h3>
+    </docs-fragment>
+    <p>
+        (De-)Serializers determine how the value of the form control is serialized into a string for the URL and, vice
+        versa, how the parameter value is converted into the value used in the form control. For basic data types such
+        as strings, numbers and booleans, <api-docs-link name="QueryParamBuilder"></api-docs-link>
+        offers methods which automatically define an appropriate (de-)serializer by default:
+    </p>
+    <ul>
+        <li><api-docs-link name="QueryParamBuilder#stringParam"></api-docs-link></li>
+        <li><api-docs-link name="QueryParamBuilder#numericParam"></api-docs-link></li>
+        <li><api-docs-link name="QueryParamBuilder#booleanParam"></api-docs-link></li>
+    </ul>
+    <p>
+        For form controls using complex value types or for customization, you can use
+        <api-docs-link name="QueryParamBuilder#param"></api-docs-link> and pass your own (de-)serializer
+        functions.
+    </p>
+    <!-- TODO Example -->
+    <docs-fragment fragment="QueryParam-multi">
+        <h3>Parameters with multiple values</h3>
+    </docs-fragment>
+    <p>
+        If your form control's model is array-typed, such as <code>&lt;select multiple&gt;</code>, you can set the
+        <code>multi</code> option to <code>true</code>. This will use the default behavior of the router to have
+        query parameters with multiple values.
+    </p>
+    <!-- TODO Example -->
+    <docs-fragment fragment="QueryParam-debounceTime">
+        <h3>debounceTime</h3>
+    </docs-fragment>
+    <p>
+        TODO
+    </p>
+    <docs-fragment fragment="QueryParam-emptyOn">
+        <h3>emptyOn</h3>
+    </docs-fragment>
+    <p>
+        TODO emptyOn, compareWith
+    </p>
+    <docs-fragment fragment="QueryParam-combineWith">
+        <h3>combineWith</h3>
+    </docs-fragment>
+    <p>
+        TODO
+    </p>
 </docs-item>
