@@ -39,16 +39,6 @@ export class QueryParamBuilder {
     }
 
     /**
-     * Redirects to {@link stringParam}.
-     * @see stringParam
-     */
-    public param(opts: QueryParamOptsInput<string[]> & { multi: true }): QueryParam<string[]>;
-    public param(opts: QueryParamOptsInput<string>): QueryParam<string>;
-    public param(opts: QueryParamOptsInput<string | string[]>): QueryParam<string | string[]> {
-        return this.stringParam(opts);
-    }
-
-    /**
      * TODO Documentation
      */
     public stringParam(opts: QueryParamOptsInput<string[]> & { multi: true }): QueryParam<string[]>;
@@ -93,9 +83,9 @@ export class QueryParamBuilder {
     /**
      * TODO Documentation
      */
-    public customParam<T>(opts: QueryParamOpts<T[]> & { multi: true }): QueryParam<T[]>;
-    public customParam<T>(opts: QueryParamOpts<T>): QueryParam<T>;
-    public customParam<T>(opts: QueryParamOpts<T | T[]>): QueryParam<T | T[]> {
+    public param<T>(opts: QueryParamOpts<T[]> & { multi: true }): QueryParam<T[]>;
+    public param<T>(opts: QueryParamOpts<T>): QueryParam<T>;
+    public param<T>(opts: QueryParamOpts<T | T[]>): QueryParam<T | T[]> {
         return new QueryParam(opts);
     }
 
@@ -104,7 +94,7 @@ export class QueryParamBuilder {
             return queryParam;
         }
 
-        return this.param({
+        return this.stringParam({
             param: queryParam,
         });
     }
