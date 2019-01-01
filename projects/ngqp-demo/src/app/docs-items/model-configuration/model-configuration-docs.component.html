@@ -43,7 +43,24 @@
         (de-)serialized to and from the URL.
     </p>
     <docs-fragment fragment="QueryParam-param">
-        <h3>Query parameter name</h3>
+        <h3>Creating parameters</h3>
+    </docs-fragment>
+    <p>
+        For basic data types such as strings, numbers and booleans, <span apiDocsLink>QueryParamBuilder</span>
+        offers methods to create a new parameter model such that the correct (de-)serializers are used (see
+        <docs-link fragment="QueryParam-serialize"></docs-link>).
+    </p>
+    <ul>
+        <li><span apiDocsLink>QueryParamBuilder#stringParam</span></li>
+        <li><span apiDocsLink>QueryParamBuilder#numericParam</span></li>
+        <li><span apiDocsLink>QueryParamBuilder#booleanParam</span></li>
+    </ul>
+    <p>
+        If your form control uses complex-typed values, use <span apiDocsLink>QueryParamBuilder#param</span> instead
+        and provide your own (de-)serializers.
+    </p>
+    <docs-fragment fragment="QueryParam-param">
+        <h3>Parameter name</h3>
     </docs-fragment>
     <p>
         ngqp separates the name of the parameter model from the name used in the URL because, for example, you may want
@@ -58,23 +75,12 @@
     </docs-fragment>
     <p>
         (De-)Serializers determine how the value of the form control is serialized into a string for the URL and, vice
-        versa, how the parameter value is converted into the value used in the form control. For basic data types such
-        as strings, numbers and booleans, <span apiDocsLink>QueryParamBuilder</span>
-        offers methods which automatically define an appropriate (de-)serializer by default:
-    </p>
-    <ul>
-        <li><span apiDocsLink>QueryParamBuilder#stringParam</span></li>
-        <li><span apiDocsLink>QueryParamBuilder#numericParam</span></li>
-        <li><span apiDocsLink>QueryParamBuilder#booleanParam</span></li>
-    </ul>
-    <p>
-        For form controls using complex value types or for customization, you can use
-        <span apiDocsLink>QueryParamBuilder#param</span> and pass your own (de-)serializer
-        functions.
+        versa, how the parameter value is converted into the value used in the form control. If you need or want to
+        provide your own (de-)serializers, you can pass them to <span apiDocsLink>QueryParamBuilder#param</span>.
     </p>
     <!-- TODO Example -->
     <docs-fragment fragment="QueryParam-multi">
-        <h3>Parameters with multiple values</h3>
+        <h3>Multiple values</h3>
     </docs-fragment>
     <p>
         If your form control's model is array-typed, such as <code>&lt;select multiple&gt;</code>, you can set the
@@ -83,19 +89,19 @@
     </p>
     <!-- TODO Example -->
     <docs-fragment fragment="QueryParam-debounceTime">
-        <h3>debounceTime</h3>
+        <h3>Debouncing user input</h3>
     </docs-fragment>
     <p>
         TODO
     </p>
     <docs-fragment fragment="QueryParam-emptyOn">
-        <h3>emptyOn</h3>
+        <h3>Default values</h3>
     </docs-fragment>
     <p>
         TODO emptyOn, compareWith
     </p>
     <docs-fragment fragment="QueryParam-combineWith">
-        <h3>combineWith</h3>
+        <h3>Side effects on other parameters</h3>
     </docs-fragment>
     <p>
         TODO
