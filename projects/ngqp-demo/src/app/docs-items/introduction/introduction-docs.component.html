@@ -84,13 +84,14 @@
         <h2>When should I use ngqp?</h2>
     </docs-fragment>
     <p>
-        ngqp is a great choice for use-cases which fit the following criteria:
+        ngqp is a great choice if you want to synchronize the URL with the state of some form controls if the following
+        crtieria apply to your case:
     </p>
     <ul>
-        <li>You have form controls that represent some transient user settings (search, filter, sort, …)</li>
-        <li>These form controls are not hooked up with some form (using <code>ngModel</code> or reactive forms)</li>
-        <li>You want these settings to be persisted across reloads</li>
-        <li>You want your link to be shareable such that these settings are part of it</li>
+        <li>They represent a transient state such as search input, filter or sorting settings or pagination</li>
+        <li>They are not used with the (Reactive) Forms API (using <code>ngModel</code> or <code>formControlName</code>)</li>
+        <li>The represented state should persist across page reloads</li>
+        <li>The URL can or should be shareable or bookmarkable</li>
     </ul>
 
     <docs-fragment fragment="when-not-to-use">
