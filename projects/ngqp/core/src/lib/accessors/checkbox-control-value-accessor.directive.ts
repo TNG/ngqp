@@ -29,7 +29,7 @@ export class CheckboxControlValueAccessorDirective implements ControlValueAccess
     constructor(private renderer: Renderer2, private elementRef: ElementRef<HTMLInputElement>) {
     }
 
-    public writeValue(value: any) {
+    public writeValue(value: boolean) {
         this.renderer.setProperty(this.elementRef.nativeElement, 'checked', value);
     }
 
