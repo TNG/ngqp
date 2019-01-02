@@ -174,8 +174,7 @@ export class QueryParam<T> {
     private changeFunctions: OnChangeFunction<T>[] = [];
 
     constructor(opts: QueryParamOpts<T>) {
-        const { param, serialize, deserialize, debounceTime, compareWith, combineWith } = opts;
-        const { emptyOn = null } = opts;
+        const { param, serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
         const multi = opts.multi === true;
 
         if (isMissing(param)) {
@@ -204,11 +203,11 @@ export class QueryParam<T> {
 
         this.param = param;
         this.serialize = wrapTryCatch(
-            createEmptyOnSerializer(serialize, emptyOn, compareWith),
+            emptyOn === undefined ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
             `Error while serializing value for ${param}`
         );
         this.deserialize = wrapTryCatch(
-            createEmptyOnDeserializer(deserialize, emptyOn),
+            emptyOn === undefined ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
             `Error while deserializing value for ${param}`
         );
         this.multi = multi;
