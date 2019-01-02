@@ -1,0 +1,13 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser>
+        <div class="alert alert-info">
+            In this example, the boolean parameter of the checkbox is (de-)serialized using the strings "active" and
+            "inactive" rather than the default "true" and "false".
+        </div>
+
+        <div [queryParamGroup]="paramGroup" class="form-check">
+            <input id="status" type="checkbox" class="form-check-input" queryParamName="status" />
+            <label for="status" class="form-check-label">Active</label>
+        </div>
+    </demo-browser>
+</demo-example>

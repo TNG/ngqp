@@ -23,6 +23,7 @@ import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help
 import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
 import { ApiDocsLinkComponent } from './shared/api-docs-link/api-docs-link.component';
 import { ReplaceUrlExampleComponent } from './docs-items/model-configuration/examples/replace-url-example/replace-url-example.component';
+import { SerializerExampleComponent } from './docs-items/model-configuration/examples/serializer-example/serializer-example.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { ReplaceUrlExampleComponent } from './docs-items/model-configuration/exa
         ModelConfigurationDocsComponent,
         ApiDocsLinkComponent,
         ReplaceUrlExampleComponent,
+        SerializerExampleComponent,
     ],
     imports: [
         BrowserModule,
