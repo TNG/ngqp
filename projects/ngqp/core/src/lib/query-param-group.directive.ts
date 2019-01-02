@@ -17,6 +17,11 @@ function hasArrayValue<T>(queryParam: QueryParam<T | T[]>, value: T | T[]): valu
     return isMultiQueryParam(queryParam);
 }
 
+/** TODO Documentation */
+function hasArraySerialization<T>(queryParam: QueryParam<T | T[]>, values: string | string[]): values is string[] {
+    return isMultiQueryParam(queryParam);
+}
+
 /**
  * TODO Documentation
  */
@@ -160,7 +165,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     }
 
     private deserialize<T = any>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
-        if (Array.isArray(values)) {
+        if (hasArraySerialization(queryParam, values)) {
             return values.map(queryParam.deserialize);
         } else {
             return queryParam.deserialize(values);
