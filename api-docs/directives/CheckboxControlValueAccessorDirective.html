@@ -512,7 +512,7 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>writeValue(value: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                        <code>writeValue(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                     </td>
                 </tr>
 
@@ -541,7 +541,7 @@
                                                 <tr>
                                                         <td>value</td>
                                                         <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -605,7 +605,7 @@ export class CheckboxControlValueAccessorDirective implements ControlValueAccess
     constructor(private renderer: Renderer2, private elementRef: ElementRef&lt;HTMLInputElement&gt;) {
     }
 
-    public writeValue(value: any) {
+    public writeValue(value: boolean) {
         this.renderer.setProperty(this.elementRef.nativeElement, &#x27;checked&#x27;, value);
     }
 

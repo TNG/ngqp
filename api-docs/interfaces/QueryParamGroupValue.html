@@ -81,7 +81,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <code>[controlName: string]:    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <code>[queryParamName: string]:    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                     </td>
                 </tr>
@@ -121,15 +121,15 @@ export type Unpack&lt;T&gt; &#x3D; T extends (infer U)[] ? U : T;
 
 /** TODO Documentation */
 export interface QueryParamGroupValue {
-    [ controlName: string ]: any;
+    [ queryParamName: string ]: any;
 }
 
 /**
  * TODO Documentation
  */
-export interface QueryParamControlOpts&lt;T&gt; {
+export interface QueryParamOpts&lt;T&gt; {
     /** TODO Documentation */
-    name: string;
+    param: string;
     /** TODO Documentation */
     serialize: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
     /** TODO Documentation */
@@ -142,7 +142,7 @@ export interface QueryParamControlOpts&lt;T&gt; {
     debounceTime?: number | null;
     /** TODO Documentation (+ not supported in multi-mode) */
     emptyOn?: Unpack&lt;T&gt;;
-    /** TODO Documentation (note: no controls / serializers, but finished values and non-recursive) */
+    /** TODO Documentation (note: no queryParams / serializers, but finished values and non-recursive) */
     combineWith?: ParamCombinator&lt;T&gt;;
 }
 
@@ -157,7 +157,7 @@ export class QueryParamGroup {
     public readonly valueChanges: Observable&lt;QueryParamGroupValue&gt; &#x3D; this._valueChanges.asObservable();
 
     /** TODO Documentation */
-    public readonly controls: { [ controlName: string ]: QueryParamControl&lt;any&gt; };
+    public readonly queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; };
 
     /** TODO Documentation */
     public readonly routerOptions: RouterAdapterOptions;
@@ -165,13 +165,13 @@ export class QueryParamGroup {
     private changeFunctions: OnChangeFunction&lt;QueryParamGroupValue&gt;[] &#x3D; [];
 
     constructor(
-        controls: { [ controlName: string ]: QueryParamControl&lt;any&gt; },
+        queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; },
         extras: RouterAdapterOptions &#x3D; {}
     ) {
-        this.controls &#x3D; controls;
+        this.queryParams &#x3D; queryParams;
         this.routerOptions &#x3D; extras;
 
-        Object.values(this.controls).forEach(control &#x3D;&gt; control._setParent(this));
+        Object.values(this.queryParams).forEach(queryParam &#x3D;&gt; queryParam._setParent(this));
     }
 
     /**
@@ -183,14 +183,14 @@ export class QueryParamGroup {
     }
 
     /** TODO Documentation */
-    public get(controlName: string): QueryParamControl&lt;any&gt; {
-        return this.controls[ controlName ];
+    public get(queryParamName: string): QueryParam&lt;any&gt; {
+        return this.queryParams[ queryParamName ];
     }
 
     /** TODO Documentation */
     public get value(): QueryParamGroupValue {
         const value: QueryParamGroupValue &#x3D; {};
-        Object.keys(this.controls).forEach(controlName &#x3D;&gt; value[ controlName ] &#x3D; this.controls[ controlName ].value);
+        Object.keys(this.queryParams).forEach(queryParamName &#x3D;&gt; value[ queryParamName ] &#x3D; this.queryParams[ queryParamName ].value);
 
         return value;
     }
@@ -199,13 +199,13 @@ export class QueryParamGroup {
      * TODO Documentation
      */
     public patchValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } &#x3D; {}): void {
-        Object.keys(value).forEach(controlName &#x3D;&gt; {
-            const control &#x3D; this.controls[ controlName ];
-            if (isMissing(control)) {
+        Object.keys(value).forEach(queryParamName &#x3D;&gt; {
+            const queryParam &#x3D; this.queryParams[ queryParamName ];
+            if (isMissing(queryParam)) {
                 return;
             }
 
-            control.setValue(value[ controlName ], { emitEvent: false });
+            queryParam.setValue(value[ queryParamName ], { emitEvent: false });
         });
 
         if (opts.emitEvent !&#x3D;&#x3D; false) {
@@ -217,8 +217,8 @@ export class QueryParamGroup {
      * TODO Documentation
      */
     public setValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } &#x3D; {}): void {
-        Object.keys(this.controls).forEach(controlName &#x3D;&gt; {
-            this.controls[ controlName ].setValue(value[ controlName ], { emitEvent: false });
+        Object.keys(this.queryParams).forEach(queryParamName &#x3D;&gt; {
+            this.queryParams[ queryParamName ].setValue(value[ queryParamName ], { emitEvent: false });
         });
 
         if (opts.emitEvent !&#x3D;&#x3D; false) {
@@ -242,7 +242,7 @@ export class QueryParamGroup {
 /**
  * TODO Documentation
  */
-export class QueryParamControl&lt;T&gt; {
+export class QueryParam&lt;T&gt; {
 
     private _valueChanges &#x3D; new Subject&lt;T&gt;();
 
@@ -252,34 +252,33 @@ export class QueryParamControl&lt;T&gt; {
     /** TODO Documentation */
     public value: T &#x3D; null;
 
-    /** TODO Documentation See QueryParamControlOpts */
-    public readonly name: string | null;
+    /** TODO Documentation See QueryParamOpts */
+    public readonly param: string | null;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly serialize: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly deserialize: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly multi: boolean;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly debounceTime: number | null;
 
-    /** TODO Documentation See QueryParamControlOpts */
+    /** TODO Documentation See QueryParamOpts */
     public readonly combineWith: ParamCombinator&lt;T&gt;;
 
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction&lt;T&gt;[] &#x3D; [];
 
-    constructor(opts: QueryParamControlOpts&lt;T&gt;) {
-        const { name, serialize, deserialize, debounceTime, compareWith, combineWith } &#x3D; opts;
-        const { emptyOn &#x3D; null } &#x3D; opts;
+    constructor(opts: QueryParamOpts&lt;T&gt;) {
+        const { param, serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } &#x3D; opts;
         const multi &#x3D; opts.multi &#x3D;&#x3D;&#x3D; true;
 
-        if (isMissing(name)) {
-            throw new Error(&#x60;Please provide a name for each query parameter control.&#x60;);
+        if (isMissing(param)) {
+            throw new Error(&#x60;Please provide a parameter name for each query parameter.&#x60;);
         }
 
         if (!isFunction(serialize)) {
@@ -299,17 +298,17 @@ export class QueryParamControl&lt;T&gt; {
         }
 
         if (multi &amp;&amp; !isMissing(emptyOn)) {
-            throw new Error(&#x60;emptyOn is only supported for single-value parameters, but ${name} is a multi-value parameter.&#x60;);
+            throw new Error(&#x60;emptyOn is only supported for single-value parameters, but ${param} is a multi-value parameter.&#x60;);
         }
 
-        this.name &#x3D; name;
+        this.param &#x3D; param;
         this.serialize &#x3D; wrapTryCatch(
-            createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            &#x60;Error while serializing value for ${name}&#x60;
+            emptyOn &#x3D;&#x3D;&#x3D; undefined ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
+            &#x60;Error while serializing value for ${param}&#x60;
         );
         this.deserialize &#x3D; wrapTryCatch(
-            createEmptyOnDeserializer(deserialize, emptyOn),
-            &#x60;Error while deserializing value for ${name}&#x60;
+            emptyOn &#x3D;&#x3D;&#x3D; undefined ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
+            &#x60;Error while deserializing value for ${param}&#x60;
         );
         this.multi &#x3D; multi;
         this.debounceTime &#x3D; debounceTime;

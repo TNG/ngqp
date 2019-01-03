@@ -93,7 +93,10 @@
                             <a href="#getMatchingVersion" title="schematics/ng-add/index.ts"><b>getMatchingVersion</b>&nbsp;&nbsp;&nbsp;(schematics/.../index.ts)</a>
                         </li>
                         <li>
-                            <a href="#hasArrayModel" title="src/lib/query-param-group.directive.ts"><b>hasArrayModel</b>&nbsp;&nbsp;&nbsp;(src/.../query-param-group.directive.ts)</a>
+                            <a href="#hasArraySerialization" title="src/lib/query-param-group.directive.ts"><b>hasArraySerialization</b>&nbsp;&nbsp;&nbsp;(src/.../query-param-group.directive.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#hasArrayValue" title="src/lib/query-param-group.directive.ts"><b>hasArrayValue</b>&nbsp;&nbsp;&nbsp;(src/.../query-param-group.directive.ts)</a>
                         </li>
                         <li>
                             <a href="#isAndroid" title="src/lib/accessors/default-control-value-accessor.directive.ts"><b>isAndroid</b>&nbsp;&nbsp;&nbsp;(src/.../default-control-value-accessor.directive.ts)</a>
@@ -105,7 +108,7 @@
                             <a href="#isMissing" title="src/lib/util.ts"><b>isMissing</b>&nbsp;&nbsp;&nbsp;(src/.../util.ts)</a>
                         </li>
                         <li>
-                            <a href="#isMultiControl" title="src/lib/query-param-group.directive.ts"><b>isMultiControl</b>&nbsp;&nbsp;&nbsp;(src/.../query-param-group.directive.ts)</a>
+                            <a href="#isMultiQueryParam" title="src/lib/query-param-group.directive.ts"><b>isMultiQueryParam</b>&nbsp;&nbsp;&nbsp;(src/.../query-param-group.directive.ts)</a>
                         </li>
                         <li>
                             <a href="#Unnamed function" title="schematics/ng-add/index.ts"><b>Unnamed function</b>&nbsp;&nbsp;&nbsp;(schematics/.../index.ts)</a>
@@ -823,18 +826,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="hasArrayModel"></a>
+                        <a name="hasArraySerialization"></a>
                         <span class="name">
                             <b>
-                            hasArrayModel
+                            hasArraySerialization
                             </b>
-                            <a href="#hasArrayModel"><span class="icon ion-ios-link"></span></a>
+                            <a href="#hasArraySerialization"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>hasArrayModel(control, model)</code>
+<code>hasArraySerialization(queryParam, values)</code>
                     </td>
                 </tr>
 
@@ -857,7 +860,7 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>control</td>
+                                                        <td>queryParam</td>
                                                     
                                                     <td>
                                                             No
@@ -866,7 +869,7 @@
 
                                                 </tr>
                                                 <tr>
-                                                        <td>model</td>
+                                                        <td>values</td>
                                                     
                                                     <td>
                                                             No
@@ -887,18 +890,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="isMultiControl"></a>
+                        <a name="hasArrayValue"></a>
                         <span class="name">
                             <b>
-                            isMultiControl
+                            hasArrayValue
                             </b>
-                            <a href="#isMultiControl"><span class="icon ion-ios-link"></span></a>
+                            <a href="#hasArrayValue"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>isMultiControl(control)</code>
+<code>hasArrayValue(queryParam, value)</code>
                     </td>
                 </tr>
 
@@ -921,7 +924,71 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>control</td>
+                                                        <td>queryParam</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>value</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isMultiQueryParam"></a>
+                        <span class="name">
+                            <b>
+                            isMultiQueryParam
+                            </b>
+                            <a href="#isMultiQueryParam"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>isMultiQueryParam(queryParam)</code>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>TODO Documentation </p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>queryParam</td>
                                                     
                                                     <td>
                                                             No

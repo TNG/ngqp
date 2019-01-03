@@ -377,7 +377,7 @@ export class QueryParamNameDirective implements OnInit {
             throw new Error(&#x60;queryParamName has been added, but without specifying the name.&#x60;);
         }
 
-        this.setupControl();
+        this.setupQueryParam();
     }
 
     /**
@@ -399,13 +399,13 @@ export class QueryParamNameDirective implements OnInit {
                 defaultAccessor &#x3D; valueAccessor;
             } else if (NGQP_BUILT_IN_ACCESSORS.some(current &#x3D;&gt; valueAccessor.constructor &#x3D;&#x3D;&#x3D; current)) {
                 if (builtInAccessor !&#x3D;&#x3D; null) {
-                    throw new Error(&#x60;More than one built-in control value accessor matches&#x60;);
+                    throw new Error(&#x60;More than one built-in ControlValueAccessor matches&#x60;);
                 }
 
                 builtInAccessor &#x3D; valueAccessor;
             } else {
                 if (customAccessor !&#x3D;&#x3D; null) {
-                    throw new Error(&#x60;More than one custom ControlValueAccessor has been found on the control&#x60;);
+                    throw new Error(&#x60;More than one custom ControlValueAccessor has been found on the form control&#x60;);
                 }
 
                 customAccessor &#x3D; valueAccessor;
@@ -424,11 +424,11 @@ export class QueryParamNameDirective implements OnInit {
             return defaultAccessor;
         }
 
-        throw new Error(&#x60;No matching control value accessor has been found for this form control&#x60;);
+        throw new Error(&#x60;No matching ControlValueAccessor has been found for this form control&#x60;);
     }
 
-    private setupControl(): void {
-        this.parent.addControl(this);
+    private setupQueryParam(): void {
+        this.parent.addQueryParam(this);
     }
 
 }
