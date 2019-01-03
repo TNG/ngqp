@@ -25,6 +25,7 @@ import { ApiDocsLinkComponent } from './shared/api-docs-link/api-docs-link.compo
 import { ReplaceUrlExampleComponent } from './docs-items/examples/replace-url-example/replace-url-example.component';
 import { SerializerExampleComponent } from './docs-items/examples/serializer-example/serializer-example.component';
 import { MultiExampleComponent } from './docs-items/examples/multi-example/multi-example.component';
+import { DebounceTimeExampleComponent } from './docs-items/examples/debounce-time-example/debounce-time-example.component';
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import { MultiExampleComponent } from './docs-items/examples/multi-example/multi
         ReplaceUrlExampleComponent,
         SerializerExampleComponent,
         MultiExampleComponent,
+        DebounceTimeExampleComponent,
     ],
     imports: [
         BrowserModule,

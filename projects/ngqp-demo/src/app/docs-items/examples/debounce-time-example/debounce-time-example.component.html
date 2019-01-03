@@ -1,0 +1,14 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup">
+        <div class="alert alert-info">
+            This input is debounced by 1s. Note how as you type, the URL will only synchronize once you stopped
+            typing for one second.
+        </div>
+
+        <div [queryParamGroup]="paramGroup" class="form-group">
+            <label for="text">Search</label>
+            <input id="text" type="text" class="form-control" placeholder="Type here" autocomplete="off"
+                   queryParamName="searchText" />
+        </div>
+    </demo-browser>
+</demo-example>
