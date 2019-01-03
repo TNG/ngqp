@@ -24,6 +24,7 @@ import { ModelConfigurationDocsComponent } from './docs-items/model-configuratio
 import { ApiDocsLinkComponent } from './shared/api-docs-link/api-docs-link.component';
 import { ReplaceUrlExampleComponent } from './docs-items/examples/replace-url-example/replace-url-example.component';
 import { SerializerExampleComponent } from './docs-items/examples/serializer-example/serializer-example.component';
+import { MultiExampleComponent } from './docs-items/examples/multi-example/multi-example.component';
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { SerializerExampleComponent } from './docs-items/examples/serializer-exa
         ApiDocsLinkComponent,
         ReplaceUrlExampleComponent,
         SerializerExampleComponent,
+        MultiExampleComponent,
     ],
     imports: [
         BrowserModule,

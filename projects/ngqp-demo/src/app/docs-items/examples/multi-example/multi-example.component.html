@@ -1,0 +1,13 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser>
+        <div class="alert alert-info">
+            Select multiple fruits to see how a list of values is synchronized to the URL.
+        </div>
+
+        <div [queryParamGroup]="paramGroup" class="form-group">
+            <select id="fruits" class="form-control" queryParamName="selectedFruit" multiple>
+                <option *ngFor="let fruit of fruits" [value]="fruit">{{ fruit }}</option>
+            </select>
+        </div>
+    </demo-browser>
+</demo-example>
