@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/Airblader/ngqp/compare/v0.4.2...v0.5.0) (2019-01-03)
+
+
+### Bug Fixes
+
+* **core:** Do not create an empty-on serializer if emptyOn wasn't given ([f394fa6](https://github.com/Airblader/ngqp/commit/f394fa6))
+* **core:** Fix list of built-in accessors ([2e39369](https://github.com/Airblader/ngqp/commit/2e39369))
+* **core:** Remove customParam and replace it with param ([60377e5](https://github.com/Airblader/ngqp/commit/60377e5))
+* **core:** Split accessors into one directive per file ([a0bde9b](https://github.com/Airblader/ngqp/commit/a0bde9b))
+* **core:** Use correct param name in shorthand syntax ([f526b61](https://github.com/Airblader/ngqp/commit/f526b61))
+* **core:** use multi property rather than checking value type ([781f009](https://github.com/Airblader/ngqp/commit/781f009))
+* **core:** Use proper type in accessor ([5d90b63](https://github.com/Airblader/ngqp/commit/5d90b63))
+* **docs:** Fix demo-browser in responsive case ([bbaf6e4](https://github.com/Airblader/ngqp/commit/bbaf6e4))
+* **docs:** Fix first TOC item ([0f566ad](https://github.com/Airblader/ngqp/commit/0f566ad))
+* **docs:** Fix fragment misalignment ([f02d26d](https://github.com/Airblader/ngqp/commit/f02d26d))
+* **docs:** Fix link to GitHub ([2f2675e](https://github.com/Airblader/ngqp/commit/2f2675e))
+* **docs:** Fix margin on fragment headings ([07c103e](https://github.com/Airblader/ngqp/commit/07c103e))
+* **docs:** Fix overflows on small screens ([e100621](https://github.com/Airblader/ngqp/commit/e100621))
+* **docs:** Fix typo ([c6b3a1e](https://github.com/Airblader/ngqp/commit/c6b3a1e))
+* **docs:** Improve responsiveness of example ([c6cd845](https://github.com/Airblader/ngqp/commit/c6cd845))
+* **docs:** Make demo-browser content overflow if necessary ([48f2da4](https://github.com/Airblader/ngqp/commit/48f2da4))
+* **docs:** Remove GitHub button for now ([aadad1b](https://github.com/Airblader/ngqp/commit/aadad1b)), closes [#36](https://github.com/Airblader/ngqp/issues/36)
+* **docs:** Use PNG instead of SVG ([cfa25df](https://github.com/Airblader/ngqp/commit/cfa25df))
+
+
+### Features
+
+* **docs:** Added Google Analytics ([aea857a](https://github.com/Airblader/ngqp/commit/aea857a)), closes [#35](https://github.com/Airblader/ngqp/issues/35)
+
+
+
 <a name="0.4.2"></a>
 ## [0.4.2](https://github.com/Airblader/ngqp/compare/v0.4.1...v0.4.2) (2018-12-30)
 
