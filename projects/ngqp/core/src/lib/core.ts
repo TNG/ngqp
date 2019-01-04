@@ -7,6 +7,7 @@ export { ControlValueAccessorDirective } from './control-value-accessor.directiv
 
 export {
     createEmptyOnSerializer,
+    createEmptyOnDeserializer,
     createStringSerializer,
     createStringDeserializer,
     createNumberSerializer,
