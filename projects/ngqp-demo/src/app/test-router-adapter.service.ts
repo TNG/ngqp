@@ -80,7 +80,8 @@ export class TestRouterAdapter implements RouterAdapter {
             this.appendToSearchParams(urlSearchParams, paramName, value);
         });
 
-        this.url = '?' + urlSearchParams.toString();
+        const url = urlSearchParams.toString();
+        this.url = url.length !== 0 ? `?${url}` : '';
     }
 
     private get params(): Params {
