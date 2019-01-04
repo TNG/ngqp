@@ -1,0 +1,23 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup">
+        <ng-container [queryParamGroup]="paramGroup">
+            <div class="alert alert-info">
+                This input defaults to 20. Note that if you change the value and then change it back to 20, the parameter
+                will actually be removed.
+            </div>
+            <div class="form-group">
+                <input type="range" class="custom-range"
+                       min="0" max="100" step="10" queryParamName="number1">
+            </div>
+
+            <div class="alert alert-info">
+                If you want to have a default value, but keep it on the URL once set, you can do so creating a custom
+                deserializer instead.
+            </div>
+            <div class="form-group">
+                <input type="range" class="custom-range"
+                       min="0" max="100" step="10" queryParamName="number2">
+            </div>
+        </ng-container>
+    </demo-browser>
+</demo-example>

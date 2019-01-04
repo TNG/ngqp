@@ -112,7 +112,7 @@
         <h3>Default values</h3>
     </docs-fragment>
     <div class="alert alert-warning">
-        Note that this feature is currently not supported if you are using <span apiDocsLink>QueryParam#multi</span>.
+        This feature is currently not supported if you are using <span apiDocsLink>QueryParam#multi</span>.
     </div>
     <p>
         By default, if a parameter value is <code>null</code>, the parameter will be removed from the URL. For example,
@@ -125,12 +125,16 @@
         if the form control takes on the specified value, the parameter will be removed from the URL. Likewise, if the
         parameter is not found on the URL, this value will be written to the form control.
     </p>
+    <div class="alert alert-info">
+        It's worth pointing out that <span apiDocsLink="QueryParam#emptyOn">emptyOn</span> is really just a convenience
+        wrapper around creating a custom (de-)serializer.
+    </div>
     <p>
         Note that this relies on a comparison against the given value, which works fine for basic types (string, number,
         boolean). If you have complex types, you need to also define a <span apiDocsLink>QueryParam#compareWith</span>
         function which checks whether two given values should be considered equal.
     </p>
-    <!-- TODO Example -->
+    <demo-empty-on-example></demo-empty-on-example>
     <docs-fragment fragment="QueryParam-combineWith">
         <h3>Side effects on other parameters</h3>
     </docs-fragment>
