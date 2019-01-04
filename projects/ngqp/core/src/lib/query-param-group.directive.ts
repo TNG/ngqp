@@ -153,7 +153,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             ? {} : queryParam.combineWith(queryParam.value, value);
 
         return {
-            ...combinedParams,
+            ...(combinedParams || {}),
             [ queryParam.param ]: newValue,
         };
     }
