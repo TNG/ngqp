@@ -18,6 +18,7 @@
         By passing a second argument to <span apiDocsLink>QueryParamBuilder#group</span>,
         you can define additional settings which affect the entire group.
     </p>
+
     <docs-fragment fragment="QueryParamGroup-replaceUrl">
         <h3>Controlling history state</h3>
     </docs-fragment>
@@ -42,6 +43,7 @@
         contains defining information such as the name of the query parameter and how the form control values are
         (de-)serialized to and from the URL.
     </p>
+
     <docs-fragment fragment="QueryParam-param">
         <h3>Creating parameters</h3>
     </docs-fragment>
@@ -59,6 +61,7 @@
         If your form control uses complex-typed values, use <span apiDocsLink>QueryParamBuilder#param</span> instead
         and provide your own (de-)serializers.
     </p>
+
     <docs-fragment fragment="QueryParam-param">
         <h3>Naming parameters</h3>
     </docs-fragment>
@@ -71,6 +74,7 @@
         The <span apiDocsLink="QueryParam#param">param</span> option of the parameter definition defines the parameter
         name used for the URL.
     </p>
+
     <docs-fragment fragment="QueryParam-serialize">
         <h3>Serializing and deserializing</h3>
     </docs-fragment>
@@ -80,6 +84,7 @@
         provide your own (de-)serializers, you can pass them to <span apiDocsLink>QueryParamBuilder#param</span>.
     </p>
     <demo-serializer-example></demo-serializer-example>
+
     <docs-fragment fragment="QueryParam-multi">
         <h3>Multiple values</h3>
     </docs-fragment>
@@ -89,6 +94,7 @@
         behavior of the router to have query parameters with multiple values.
     </p>
     <demo-multi-example></demo-multi-example>
+
     <docs-fragment fragment="QueryParam-debounceTime">
         <h3>Debouncing user input</h3>
     </docs-fragment>
@@ -108,6 +114,7 @@
         debounce to happen when initially navigating to a specific route.
     </div>
     <demo-debounce-time-example></demo-debounce-time-example>
+
     <docs-fragment fragment="QueryParam-emptyOn">
         <h3>Default values</h3>
     </docs-fragment>
@@ -135,6 +142,7 @@
         function which checks whether two given values should be considered equal.
     </p>
     <demo-empty-on-example></demo-empty-on-example>
+
     <docs-fragment fragment="QueryParam-combineWith">
         <h3>Side effects on other parameters</h3>
     </docs-fragment>
