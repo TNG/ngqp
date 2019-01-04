@@ -17,6 +17,7 @@
         "demo:release:publish": "yarn demo:release:prepare && npx ngh --dir=dist/ngqp-demo --cname=\"www.ngqp.io\"",
         "demo:serve": "ng serve ngqp-demo",
         "api-docs:build": "scripts/build-api-docs.sh",
+        "api-docs:serve": "compodoc -s -d ./dist/ngqp-demo/api-docs",
         "release": "yarn core:release:publish && yarn demo:release:publish"
     },
     "private": true,
