@@ -28,6 +28,7 @@ import { MultiExampleComponent } from './docs-items/examples/multi-example/multi
 import { DebounceTimeExampleComponent } from './docs-items/examples/debounce-time-example/debounce-time-example.component';
 import { EmptyOnExampleComponent } from './docs-items/examples/empty-on-example/empty-on-example.component';
 import { CombineWithExampleComponent } from './docs-items/examples/combine-with-example/combine-with-example.component';
+import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { CombineWithExampleComponent } from './docs-items/examples/combine-with-
         DebounceTimeExampleComponent,
         EmptyOnExampleComponent,
         CombineWithExampleComponent,
+        ModelUsageDocsComponent,
     ],
     imports: [
         BrowserModule,

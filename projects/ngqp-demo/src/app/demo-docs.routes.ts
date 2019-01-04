@@ -4,6 +4,7 @@ import { IntroductionDocsComponent } from './docs-items/introduction/introductio
 import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-docs.component';
 import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
 import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
+import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -42,8 +43,7 @@ export const DOCS_ROUTES: Routes = [
     },
     {
         path: 'model-usage',
-        // TODO
-        component: IntroductionDocsComponent,
+        component: ModelUsageDocsComponent,
         data: {
             docsPage: DocsPage.MODEL_USAGE,
         },
