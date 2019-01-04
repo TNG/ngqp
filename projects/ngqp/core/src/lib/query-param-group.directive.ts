@@ -77,9 +77,9 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
                 const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
-                const newValue = this.deserialize(queryParam,
-                    queryParam.multi ? queryParamMap.getAll(queryParam.param) : queryParamMap.get(queryParam.param)
-                );
+                const newValue = queryParam.multi
+                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.param))
+                    : this.deserialize(queryParam, queryParamMap.get(queryParam.param));
 
                 // Get the directive, if it has been initialized yet.
                 const directive = this.directives.find(dir => dir.name === queryParamName);
@@ -146,7 +146,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.queue$.next(params);
     }
 
-    private getParamsForValue<T = any>(queryParam: QueryParam<T | T[]>, value: T): Params {
+    private getParamsForValue<T>(queryParam: QueryParam<T | T[]>, value: T): Params {
         const newValue = this.serialize(queryParam, value);
 
         const combinedParams: Params = isMissing(queryParam.combineWith)
@@ -158,13 +158,13 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         };
     }
 
-    private serialize<T = any>(queryParam: QueryParam<T | T[]>, value: T): string | string[] {
+    private serialize<T>(queryParam: QueryParam<T | T[]>, value: T): string | string[] {
         return hasArrayValue(queryParam, value)
             ? (value || <T[]>[]).map(queryParam.serialize)
             : queryParam.serialize(value);
     }
 
-    private deserialize<T = any>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
+    private deserialize<T>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
         if (hasArraySerialization(queryParam, values)) {
             return values.map(queryParam.deserialize);
         } else {
