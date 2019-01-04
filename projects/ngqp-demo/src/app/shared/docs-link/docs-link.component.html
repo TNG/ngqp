@@ -1,1 +1,5 @@
-<a [routerLink]="page | docsPageRoute" [fragment]="fragment">{{ page | docsPageName }}</a>
+<a [routerLink]="page | docsPageRoute" [fragment]="fragment">{{ customText ? customText : (page | docsPageName) }}</a>
+
+<div class="d-none" #content>
+    <ng-content></ng-content>
+</div>
