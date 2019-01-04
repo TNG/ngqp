@@ -158,10 +158,10 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         };
     }
 
-    private serialize<T = any>(queryParam: QueryParam<T | T[]>, value: T): string[] {
+    private serialize<T = any>(queryParam: QueryParam<T | T[]>, value: T): string | string[] {
         return hasArrayValue(queryParam, value)
             ? (value || <T[]>[]).map(queryParam.serialize)
-            : [queryParam.serialize(value)];
+            : queryParam.serialize(value);
     }
 
     private deserialize<T = any>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
