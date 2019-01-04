@@ -6,7 +6,7 @@ import { DocsItemComponent } from '../docs-item/docs-item.component';
     selector: 'docs-link',
     templateUrl: './docs-link.component.html',
 })
-export class DocsLinkComponent implements OnInit, AfterContentInit{
+export class DocsLinkComponent implements OnInit, AfterContentInit {
 
     @ViewChild('content', { read: ElementRef })
     private contentNode: ElementRef<HTMLDivElement>;
