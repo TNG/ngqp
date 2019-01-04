@@ -5,10 +5,10 @@ import { createEmptyOnDeserializer, createEmptyOnSerializer } from './serializer
 import { RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 
 /** TODO Documentation */
-export type ParamSerializer<T> = (model: T | null) => string | null;
+export type ParamSerializer<T> = (model: T) => string;
 
 /** TODO Documentation */
-export type ParamDeserializer<T> = (value: string | null) => T | null;
+export type ParamDeserializer<T> = (value: string) => T;
 
 /** TODO Documentation */
 export type OnChangeFunction<T> = (value: T) => void;
