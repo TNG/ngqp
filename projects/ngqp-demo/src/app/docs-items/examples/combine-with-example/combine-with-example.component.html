@@ -1,0 +1,21 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup">
+        <div class="alert alert-info">
+            The <code>select</code> for the fruit is disabled, but by typing a fruit's name into the input below, you
+            can still select it.
+        </div>
+
+        <ng-container [queryParamGroup]="paramGroup">
+            <div class="form-group">
+                <input type="text" placeholder="Type here" autocomplete="off" class="form-control"
+                       queryParamName="textInput" />
+            </div>
+
+            <div class="form-group">
+                <select size="3" class="form-control" queryParamName="selectedFruit" disabled>
+                    <option *ngFor="let fruit of fruits" [value]="fruit">{{ fruit }}</option>
+                </select>
+            </div>
+        </ng-container>
+    </demo-browser>
+</demo-example>

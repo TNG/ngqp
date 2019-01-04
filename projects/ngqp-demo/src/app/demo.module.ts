@@ -27,6 +27,7 @@ import { SerializerExampleComponent } from './docs-items/examples/serializer-exa
 import { MultiExampleComponent } from './docs-items/examples/multi-example/multi-example.component';
 import { DebounceTimeExampleComponent } from './docs-items/examples/debounce-time-example/debounce-time-example.component';
 import { EmptyOnExampleComponent } from './docs-items/examples/empty-on-example/empty-on-example.component';
+import { CombineWithExampleComponent } from './docs-items/examples/combine-with-example/combine-with-example.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { EmptyOnExampleComponent } from './docs-items/examples/empty-on-example/
         MultiExampleComponent,
         DebounceTimeExampleComponent,
         EmptyOnExampleComponent,
+        CombineWithExampleComponent,
     ],
     imports: [
         BrowserModule,
