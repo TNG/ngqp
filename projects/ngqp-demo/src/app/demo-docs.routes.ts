@@ -57,14 +57,6 @@ export const DOCS_ROUTES: Routes = [
         },
     },
     {
-        path: 'validation',
-        // TODO
-        component: IntroductionDocsComponent,
-        data: {
-            docsPage: DocsPage.VALIDATION,
-        },
-    },
-    {
         path: 'custom-accessor',
         // TODO
         component: IntroductionDocsComponent,

@@ -21,8 +21,6 @@ export class DocsPageNamePipe implements PipeTransform {
                 return 'Working with the Model';
             case DocsPage.GLOBAL_CONFIGURATION:
                 return 'Global Configuration';
-            case DocsPage.VALIDATION:
-                return 'Validating Query Parameters';
             case DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR:
                 return 'Controls without ControlValueAccessor';
             default:

@@ -35,7 +35,6 @@ export class DocsNavigationComponent {
         {
             name: 'Advanced',
             children: [
-                { page: DocsPage.VALIDATION },
                 { page: DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR },
             ],
         },
