@@ -398,9 +398,9 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.routerAdapter.queryParamMap.subscribe(queryParamMap &#x3D;&gt; {
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName &#x3D;&gt; {
                 const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(queryParamName);
-                const newValue &#x3D; this.deserialize(queryParam,
-                    queryParam.multi ? queryParamMap.getAll(queryParam.param) : queryParamMap.get(queryParam.param)
-                );
+                const newValue &#x3D; queryParam.multi
+                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.param))
+                    : this.deserialize(queryParam, queryParamMap.get(queryParam.param));
 
                 // Get the directive, if it has been initialized yet.
                 const directive &#x3D; this.directives.find(dir &#x3D;&gt; dir.name &#x3D;&#x3D;&#x3D; queryParamName);
@@ -467,25 +467,25 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.queue$.next(params);
     }
 
-    private getParamsForValue&lt;T &#x3D; any&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T): Params {
+    private getParamsForValue&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T): Params {
         const newValue &#x3D; this.serialize(queryParam, value);
 
         const combinedParams: Params &#x3D; isMissing(queryParam.combineWith)
             ? {} : queryParam.combineWith(queryParam.value, value);
 
         return {
-            ...combinedParams,
+            ...(combinedParams || {}),
             [ queryParam.param ]: newValue,
         };
     }
 
-    private serialize&lt;T &#x3D; any&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T): string[] {
+    private serialize&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T): string | string[] {
         return hasArrayValue(queryParam, value)
             ? (value || &lt;T[]&gt;[]).map(queryParam.serialize)
-            : [queryParam.serialize(value)];
+            : queryParam.serialize(value);
     }
 
-    private deserialize&lt;T &#x3D; any&gt;(queryParam: QueryParam&lt;T&gt;, values: string | string[]): Unpack&lt;T&gt; | Unpack&lt;T&gt;[] {
+    private deserialize&lt;T&gt;(queryParam: QueryParam&lt;T&gt;, values: string | string[]): Unpack&lt;T&gt; | Unpack&lt;T&gt;[] {
         if (hasArraySerialization(queryParam, values)) {
             return values.map(queryParam.deserialize);
         } else {

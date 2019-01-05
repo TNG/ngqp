@@ -749,10 +749,10 @@ import { createEmptyOnDeserializer, createEmptyOnSerializer } from &#x27;./seria
 import { RouterAdapterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
 
 /** TODO Documentation */
-export type ParamSerializer&lt;T&gt; &#x3D; (model: T | null) &#x3D;&gt; string | null;
+export type ParamSerializer&lt;T&gt; &#x3D; (model: T) &#x3D;&gt; string;
 
 /** TODO Documentation */
-export type ParamDeserializer&lt;T&gt; &#x3D; (value: string | null) &#x3D;&gt; T | null;
+export type ParamDeserializer&lt;T&gt; &#x3D; (value: string) &#x3D;&gt; T;
 
 /** TODO Documentation */
 export type OnChangeFunction&lt;T&gt; &#x3D; (value: T) &#x3D;&gt; void;
