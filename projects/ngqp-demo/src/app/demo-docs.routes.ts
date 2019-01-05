@@ -5,6 +5,7 @@ import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-do
 import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
 import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
 import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
+import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -50,8 +51,7 @@ export const DOCS_ROUTES: Routes = [
     },
     {
         path: 'global-configuration',
-        // TODO
-        component: IntroductionDocsComponent,
+        component: GlobalConfigurationDocsComponent,
         data: {
             docsPage: DocsPage.GLOBAL_CONFIGURATION,
         },

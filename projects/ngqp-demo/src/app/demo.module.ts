@@ -30,6 +30,7 @@ import { EmptyOnExampleComponent } from './docs-items/examples/empty-on-example/
 import { CombineWithExampleComponent } from './docs-items/examples/combine-with-example/combine-with-example.component';
 import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 import { PatchSetValueExampleComponent } from './docs-items/examples/patch-set-value-example/patch-set-value-example.component';
+import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { PatchSetValueExampleComponent } from './docs-items/examples/patch-set-v
         CombineWithExampleComponent,
         ModelUsageDocsComponent,
         PatchSetValueExampleComponent,
+        GlobalConfigurationDocsComponent,
     ],
     imports: [
         BrowserModule,

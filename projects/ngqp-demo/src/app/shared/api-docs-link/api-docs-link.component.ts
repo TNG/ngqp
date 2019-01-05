@@ -1,9 +1,10 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
-export type ApiDocType = 'classes' | 'directives' | 'injectables';
+export type ApiDocType = 'modules' | 'classes' | 'directives' | 'injectables';
 
 const LOOKUP: { [ name: string ]: ApiDocType } = {
+    'QueryParamModule': 'modules',
     'QueryParam': 'classes',
     'QueryParamGroup': 'classes',
     'QueryParamBuilder': 'injectables',
