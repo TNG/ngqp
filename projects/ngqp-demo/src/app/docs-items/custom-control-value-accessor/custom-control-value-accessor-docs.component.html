@@ -1,0 +1,31 @@
+<docs-item>
+    <p>
+        Sometimes you may want to wire a parameter to a component which doesn't have a suitable <code>ControlValueAccessor</code>
+        implementation. This article discusses different strategies on how to make such a use-case work.
+    </p>
+    <p>
+        However, before you use any of the strategies discussed here, you should consider providing a
+        <code>ControlValueAccessor</code> implementation for your component. Remember that this is the mechanism that
+        allows you to use the same form control with <code>ngModel</code> or reactive forms as well!
+    </p>
+
+    <docs-fragment fragment="ControlValueAccessorDirective">
+        <h2>Strategy 1: Dynamic ControlValueAccessor</h2>
+    </docs-fragment>
+    <p>
+        <span apiDocsLink>ControlValueAccessorDirective</span> offers you a simple way to implement an on-the-fly
+        control value accessor by wiring it up in the template directly.
+    </p>
+    <demo-control-value-accessor-directive-example></demo-control-value-accessor-directive-example>
+
+    <docs-fragment fragment="manual">
+        <h2>Strategy 2: Manual wiring</h2>
+    </docs-fragment>
+    <p>
+        If you really need or want to work without a <code>ControlValueAccessor</code>, you can use the API of
+        <span apiDocsLink>QueryParam</span> to wire it up manually. You can read more at
+        <docs-link [page]="DocsPage.MODEL_USAGE"></docs-link>, but specifically we will be using
+        <span apiDocsLink="QueryParam#valueChanges">valueChanges</span> and <span apiDocsLink="QueryParam#setValue">setValue</span>.
+    </p>
+    <demo-manual-wiring-example></demo-manual-wiring-example>
+</docs-item>

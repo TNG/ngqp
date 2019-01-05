@@ -31,6 +31,9 @@ import { CombineWithExampleComponent } from './docs-items/examples/combine-with-
 import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 import { PatchSetValueExampleComponent } from './docs-items/examples/patch-set-value-example/patch-set-value-example.component';
 import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
+import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
+import { ControlValueAccessorDirectiveExampleComponent } from './docs-items/examples/control-value-accessor-directive-example/control-value-accessor-directive-example.component';
+import { ManualWiringExampleComponent } from './docs-items/examples/manual-wiring-example/manual-wiring-example.component';
 
 @NgModule({
     declarations: [
@@ -65,6 +68,9 @@ import { GlobalConfigurationDocsComponent } from './docs-items/global-configurat
         ModelUsageDocsComponent,
         PatchSetValueExampleComponent,
         GlobalConfigurationDocsComponent,
+        CustomControlValueAccessorDocsComponent,
+        ControlValueAccessorDirectiveExampleComponent,
+        ManualWiringExampleComponent,
     ],
     imports: [
         BrowserModule,

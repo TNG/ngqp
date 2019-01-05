@@ -1,5 +1,5 @@
 <nav>
-    <ul class="pagination justify-content-center">
+    <ul class="pagination my-0 justify-content-center">
         <li *ngFor="let page of pages" class="page-item" [class.active]="page === currentPage">
             <button class="page-link" (click)="currentPageChange.emit(page)">{{ page }}</button>
         </li>

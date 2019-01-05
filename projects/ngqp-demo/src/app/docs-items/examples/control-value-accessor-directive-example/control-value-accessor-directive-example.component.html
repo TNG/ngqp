@@ -1,0 +1,12 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup">
+        <ng-container [queryParamGroup]="paramGroup">
+            <demo-pagination #paginator [numberOfPages]="5"
+                             controlValueAccessor #accessor="controlValueAccessor"
+                             (currentPageChange)="accessor.notifyChange($event)"
+                             (valueChange)="paginator.currentPage = $event"
+                             queryParamName="page">
+            </demo-pagination>
+        </ng-container>
+    </demo-browser>
+</demo-example>

@@ -10,6 +10,7 @@ const LOOKUP: { [ name: string ]: ApiDocType } = {
     'QueryParamBuilder': 'injectables',
     'QueryParamGroupDirective': 'directives',
     'QueryParamNameDirective': 'directives',
+    'ControlValueAccessorDirective': 'directives',
 };
 
 @Component({

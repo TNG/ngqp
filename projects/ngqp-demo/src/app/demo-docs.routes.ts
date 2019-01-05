@@ -6,6 +6,7 @@ import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help
 import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
 import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
+import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -58,8 +59,7 @@ export const DOCS_ROUTES: Routes = [
     },
     {
         path: 'custom-accessor',
-        // TODO
-        component: IntroductionDocsComponent,
+        component: CustomControlValueAccessorDocsComponent,
         data: {
             docsPage: DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR,
         },

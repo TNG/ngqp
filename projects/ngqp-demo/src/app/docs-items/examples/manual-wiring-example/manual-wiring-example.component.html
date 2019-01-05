@@ -1,0 +1,8 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup">
+        <ng-container [queryParamGroup]="paramGroup">
+            <demo-pagination [numberOfPages]="5" [currentPage]="currentPage" (currentPageChange)="onPageChange($event)">
+            </demo-pagination>
+        </ng-container>
+    </demo-browser>
+</demo-example>
