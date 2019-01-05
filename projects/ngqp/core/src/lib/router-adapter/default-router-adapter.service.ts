@@ -2,16 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RouterAdapter, RouterAdapterOptions } from './router-adapter.interface';
 
-/**
- * TODO Documentation
- */
-export const DefaultRouterAdapterOptions: RouterAdapterOptions = {
-    replaceUrl: true,
-};
-
-/**
- * TODO Documentation
- */
+/** @internal */
 @Injectable()
 export class DefaultRouterAdapter implements RouterAdapter {
 
