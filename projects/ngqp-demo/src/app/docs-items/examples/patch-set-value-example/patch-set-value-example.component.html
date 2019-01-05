@@ -1,0 +1,29 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup" initialQueryParams="?p1=Test1&p2=Test2">
+        <div class="alert alert-info">
+            Use the buttons below to trigger either <code>patchValue</code> or <code>setValue</code>, both times with
+            the same argument. Notice how in the latter case, the second input is emptied while in the former case
+            only the first input is changed.
+        </div>
+
+        <ng-container [queryParamGroup]="paramGroup">
+            <div class="form-group">
+                <label for="p1">p1</label>
+                <input id="p1" type="text" class="form-control" queryParamName="p1" />
+            </div>
+            <div class="form-group">
+                <label for="p2">p2</label>
+                <input id="p2" type="text" class="form-control" queryParamName="p2" />
+            </div>
+
+            <div class="form-row">
+                <div class="col-auto">
+                    <button class="btn btn-primary" (click)="patchGroup()">paramGroup.patchValue({{ '{' }} p1: 'Hello!' {{ '}' }})</button>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" (click)="setGroup()">paramGroup.setValue({{ '{' }} p1: 'Hello!' {{ '}' }})</button>
+                </div>
+            </div>
+        </ng-container>
+    </demo-browser>
+</demo-example>

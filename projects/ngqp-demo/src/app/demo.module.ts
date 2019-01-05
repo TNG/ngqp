@@ -29,6 +29,7 @@ import { DebounceTimeExampleComponent } from './docs-items/examples/debounce-tim
 import { EmptyOnExampleComponent } from './docs-items/examples/empty-on-example/empty-on-example.component';
 import { CombineWithExampleComponent } from './docs-items/examples/combine-with-example/combine-with-example.component';
 import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
+import { PatchSetValueExampleComponent } from './docs-items/examples/patch-set-value-example/patch-set-value-example.component';
 
 @NgModule({
     declarations: [
@@ -61,6 +62,7 @@ import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-do
         EmptyOnExampleComponent,
         CombineWithExampleComponent,
         ModelUsageDocsComponent,
+        PatchSetValueExampleComponent,
     ],
     imports: [
         BrowserModule,

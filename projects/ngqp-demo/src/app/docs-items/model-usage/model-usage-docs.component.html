@@ -20,8 +20,7 @@
         method by passing the name of the parameter model (i.e., <em>not</em> the <code>param</code> name for the URL)
         to it. This will return the appropriate <span apiDocsLink>QueryParam</span> instance.
     </p>
-    <!-- TODO Example -->
-    <demo-snippet type="typescript" code="TODO"></demo-snippet>
+    <demo-snippet type="typescript" [code]="qpgGetSnippet"></demo-snippet>
 
     <docs-fragment fragment="QueryParamGroup-value">
         <h3>Reading the current value</h3>
@@ -31,8 +30,7 @@
         an object keyed by the names of the <span apiDocsLink>QueryParam</span> models where each key carries the current
         value of the corresponding parameter.
     </p>
-    <!-- TODO Example -->
-    <demo-snippet type="typescript" code="TODO"></demo-snippet>
+    <demo-snippet type="typescript" [code]="qpgValueSnippet"></demo-snippet>
 
     <docs-fragment fragment="QueryParamGroup-valueChanges">
         <h3>Subscribing to value changes</h3>
@@ -45,8 +43,7 @@
     <div class="alert alert-warning">
         Remember to unsubscribe from this observable!
     </div>
-    <!-- TODO Example -->
-    <demo-snippet type="typescript" code="TODO"></demo-snippet>
+    <demo-snippet type="typescript" [code]="qpgValueChangesSnippet"></demo-snippet>
 
     <docs-fragment fragment="QueryParamGroup-patchValue-setValue">
         <h3>Updating the value</h3>
@@ -57,8 +54,7 @@
         <span apiDocsLink="QueryParamGroup#setValue">setValue</span>. Both methods expect the input to be of the same
         shape as <span apiDocsLink>QueryParamGroup#value</span> as described above.
     </p>
-    <!-- TODO Example -->
-    <demo-snippet type="typescript" code="TODO"></demo-snippet>
+    <demo-patch-set-value-example></demo-patch-set-value-example>
 
     <docs-fragment fragment="QueryParam">
         <h2>QueryParam</h2>
