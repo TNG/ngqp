@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { RouterAdapter, RouterAdapterOptions } from './router-adapter.interface';
+import { RouterAdapter, RouterOptions } from './router-adapter.interface';
 
 /** @internal */
 @Injectable()
@@ -17,7 +17,7 @@ export class DefaultRouterAdapter implements RouterAdapter {
         return this.route.queryParamMap;
     }
 
-    public navigate(queryParams: Params, extras: RouterAdapterOptions = {}): Promise<boolean> {
+    public navigate(queryParams: Params, extras: RouterOptions = {}): Promise<boolean> {
         return this.router.navigate([], {
             relativeTo: this.route,
             queryParamsHandling: 'merge',

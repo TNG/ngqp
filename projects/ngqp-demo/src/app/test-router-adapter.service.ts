@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
-import { RouterAdapter } from '@ngqp/core';
-import { RouterAdapterOptions } from '../../../ngqp/core/src/lib/router-adapter/router-adapter.interface';
+import { RouterAdapter, RouterOptions } from '@ngqp/core';
 
 @Injectable()
 export class TestRouterAdapter implements RouterAdapter {
@@ -15,7 +14,7 @@ export class TestRouterAdapter implements RouterAdapter {
 
     private _params: Params;
 
-    public navigate(queryParams: Params, extras: RouterAdapterOptions = {}): Promise<boolean> {
+    public navigate(queryParams: Params, extras: RouterOptions = {}): Promise<boolean> {
         const previousUrl = this.url;
 
         const newParams = {

@@ -2,7 +2,7 @@ import { Params } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { Comparator, isFunction, isMissing, wrapTryCatch } from './util';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from './serializers';
-import { RouterAdapterOptions } from './router-adapter/router-adapter.interface';
+import { RouterOptions } from './router-adapter/router-adapter.interface';
 
 /**
  * A serializer defines how the represented form control's
@@ -141,13 +141,13 @@ export class QueryParamGroup {
     public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> };
 
     /** @internal */
-    public readonly routerOptions: RouterAdapterOptions;
+    public readonly routerOptions: RouterOptions;
 
     private changeFunctions: OnChangeFunction<QueryParamGroupValue>[] = [];
 
     constructor(
         queryParams: { [ queryParamName: string ]: QueryParam<any> },
-        extras: RouterAdapterOptions = {}
+        extras: RouterOptions = {}
     ) {
         this.queryParams = queryParams;
         this.routerOptions = extras;

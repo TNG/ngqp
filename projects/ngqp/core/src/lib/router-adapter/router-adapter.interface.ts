@@ -20,7 +20,7 @@ export interface RouterAdapter {
     queryParamMap: Observable<ParamMap>;
 
     /** @internal */
-    navigate(queryParams: Params, extras?: RouterAdapterOptions): Promise<boolean>;
+    navigate(queryParams: Params, extras?: RouterOptions): Promise<boolean>;
 
 }
 
@@ -28,17 +28,17 @@ export interface RouterAdapter {
  * Options to be provided when a navigation is started to update the URL.
  * These options are simply forwarded to Router#navigate.
  */
-export type RouterAdapterOptions = Pick<NavigationExtras, 'replaceUrl'>;
+export type RouterOptions = Pick<NavigationExtras, 'replaceUrl'>;
 
 /**
- * See {@link RouterAdapterOptions}.
+ * See {@link RouterOptions}.
  */
-export const DefaultRouterAdapterOptions: RouterAdapterOptions = {
+export const DefaultRouterOptions: RouterOptions = {
     replaceUrl: true,
 };
 
 /** @internal */
 export const NGQP_ROUTER_ADAPTER = new InjectionToken<RouterAdapter>('NGQP_ROUTER_ADAPTER');
 
-/** Injection token to provide {@link RouterAdapterOptions}. */
-export const NGQP_ROUTER_OPTIONS = new InjectionToken<RouterAdapterOptions>('NGQP_ROUTER_OPTIONS');
+/** Injection token to provide {@link RouterOptions}. */
+export const NGQP_ROUTER_OPTIONS = new InjectionToken<RouterOptions>('NGQP_ROUTER_OPTIONS');

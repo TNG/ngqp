@@ -14,10 +14,10 @@ import {
 } from './accessors/accessors';
 import {
     DefaultRouterAdapter,
-    DefaultRouterAdapterOptions,
+    DefaultRouterOptions,
     NGQP_ROUTER_ADAPTER,
     NGQP_ROUTER_OPTIONS,
-    RouterAdapterOptions
+    RouterOptions
 } from './router-adapter/router-adapter';
 
 /** @ignore */
@@ -48,19 +48,19 @@ const DIRECTIVES: Type<any>[] = [
         },
         {
             provide: NGQP_ROUTER_OPTIONS,
-            useValue: DefaultRouterAdapterOptions,
+            useValue: DefaultRouterOptions,
         },
     ],
 })
 export class QueryParamModule {
 
-    public static forRoot(config: { routerOptions?: RouterAdapterOptions } = {}): ModuleWithProviders<QueryParamModule> {
+    public static forRoot(config: { routerOptions?: RouterOptions } = {}): ModuleWithProviders<QueryParamModule> {
         return {
             ngModule: QueryParamModule,
             providers: [
                 {
                     provide: NGQP_ROUTER_OPTIONS,
-                    useValue: config.routerOptions ? config.routerOptions : DefaultRouterAdapterOptions,
+                    useValue: config.routerOptions ? config.routerOptions : DefaultRouterOptions,
                 },
             ],
         };

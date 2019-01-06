@@ -2,7 +2,7 @@ import { Directive, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/
 import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from './router-adapter/router-adapter.interface';
+import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParam, QueryParamGroup, QueryParamGroupValue, Unpack } from './model';
 import { isMissing } from './util';
@@ -46,7 +46,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
 
     constructor(
         @Inject(NGQP_ROUTER_ADAPTER) private routerAdapter: RouterAdapter,
-        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private globalRouterOptions: RouterAdapterOptions
+        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private globalRouterOptions: RouterOptions
     ) {
         this.setupNavigationQueue();
     }
@@ -170,7 +170,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         }
     }
 
-    private get routerOptions(): RouterAdapterOptions {
+    private get routerOptions(): RouterOptions {
         const groupOptions = this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
 
         return {

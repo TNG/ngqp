@@ -9,7 +9,7 @@ import {
     DEFAULT_STRING_SERIALIZER
 } from './serializers';
 import { LOOSE_IDENTITY_COMPARATOR } from './util';
-import { RouterAdapterOptions } from './router-adapter/router-adapter.interface';
+import { RouterOptions } from './router-adapter/router-adapter.interface';
 
 type OverwritePartial<T1, T2 extends keyof T1> = Pick<T1, Exclude<keyof T1, T2>> & Partial<Pick<T1, T2>>;
 
@@ -40,7 +40,7 @@ export class QueryParamBuilder {
      */
     public group(
         queryParams: { [ name: string ]: QueryParam<any> | string },
-        extras: RouterAdapterOptions = {}
+        extras: RouterOptions = {}
     ): QueryParamGroup {
         const mappedQueryParams: { [ queryParamName: string ]: QueryParam<any> } = {};
         Object.keys(queryParams).forEach(queryParamName => {
