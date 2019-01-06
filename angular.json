@@ -110,8 +110,7 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": [
-                            "projects/ngqp-demo/tsconfig.app.json",
-                            "projects/ngqp-demo/tsconfig.spec.json"
+                            "projects/ngqp-demo/tsconfig.app.json"
                         ],
                         "exclude": [
                             "**/node_modules/**",
