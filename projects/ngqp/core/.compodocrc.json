@@ -1,7 +1,7 @@
 {
     "$schema": "../../../node_modules/@compodoc/compodoc/src/config/schema.json",
     "output": "../../../dist/ngqp-demo/api-docs",
-    "tsconfig": "tsconfig.lib.json",
+    "tsconfig": "tsconfig.compodoc.json",
     "disableCoverage": true,
     "disablePrivate": true,
     "disableInternal": true,
