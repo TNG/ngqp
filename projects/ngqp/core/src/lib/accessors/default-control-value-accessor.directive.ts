@@ -2,16 +2,19 @@ import { Directive, ElementRef, forwardRef, HostListener, Inject, Optional, PLAT
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 
+/** @ignore */
 export const NGQP_DEFAULT_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => DefaultControlValueAccessorDirective),
     multi: true
 };
 
+/** @ignore */
 function isAndroid(navigator: Navigator): boolean {
     return /android (\d+)/.test(navigator.userAgent.toLowerCase());
 }
 
+/** @ignore */
 @Directive({
     selector: 'input:not([type=checkbox]):not([type=radio])[queryParamName],textarea[queryParamName]',
     providers: [NGQP_DEFAULT_VALUE_ACCESSOR],

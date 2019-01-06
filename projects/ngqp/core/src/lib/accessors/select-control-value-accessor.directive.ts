@@ -1,12 +1,14 @@
 import { Directive, ElementRef, forwardRef, HostListener, Renderer2, StaticProvider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/** @ignore */
 export const NGQP_SELECT_VALUE_ACCESSOR: StaticProvider = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => SelectControlValueAccessorDirective),
     multi: true
 };
 
+/** @ignore */
 @Directive({
     selector: 'select:not([multiple])[queryParamName]',
     providers: [NGQP_SELECT_VALUE_ACCESSOR],

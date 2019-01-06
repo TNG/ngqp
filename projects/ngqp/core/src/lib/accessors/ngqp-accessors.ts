@@ -5,6 +5,7 @@ import { CheckboxControlValueAccessorDirective } from './checkbox-control-value-
 import { SelectControlValueAccessorDirective } from './select-control-value-accessor.directive';
 import { MultiSelectControlValueAccessorDirective } from './multi-select-control-value-accessor.directive';
 
+/** @ignore */
 export const NGQP_BUILT_IN_ACCESSORS = [
     DefaultControlValueAccessorDirective,
     NumberControlValueAccessorDirective,

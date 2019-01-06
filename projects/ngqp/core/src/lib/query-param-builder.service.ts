@@ -12,10 +12,16 @@ import { LOOSE_IDENTITY_COMPARATOR } from './util';
 import { RouterAdapterOptions } from './router-adapter/router-adapter.interface';
 
 type OverwritePartial<T1, T2 extends keyof T1> = Pick<T1, Exclude<keyof T1, T2>> & Partial<Pick<T1, T2>>;
-export type QueryParamOptsInput<T> = OverwritePartial<QueryParamOpts<T>, 'serialize' | 'deserialize' | 'compareWith'>;
+
+/** See {@link QueryParamOpts}. */
+export interface QueryParamOptsInput<T> extends OverwritePartial<QueryParamOpts<T>, 'serialize' | 'deserialize' | 'compareWith'> {
+}
 
 /**
- * TODO Documentation
+ * Service to create parameters and groups.
+ *
+ * This service provides a simple API to create {@link QueryParamGroup} and {@link QueryParam}
+ * instances and is the recommended way to set them up.
  */
 @Injectable({
     providedIn: 'root'
@@ -23,7 +29,14 @@ export type QueryParamOptsInput<T> = OverwritePartial<QueryParamOpts<T>, 'serial
 export class QueryParamBuilder {
 
     /**
-     * TODO Documentation
+     * Creates a new {@link QueryParamGroup}.
+     *
+     * This is the primary method to create a new group of parameters. Pass a list of
+     * {@link QueryParam} instances by using the `xxxParam` methods.
+     *
+     * @param queryParams List of {@link QueryParam}s keyed by a unique name.
+     * @param extras Additional parameters for this group, overriding global configuration.
+     * @returns The new {@link QueryParamGroup}.
      */
     public group(
         queryParams: { [ name: string ]: QueryParam<any> | string },
@@ -38,11 +51,15 @@ export class QueryParamBuilder {
         return new QueryParamGroup(mappedQueryParams, extras);
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @ignore */
     public stringParam(opts: QueryParamOptsInput<string[]> & { multi: true }): QueryParam<string[]>;
+    /** @ignore */
     public stringParam(opts: QueryParamOptsInput<string>): QueryParam<string>;
+    /**
+     * Create a new parameter of type `string`.
+     *
+     * See {@link QueryParamOptsInput}.
+     */
     public stringParam(opts: QueryParamOptsInput<string | string[]>): QueryParam<string | string[]> {
         return new QueryParam({
             serialize: DEFAULT_STRING_SERIALIZER,
@@ -52,11 +69,15 @@ export class QueryParamBuilder {
         });
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @ignore */
     public numericParam(opts: QueryParamOptsInput<number[]> & { multi: true }): QueryParam<number[]>;
+    /** @ignore */
     public numericParam(opts: QueryParamOptsInput<number>): QueryParam<number>;
+    /**
+     * Create a new parameter of type `number`.
+     *
+     * See {@link QueryParamOptsInput}.
+     */
     public numericParam(opts: QueryParamOptsInput<number | number[]>): QueryParam<number | number[]> {
         return new QueryParam({
             serialize: DEFAULT_NUMBER_SERIALIZER,
@@ -66,11 +87,15 @@ export class QueryParamBuilder {
         });
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @ignore */
     public booleanParam(opts: QueryParamOptsInput<boolean[]> & { multi: true }): QueryParam<boolean[]>;
+    /** @ignore */
     public booleanParam(opts: QueryParamOptsInput<boolean>): QueryParam<boolean>;
+    /**
+     * Create a new parameter of type `boolean`.
+     *
+     * See {@link QueryParamOptsInput}.
+     */
     public booleanParam(opts: QueryParamOptsInput<boolean | boolean[]>): QueryParam<boolean | boolean[]> {
         return new QueryParam({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
@@ -80,11 +105,15 @@ export class QueryParamBuilder {
         });
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @ignore */
     public param<T>(opts: QueryParamOpts<T[]> & { multi: true }): QueryParam<T[]>;
+    /** @ignore */
     public param<T>(opts: QueryParamOpts<T>): QueryParam<T>;
+    /**
+     * Create a new parameter for a complex type.
+     *
+     * See {@link QueryParamOptsInput}.
+     */
     public param<T>(opts: QueryParamOpts<T | T[]>): QueryParam<T | T[]> {
         return new QueryParam(opts);
     }

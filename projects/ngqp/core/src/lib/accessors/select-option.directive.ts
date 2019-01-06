@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Host, Input, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { SelectControlValueAccessorDirective } from './select-control-value-accessor.directive';
 
+/** @ignore */
 @Directive({
     selector: 'option',
 })

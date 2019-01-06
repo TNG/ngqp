@@ -1,12 +1,14 @@
 import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/** @ignore */
 export const NGQP_NUMBER_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NumberControlValueAccessorDirective),
     multi: true
 };
 
+/** @ignore */
 @Directive({
     selector: 'input[type=number][queryParamName]',
     providers: [NGQP_NUMBER_VALUE_ACCESSOR],

@@ -20,6 +20,7 @@ import {
     RouterAdapterOptions
 } from './router-adapter/router-adapter';
 
+/** @ignore */
 const DIRECTIVES: Type<any>[] = [
     QueryParamNameDirective,
     QueryParamGroupDirective,

@@ -4,18 +4,25 @@ import { QueryParamGroupDirective } from './query-param-group.directive';
 import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from './accessors/accessors';
 
 /**
- * TODO Documentation
+ * Binds a {@link QueryParam} to a DOM element.
+ *
+ * This directive accepts the name of a {@link QueryParam} inside its parent
+ * {@link QueryParamGroup}. It binds this parameter to the host element,
+ * which is required to have a [ControlValueAccessor]{@link https://angular.io/api/forms/ControlValueAccessor}.
  */
 @Directive({
     selector: '[queryParamName]',
 })
 export class QueryParamNameDirective implements OnInit {
 
-    /** TODO Documentation */
+    /**
+     * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.
+     * Note that this does not refer to the [parameter name]{@link QueryParam#param}.
+     */
     @Input('queryParamName')
     public name: string;
 
-    /** TODO Documentation */
+    /** @internal */
     public valueAccessor: ControlValueAccessor | null = null;
 
     constructor(
@@ -29,6 +36,7 @@ export class QueryParamNameDirective implements OnInit {
         this.valueAccessor = this.selectValueAccessor(valueAccessors);
     }
 
+    /** @ignore */
     public ngOnInit() {
         if (!this.name) {
             throw new Error(`queryParamName has been added, but without specifying the name.`);

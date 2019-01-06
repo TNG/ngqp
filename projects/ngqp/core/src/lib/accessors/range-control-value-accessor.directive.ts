@@ -1,12 +1,14 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
 
+/** @ignore */
 export const NGQP_RANGE_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => RangeControlValueAccessorDirective),
     multi: true
 };
 
+/** @ignore */
 @Directive({
     selector: 'input[type=range][queryParamName]',
     providers: [NGQP_RANGE_VALUE_ACCESSOR],

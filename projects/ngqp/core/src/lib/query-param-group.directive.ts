@@ -7,37 +7,40 @@ import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParam, QueryParamGroup, QueryParamGroupValue, Unpack } from './model';
 import { isMissing } from './util';
 
-/** TODO Documentation */
+/** @internal */
 function isMultiQueryParam<T>(queryParam: QueryParam<T | T[]>): queryParam is QueryParam<T[]> {
     return queryParam.multi;
 }
 
-/** TODO Documentation */
+/** @internal */
 function hasArrayValue<T>(queryParam: QueryParam<T | T[]>, value: T | T[]): value is T[] {
     return isMultiQueryParam(queryParam);
 }
 
-/** TODO Documentation */
+/** @internal */
 function hasArraySerialization<T>(queryParam: QueryParam<T | T[]>, values: string | string[]): values is string[] {
     return isMultiQueryParam(queryParam);
 }
 
 /**
- * TODO Documentation
+ * Binds a {@link QueryParamGroup} to a DOM element.
+ *
+ * This directive accepts an instance of {@link QueryParamGroup}. Any child using
+ * {@link QueryParamNameDirective} will then be matched against this group, and the
+ * synchronization process can take place.
  */
 @Directive({
     selector: '[queryParamGroup]',
 })
 export class QueryParamGroupDirective implements OnInit, OnDestroy {
 
-    /** TODO Documentation */
+    /**
+     * The {@link QueryParamGroup} to bind.
+     */
     @Input('queryParamGroup')
     public queryParamGroup: QueryParamGroup;
 
-    /** TODO Documentation */
     private directives: QueryParamNameDirective[] = [];
-
-    /** TODO Documentation @internal */
     private queue$ = new Subject<Params>();
     private destroy$ = new Subject<void>();
 
@@ -48,6 +51,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.setupNavigationQueue();
     }
 
+    /** @ignore */
     public ngOnInit() {
         if (!this.queryParamGroup) {
             throw new Error(`You added the queryParamGroup directive, but haven't supplied a group to use.`);
@@ -96,15 +100,13 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         });
     }
 
+    /** @ignore */
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
+    /** @internal */
     public addQueryParam(directive: QueryParamNameDirective): void {
         const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
         if (!queryParam) {
@@ -131,10 +133,6 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.directives.push(directive);
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
