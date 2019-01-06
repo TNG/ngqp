@@ -14,3 +14,5 @@ script:
     - yarn run core:test
     - yarn run demo:build:prod
     - yarn run api-docs:build
+after_success:
+    - yarn run codecov

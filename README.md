@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/Airblader/ngqp.svg?branch=master)](https://travis-ci.org/Airblader/ngqp)
 [![npm version](https://badge.fury.io/js/%40ngqp%2Fcore.svg)](https://www.npmjs.com/@ngqp/core)
+[![Coverage](https://codecov.io/gh/Airblader/ngqp/branch/master/graph/badge.svg)](https://codecov.io/gh/Airblader/ngqp/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
 [![Gitter](https://img.shields.io/gitter/room/Airblader/ngqp.svg?style=flat-square)](https://gitter.im/ngqp)
 
