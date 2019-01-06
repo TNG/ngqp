@@ -11,12 +11,6 @@ import {
 import { LOOSE_IDENTITY_COMPARATOR } from './util';
 import { RouterOptions } from './router-adapter/router-adapter.interface';
 
-type OverwritePartial<T1, T2 extends keyof T1> = Pick<T1, Exclude<keyof T1, T2>> & Partial<Pick<T1, T2>>;
-
-/** See {@link QueryParamOpts}. */
-export interface QueryParamOptsInput<T> extends OverwritePartial<QueryParamOpts<T>, 'serialize' | 'deserialize' | 'compareWith'> {
-}
-
 /**
  * Service to create parameters and groups.
  *
@@ -52,15 +46,15 @@ export class QueryParamBuilder {
     }
 
     /** @ignore */
-    public stringParam(opts: QueryParamOptsInput<string[]> & { multi: true }): QueryParam<string[]>;
+    public stringParam(opts: QueryParamOpts<string[]> & { multi: true }): QueryParam<string[]>;
     /** @ignore */
-    public stringParam(opts: QueryParamOptsInput<string>): QueryParam<string>;
+    public stringParam(opts: QueryParamOpts<string>): QueryParam<string>;
     /**
      * Create a new parameter of type `string`.
      *
-     * See {@link QueryParamOptsInput}.
+     * See {@link QueryParamOpts}.
      */
-    public stringParam(opts: QueryParamOptsInput<string | string[]>): QueryParam<string | string[]> {
+    public stringParam(opts: QueryParamOpts<string | string[]>): QueryParam<string | string[]> {
         return new QueryParam({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
@@ -70,15 +64,15 @@ export class QueryParamBuilder {
     }
 
     /** @ignore */
-    public numericParam(opts: QueryParamOptsInput<number[]> & { multi: true }): QueryParam<number[]>;
+    public numericParam(opts: QueryParamOpts<number[]> & { multi: true }): QueryParam<number[]>;
     /** @ignore */
-    public numericParam(opts: QueryParamOptsInput<number>): QueryParam<number>;
+    public numericParam(opts: QueryParamOpts<number>): QueryParam<number>;
     /**
      * Create a new parameter of type `number`.
      *
-     * See {@link QueryParamOptsInput}.
+     * See {@link QueryParamOpts}.
      */
-    public numericParam(opts: QueryParamOptsInput<number | number[]>): QueryParam<number | number[]> {
+    public numericParam(opts: QueryParamOpts<number | number[]>): QueryParam<number | number[]> {
         return new QueryParam({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
@@ -88,15 +82,15 @@ export class QueryParamBuilder {
     }
 
     /** @ignore */
-    public booleanParam(opts: QueryParamOptsInput<boolean[]> & { multi: true }): QueryParam<boolean[]>;
+    public booleanParam(opts: QueryParamOpts<boolean[]> & { multi: true }): QueryParam<boolean[]>;
     /** @ignore */
-    public booleanParam(opts: QueryParamOptsInput<boolean>): QueryParam<boolean>;
+    public booleanParam(opts: QueryParamOpts<boolean>): QueryParam<boolean>;
     /**
      * Create a new parameter of type `boolean`.
      *
-     * See {@link QueryParamOptsInput}.
+     * See {@link QueryParamOpts}.
      */
-    public booleanParam(opts: QueryParamOptsInput<boolean | boolean[]>): QueryParam<boolean | boolean[]> {
+    public booleanParam(opts: QueryParamOpts<boolean | boolean[]>): QueryParam<boolean | boolean[]> {
         return new QueryParam({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
@@ -112,7 +106,7 @@ export class QueryParamBuilder {
     /**
      * Create a new parameter for a complex type.
      *
-     * See {@link QueryParamOptsInput}.
+     * See {@link QueryParamOpts}.
      */
     public param<T>(opts: QueryParamOpts<T | T[]>): QueryParam<T | T[]> {
         return new QueryParam(opts);

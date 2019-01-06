@@ -48,14 +48,14 @@ export interface QueryParamOpts<T> {
      *
      * See {@link ParamSerializer}.
      */
-    serialize: ParamSerializer<Unpack<T>>;
+    serialize?: ParamSerializer<Unpack<T>>;
 
     /**
      * The deserializer used for this parameter.
      *
      * See {@link ParamDeserializer}.
      */
-    deserialize: ParamDeserializer<Unpack<T>>;
+    deserialize?: ParamDeserializer<Unpack<T>>;
 
     /**
      * Whether this parameter can take on multiple values at once.
@@ -97,7 +97,7 @@ export interface QueryParamOpts<T> {
      *
      * See {@link Comparator}.
      */
-    compareWith: Comparator<Unpack<T>>;
+    compareWith?: Comparator<Unpack<T>>;
 
     /**
      * Execute a side effect on other query parameters.
