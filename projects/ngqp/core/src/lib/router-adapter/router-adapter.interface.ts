@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { NavigationExtras, ParamMap, Params } from '@angular/router';
+import { ParamMap, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 
 /**
@@ -28,7 +28,9 @@ export interface RouterAdapter {
  * Options to be provided when a navigation is started to update the URL.
  * These options are simply forwarded to Router#navigate.
  */
-export type RouterOptions = Pick<NavigationExtras, 'replaceUrl'>;
+export interface RouterOptions {
+    replaceUrl?: boolean;
+}
 
 /**
  * See {@link RouterOptions}.
