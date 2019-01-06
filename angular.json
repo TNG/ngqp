@@ -106,23 +106,6 @@
                         "browserTarget": "ngqp-demo:build"
                     }
                 },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "projects/ngqp-demo/src/test.ts",
-                        "polyfills": "projects/ngqp-demo/src/polyfills.ts",
-                        "tsConfig": "projects/ngqp-demo/tsconfig.spec.json",
-                        "karmaConfig": "projects/ngqp-demo/karma.conf.js",
-                        "styles": [
-                            "projects/ngqp-demo/src/styles.scss"
-                        ],
-                        "scripts": [],
-                        "assets": [
-                            "projects/ngqp-demo/src/favicon.ico",
-                            "projects/ngqp-demo/src/assets"
-                        ]
-                    }
-                },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {

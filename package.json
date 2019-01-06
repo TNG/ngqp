@@ -4,10 +4,10 @@
     "scripts": {
         "ng": "ng",
         "lint": "ng lint",
-        "test": "ng test",
         "serve": "yarn demo:serve",
         "core:build": "ng build @ngqp/core",
         "core:build:prod": "yarn core:build",
+        "core:test": "ng test @ngqp/core --code-coverage --source-map=true --progress=false --watch=false",
         "core:release:prepare": "scripts/prepare-release.sh",
         "core:release:publish": "yarn core:release:prepare && scripts/publish-release.sh",
         "schematics:build": "scripts/build-schematics.sh",

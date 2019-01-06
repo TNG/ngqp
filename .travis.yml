@@ -11,5 +11,6 @@ notifications:
 script:
     - yarn run lint
     - yarn run core:build
+    - yarn run core:test
     - yarn run demo:build:prod
     - yarn run api-docs:build
