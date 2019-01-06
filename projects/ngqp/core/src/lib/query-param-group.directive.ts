@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
-import { QueryParam, QueryParamGroup, QueryParamGroupValue, Unpack } from './model';
+import { QueryParam, QueryParamGroup, Unpack } from './model';
 import { isMissing } from './util';
 
 /** @internal */
@@ -57,7 +57,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
             throw new Error(`You added the queryParamGroup directive, but haven't supplied a group to use.`);
         }
 
-        this.queryParamGroup._registerOnChange((value: QueryParamGroupValue) => {
+        this.queryParamGroup._registerOnChange((value: Record<string, any>) => {
             let params: Params = {};
             Object.keys(value).forEach(queryParamName => {
                 const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);

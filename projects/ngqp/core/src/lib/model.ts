@@ -25,9 +25,6 @@ export type ParamDeserializer<T> = (value: string) => T;
 export type ParamCombinator<T> = (previousValue: T, newValue: T) => Params;
 
 /** @internal */
-export type QueryParamGroupValue = Record<string, any>;
-
-/** @internal */
 export type OnChangeFunction<T> = (value: T) => void;
 
 /** @internal */
@@ -124,7 +121,7 @@ export interface QueryParamOpts<T> {
  */
 export class QueryParamGroup {
 
-    private _valueChanges = new Subject<QueryParamGroupValue>();
+    private _valueChanges = new Subject<Record<string, any>>();
 
     /**
      * Emits the values of all parameters in this group whenever at least one changes.
@@ -135,7 +132,7 @@ export class QueryParamGroup {
      *
      * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
      */
-    public readonly valueChanges: Observable<QueryParamGroupValue> = this._valueChanges.asObservable();
+    public readonly valueChanges: Observable<Record<string, any>> = this._valueChanges.asObservable();
 
     /** @internal */
     public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> };
@@ -143,7 +140,7 @@ export class QueryParamGroup {
     /** @internal */
     public readonly routerOptions: RouterOptions;
 
-    private changeFunctions: OnChangeFunction<QueryParamGroupValue>[] = [];
+    private changeFunctions: OnChangeFunction<Record<string, any>>[] = [];
 
     constructor(
         queryParams: { [ queryParamName: string ]: QueryParam<any> },
@@ -156,7 +153,7 @@ export class QueryParamGroup {
     }
 
     /** @internal */
-    public _registerOnChange(fn: OnChangeFunction<QueryParamGroupValue>): void {
+    public _registerOnChange(fn: OnChangeFunction<Record<string, any>>): void {
         this.changeFunctions.push(fn);
     }
 
@@ -183,8 +180,8 @@ export class QueryParamGroup {
      * See {@link QueryParamGroup#valueChanges} for a description of the format of
      * the value.
      */
-    public get value(): QueryParamGroupValue {
-        const value: QueryParamGroupValue = {};
+    public get value(): Record<string, any> {
+        const value: Record<string, any> = {};
         Object.keys(this.queryParams).forEach(queryParamName => value[ queryParamName ] = this.queryParams[ queryParamName ].value);
 
         return value;
@@ -199,7 +196,7 @@ export class QueryParamGroup {
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public patchValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } = {}): void {
+    public patchValue(value: Record<string, any>, opts: { emitEvent?: boolean } = {}): void {
         Object.keys(value).forEach(queryParamName => {
             const queryParam = this.queryParams[ queryParamName ];
             if (isMissing(queryParam)) {
@@ -223,7 +220,7 @@ export class QueryParamGroup {
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public setValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } = {}): void {
+    public setValue(value: Record<string, any>, opts: { emitEvent?: boolean } = {}): void {
         Object.keys(this.queryParams).forEach(queryParamName => {
             this.queryParams[ queryParamName ].setValue(value[ queryParamName ], { emitEvent: false });
         });
