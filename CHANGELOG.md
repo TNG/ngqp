@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.5.1"></a>
+## [0.5.1](https://github.com/Airblader/ngqp/compare/v0.5.0...v0.5.1) (2019-01-06)
+
+
+### Bug Fixes
+
+* **core:** Allow combineWith returning null | undefined ([3bfc1b0](https://github.com/Airblader/ngqp/commit/3bfc1b0))
+* **core:** Do not serialize non-multi params into an array ([bf6c355](https://github.com/Airblader/ngqp/commit/bf6c355))
+* **core:** Don't expost "adapter" naming in API ([e0e875b](https://github.com/Airblader/ngqp/commit/e0e875b))
+* **core:** Export createEmptyOnDeserializer ([ca45e43](https://github.com/Airblader/ngqp/commit/ca45e43))
+* **core:** Improve typing definitions ([0d509d0](https://github.com/Airblader/ngqp/commit/0d509d0))
+* **core:** Remove typealias ([bab1e45](https://github.com/Airblader/ngqp/commit/bab1e45))
+* **core:** Removed QueryParamOptsInput ([63f83a5](https://github.com/Airblader/ngqp/commit/63f83a5))
+* **core:** Rename forRoot to withConfig and ensure defaults are set at least ([0f0b48d](https://github.com/Airblader/ngqp/commit/0f0b48d)), closes [#41](https://github.com/Airblader/ngqp/issues/41)
+* **core:** Use interface instead of type alias ([4de02a4](https://github.com/Airblader/ngqp/commit/4de02a4)), closes [#40](https://github.com/Airblader/ngqp/issues/40)
+* **docs:** Exclude schematics from docs ([e57e700](https://github.com/Airblader/ngqp/commit/e57e700)), closes [#45](https://github.com/Airblader/ngqp/issues/45)
+* **docs:** Fix heading level ([f27f369](https://github.com/Airblader/ngqp/commit/f27f369))
+* **docs:** Fix linting error ([2ea841b](https://github.com/Airblader/ngqp/commit/2ea841b))
+* **docs:** Prevent line break in API docs link ([17f368e](https://github.com/Airblader/ngqp/commit/17f368e))
+* **docs:** Remove URL entirely if no parmas are set ([aba7bd1](https://github.com/Airblader/ngqp/commit/aba7bd1))
+* **README:** Rework README ([8c9d268](https://github.com/Airblader/ngqp/commit/8c9d268))
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/Airblader/ngqp/compare/v0.4.2...v0.5.0) (2019-01-03)
 
