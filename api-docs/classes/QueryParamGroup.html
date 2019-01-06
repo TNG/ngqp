@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@ngqp/core documentation</title>
+        <title>ngqp – API Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">@ngqp/core documentation</a>
+            <a href="../" class="navbar-brand">ngqp – API Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -67,7 +67,10 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>TODO Documentation</p>
+                <p>Groups multiple <a href="../classes/QueryParam.html">QueryParam</a> instances to a single unit.</p>
+<p>This &quot;bundles&quot; multiple parameters together such that changes can be emitted as a
+complete unit. Collecting parameters into a group is required for the synchronization
+to and from the URL.</p>
 
             </p>
 
@@ -89,16 +92,6 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#queryParams">queryParams</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#routerOptions">routerOptions</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
                                 <a href="#valueChanges">valueChanges</a>
                             </li>
                         </ul>
@@ -113,10 +106,6 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#_updateValue">_updateValue</a>
-                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#get">get</a>
@@ -161,12 +150,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(queryParams: literal type, extras: <a href="../interfaces/RouterAdapter.html">RouterAdapterOptions</a>)</code>
+<code>constructor(queryParams: literal type, extras: <a href="../interfaces/RouterOptions.html">RouterOptions</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/lib/model.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/lib/model.ts:143</a></div>
                             </td>
                         </tr>
 
@@ -199,7 +188,7 @@
                                                         <td>extras</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../interfaces/RouterAdapter.html" target="_self" >RouterAdapterOptions</a></code>
+                                                                    <code><a href="../interfaces/RouterOptions.html" target="_self" >RouterOptions</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -225,90 +214,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="queryParams"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            queryParams
-                            </b>
-                            <a href="#queryParams"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>queryParams:     <code>literal type</code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>literal type</code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/lib/model.ts:60</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>TODO Documentation </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="routerOptions"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            routerOptions
-                            </b>
-                            <a href="#routerOptions"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>routerOptions:     <code><a href="../interfaces/RouterAdapter.html" target="_self" >RouterAdapterOptions</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../interfaces/RouterAdapter.html" target="_self" >RouterAdapterOptions</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/lib/model.ts:63</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>TODO Documentation </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="valueChanges"></a>
                         <span class="name">
                             <b>
@@ -322,13 +227,13 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>valueChanges:     <code><a href="../interfaces/QueryParamGroupValue.html" target="_self" >Observable&lt;QueryParamGroupValue&gt;</a></code>
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>valueChanges:     <code>Observable&lt;Record&lt;string, any&gt;&gt;</code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../interfaces/QueryParamGroupValue.html" target="_self" >Observable&lt;QueryParamGroupValue&gt;</a></code>
+                            <i>Type : </i>    <code>Observable&lt;Record&lt;string, any&gt;&gt;</code>
 
                         </td>
                     </tr>
@@ -339,13 +244,17 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/lib/model.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/lib/model.ts:135</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>TODO Documentation </p>
+                        <div class="io-description"><p>Emits the values of all parameters in this group whenever at least one changes.</p>
+<p>This observable emits an object keyed by the {@QueryParam} names where each key
+carries the current value of the represented parameter. It emits whenever at least
+one parameter&#39;s value is changed.</p>
+<p>NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.</p>
 </div>
                     </td>
                 </tr>
@@ -359,83 +268,6 @@
         <h3 id="methods">
             Methods
         </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="_updateValue"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            _updateValue
-                            </b>
-                            <a href="#_updateValue"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>_updateValue(opts: literal type)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/lib/model.ts:132</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                        <td>
-                                                                    <code>literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>{}</code>
-                                                        </td>
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -460,14 +292,16 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/lib/model.ts:86</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/lib/model.ts:168</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation </p>
+                            <div class="io-description"><p>Retrieves a specific <a href="../classes/QueryParam.html">QueryParam</a> from this group by name.</p>
+<p>This returns the <a href="../classes/QueryParam.html">QueryParam</a> with the given name, or <code>null</code>
+if no parameter with that name is found in this group.</p>
 </div>
 
                             <div class="io-description">
@@ -478,6 +312,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -492,6 +327,10 @@
                                                     </td>
                                                     
 
+                                                        <td>
+                                                                <code><p>The name of the parameter instance to retrieve.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -499,7 +338,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;any&gt;</a></code>
+                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam | null</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -526,21 +365,23 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>patchValue(value: <a href="../interfaces/QueryParamGroupValue.html">QueryParamGroupValue</a>, opts: literal type)</code>
+                        <code>patchValue(value: Record<string | any>, opts: literal type)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/lib/model.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/lib/model.ts:199</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
+                            <div class="io-description"><p>Updates the value of this group by merging it in.</p>
+<p>This sets the value of each provided parameter to the respective provided
+value. If a parameter is not listed, its value remains unchanged.</p>
 </div>
 
                             <div class="io-description">
@@ -552,13 +393,14 @@
                                                     <td>Type</td>
                                                 <td>Optional</td>
                                                     <td>Default value</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>value</td>
                                                         <td>
-                                                                    <code><a href="../interfaces/QueryParamGroupValue.html" target="_self" >QueryParamGroupValue</a></code>
+                                                                    <code>Record&lt;string | any&gt;</code>
                                                         </td>
                                                     
                                                     <td>
@@ -568,6 +410,10 @@
                                                         <td>
                                                         </td>
 
+                                                        <td>
+                                                                <code><p>See {</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>opts</td>
@@ -583,6 +429,10 @@
                                                                 <code>{}</code>
                                                         </td>
 
+                                                        <td>
+                                                                <code><p>Additional options</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -617,21 +467,23 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>setValue(value: <a href="../interfaces/QueryParamGroupValue.html">QueryParamGroupValue</a>, opts: literal type)</code>
+                        <code>setValue(value: Record<string | any>, opts: literal type)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/lib/model.ts:119</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/lib/model.ts:223</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
+                            <div class="io-description"><p>Updates the value of this group by overwriting it.</p>
+<p>This sets the value of each provided parameter to the respective provided
+value. If a parameter is not listed, its value is set to <code>undefine</code>.</p>
 </div>
 
                             <div class="io-description">
@@ -643,13 +495,14 @@
                                                     <td>Type</td>
                                                 <td>Optional</td>
                                                     <td>Default value</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
                                                         <td>value</td>
                                                         <td>
-                                                                    <code><a href="../interfaces/QueryParamGroupValue.html" target="_self" >QueryParamGroupValue</a></code>
+                                                                    <code>Record&lt;string | any&gt;</code>
                                                         </td>
                                                     
                                                     <td>
@@ -659,6 +512,10 @@
                                                         <td>
                                                         </td>
 
+                                                        <td>
+                                                                <code><p>See {</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>opts</td>
@@ -674,6 +531,10 @@
                                                                 <code>{}</code>
                                                         </td>
 
+                                                        <td>
+                                                                <code><p>Additional options</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -718,16 +579,18 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/lib/model.ts:91</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/lib/model.ts:183</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>TODO Documentation </p>
+                                <div class="io-description"><p>The current value of this group.</p>
+<p>See <a href="../classes/QueryParamGroup.html#valueChanges">QueryParamGroup</a> for a description of the format of
+the value.</p>
 </div>
 
                                 <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="../interfaces/QueryParamGroupValue.html" target="_self" >QueryParamGroupValue</a></code>
+                                    <b>Returns : </b>    <code>Record&lt;string, any&gt;</code>
 
                                 </div>
                         </td>
@@ -744,71 +607,149 @@
 import { Observable, Subject } from &#x27;rxjs&#x27;;
 import { Comparator, isFunction, isMissing, wrapTryCatch } from &#x27;./util&#x27;;
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from &#x27;./serializers&#x27;;
-import { RouterAdapterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
-
-/** TODO Documentation */
-export type ParamSerializer&lt;T&gt; &#x3D; (model: T) &#x3D;&gt; string;
-
-/** TODO Documentation */
-export type ParamDeserializer&lt;T&gt; &#x3D; (value: string) &#x3D;&gt; T;
-
-/** TODO Documentation */
-export type OnChangeFunction&lt;T&gt; &#x3D; (value: T) &#x3D;&gt; void;
-
-/** TODO Documentation */
-export type ParamCombinator&lt;T&gt; &#x3D; (previousValue: T, newValue: T) &#x3D;&gt; Params;
-
-/** TODO Documentation */
-export type Unpack&lt;T&gt; &#x3D; T extends (infer U)[] ? U : T;
-
-/** TODO Documentation */
-export interface QueryParamGroupValue {
-    [ queryParamName: string ]: any;
-}
+import { RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
 
 /**
- * TODO Documentation
+ * A serializer defines how the represented form control&#x27;s
+ * value is converted into a string to be used in the URL.
+ */
+export type ParamSerializer&lt;T&gt; &#x3D; (model: T) &#x3D;&gt; string;
+
+/**
+ * A deserializer defines how a URL parameter is converted
+ * into the represented form control&#x27;s value.
+ */
+export type ParamDeserializer&lt;T&gt; &#x3D; (value: string) &#x3D;&gt; T;
+
+/**
+ * Defines a function which describes side effects on other
+ * URL parameters.
+ *
+ * See {@link QueryParamOpts#combineWith}.
+ */
+export type ParamCombinator&lt;T&gt; &#x3D; (previousValue: T, newValue: T) &#x3D;&gt; Params;
+
+/** @internal */
+export type OnChangeFunction&lt;T&gt; &#x3D; (value: T) &#x3D;&gt; void;
+
+/** @internal */
+export type Unpack&lt;T&gt; &#x3D; T extends (infer U)[] ? U : T;
+
+/**
+ * List of options which can be passed to {@link QueryParam}.
  */
 export interface QueryParamOpts&lt;T&gt; {
-    /** TODO Documentation */
+    /**
+     * The name of the parameter to be used in the URL.
+     *
+     * This represents the name of the query parameter which will be
+     * used in the URL (e.g., &#x60;?q&#x3D;&#x60;), which differs from the name of
+     * the {@link QueryParam} model used inside {@link QueryParamGroup}.
+     */
     param: string;
-    /** TODO Documentation */
-    serialize: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
-    /** TODO Documentation */
-    deserialize: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
-    /** TODO Documentation */
-    compareWith: Comparator&lt;Unpack&lt;T&gt;&gt;;
-    /** TODO Documentation */
+
+    /**
+     * The serializer used for this parameter.
+     *
+     * See {@link ParamSerializer}.
+     */
+    serialize?: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
+
+    /**
+     * The deserializer used for this parameter.
+     *
+     * See {@link ParamDeserializer}.
+     */
+    deserialize?: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
+
+    /**
+     * Whether this parameter can take on multiple values at once.
+     *
+     * If set to true, this parameter is array-typed. How this is represented
+     * on the URL is defined by the Angular Router, which defines the parameter
+     * multiple times, e.g. &#x60;https://www.app.io?param&#x3D;A&amp;param&#x3D;B&amp;param&#x3D;C&#x60;.
+     */
     multi?: boolean;
-    /** TODO Documentation */
+
+    /**
+     * Defines, in milliseconds, how much changes to the value should be debounced.
+     *
+     * When set, a change of the parameter value coming from either the form control
+     * or a programmatic change will be debounced by the given value (in milliseconds).
+     * This is useful for, e.g., text inputs.
+     *
+     * If the value changes through a change of the URL, this debounce will not apply.
+     */
     debounceTime?: number | null;
-    /** TODO Documentation (+ not supported in multi-mode) */
+
+    /**
+     * Default value of the parameter.
+     *
+     * If set, the parameter will be considered to default to this value. This means
+     * that if the parameter is not defined on the URL, this value will be written
+     * to the form control. Vice versa, if the form control takes on this value,
+     * the URL parameter will be removed.
+     *
+     * NOTE: This does currently not work in combination with {@link QueryParamOpts#multi}.
+     */
     emptyOn?: Unpack&lt;T&gt;;
-    /** TODO Documentation (note: no queryParams / serializers, but finished values and non-recursive) */
+
+    /**
+     * The comparator to be used with {@link QueryParamOpts#emptyOn}.
+     *
+     * This function will be used to determine whether the current value equals the defined
+     * default value. By default, a loose equals comparison is made (i.e., &quot;&#x3D;&#x3D;&quot;).
+     *
+     * See {@link Comparator}.
+     */
+    compareWith?: Comparator&lt;Unpack&lt;T&gt;&gt;;
+
+    /**
+     * Execute a side effect on other query parameters.
+     *
+     * If the value of this parameter changes, this function is invoked. It can return an
+     * additional set of query parameters to change, e.g., to reset the current page in a
+     * pagination when the direction in which to sort has been changed.
+     *
+     * NOTE: This function must return the raw query parameter names and values. No
+     *       (de-)serializers are run and no recursion is applied.
+     */
     combineWith?: ParamCombinator&lt;T&gt;;
 }
 
 /**
- * TODO Documentation
+ * Groups multiple {@link QueryParam} instances to a single unit.
+ *
+ * This &quot;bundles&quot; multiple parameters together such that changes can be emitted as a
+ * complete unit. Collecting parameters into a group is required for the synchronization
+ * to and from the URL.
  */
 export class QueryParamGroup {
 
-    private _valueChanges &#x3D; new Subject&lt;QueryParamGroupValue&gt;();
+    private _valueChanges &#x3D; new Subject&lt;Record&lt;string, any&gt;&gt;();
 
-    /** TODO Documentation */
-    public readonly valueChanges: Observable&lt;QueryParamGroupValue&gt; &#x3D; this._valueChanges.asObservable();
+    /**
+     * Emits the values of all parameters in this group whenever at least one changes.
+     *
+     * This observable emits an object keyed by the {@QueryParam} names where each key
+     * carries the current value of the represented parameter. It emits whenever at least
+     * one parameter&#x27;s value is changed.
+     *
+     * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
+     */
+    public readonly valueChanges: Observable&lt;Record&lt;string, any&gt;&gt; &#x3D; this._valueChanges.asObservable();
 
-    /** TODO Documentation */
+    /** @internal */
     public readonly queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; };
 
-    /** TODO Documentation */
-    public readonly routerOptions: RouterAdapterOptions;
+    /** @internal */
+    public readonly routerOptions: RouterOptions;
 
-    private changeFunctions: OnChangeFunction&lt;QueryParamGroupValue&gt;[] &#x3D; [];
+    private changeFunctions: OnChangeFunction&lt;Record&lt;string, any&gt;&gt;[] &#x3D; [];
 
     constructor(
         queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; },
-        extras: RouterAdapterOptions &#x3D; {}
+        extras: RouterOptions &#x3D; {}
     ) {
         this.queryParams &#x3D; queryParams;
         this.routerOptions &#x3D; extras;
@@ -816,31 +757,51 @@ export class QueryParamGroup {
         Object.values(this.queryParams).forEach(queryParam &#x3D;&gt; queryParam._setParent(this));
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
-    public _registerOnChange(fn: OnChangeFunction&lt;QueryParamGroupValue&gt;): void {
+    /** @internal */
+    public _registerOnChange(fn: OnChangeFunction&lt;Record&lt;string, any&gt;&gt;): void {
         this.changeFunctions.push(fn);
     }
 
-    /** TODO Documentation */
-    public get(queryParamName: string): QueryParam&lt;any&gt; {
-        return this.queryParams[ queryParamName ];
+    /**
+     * Retrieves a specific {@link QueryParam} from this group by name.
+     *
+     * This returns the {@link QueryParam} with the given name, or &#x60;null&#x60;
+     * if no parameter with that name is found in this group.
+     *
+     * @param queryParamName The name of the parameter instance to retrieve.
+     */
+    public get(queryParamName: string): QueryParam&lt;any&gt; | null {
+        const param &#x3D; this.queryParams[ queryParamName ];
+        if (!param) {
+            return null;
+        }
+
+        return param;
     }
 
-    /** TODO Documentation */
-    public get value(): QueryParamGroupValue {
-        const value: QueryParamGroupValue &#x3D; {};
+    /**
+     * The current value of this group.
+     *
+     * See {@link QueryParamGroup#valueChanges} for a description of the format of
+     * the value.
+     */
+    public get value(): Record&lt;string, any&gt; {
+        const value: Record&lt;string, any&gt; &#x3D; {};
         Object.keys(this.queryParams).forEach(queryParamName &#x3D;&gt; value[ queryParamName ] &#x3D; this.queryParams[ queryParamName ].value);
 
         return value;
     }
 
     /**
-     * TODO Documentation
+     * Updates the value of this group by merging it in.
+     *
+     * This sets the value of each provided parameter to the respective provided
+     * value. If a parameter is not listed, its value remains unchanged.
+     *
+     * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
+     * @param opts Additional options
      */
-    public patchValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } &#x3D; {}): void {
+    public patchValue(value: Record&lt;string, any&gt;, opts: { emitEvent?: boolean } &#x3D; {}): void {
         Object.keys(value).forEach(queryParamName &#x3D;&gt; {
             const queryParam &#x3D; this.queryParams[ queryParamName ];
             if (isMissing(queryParam)) {
@@ -856,9 +817,15 @@ export class QueryParamGroup {
     }
 
     /**
-     * TODO Documentation
+     * Updates the value of this group by overwriting it.
+     *
+     * This sets the value of each provided parameter to the respective provided
+     * value. If a parameter is not listed, its value is set to &#x60;undefine&#x60;.
+     *
+     * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
+     * @param opts Additional options
      */
-    public setValue(value: QueryParamGroupValue, opts: { emitEvent?: boolean } &#x3D; {}): void {
+    public setValue(value: Record&lt;string, any&gt;, opts: { emitEvent?: boolean } &#x3D; {}): void {
         Object.keys(this.queryParams).forEach(queryParamName &#x3D;&gt; {
             this.queryParams[ queryParamName ].setValue(value[ queryParamName ], { emitEvent: false });
         });
@@ -868,9 +835,7 @@ export class QueryParamGroup {
         }
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @internal */
     public _updateValue(opts: {
         emitEvent?: boolean,
     } &#x3D; {}): void {
@@ -882,34 +847,44 @@ export class QueryParamGroup {
 }
 
 /**
- * TODO Documentation
+ * Describes a single parameter.
+ *
+ * This is the description of a single parameter and essentially serves
+ * as the glue between its representation in the URL and its connection
+ * to a form control.
  */
 export class QueryParam&lt;T&gt; {
 
     private _valueChanges &#x3D; new Subject&lt;T&gt;();
 
-    /** TODO Documentation */
+    /**
+     * Emits the current value of this parameter whenever it changes.
+     *
+     * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
+     */
     public readonly valueChanges: Observable&lt;T&gt; &#x3D; this._valueChanges.asObservable();
 
-    /** TODO Documentation */
+    /**
+     * The current value of this parameter.
+     */
     public value: T &#x3D; null;
 
-    /** TODO Documentation See QueryParamOpts */
+    /** See {@link QueryParamOpts#param}. */
     public readonly param: string | null;
 
-    /** TODO Documentation See QueryParamOpts */
+    /** @internal */
     public readonly serialize: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
 
-    /** TODO Documentation See QueryParamOpts */
+    /** @internal */
     public readonly deserialize: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
 
-    /** TODO Documentation See QueryParamOpts */
+    /** @internal */
     public readonly multi: boolean;
 
-    /** TODO Documentation See QueryParamOpts */
+    /** @internal */
     public readonly debounceTime: number | null;
 
-    /** TODO Documentation See QueryParamOpts */
+    /** @internal */
     public readonly combineWith: ParamCombinator&lt;T&gt;;
 
     private parent: QueryParamGroup;
@@ -957,16 +932,16 @@ export class QueryParam&lt;T&gt; {
         this.combineWith &#x3D; combineWith;
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
+    /** @internal */
     public _registerOnChange(fn: OnChangeFunction&lt;T&gt;): void {
         this.changeFunctions.push(fn);
     }
 
     /**
-     * TODO Documentation
+     * Updates the value of this parameter.
+     *
+     * If wired up with a {@link QueryParamGroup}, this will also synchronize
+     * the value to the URL.
      */
     public setValue(value: T | null, opts: { emitEvent?: boolean } &#x3D; {}): void {
         this.value &#x3D; value;
@@ -976,9 +951,7 @@ export class QueryParam&lt;T&gt; {
         }
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @internal */
     public _updateValue(opts: {
         emitEvent?: boolean,
         onlySelf?: boolean,
@@ -992,10 +965,7 @@ export class QueryParam&lt;T&gt; {
         }
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
+    /** @internal */
     public _setParent(parent: QueryParamGroup): void {
         this.parent &#x3D; parent;
     }
@@ -1056,6 +1026,14 @@ export class QueryParam&lt;T&gt; {
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', '131508204', '');
+                ga('send', 'pageview');
+            </script>
 
     </body>
 </html>

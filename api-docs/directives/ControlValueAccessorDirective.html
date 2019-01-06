@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@ngqp/core documentation</title>
+        <title>ngqp – API Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">@ngqp/core documentation</a>
+            <a href="../" class="navbar-brand">ngqp – API Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -62,13 +62,14 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>TODO Documentation</p>
-<p>&lt;app-foo #ctrl
+                <p>Provides an ad-hoc ControlValueAccessor to a component.</p>
+<p>This directive provides a ControlValueAccessor for the host on which it is applied
+by proxying the required interface through events and an API.</p>
+<div><pre class="line-numbers"><code class="language-none"> &lt;app-item-selector #ctrl
           controlValueAccessor #accessor=&quot;controlValueAccessor&quot;
-          (fooChange)=&quot;accessor.notifyChange($event)&quot;
-          (valueChange)=&quot;ctrl.foo = $event&quot;&gt;
-</app-foo></p>
-
+          (itemChange)=&quot;accessor.notifyChange($event)&quot;
+          (valueChange)=&quot;ctrl.item = $event&quot;&gt;
+ &lt;/app-item-selector&gt;</code></pre></div>
             </p>
 
             <p class="comment">
@@ -122,19 +123,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#registerOnChange">registerOnChange</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#registerOnTouched">registerOnTouched</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#setDisabledState">setDisabledState</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#writeValue">writeValue</a>
+                                <a href="#notifyTouched">notifyTouched</a>
                             </li>
                         </ul>
                     </td>
@@ -177,7 +166,10 @@
                         <code>disabledChange</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>TODO Documentation </p>
+                        <div><p>Fired when the control&#39;s disabled change should change.</p>
+<p>From the ControlValueAccessor perspective, this is the equivalent of
+setDisabledState.</p>
+<p>This is currently not used by ngqp.</p>
 </div>
                         <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
 
@@ -185,7 +177,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/lib/control-value-accessor.directive.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/lib/control-value-accessor.directive.ts:49</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -198,7 +190,10 @@
                         <code>valueChange</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>TODO Documentation </p>
+                        <div><p>Fired when a value should be written (model -&gt; view).</p>
+<p>From the ControlValueAccessor perspective, this is the equivalent of
+writeValue. You should bind to this event and update your component&#39;s
+state with the given value.</p>
 </div>
                         <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
 
@@ -206,7 +201,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/control-value-accessor.directive.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/control-value-accessor.directive.ts:38</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -243,14 +238,16 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/control-value-accessor.directive.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/lib/control-value-accessor.directive.ts:60</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation </p>
+                            <div class="io-description"><p>Write a new value to the model (view -&gt; model)</p>
+<p>When your component&#39;s value changes, call this method to inform
+the model about the change.</p>
 </div>
 
                             <div class="io-description">
@@ -296,282 +293,41 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="registerOnChange"></a>
+                        <a name="notifyTouched"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            registerOnChange
+                            notifyTouched
                             </b>
-                            <a href="#registerOnChange"><span class="icon ion-ios-link"></span></a>
+                            <a href="#notifyTouched"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>registerOnChange(fn: (value: T) => void)</code>
+                        <code>notifyTouched()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/lib/control-value-accessor.directive.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/lib/control-value-accessor.directive.ts:69</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Inform that the component has been touched by the user.</p>
+<p>This is currently not used by ngqp.</p>
+</div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>fn</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="registerOnTouched"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            registerOnTouched
-                            </b>
-                            <a href="#registerOnTouched"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>registerOnTouched(fn: () => void)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/lib/control-value-accessor.directive.ts:50</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>fn</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="setDisabledState"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            setDisabledState
-                            </b>
-                            <a href="#setDisabledState"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>setDisabledState(isDisabled: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/lib/control-value-accessor.directive.ts:54</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>isDisabled</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="writeValue"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            writeValue
-                            </b>
-                            <a href="#writeValue"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>writeValue(value: T)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/control-value-accessor.directive.ts:42</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>value</td>
-                                                        <td>
-                                                                    <code>T</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -588,13 +344,17 @@
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
 
 /**
- * TODO Documentation
+ * Provides an ad-hoc ControlValueAccessor to a component.
  *
- * &lt;app-foo #ctrl
- *          controlValueAccessor #accessor&#x3D;&quot;controlValueAccessor&quot;
- *          (fooChange)&#x3D;&quot;accessor.notifyChange($event)&quot;
- *          (valueChange)&#x3D;&quot;ctrl.foo &#x3D; $event&quot;&gt;
- * &lt;/app-foo&gt;
+ * This directive provides a ControlValueAccessor for the host on which it is applied
+ * by proxying the required interface through events and an API.
+ *
+ *
+ *     &lt;app-item-selector #ctrl
+ *              controlValueAccessor #accessor&#x3D;&quot;controlValueAccessor&quot;
+ *              (itemChange)&#x3D;&quot;accessor.notifyChange($event)&quot;
+ *              (valueChange)&#x3D;&quot;ctrl.item &#x3D; $event&quot;&gt;
+ *     &lt;/app-item-selector&gt;
  */
 @Directive({
     selector: &#x27;[controlValueAccessor]&#x27;,
@@ -609,34 +369,65 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x2
 })
 export class ControlValueAccessorDirective&lt;T&gt; implements ControlValueAccessor {
 
-    /** TODO Documentation */
+    /**
+     * Fired when a value should be written (model -&gt; view).
+     *
+     * From the ControlValueAccessor perspective, this is the equivalent of
+     * writeValue. You should bind to this event and update your component&#x27;s
+     * state with the given value.
+     */
     @Output(&#x27;valueChange&#x27;)
     public valueChange &#x3D; new EventEmitter&lt;T&gt;();
 
-    /** TODO Documentation */
+    /**
+     * Fired when the control&#x27;s disabled change should change.
+     *
+     * From the ControlValueAccessor perspective, this is the equivalent of
+     * setDisabledState.
+     *
+     * This is currently not used by ngqp.
+     */
     @Output(&#x27;disabledChange&#x27;)
     public disabledChange &#x3D; new EventEmitter&lt;boolean&gt;();
 
     private fnChange &#x3D; (_: T) &#x3D;&gt; {};
     private fnTouched &#x3D; () &#x3D;&gt; {};
 
-    /** TODO Documentation */
+    /**
+     * Write a new value to the model (view -&gt; model)
+     *
+     * When your component&#x27;s value changes, call this method to inform
+     * the model about the change.
+     */
     public notifyChange(value: T): void {
         this.fnChange(value);
     }
 
+    /**
+     * Inform that the component has been touched by the user.
+     *
+     * This is currently not used by ngqp.
+     */
+    public notifyTouched(): void {
+        this.fnTouched();
+    }
+
+    /** @internal */
     public writeValue(value: T) {
         this.valueChange.emit(value);
     }
 
+    /** @internal */
     public registerOnChange(fn: (value: T) &#x3D;&gt; any) {
         this.fnChange &#x3D; fn;
     }
 
+    /** @internal */
     public registerOnTouched(fn: () &#x3D;&gt; any) {
         this.fnTouched &#x3D; fn;
     }
 
+    /** @internal */
     public setDisabledState(isDisabled: boolean) {
         this.disabledChange.emit(isDisabled);
     }
@@ -703,6 +494,14 @@ export class ControlValueAccessorDirective&lt;T&gt; implements ControlValueAcces
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', '131508204', '');
+                ga('send', 'pageview');
+            </script>
 
     </body>
 </html>

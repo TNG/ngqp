@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@ngqp/core documentation</title>
+        <title>ngqp – API Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">@ngqp/core documentation</a>
+            <a href="../" class="navbar-brand">ngqp – API Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -62,7 +62,10 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>TODO Documentation</p>
+                <p>Binds a <a href="../classes/QueryParamGroup.html">QueryParamGroup</a> to a DOM element.</p>
+<p>This directive accepts an instance of <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>. Any child using
+<a href="../directives/QueryParamNameDirective.html">QueryParamNameDirective</a> will then be matched against this group, and the
+synchronization process can take place.</p>
 
             </p>
 
@@ -94,25 +97,6 @@
     <table class="table table-sm table-bordered index-table">
         <tbody>
 
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#ngOnDestroy">ngOnDestroy</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -142,12 +126,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(routerAdapter: <a href="../interfaces/RouterAdapter.html">RouterAdapter</a>, globalRouterOptions: <a href="../interfaces/RouterAdapter.html">RouterAdapterOptions</a>)</code>
+<code>constructor(routerAdapter: RouterAdapter, globalRouterOptions: <a href="../interfaces/RouterOptions.html">RouterOptions</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/query-param-group.directive.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/lib/query-param-group.directive.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -168,7 +152,7 @@
                                                         <td>routerAdapter</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../interfaces/RouterAdapter.html" target="_self" >RouterAdapter</a></code>
+                                                                    <code>RouterAdapter</code>
                                                         </td>
                                                   
                                                     <td>
@@ -180,7 +164,7 @@
                                                         <td>globalRouterOptions</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../interfaces/RouterAdapter.html" target="_self" >RouterAdapterOptions</a></code>
+                                                                    <code><a href="../interfaces/RouterOptions.html" target="_self" >RouterOptions</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -207,7 +191,7 @@
                         <code>queryParamGroup</code>
                     </td>
                     <td class="col-md-10">
-                        <div><p>TODO Documentation </p>
+                        <div><p>The <a href="../classes/QueryParamGroup.html">QueryParamGroup</a> to bind.</p>
 </div>
                             <p>
                             <em>Type :</em>    <code><a href="../classes/QueryParamGroup.html" target="_self" >QueryParamGroup</a></code>
@@ -217,7 +201,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/query-param-group.directive.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/lib/query-param-group.directive.ts:41</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -226,92 +210,6 @@
 
 
 
-            <section>
-    
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnDestroy"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            ngOnDestroy
-                            </b>
-                            <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>ngOnDestroy()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/lib/query-param-group.directive.ts:99</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="ngOnInit"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            ngOnInit
-                            </b>
-                            <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>ngOnInit()</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/lib/query-param-group.directive.ts:51</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -323,58 +221,62 @@
 import { Params } from &#x27;@angular/router&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { concatMap, debounceTime, map, takeUntil, tap } from &#x27;rxjs/operators&#x27;;
-import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterAdapterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
+import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
 import { QueryParamNameDirective } from &#x27;./query-param-name.directive&#x27;;
-import { QueryParam, QueryParamGroup, QueryParamGroupValue, Unpack } from &#x27;./model&#x27;;
+import { QueryParam, QueryParamGroup, Unpack } from &#x27;./model&#x27;;
 import { isMissing } from &#x27;./util&#x27;;
 
-/** TODO Documentation */
+/** @internal */
 function isMultiQueryParam&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;): queryParam is QueryParam&lt;T[]&gt; {
     return queryParam.multi;
 }
 
-/** TODO Documentation */
+/** @internal */
 function hasArrayValue&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T | T[]): value is T[] {
     return isMultiQueryParam(queryParam);
 }
 
-/** TODO Documentation */
+/** @internal */
 function hasArraySerialization&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, values: string | string[]): values is string[] {
     return isMultiQueryParam(queryParam);
 }
 
 /**
- * TODO Documentation
+ * Binds a {@link QueryParamGroup} to a DOM element.
+ *
+ * This directive accepts an instance of {@link QueryParamGroup}. Any child using
+ * {@link QueryParamNameDirective} will then be matched against this group, and the
+ * synchronization process can take place.
  */
 @Directive({
     selector: &#x27;[queryParamGroup]&#x27;,
 })
 export class QueryParamGroupDirective implements OnInit, OnDestroy {
 
-    /** TODO Documentation */
+    /**
+     * The {@link QueryParamGroup} to bind.
+     */
     @Input(&#x27;queryParamGroup&#x27;)
     public queryParamGroup: QueryParamGroup;
 
-    /** TODO Documentation */
     private directives: QueryParamNameDirective[] &#x3D; [];
-
-    /** TODO Documentation @internal */
     private queue$ &#x3D; new Subject&lt;Params&gt;();
     private destroy$ &#x3D; new Subject&lt;void&gt;();
 
     constructor(
         @Inject(NGQP_ROUTER_ADAPTER) private routerAdapter: RouterAdapter,
-        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private globalRouterOptions: RouterAdapterOptions
+        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private globalRouterOptions: RouterOptions
     ) {
         this.setupNavigationQueue();
     }
 
+    /** @ignore */
     public ngOnInit() {
         if (!this.queryParamGroup) {
             throw new Error(&#x60;You added the queryParamGroup directive, but haven&#x27;t supplied a group to use.&#x60;);
         }
 
-        this.queryParamGroup._registerOnChange((value: QueryParamGroupValue) &#x3D;&gt; {
+        this.queryParamGroup._registerOnChange((value: Record&lt;string, any&gt;) &#x3D;&gt; {
             let params: Params &#x3D; {};
             Object.keys(value).forEach(queryParamName &#x3D;&gt; {
                 const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(queryParamName);
@@ -417,15 +319,13 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         });
     }
 
+    /** @ignore */
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
+    /** @internal */
     public addQueryParam(directive: QueryParamNameDirective): void {
         const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(directive.name);
         if (!queryParam) {
@@ -452,10 +352,6 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.directives.push(directive);
     }
 
-    /**
-     * TODO Documentation
-     * @internal
-     */
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
@@ -493,11 +389,11 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         }
     }
 
-    private get routerOptions(): RouterAdapterOptions {
+    private get routerOptions(): RouterOptions {
         const groupOptions &#x3D; this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
 
         return {
-            ...this.globalRouterOptions,
+            ...(this.globalRouterOptions || {}),
             ...groupOptions,
         };
     }
@@ -564,6 +460,14 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', '131508204', '');
+                ga('send', 'pageview');
+            </script>
 
     </body>
 </html>

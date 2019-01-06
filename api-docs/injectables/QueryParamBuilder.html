@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@ngqp/core documentation</title>
+        <title>ngqp – API Documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">@ngqp/core documentation</a>
+            <a href="../" class="navbar-brand">ngqp – API Documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -63,7 +63,9 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>TODO Documentation</p>
+                <p>Service to create parameters and groups.</p>
+<p>This service provides a simple API to create <a href="../classes/QueryParamGroup.html">QueryParamGroup</a> and <a href="../classes/QueryParam.html">QueryParam</a>
+instances and is the recommended way to set them up.</p>
 
             </p>
 
@@ -87,14 +89,6 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#booleanParam">booleanParam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#booleanParam">booleanParam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#group">group</a>
                             </li>
                             <li>
@@ -103,31 +97,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#numericParam">numericParam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#numericParam">numericParam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#param">param</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#param">param</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#param">param</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#stringParam">stringParam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#stringParam">stringParam</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -168,20 +138,23 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>booleanParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOptsInput<boolean | []></a>)</code>
+                        <code>booleanParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<boolean | []></a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/lib/query-param-builder.service.ts:74</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/lib/query-param-builder.service.ts:93</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Create a new parameter of type <code>boolean</code>.</p>
+<p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>.</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -197,7 +170,7 @@
                                                 <tr>
                                                         <td>opts</td>
                                                         <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOptsInput&lt;boolean | []&gt;</a></code>
+                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOpts&lt;boolean | []&gt;</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -226,146 +199,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="booleanParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            booleanParam
-                            </b>
-                            <a href="#booleanParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>booleanParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOptsInput<boolean></a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/lib/query-param-builder.service.ts:73</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOptsInput&lt;boolean&gt;</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;boolean&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="booleanParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            booleanParam
-                            </b>
-                            <a href="#booleanParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>booleanParam(opts)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/lib/query-param-builder.service.ts:72</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;boolean[]&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="group"></a>
                         <span class="name">
                             <b>
@@ -379,21 +212,23 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>group(queryParams: literal type, extras: <a href="../interfaces/RouterAdapter.html">RouterAdapterOptions</a>)</code>
+                        <code>group(queryParams: literal type, extras: <a href="../interfaces/RouterOptions.html">RouterOptions</a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/query-param-builder.service.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/query-param-builder.service.ts:35</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
+                            <div class="io-description"><p>Creates a new <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.</p>
+<p>This is the primary method to create a new group of parameters. Pass a list of
+<a href="../classes/QueryParam.html">QueryParam</a> instances by using the <code>xxxParam</code> methods.</p>
 </div>
 
                             <div class="io-description">
@@ -405,6 +240,7 @@
                                                     <td>Type</td>
                                                 <td>Optional</td>
                                                     <td>Default value</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -421,11 +257,15 @@
                                                         <td>
                                                         </td>
 
+                                                        <td>
+                                                                <code><p>List of {</p>
+</code>
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>extras</td>
                                                         <td>
-                                                                    <code><a href="../interfaces/RouterAdapter.html" target="_self" >RouterAdapterOptions</a></code>
+                                                                    <code><a href="../interfaces/RouterOptions.html" target="_self" >RouterOptions</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -436,6 +276,10 @@
                                                                 <code>{}</code>
                                                         </td>
 
+                                                        <td>
+                                                                <code><p>Additional parameters for this group, overriding global configuration.</p>
+</code>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -447,7 +291,8 @@
 
                             </div>
                                 <div class="io-description">
-                                    
+                                    <p>The new {</p>
+
                                 </div>
                     </td>
                 </tr>
@@ -470,21 +315,22 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>numericParam(opts)</code>
+                        <code>numericParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<number | []></a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/lib/query-param-builder.service.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/lib/query-param-builder.service.ts:75</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
+                            <div class="io-description"><p>Create a new parameter of type <code>number</code>.</p>
+<p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>.</p>
 </div>
 
                             <div class="io-description">
@@ -493,73 +339,6 @@
                                         <thead>
                                             <tr>
                                                 <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;number[]&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="numericParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            numericParam
-                            </b>
-                            <a href="#numericParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>numericParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOptsInput<number></a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/lib/query-param-builder.service.ts:59</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
                                             </tr>
@@ -568,78 +347,7 @@
                                                 <tr>
                                                         <td>opts</td>
                                                         <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOptsInput&lt;number&gt;</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;number&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="numericParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            numericParam
-                            </b>
-                            <a href="#numericParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>numericParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOptsInput<number | []></a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/lib/query-param-builder.service.ts:60</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOptsInput&lt;number | []&gt;</a></code>
+                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOpts&lt;number | []&gt;</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -681,162 +389,6 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>param(opts)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/lib/query-param-builder.service.ts:86</a></div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-md-4">
-                                <b>Type parameters :</b>
-                                <ul class="type-parameters">
-                                        <li>T</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;T[]&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="param"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            param
-                            </b>
-                            <a href="#param"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>param(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<T></a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/lib/query-param-builder.service.ts:87</a></div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-md-4">
-                                <b>Type parameters :</b>
-                                <ul class="type-parameters">
-                                        <li>T</li>
-                                </ul>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOpts&lt;T&gt;</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;T&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="param"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            param
-                            </b>
-                            <a href="#param"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
                         <code>param(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<T | []></a>)</code>
                     </td>
                 </tr>
@@ -844,7 +396,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/lib/query-param-builder.service.ts:88</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/lib/query-param-builder.service.ts:111</a></div>
                             </td>
                         </tr>
 
@@ -859,6 +411,9 @@
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Create a new parameter for a complex type.</p>
+<p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>.</p>
+</div>
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -916,89 +471,23 @@
                 <tr>
                     <td class="col-md-4">
                             <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>stringParam(opts)</code>
+                        <code>stringParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<string | []></a>)</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/lib/query-param-builder.service.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/lib/query-param-builder.service.ts:57</a></div>
                             </td>
                         </tr>
 
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>TODO Documentation</p>
+                            <div class="io-description"><p>Create a new parameter of type <code>string</code>.</p>
+<p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>.</p>
 </div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;string[]&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="stringParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            stringParam
-                            </b>
-                            <a href="#stringParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>stringParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOptsInput<string | []></a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/lib/query-param-builder.service.ts:46</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
 
                             <div class="io-description">
                                     <b>Parameters :</b>
@@ -1014,7 +503,7 @@
                                                 <tr>
                                                         <td>opts</td>
                                                         <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOptsInput&lt;string | []&gt;</a></code>
+                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOpts&lt;string | []&gt;</a></code>
                                                         </td>
                                                     
                                                     <td>
@@ -1030,77 +519,6 @@
                             </div>
                             <div class="io-description">
                                 <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;string | []&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="stringParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            stringParam
-                            </b>
-                            <a href="#stringParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>stringParam(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOptsInput<string></a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/lib/query-param-builder.service.ts:45</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>opts</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOptsInput&lt;string&gt;</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;string&gt;</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -1128,13 +546,13 @@ import {
     DEFAULT_STRING_SERIALIZER
 } from &#x27;./serializers&#x27;;
 import { LOOSE_IDENTITY_COMPARATOR } from &#x27;./util&#x27;;
-import { RouterAdapterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
-
-type OverwritePartial&lt;T1, T2 extends keyof T1&gt; &#x3D; Pick&lt;T1, Exclude&lt;keyof T1, T2&gt;&gt; &amp; Partial&lt;Pick&lt;T1, T2&gt;&gt;;
-export type QueryParamOptsInput&lt;T&gt; &#x3D; OverwritePartial&lt;QueryParamOpts&lt;T&gt;, &#x27;serialize&#x27; | &#x27;deserialize&#x27; | &#x27;compareWith&#x27;&gt;;
+import { RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
 
 /**
- * TODO Documentation
+ * Service to create parameters and groups.
+ *
+ * This service provides a simple API to create {@link QueryParamGroup} and {@link QueryParam}
+ * instances and is the recommended way to set them up.
  */
 @Injectable({
     providedIn: &#x27;root&#x27;
@@ -1142,11 +560,18 @@ export type QueryParamOptsInput&lt;T&gt; &#x3D; OverwritePartial&lt;QueryParamOp
 export class QueryParamBuilder {
 
     /**
-     * TODO Documentation
+     * Creates a new {@link QueryParamGroup}.
+     *
+     * This is the primary method to create a new group of parameters. Pass a list of
+     * {@link QueryParam} instances by using the &#x60;xxxParam&#x60; methods.
+     *
+     * @param queryParams List of {@link QueryParam}s keyed by a unique name.
+     * @param extras Additional parameters for this group, overriding global configuration.
+     * @returns The new {@link QueryParamGroup}.
      */
     public group(
         queryParams: { [ name: string ]: QueryParam&lt;any&gt; | string },
-        extras: RouterAdapterOptions &#x3D; {}
+        extras: RouterOptions &#x3D; {}
     ): QueryParamGroup {
         const mappedQueryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; } &#x3D; {};
         Object.keys(queryParams).forEach(queryParamName &#x3D;&gt; {
@@ -1157,12 +582,16 @@ export class QueryParamBuilder {
         return new QueryParamGroup(mappedQueryParams, extras);
     }
 
+    /** @ignore */
+    public stringParam(opts: QueryParamOpts&lt;string[]&gt; &amp; { multi: true }): QueryParam&lt;string[]&gt;;
+    /** @ignore */
+    public stringParam(opts: QueryParamOpts&lt;string&gt;): QueryParam&lt;string&gt;;
     /**
-     * TODO Documentation
+     * Create a new parameter of type &#x60;string&#x60;.
+     *
+     * See {@link QueryParamOpts}.
      */
-    public stringParam(opts: QueryParamOptsInput&lt;string[]&gt; &amp; { multi: true }): QueryParam&lt;string[]&gt;;
-    public stringParam(opts: QueryParamOptsInput&lt;string&gt;): QueryParam&lt;string&gt;;
-    public stringParam(opts: QueryParamOptsInput&lt;string | string[]&gt;): QueryParam&lt;string | string[]&gt; {
+    public stringParam(opts: QueryParamOpts&lt;string | string[]&gt;): QueryParam&lt;string | string[]&gt; {
         return new QueryParam({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
@@ -1171,12 +600,16 @@ export class QueryParamBuilder {
         });
     }
 
+    /** @ignore */
+    public numericParam(opts: QueryParamOpts&lt;number[]&gt; &amp; { multi: true }): QueryParam&lt;number[]&gt;;
+    /** @ignore */
+    public numericParam(opts: QueryParamOpts&lt;number&gt;): QueryParam&lt;number&gt;;
     /**
-     * TODO Documentation
+     * Create a new parameter of type &#x60;number&#x60;.
+     *
+     * See {@link QueryParamOpts}.
      */
-    public numericParam(opts: QueryParamOptsInput&lt;number[]&gt; &amp; { multi: true }): QueryParam&lt;number[]&gt;;
-    public numericParam(opts: QueryParamOptsInput&lt;number&gt;): QueryParam&lt;number&gt;;
-    public numericParam(opts: QueryParamOptsInput&lt;number | number[]&gt;): QueryParam&lt;number | number[]&gt; {
+    public numericParam(opts: QueryParamOpts&lt;number | number[]&gt;): QueryParam&lt;number | number[]&gt; {
         return new QueryParam({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
@@ -1185,12 +618,16 @@ export class QueryParamBuilder {
         });
     }
 
+    /** @ignore */
+    public booleanParam(opts: QueryParamOpts&lt;boolean[]&gt; &amp; { multi: true }): QueryParam&lt;boolean[]&gt;;
+    /** @ignore */
+    public booleanParam(opts: QueryParamOpts&lt;boolean&gt;): QueryParam&lt;boolean&gt;;
     /**
-     * TODO Documentation
+     * Create a new parameter of type &#x60;boolean&#x60;.
+     *
+     * See {@link QueryParamOpts}.
      */
-    public booleanParam(opts: QueryParamOptsInput&lt;boolean[]&gt; &amp; { multi: true }): QueryParam&lt;boolean[]&gt;;
-    public booleanParam(opts: QueryParamOptsInput&lt;boolean&gt;): QueryParam&lt;boolean&gt;;
-    public booleanParam(opts: QueryParamOptsInput&lt;boolean | boolean[]&gt;): QueryParam&lt;boolean | boolean[]&gt; {
+    public booleanParam(opts: QueryParamOpts&lt;boolean | boolean[]&gt;): QueryParam&lt;boolean | boolean[]&gt; {
         return new QueryParam({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
@@ -1199,11 +636,15 @@ export class QueryParamBuilder {
         });
     }
 
-    /**
-     * TODO Documentation
-     */
+    /** @ignore */
     public param&lt;T&gt;(opts: QueryParamOpts&lt;T[]&gt; &amp; { multi: true }): QueryParam&lt;T[]&gt;;
+    /** @ignore */
     public param&lt;T&gt;(opts: QueryParamOpts&lt;T&gt;): QueryParam&lt;T&gt;;
+    /**
+     * Create a new parameter for a complex type.
+     *
+     * See {@link QueryParamOpts}.
+     */
     public param&lt;T&gt;(opts: QueryParamOpts&lt;T | T[]&gt;): QueryParam&lt;T | T[]&gt; {
         return new QueryParam(opts);
     }
@@ -1280,6 +721,14 @@ export class QueryParamBuilder {
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
+            <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                ga('create', '131508204', '');
+                ga('send', 'pageview');
+            </script>
 
     </body>
 </html>
