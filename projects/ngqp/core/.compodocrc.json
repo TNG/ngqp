@@ -5,6 +5,9 @@
     "disableCoverage": true,
     "disablePrivate": true,
     "disableInternal": true,
+    "disableGraph": true,
+    "disableDomTree": true,
+    "disableRoutesGraph": true,
     "name": "ngqp – API Documentation",
     "customFavicon": "../../ngqp-demo/src/favicon.ico",
     "gaID": "131508204"
