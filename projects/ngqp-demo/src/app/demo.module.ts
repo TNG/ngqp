@@ -78,7 +78,7 @@ import { ManualWiringExampleComponent } from './docs-items/examples/manual-wirin
         DemoRoutingModule,
         NgbModule,
         FontAwesomeModule,
-        QueryParamModule.forRoot(),
+        QueryParamModule,
     ],
     bootstrap: [ DemoComponent ]
 })

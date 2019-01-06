@@ -6,7 +6,7 @@ const SNIPPETS: { [ key: string ]: string } = {
     MODULE_IMPORT: `
         @NgModule({
             imports: [
-                QueryParamModule.forRoot(),
+                QueryParamModule,
             ],
         })
         export class AppModule {}`,

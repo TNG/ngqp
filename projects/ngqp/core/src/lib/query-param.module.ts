@@ -54,13 +54,16 @@ const DIRECTIVES: Type<any>[] = [
 })
 export class QueryParamModule {
 
-    public static forRoot(config: { routerOptions?: RouterOptions } = {}): ModuleWithProviders<QueryParamModule> {
+    public static withConfig(config: { routerOptions?: RouterOptions } = {}): ModuleWithProviders<QueryParamModule> {
         return {
             ngModule: QueryParamModule,
             providers: [
                 {
                     provide: NGQP_ROUTER_OPTIONS,
-                    useValue: config.routerOptions ? config.routerOptions : DefaultRouterOptions,
+                    useValue: {
+                        ...DefaultRouterOptions,
+                        ...config.routerOptions
+                    },
                 },
             ],
         };

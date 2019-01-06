@@ -174,7 +174,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         const groupOptions = this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
 
         return {
-            ...this.globalRouterOptions,
+            ...(this.globalRouterOptions || {}),
             ...groupOptions,
         };
     }
