@@ -11,7 +11,7 @@ export class UsageGuideDocsComponent {
     public DocsPage = DocsPage;
 
     public defineModelSnippet = require('!raw-loader!./snippets/define-model.example.ts');
-    public connectModelSnippet = require('!raw-loader!./snippets/connect-model.example.html');
+    public bindModelSnippet = require('!raw-loader!./snippets/bind-model.example.html');
     public usingModelSnippet = `
 public ngOnInit() {
     this.paramGroup.valueChanges.pipe(

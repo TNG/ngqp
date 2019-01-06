@@ -24,22 +24,22 @@
     </p>
     <demo-snippet type="typescript" [code]="defineModelSnippet"></demo-snippet>
 
-    <docs-fragment fragment="connect-model">
-        <h2>Step 2: Connecting the Model</h2>
+    <docs-fragment fragment="bind-model">
+        <h2>Step 2: Binding the Model</h2>
     </docs-fragment>
     <p>
-        Now that we define what the model for our parameters looks like, it's time to wire this model up with the form
+        Now that we define what the model for our parameters looks like, it's time to bind this model to the form
         controls that the user interacts with. To do this, we need a parent with
         <span apiDocsLink="QueryParamGroupDirective">queryParamGroup</span> and then the individual form controls which
-        are wired up using <span apiDocsLink="QueryParamNameDirective">queryParamName</span>.
+        are bound using <span apiDocsLink="QueryParamNameDirective">queryParamName</span>.
     </p>
     <div class="alert alert-info">
-        To wire a component with the model, the component has to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
+        To bind a component to the model, the component has to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
         provided to it (the same mechanism that is used in the Forms API). ngqp ships standard implementations for basic
         form elements such as inputs, but if you have custom components you may need to implement this.
         For more information, see <docs-link [page]="DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR"></docs-link>.
     </div>
-    <demo-snippet type="html" [code]="connectModelSnippet"></demo-snippet>
+    <demo-snippet type="html" [code]="bindModelSnippet"></demo-snippet>
     <p>
         As you can see, <span apiDocsLink="QueryParamNameDirective">queryParamName</span> refers to the name we gave to
         the query param model. The <span apiDocsLink="QueryParam">param</span> attribute specified inside the model is

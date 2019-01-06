@@ -1,6 +1,6 @@
 <docs-item>
     <p>
-        Sometimes you may want to wire a parameter to a component which doesn't have a suitable <code>ControlValueAccessor</code>
+        Sometimes you may want to bind a parameter to a component which doesn't have a suitable <code>ControlValueAccessor</code>
         implementation. This article discusses different strategies on how to make such a use-case work.
     </p>
     <p>
@@ -23,7 +23,7 @@
     </docs-fragment>
     <p>
         If you really need or want to work without a <code>ControlValueAccessor</code>, you can use the API of
-        <span apiDocsLink>QueryParam</span> to wire it up manually. You can read more at
+        <span apiDocsLink>QueryParam</span> to bind it manually. You can read more at
         <docs-link [page]="DocsPage.MODEL_USAGE"></docs-link>, but specifically we will be using
         <span apiDocsLink="QueryParam#valueChanges">valueChanges</span> and <span apiDocsLink="QueryParam#setValue">setValue</span>.
     </p>
