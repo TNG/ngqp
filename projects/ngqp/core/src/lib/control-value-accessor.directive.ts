@@ -11,7 +11,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
  *     <app-item-selector #ctrl
  *              controlValueAccessor #accessor="controlValueAccessor"
  *              (itemChange)="accessor.notifyChange($event)"
- *              (valueChange)="ctrl.item = $event">
+ *              (controlValueChange)="ctrl.item = $event">
  *     </app-item-selector>
  */
 @Directive({
@@ -34,8 +34,8 @@ export class ControlValueAccessorDirective<T> implements ControlValueAccessor {
      * writeValue. You should bind to this event and update your component's
      * state with the given value.
      */
-    @Output('valueChange')
-    public valueChange = new EventEmitter<T>();
+    @Output('controlValueChange')
+    public controlValueChange = new EventEmitter<T>();
 
     /**
      * Fired when the control's disabled change should change.
@@ -72,7 +72,7 @@ export class ControlValueAccessorDirective<T> implements ControlValueAccessor {
 
     /** @internal */
     public writeValue(value: T) {
-        this.valueChange.emit(value);
+        this.controlValueChange.emit(value);
     }
 
     /** @internal */

@@ -4,7 +4,7 @@
             <demo-pagination #paginator [numberOfPages]="5"
                              controlValueAccessor #accessor="controlValueAccessor"
                              (currentPageChange)="accessor.notifyChange($event)"
-                             (valueChange)="paginator.currentPage = $event"
+                             (controlValueChange)="paginator.currentPage = $event"
                              queryParamName="page">
             </demo-pagination>
         </ng-container>
