@@ -2,7 +2,7 @@
 name: Feature request
 about: Share your ideas for @ngqp
 title: ''
-labels: 'Status: Needs Triage, Type: Feature Request'
+labels: 'Type: Feature, Status: Needs Triage'
 assignees: ''
 
 ---
