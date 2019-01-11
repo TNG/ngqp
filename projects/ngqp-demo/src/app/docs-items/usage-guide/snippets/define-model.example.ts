@@ -8,7 +8,6 @@ export class ExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            simple: 'p1',
             stringParam: qpb.stringParam({
                 param: 'p2'
             }),

@@ -8,10 +8,10 @@ export class ExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            myParam: 'q',
+            myParam: qpb.stringParam({ param: 'q' }),
         });
 
-        const myParam: QueryParam = this.paramGroup.get('myParam');
+        const myParam: QueryParam<string> = this.paramGroup.get('myParam');
     }
 
 }

@@ -35,16 +35,11 @@ export class QueryParamBuilder {
      * @returns The new {@link QueryParamGroup}.
      */
     public group(
-        queryParams: { [ name: string ]: QueryParam<any> | string },
+        queryParams: { [ name: string ]: QueryParam<any> },
         extras: RouterOptions = {}
     ): QueryParamGroup {
-        const mappedQueryParams: { [ queryParamName: string ]: QueryParam<any> } = {};
-        Object.keys(queryParams).forEach(queryParamName => {
-            mappedQueryParams[ queryParamName ] = this.createQueryParam(queryParams[ queryParamName ]);
-        });
-
         // TODO Maybe we should first validate that no two queryParams defined the same "param".
-        return new QueryParamGroup(mappedQueryParams, extras);
+        return new QueryParamGroup(queryParams, extras);
     }
 
     /** @ignore */
@@ -114,16 +109,6 @@ export class QueryParamBuilder {
         return new QueryParam<any>({
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        });
-    }
-
-    private createQueryParam<T>(queryParam: QueryParam<T> | string): QueryParam<T> | QueryParam<string> {
-        if (queryParam instanceof QueryParam) {
-            return queryParam;
-        }
-
-        return this.stringParam({
-            param: queryParam,
         });
     }
 

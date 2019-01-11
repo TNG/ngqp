@@ -16,8 +16,8 @@ export class PatchSetValueExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            p1: 'p1',
-            p2: 'p2',
+            p1: qpb.stringParam({ param: 'p1' }),
+            p2: qpb.stringParam({ param: 'p2' }),
         });
     }
 

@@ -17,11 +17,11 @@ export class ReplaceUrlExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.replaceParamGroup = this.qpb.group({
-            text: 'q1',
+            text: qpb.stringParam({ param: 'q1' }),
         }, { replaceUrl: true });
 
         this.noReplaceParamGroup = this.qpb.group({
-            text: 'q2',
+            text: qpb.stringParam({ param: 'q2' }),
         }, { replaceUrl: false });
     }
 
