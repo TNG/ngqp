@@ -111,7 +111,10 @@ export class QueryParamBuilder {
      * See {@link QueryParamOpts}.
      */
     public param<T>(opts: QueryParamOpts<T> | QueryParamOpts<T[]>): QueryParam<T> | QueryParam<T[]> {
-        return new QueryParam<any>(opts);
+        return new QueryParam<any>({
+            compareWith: LOOSE_IDENTITY_COMPARATOR,
+            ...opts,
+        });
     }
 
     private createQueryParam<T>(queryParam: QueryParam<T> | string): QueryParam<T> | QueryParam<string> {
