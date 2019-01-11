@@ -56,8 +56,8 @@ export class QueryParamBuilder {
      *
      * See {@link QueryParamOpts}.
      */
-    public stringParam(opts: QueryParamOpts<string | string[]>): QueryParam<string | string[]> {
-        return new QueryParam({
+    public stringParam(opts: QueryParamOpts<string> | QueryParamOpts<string[]>): QueryParam<string> | QueryParam<string[]> {
+        return new QueryParam<any>({
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
@@ -74,8 +74,8 @@ export class QueryParamBuilder {
      *
      * See {@link QueryParamOpts}.
      */
-    public numericParam(opts: QueryParamOpts<number | number[]>): QueryParam<number | number[]> {
-        return new QueryParam({
+    public numericParam(opts: QueryParamOpts<number> | QueryParamOpts<number[]>): QueryParam<number> | QueryParam<number[]> {
+        return new QueryParam<any>({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
@@ -92,8 +92,8 @@ export class QueryParamBuilder {
      *
      * See {@link QueryParamOpts}.
      */
-    public booleanParam(opts: QueryParamOpts<boolean | boolean[]>): QueryParam<boolean | boolean[]> {
-        return new QueryParam({
+    public booleanParam(opts: QueryParamOpts<boolean> | QueryParamOpts<boolean[]>): QueryParam<boolean> | QueryParam<boolean[]> {
+        return new QueryParam<any>({
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
@@ -110,11 +110,11 @@ export class QueryParamBuilder {
      *
      * See {@link QueryParamOpts}.
      */
-    public param<T>(opts: QueryParamOpts<T | T[]>): QueryParam<T | T[]> {
-        return new QueryParam(opts);
+    public param<T>(opts: QueryParamOpts<T> | QueryParamOpts<T[]>): QueryParam<T> | QueryParam<T[]> {
+        return new QueryParam<any>(opts);
     }
 
-    private createQueryParam<T>(queryParam: QueryParam<T> | string): QueryParam<T | string> {
+    private createQueryParam<T>(queryParam: QueryParam<T> | string): QueryParam<T> | QueryParam<string> {
         if (queryParam instanceof QueryParam) {
             return queryParam;
         }

@@ -10,17 +10,17 @@ import { QueryParamGroup } from '../model/query-param-group';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 
 /** @internal */
-function isMultiQueryParam<T>(queryParam: QueryParam<T | T[]>): queryParam is QueryParam<T[]> {
+function isMultiQueryParam<T>(queryParam: QueryParam<T> | QueryParam<T[]>): queryParam is QueryParam<T[]> {
     return queryParam.multi;
 }
 
 /** @internal */
-function hasArrayValue<T>(queryParam: QueryParam<T | T[]>, value: T | T[]): value is T[] {
+function hasArrayValue<T>(queryParam: QueryParam<T> | QueryParam<T[]>, value: T | T[]): value is T[] {
     return isMultiQueryParam(queryParam);
 }
 
 /** @internal */
-function hasArraySerialization<T>(queryParam: QueryParam<T | T[]>, values: string | string[]): values is string[] {
+function hasArraySerialization(queryParam: QueryParam<any>, values: string | string[] | null): values is string[] {
     return isMultiQueryParam(queryParam);
 }
 
@@ -146,7 +146,7 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         this.queue$.next(params);
     }
 
-    private getParamsForValue<T>(queryParam: QueryParam<T | T[]>, value: T): Params {
+    private getParamsForValue<T>(queryParam: QueryParam<any>, value: T | undefined | null): Params {
         const newValue = this.serialize(queryParam, value);
 
         const combinedParams: Params = isMissing(queryParam.combineWith)
@@ -158,10 +158,12 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
         };
     }
 
-    private serialize<T>(queryParam: QueryParam<T | T[]>, value: T): string | string[] {
-        return hasArrayValue(queryParam, value)
-            ? (value || <T[]>[]).map(queryParam.serialize)
-            : queryParam.serialize(value);
+    private serialize<T>(queryParam: QueryParam<any>, value: T): string | string[] {
+        if (hasArrayValue(queryParam, value)) {
+            return (value || []).map(queryParam.serialize);
+        } else {
+            return queryParam.serialize(value);
+        }
     }
 
     private deserialize<T>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {

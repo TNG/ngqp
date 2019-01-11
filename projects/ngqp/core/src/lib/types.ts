@@ -4,13 +4,13 @@ import { Params } from '@angular/router';
  * A serializer defines how the represented form control's
  * value is converted into a string to be used in the URL.
  */
-export type ParamSerializer<T> = (model: T) => string;
+export type ParamSerializer<T> = (model: T | undefined | null) => string | null;
 
 /**
  * A deserializer defines how a URL parameter is converted
  * into the represented form control's value.
  */
-export type ParamDeserializer<T> = (value: string) => T;
+export type ParamDeserializer<T> = (value: string | null) => T | undefined | null;
 
 /**
  * Defines a function which describes side effects on other
@@ -18,10 +18,10 @@ export type ParamDeserializer<T> = (value: string) => T;
  *
  * See {@link QueryParamOpts#combineWith}.
  */
-export type ParamCombinator<T> = (previousValue: T, newValue: T) => Params;
+export type ParamCombinator<T> = (previousValue: T | undefined | null, newValue: T | undefined | null) => Params | null;
 
 /** @internal */
-export type OnChangeFunction<T> = (value: T) => void;
+export type OnChangeFunction<T> = (value: T | null) => void;
 
 /**
  * A function which compares two values of the same type to determine
@@ -31,7 +31,7 @@ export type OnChangeFunction<T> = (value: T) => void;
  * @param b Second value to compare.
  * @returns `true` if and only if `a` and `b` should be considered equal.
  */
-export type Comparator<T> = (a: T, b: T) => boolean;
+export type Comparator<T> = (a: T | undefined | null, b: T | undefined | null) => boolean;
 
 /**
  * Unpacks an array type.

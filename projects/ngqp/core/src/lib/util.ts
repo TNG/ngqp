@@ -8,7 +8,7 @@ export function isMissing(obj: any): obj is null | undefined {
 }
 
 /** @internal */
-export function isFunction(obj: any): boolean {
+export function isFunction(obj: any): obj is Function {
     return !isMissing(obj) && typeof obj === 'function';
 }
 
