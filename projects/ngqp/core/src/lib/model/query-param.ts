@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
-import { isFunction, isMissing, Unpack, wrapTryCatch } from '../util';
-import { OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
+import { isFunction, isMissing, wrapTryCatch } from '../util';
+import { OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from '../types';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from '../serializers';
 import { QueryParamGroup } from './query-param-group';
 import { QueryParamOpts } from './query-param-opts';

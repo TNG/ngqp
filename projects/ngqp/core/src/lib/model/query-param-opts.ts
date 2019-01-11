@@ -1,5 +1,4 @@
-import { Unpack } from '../util';
-import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
+import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from '../types';
 
 /**
  * List of options which can be passed to {@link QueryParam}.

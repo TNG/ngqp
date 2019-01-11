@@ -1,7 +1,4 @@
 /** @internal */
-export type Unpack<T> = T extends (infer U)[] ? U : T;
-
-/** @internal */
 // tslint:disable-next-line:triple-equals
 export const LOOSE_IDENTITY_COMPARATOR = <T>(a: T, b: T) => a == b;
 
