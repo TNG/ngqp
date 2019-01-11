@@ -1,7 +1,7 @@
 import { Directive, Host, Inject, Input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryParamGroupDirective } from './query-param-group.directive';
-import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from './accessors/accessors';
+import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from '../accessors/accessors';
 
 /**
  * Binds a {@link QueryParam} to a DOM element.

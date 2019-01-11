@@ -2,12 +2,12 @@ import { Directive, Inject, Input, OnDestroy, OnInit, Optional } from '@angular/
 import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { isMissing } from './util';
-import { Unpack } from './types';
+import { isMissing } from '../util';
+import { Unpack } from '../types';
 import { QueryParamNameDirective } from './query-param-name.directive';
-import { QueryParam } from './model/query-param';
-import { QueryParamGroup } from './model/query-param-group';
-import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from './router-adapter/router-adapter.interface';
+import { QueryParam } from '../model/query-param';
+import { QueryParamGroup } from '../model/query-param-group';
+import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 
 /** @internal */
 function isMultiQueryParam<T>(queryParam: QueryParam<T | T[]>): queryParam is QueryParam<T[]> {
