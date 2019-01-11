@@ -12,7 +12,7 @@ import { SelectOptionDirective } from './select-option.directive';
         </select>
 `,
 })
-export class SelectAccessorTestComponent {
+class SelectAccessorTestComponent {
 }
 
 describe(SelectControlValueAccessorDirective.name, () => {

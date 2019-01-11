@@ -6,7 +6,7 @@ import { CheckboxControlValueAccessorDirective } from './checkbox-control-value-
     selector: 'checkbox-test',
     template: `<input type="checkbox" queryParamName="test"/>`,
 })
-export class CheckboxAccessorTestComponent {
+class CheckboxAccessorTestComponent {
 }
 
 describe(CheckboxControlValueAccessorDirective.name, () => {

@@ -6,7 +6,7 @@ import { DefaultControlValueAccessorDirective } from './default-control-value-ac
     selector: 'default-test',
     template: `<input type="text" queryParamName="test"/>`,
 })
-export class DefaultAccessorTestComponent {
+class DefaultAccessorTestComponent {
 }
 
 describe(DefaultControlValueAccessorDirective.name, () => {

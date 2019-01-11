@@ -12,7 +12,7 @@ import { MultiSelectOptionDirective } from './multi-select-option.directive';
         </select>
 `,
 })
-export class MultiSelectAccessorTestComponent {
+class MultiSelectAccessorTestComponent {
 }
 
 describe(MultiSelectControlValueAccessorDirective.name, () => {

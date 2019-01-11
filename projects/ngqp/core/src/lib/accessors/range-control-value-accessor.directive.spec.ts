@@ -6,7 +6,7 @@ import { RangeControlValueAccessorDirective } from './range-control-value-access
     selector: 'range-test',
     template: `<input type="range" min="0" max="100" queryParamName="test"/>`,
 })
-export class RangeAccessorTestComponent {
+class RangeAccessorTestComponent {
 }
 
 describe(RangeControlValueAccessorDirective.name, () => {

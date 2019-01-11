@@ -6,7 +6,7 @@ import { NumberControlValueAccessorDirective } from './number-control-value-acce
     selector: 'number-test',
     template: `<input type="number" queryParamName="test"/>`,
 })
-export class NumberAccessorTestComponent {
+class NumberAccessorTestComponent {
 }
 
 describe(NumberControlValueAccessorDirective.name, () => {
