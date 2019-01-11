@@ -52,6 +52,7 @@ export class QueryParam<T> {
     constructor(opts: QueryParamOpts<T>) {
         const { param, serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
         const multi = opts.multi === true;
+        const hasEmptyOn = emptyOn !== undefined;
 
         if (isMissing(param)) {
             throw new Error(`Please provide a parameter name for each query parameter.`);
@@ -65,7 +66,7 @@ export class QueryParam<T> {
             throw new Error(`deserialize must be a function, but received ${deserialize}`);
         }
 
-        if (!isFunction(compareWith)) {
+        if (hasEmptyOn && !isFunction(compareWith)) {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 
@@ -79,11 +80,11 @@ export class QueryParam<T> {
 
         this.param = param;
         this.serialize = wrapTryCatch(
-            emptyOn === undefined ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
+            !hasEmptyOn ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
             `Error while serializing value for ${param}`
         );
         this.deserialize = wrapTryCatch(
-            emptyOn === undefined ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
+            !hasEmptyOn ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
             `Error while deserializing value for ${param}`
         );
         this.multi = multi;
