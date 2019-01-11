@@ -4,8 +4,9 @@ import { Subject } from 'rxjs';
 import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from './router-adapter/router-adapter.interface';
 import { QueryParamNameDirective } from './query-param-name.directive';
-import { QueryParam, QueryParamGroup, Unpack } from './model';
-import { isMissing } from './util';
+import { isMissing, Unpack } from './util';
+import { QueryParam } from './model/query-param';
+import { QueryParamGroup } from './model/query-param-group';
 
 /** @internal */
 function isMultiQueryParam<T>(queryParam: QueryParam<T | T[]>): queryParam is QueryParam<T[]> {

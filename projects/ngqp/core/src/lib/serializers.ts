@@ -1,5 +1,5 @@
-import { ParamDeserializer, ParamSerializer } from './model';
-import { Comparator, isMissing } from './util';
+import { isMissing } from './util';
+import { Comparator, ParamDeserializer, ParamSerializer } from './types';
 
 /**
  * Wraps a serializer which defaults to the given value.

@@ -1,12 +1,5 @@
-/**
- * A function which compares two values of the same type to determine
- * if they are equal.
- *
- * @param a First value to compare.
- * @param b Second value to compare.
- * @returns `true` if and only if `a` and `b` should be considered equal.
- */
-export type Comparator<T> = (a: T, b: T) => boolean;
+/** @internal */
+export type Unpack<T> = T extends (infer U)[] ? U : T;
 
 /** @internal */
 // tslint:disable-next-line:triple-equals

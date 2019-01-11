@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { QueryParam, QueryParamOpts, QueryParamGroup } from './model';
 import {
     DEFAULT_BOOLEAN_DESERIALIZER,
     DEFAULT_BOOLEAN_SERIALIZER,
@@ -10,6 +9,9 @@ import {
 } from './serializers';
 import { LOOSE_IDENTITY_COMPARATOR } from './util';
 import { RouterOptions } from './router-adapter/router-adapter.interface';
+import { QueryParam } from './model/query-param';
+import { QueryParamGroup } from './model/query-param-group';
+import { QueryParamOpts } from './model/query-param-opts';
 
 /**
  * Service to create parameters and groups.
