@@ -66,15 +66,15 @@ export class QueryParamBuilder {
     }
 
     /** @ignore */
-    public numericParam(opts: QueryParamOpts<number[]> & { multi: true }): QueryParam<number[]>;
+    public numberParam(opts: QueryParamOpts<number[]> & { multi: true }): QueryParam<number[]>;
     /** @ignore */
-    public numericParam(opts: QueryParamOpts<number>): QueryParam<number>;
+    public numberParam(opts: QueryParamOpts<number>): QueryParam<number>;
     /**
      * Create a new parameter of type `number`.
      *
      * See {@link QueryParamOpts}.
      */
-    public numericParam(opts: QueryParamOpts<number> | QueryParamOpts<number[]>): QueryParam<number> | QueryParam<number[]> {
+    public numberParam(opts: QueryParamOpts<number> | QueryParamOpts<number[]>): QueryParam<number> | QueryParam<number[]> {
         return new QueryParam<any>({
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,

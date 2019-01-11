@@ -32,14 +32,14 @@ describe(QueryParamBuilder.name, () => {
         });
     });
 
-    describe('numericParam', () => {
+    describe('numberParam', () => {
         it('can create a parameter', () => {
-            const param: QueryParam<number> = qpb.numericParam({ param: 'q' });
+            const param: QueryParam<number> = qpb.numberParam({ param: 'q' });
             expect(param).toBeTruthy();
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<number[]> = qpb.numericParam({ param: 'q', multi: true });
+            const param: QueryParam<number[]> = qpb.numberParam({ param: 'q', multi: true });
             expect(param).toBeTruthy();
         });
     });

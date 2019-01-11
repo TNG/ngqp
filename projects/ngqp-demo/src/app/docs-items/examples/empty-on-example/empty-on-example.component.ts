@@ -16,11 +16,11 @@ export class EmptyOnExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            number1: qpb.numericParam({
+            number1: qpb.numberParam({
                 param: 'n1',
                 emptyOn: 20,
             }),
-            number2: qpb.numericParam({
+            number2: qpb.numberParam({
                 param: 'n2',
                 deserialize: createNumberDeserializer(20),
             }),

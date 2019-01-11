@@ -27,7 +27,7 @@ export class ExampleComponent implements OnInit, OnDestroy {
 
             // The price cap is a numeric parameter, and we want the default value
             // to be 0
-            priceCap: qpb.numericParam({
+            priceCap: qpb.numberParam({
                 param: 'costsLessThan',
                 emptyOn: 0,
             }),

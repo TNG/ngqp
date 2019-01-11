@@ -28,7 +28,7 @@ export class IntroductionDocsComponent {
                 debounceTime: 300,
             }),
             manufacturer: 'manufacturer',
-            priceCap: qpb.numericParam({
+            priceCap: qpb.numberParam({
                 param: 'costsLessThan',
                 emptyOn: 0,
             }),
