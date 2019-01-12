@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
-import { Subject } from 'rxjs';
-import { concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { EMPTY, from, Observable, Subject } from 'rxjs';
+import { catchError, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { isMissing } from '../util';
 import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
@@ -167,11 +167,19 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Subscribes to the parameter queue and executes navigations in sequence. */
     private setupNavigationQueue() {
-        // FIXME: We should implement some error handling here.
         this.queue$.pipe(
             takeUntil(this.destroy$),
-            concatMap(params => this.routerAdapter.navigate(params, this.routerOptions)),
+            concatMap(params => this.navigateSafely(params)),
         ).subscribe();
+    }
+
+    private navigateSafely(params: Params): Observable<any> {
+        return from(this.routerAdapter.navigate(params, this.routerOptions)).pipe(
+            catchError((err: any) => {
+                console.error(`There was an error while navigating`, err);
+                return EMPTY;
+            })
+        );
     }
 
     /** Sends a change of parameters to the queue. */
