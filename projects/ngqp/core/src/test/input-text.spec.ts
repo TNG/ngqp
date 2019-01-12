@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { QueryParamBuilder, QueryParamGroup, QueryParamGroupDirective, QueryParamModule } from '../public_api';
+import { QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
 import { setupNavigationWarnStub } from './util';
 
 @Component({
@@ -24,7 +24,7 @@ class BasicTestComponent {
 
 }
 
-describe(QueryParamGroupDirective.name, () => {
+describe('ngqp', () => {
     let fixture: ComponentFixture<BasicTestComponent>;
     let component: BasicTestComponent;
     let input: HTMLInputElement;
