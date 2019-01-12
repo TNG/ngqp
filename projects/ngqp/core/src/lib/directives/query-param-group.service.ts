@@ -24,14 +24,32 @@ function hasArraySerialization(queryParam: QueryParam<any>, values: string | str
     return isMultiQueryParam(queryParam);
 }
 
-/** @internal */
+/**
+ * Service implementing the synchronization logic
+ *
+ * This service is the key to the synchronization process by binding a {@link QueryParamGroup}
+ * to the router.
+ *
+ * @internal
+ */
 @Injectable()
 export class QueryParamGroupService implements OnDestroy {
 
+    /** The {@link QueryParamGroup} to bind. */
     private queryParamGroup: QueryParamGroup;
+
+    /** List of {@link QueryParamNameDirective} directives registered to this service. */
     private directives: QueryParamNameDirective[] = [];
 
+    /**
+     * Queue of navigation parameters
+     *
+     * A queue is used for navigations as we need to make sure all parameter changes
+     * are executed in sequence as otherwise navigations might overwrite each other.
+     */
     private queue$ = new Subject<Params>();
+
+    /** @ignore */
     private destroy$ = new Subject<void>();
 
     constructor(
@@ -47,11 +65,23 @@ export class QueryParamGroupService implements OnDestroy {
         this.destroy$.complete();
     }
 
+    /**
+     * Uses the given {@link QueryParamGroup} for synchronization.
+     */
     public setQueryParamGroup(queryParamGroup: QueryParamGroup): void {
+        // FIXME: If this is called when we already have a group, we probably need to do
+        //        some cleanup first.
+        if (this.queryParamGroup) {
+            throw new Error(`A QueryParamGroup has already been setup. Changing the group is currently not supported.`);
+        }
+
         this.queryParamGroup = queryParamGroup;
         this.startSynchronization();
     }
 
+    /**
+     * Registers a {@link QueryParamNameDirective} directive.
+     */
     public addQueryParam(directive: QueryParamNameDirective): void {
         const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
         if (!queryParam) {
@@ -84,6 +114,7 @@ export class QueryParamGroupService implements OnDestroy {
         this.setupRouterListener();
     }
 
+    /** Listens for programmatic changes on group level and synchronizes to the router. */
     private setupGroupChangeListener() {
         this.queryParamGroup._registerOnChange((value: Record<string, any>) => {
             let params: Params = {};
@@ -100,6 +131,7 @@ export class QueryParamGroupService implements OnDestroy {
         });
     }
 
+    /** Listens for programmatic changes on parameter level and synchronizes to the router. */
     private setupParamChangeListeners() {
         Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
             const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
@@ -109,6 +141,7 @@ export class QueryParamGroupService implements OnDestroy {
         });
     }
 
+    /** Listens for changes in the router and synchronizes to the model. */
     private setupRouterListener() {
         this.routerAdapter.queryParamMap.subscribe(queryParamMap => {
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
@@ -132,17 +165,26 @@ export class QueryParamGroupService implements OnDestroy {
         });
     }
 
+    /** Subscribes to the parameter queue and executes navigations in sequence. */
     private setupNavigationQueue() {
+        // FIXME: We should implement some error handling here.
         this.queue$.pipe(
             takeUntil(this.destroy$),
             concatMap(params => this.routerAdapter.navigate(params, this.routerOptions)),
         ).subscribe();
     }
 
+    /** Sends a change of parameters to the queue. */
     private enqueueNavigation(params: Params): void {
         this.queue$.next(params);
     }
 
+    /**
+     * Returns the full set of parameters given a value for a parameter model.
+     *
+     * This consists mainly of properly serializing the model value and ensuring to take
+     * side effect changes into account that may have been configured.
+     */
     private getParamsForValue<T>(queryParam: QueryParam<any>, value: T | undefined | null): Params {
         const newValue = this.serialize(queryParam, value);
 
@@ -171,6 +213,11 @@ export class QueryParamGroupService implements OnDestroy {
         }
     }
 
+    /**
+     * Returns the current set of options to pass to the router.
+     *
+     * This merges the global configuration with the group specific configuration.
+     */
     private get routerOptions(): RouterOptions {
         const groupOptions = this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
 
