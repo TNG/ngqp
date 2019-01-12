@@ -30,6 +30,7 @@ export interface RouterAdapter {
  */
 export interface RouterOptions {
     replaceUrl?: boolean;
+    preserveFragment?: boolean;
 }
 
 /**
@@ -37,6 +38,7 @@ export interface RouterOptions {
  */
 export const DefaultRouterOptions: RouterOptions = {
     replaceUrl: true,
+    preserveFragment: true,
 };
 
 /** @internal */
