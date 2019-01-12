@@ -1,7 +1,7 @@
-import { Directive, Host, Inject, Input, OnInit, Optional, Self, SkipSelf } from '@angular/core';
+import { Directive, Inject, Input, OnInit, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { QueryParamGroupDirective } from './query-param-group.directive';
 import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from '../accessors/accessors';
+import { QueryParamGroupService } from './query-param-group.service';
 
 /**
  * Binds a {@link QueryParam} to a DOM element.
@@ -26,10 +26,10 @@ export class QueryParamNameDirective implements OnInit {
     public valueAccessor: ControlValueAccessor | null = null;
 
     constructor(
-        @Optional() @Host() @SkipSelf() private parent: QueryParamGroupDirective,
+        @Optional() private groupService: QueryParamGroupService,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],
     ) {
-        if (!this.parent) {
+        if (!this.groupService) {
             throw new Error(`No parent configuration found. Did you forget to add [queryParamGroup]?`);
         }
 
@@ -42,7 +42,7 @@ export class QueryParamNameDirective implements OnInit {
             throw new Error(`queryParamName has been added, but without specifying the name.`);
         }
 
-        this.setupQueryParam();
+        this.groupService.addQueryParam(this);
     }
 
     /**
@@ -90,10 +90,6 @@ export class QueryParamNameDirective implements OnInit {
         }
 
         throw new Error(`No matching ControlValueAccessor has been found for this form control`);
-    }
-
-    private setupQueryParam(): void {
-        this.parent.addQueryParam(this);
     }
 
 }
