@@ -97,6 +97,11 @@ export class QueryParam<T> {
         this.changeFunctions.push(fn);
     }
 
+    /** @internal */
+    public _clearChangeFunctions(): void {
+        this.changeFunctions = [];
+    }
+
     /**
      * Updates the value of this parameter.
      *

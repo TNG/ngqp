@@ -1,5 +1,6 @@
 import { Directive, Inject, Input, OnChanges, OnDestroy, Optional, Self, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from '../accessors/accessors';
 import { QueryParamGroupService } from './query-param-group.service';
 
@@ -49,14 +50,14 @@ export class QueryParamNameDirective implements OnChanges, OnDestroy {
                 throw new Error(`queryParamName has been added, but without specifying the name.`);
             }
 
-            this.groupService.addQueryParam(this);
+            this.groupService.registerQueryParamDirective(this);
         }
     }
 
     /** @ignore */
     public ngOnDestroy() {
         if (this.groupService) {
-            this.groupService.removeQueryParam(this);
+            this.groupService.deregisterQueryParamDirective(this);
         }
     }
 

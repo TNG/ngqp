@@ -5,6 +5,9 @@ import { Comparator } from './types';
 export const LOOSE_IDENTITY_COMPARATOR = <T>(a: T, b: T) => a == b;
 
 /** @internal */
+export const NOP: Function = () => {};
+
+/** @internal */
 export function isMissing(obj: any): obj is null | undefined {
     return obj === undefined || obj === null;
 }

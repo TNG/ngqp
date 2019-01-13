@@ -49,6 +49,11 @@ export class QueryParamGroup {
         this.changeFunctions.push(fn);
     }
 
+    /** @internal */
+    public _clearChangeFunctions(): void {
+        this.changeFunctions = [];
+    }
+
     /**
      * Retrieves a specific {@link QueryParam} from this group by name.
      *
