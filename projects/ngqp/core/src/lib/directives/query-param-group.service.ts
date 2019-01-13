@@ -24,12 +24,6 @@ function hasArraySerialization(queryParam: QueryParam<any>, values: string | str
     return isMultiQueryParam(queryParam);
 }
 
-/** @internal */
-class QueryParamDirectiveState {
-    constructor(public directive: QueryParamNameDirective, public queue$: Subject<any>) {
-    }
-}
-
 /**
  * Service implementing the synchronization logic
  *
@@ -44,8 +38,8 @@ export class QueryParamGroupService implements OnDestroy {
     /** The {@link QueryParamGroup} to bind. */
     private queryParamGroup: QueryParamGroup;
 
-    /** List of {@link QueryParamNameDirective} directives registered to this service (by name). */
-    private directives = new Map<string, QueryParamDirectiveState>();
+    /** List of {@link QueryParamNameDirective} directives registered to this service. */
+    private directives: QueryParamNameDirective[] = [];
 
     /**
      * Queue of navigation parameters
@@ -100,9 +94,6 @@ export class QueryParamGroupService implements OnDestroy {
         if (!directive.valueAccessor) {
             throw new Error(`No value accessor found for the form control. Please make sure to implement ControlValueAccessor on this component.`);
         }
-        if (this.directives.has(directive.name)) {
-            throw new Error(`A directive with name ${directive.name} has already been registered.`);
-        }
 
         // Chances are that we read the initial route before a directive has been registered here.
         // The value in the model will be correct, but we need to sync it to the view once initially.
@@ -118,19 +109,19 @@ export class QueryParamGroupService implements OnDestroy {
 
         directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
 
-        this.directives.set(directive.name, new QueryParamDirectiveState(directive, debouncedQueue$));
+        this.directives.push(directive);
     }
 
     /**
      * Deregisters a {@link QueryParamNameDirective} directive.
      */
     public deregisterQueryParamDirective(directive: QueryParamNameDirective): void {
-        const state = this.directives.get(directive.name);
-        if (state && state.queue$) {
-            state.queue$.complete();
+        const index = this.directives.indexOf(directive);
+        if (index === -1) {
+            return;
         }
 
-        this.directives.delete(directive.name);
+        this.directives.splice(index, 1);
         directive.valueAccessor.registerOnChange(NOP);
         directive.valueAccessor.registerOnTouched(NOP);
 
@@ -184,11 +175,9 @@ export class QueryParamGroupService implements OnDestroy {
                     ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.param))
                     : this.deserialize(queryParam, queryParamMap.get(queryParam.param));
 
-                // Get the directive, if it has been initialized yet.
-                const state = this.directives.get(queryParamName);
-                if (state && state.directive) {
-                    state.directive.valueAccessor.writeValue(newValue);
-                }
+                this.directives
+                    .filter(directive => directive.name === queryParamName)
+                    .forEach(directive => directive.valueAccessor.writeValue(newValue));
 
                 queryParam.value = newValue;
                 queryParam._updateValue({ emitEvent: true, onlySelf: true });
