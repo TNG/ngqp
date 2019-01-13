@@ -19,7 +19,8 @@
 
                 <ul class="nav flex-column text-muted pt-1">
                     <li *ngFor="let fragment of fragmentService.fragments" class="nav-item">
-                        <a class="nav-link" [attr.data-indent]="fragment.indent" routerLink="." [fragment]="fragment.id">
+                        <a class="nav-link" [attr.data-indent]="fragment.indent"
+                           routerLink="." [fragment]="fragment.id" (click)="onTocClick(fragment.name)">
                             {{ fragment.name }}
                         </a>
                     </li>

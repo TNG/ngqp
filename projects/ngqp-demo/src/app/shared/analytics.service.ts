@@ -23,7 +23,12 @@ export class AnalyticsService {
             map(event => event as NavigationEnd),
         ).subscribe(event => {
             const url = event.urlAfterRedirects;
-            gtag('config', 'UA-131508204-1', { 'page_path': url });
+
+            try {
+                gtag('config', 'UA-131508204-1', { 'page_path': url });
+            } catch (ignored) {
+                // Ignored
+            }
         });
     }
 
@@ -32,7 +37,11 @@ export class AnalyticsService {
             return;
         }
 
-        gtag('event', action);
+        try {
+            gtag('event', action);
+        } catch (ignored) {
+            // Ignored
+        }
     }
 
 }
