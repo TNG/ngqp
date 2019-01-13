@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/model.ts</code>
+            <code>src/lib/model/query-param-group.ts</code>
         </p>
 
             <p class="comment">
@@ -155,7 +155,7 @@ to and from the URL.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/lib/model.ts:143</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/model/query-param-group.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -244,7 +244,7 @@ to and from the URL.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/lib/model.ts:135</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/lib/model/query-param-group.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -292,7 +292,7 @@ one parameter&#39;s value is changed.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/lib/model.ts:168</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/lib/model/query-param-group.ts:65</a></div>
                             </td>
                         </tr>
 
@@ -372,7 +372,7 @@ if no parameter with that name is found in this group.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="199" class="link-to-prism">src/lib/model.ts:199</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/lib/model/query-param-group.ts:96</a></div>
                             </td>
                         </tr>
 
@@ -474,7 +474,7 @@ value. If a parameter is not listed, its value remains unchanged.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/lib/model.ts:223</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/lib/model/query-param-group.ts:120</a></div>
                             </td>
                         </tr>
 
@@ -579,7 +579,7 @@ value. If a parameter is not listed, its value is set to <code>undefine</code>.<
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="183" class="link-to-prism">src/lib/model.ts:183</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/lib/model/query-param-group.ts:80</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -603,119 +603,11 @@ the value.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Params } from &#x27;@angular/router&#x27;;
-import { Observable, Subject } from &#x27;rxjs&#x27;;
-import { Comparator, isFunction, isMissing, wrapTryCatch } from &#x27;./util&#x27;;
-import { createEmptyOnDeserializer, createEmptyOnSerializer } from &#x27;./serializers&#x27;;
-import { RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
-
-/**
- * A serializer defines how the represented form control&#x27;s
- * value is converted into a string to be used in the URL.
- */
-export type ParamSerializer&lt;T&gt; &#x3D; (model: T) &#x3D;&gt; string;
-
-/**
- * A deserializer defines how a URL parameter is converted
- * into the represented form control&#x27;s value.
- */
-export type ParamDeserializer&lt;T&gt; &#x3D; (value: string) &#x3D;&gt; T;
-
-/**
- * Defines a function which describes side effects on other
- * URL parameters.
- *
- * See {@link QueryParamOpts#combineWith}.
- */
-export type ParamCombinator&lt;T&gt; &#x3D; (previousValue: T, newValue: T) &#x3D;&gt; Params;
-
-/** @internal */
-export type OnChangeFunction&lt;T&gt; &#x3D; (value: T) &#x3D;&gt; void;
-
-/** @internal */
-export type Unpack&lt;T&gt; &#x3D; T extends (infer U)[] ? U : T;
-
-/**
- * List of options which can be passed to {@link QueryParam}.
- */
-export interface QueryParamOpts&lt;T&gt; {
-    /**
-     * The name of the parameter to be used in the URL.
-     *
-     * This represents the name of the query parameter which will be
-     * used in the URL (e.g., &#x60;?q&#x3D;&#x60;), which differs from the name of
-     * the {@link QueryParam} model used inside {@link QueryParamGroup}.
-     */
-    param: string;
-
-    /**
-     * The serializer used for this parameter.
-     *
-     * See {@link ParamSerializer}.
-     */
-    serialize?: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
-
-    /**
-     * The deserializer used for this parameter.
-     *
-     * See {@link ParamDeserializer}.
-     */
-    deserialize?: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
-
-    /**
-     * Whether this parameter can take on multiple values at once.
-     *
-     * If set to true, this parameter is array-typed. How this is represented
-     * on the URL is defined by the Angular Router, which defines the parameter
-     * multiple times, e.g. &#x60;https://www.app.io?param&#x3D;A&amp;param&#x3D;B&amp;param&#x3D;C&#x60;.
-     */
-    multi?: boolean;
-
-    /**
-     * Defines, in milliseconds, how much changes to the value should be debounced.
-     *
-     * When set, a change of the parameter value coming from either the form control
-     * or a programmatic change will be debounced by the given value (in milliseconds).
-     * This is useful for, e.g., text inputs.
-     *
-     * If the value changes through a change of the URL, this debounce will not apply.
-     */
-    debounceTime?: number | null;
-
-    /**
-     * Default value of the parameter.
-     *
-     * If set, the parameter will be considered to default to this value. This means
-     * that if the parameter is not defined on the URL, this value will be written
-     * to the form control. Vice versa, if the form control takes on this value,
-     * the URL parameter will be removed.
-     *
-     * NOTE: This does currently not work in combination with {@link QueryParamOpts#multi}.
-     */
-    emptyOn?: Unpack&lt;T&gt;;
-
-    /**
-     * The comparator to be used with {@link QueryParamOpts#emptyOn}.
-     *
-     * This function will be used to determine whether the current value equals the defined
-     * default value. By default, a loose equals comparison is made (i.e., &quot;&#x3D;&#x3D;&quot;).
-     *
-     * See {@link Comparator}.
-     */
-    compareWith?: Comparator&lt;Unpack&lt;T&gt;&gt;;
-
-    /**
-     * Execute a side effect on other query parameters.
-     *
-     * If the value of this parameter changes, this function is invoked. It can return an
-     * additional set of query parameters to change, e.g., to reset the current page in a
-     * pagination when the direction in which to sort has been changed.
-     *
-     * NOTE: This function must return the raw query parameter names and values. No
-     *       (de-)serializers are run and no recursion is applied.
-     */
-    combineWith?: ParamCombinator&lt;T&gt;;
-}
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable, Subject } from &#x27;rxjs&#x27;;
+import { isMissing } from &#x27;../util&#x27;;
+import { OnChangeFunction } from &#x27;../types&#x27;;
+import { QueryParam } from &#x27;./query-param&#x27;;
+import { RouterOptions } from &#x27;../router-adapter/router-adapter.interface&#x27;;
 
 /**
  * Groups multiple {@link QueryParam} instances to a single unit.
@@ -760,6 +652,11 @@ export class QueryParamGroup {
     /** @internal */
     public _registerOnChange(fn: OnChangeFunction&lt;Record&lt;string, any&gt;&gt;): void {
         this.changeFunctions.push(fn);
+    }
+
+    /** @internal */
+    public _clearChangeFunctions(): void {
+        this.changeFunctions &#x3D; [];
     }
 
     /**
@@ -844,132 +741,6 @@ export class QueryParamGroup {
         }
     }
 
-}
-
-/**
- * Describes a single parameter.
- *
- * This is the description of a single parameter and essentially serves
- * as the glue between its representation in the URL and its connection
- * to a form control.
- */
-export class QueryParam&lt;T&gt; {
-
-    private _valueChanges &#x3D; new Subject&lt;T&gt;();
-
-    /**
-     * Emits the current value of this parameter whenever it changes.
-     *
-     * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
-     */
-    public readonly valueChanges: Observable&lt;T&gt; &#x3D; this._valueChanges.asObservable();
-
-    /**
-     * The current value of this parameter.
-     */
-    public value: T &#x3D; null;
-
-    /** See {@link QueryParamOpts#param}. */
-    public readonly param: string | null;
-
-    /** @internal */
-    public readonly serialize: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
-
-    /** @internal */
-    public readonly deserialize: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
-
-    /** @internal */
-    public readonly multi: boolean;
-
-    /** @internal */
-    public readonly debounceTime: number | null;
-
-    /** @internal */
-    public readonly combineWith: ParamCombinator&lt;T&gt;;
-
-    private parent: QueryParamGroup;
-    private changeFunctions: OnChangeFunction&lt;T&gt;[] &#x3D; [];
-
-    constructor(opts: QueryParamOpts&lt;T&gt;) {
-        const { param, serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } &#x3D; opts;
-        const multi &#x3D; opts.multi &#x3D;&#x3D;&#x3D; true;
-
-        if (isMissing(param)) {
-            throw new Error(&#x60;Please provide a parameter name for each query parameter.&#x60;);
-        }
-
-        if (!isFunction(serialize)) {
-            throw new Error(&#x60;serialize must be a function, but received ${serialize}&#x60;);
-        }
-
-        if (!isFunction(deserialize)) {
-            throw new Error(&#x60;deserialize must be a function, but received ${deserialize}&#x60;);
-        }
-
-        if (!isFunction(compareWith)) {
-            throw new Error(&#x60;compareWith must be a function, but received ${compareWith}&#x60;);
-        }
-
-        if (!isMissing(combineWith) &amp;&amp; !isFunction(combineWith)) {
-            throw new Error(&#x60;combineWith must be a function, but received ${combineWith}&#x60;);
-        }
-
-        if (multi &amp;&amp; !isMissing(emptyOn)) {
-            throw new Error(&#x60;emptyOn is only supported for single-value parameters, but ${param} is a multi-value parameter.&#x60;);
-        }
-
-        this.param &#x3D; param;
-        this.serialize &#x3D; wrapTryCatch(
-            emptyOn &#x3D;&#x3D;&#x3D; undefined ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            &#x60;Error while serializing value for ${param}&#x60;
-        );
-        this.deserialize &#x3D; wrapTryCatch(
-            emptyOn &#x3D;&#x3D;&#x3D; undefined ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
-            &#x60;Error while deserializing value for ${param}&#x60;
-        );
-        this.multi &#x3D; multi;
-        this.debounceTime &#x3D; debounceTime;
-        this.combineWith &#x3D; combineWith;
-    }
-
-    /** @internal */
-    public _registerOnChange(fn: OnChangeFunction&lt;T&gt;): void {
-        this.changeFunctions.push(fn);
-    }
-
-    /**
-     * Updates the value of this parameter.
-     *
-     * If wired up with a {@link QueryParamGroup}, this will also synchronize
-     * the value to the URL.
-     */
-    public setValue(value: T | null, opts: { emitEvent?: boolean } &#x3D; {}): void {
-        this.value &#x3D; value;
-
-        if (opts.emitEvent !&#x3D;&#x3D; false) {
-            this.changeFunctions.forEach(changeFn &#x3D;&gt; changeFn(value));
-        }
-    }
-
-    /** @internal */
-    public _updateValue(opts: {
-        emitEvent?: boolean,
-        onlySelf?: boolean,
-    } &#x3D; {}): void {
-        if (opts.emitEvent !&#x3D;&#x3D; false) {
-            this._valueChanges.next(this.value);
-        }
-
-        if (!isMissing(this.parent) &amp;&amp; !opts.onlySelf) {
-            this.parent._updateValue(opts);
-        }
-    }
-
-    /** @internal */
-    public _setParent(parent: QueryParamGroup): void {
-        this.parent &#x3D; parent;
-    }
-
 }</code></pre>
     </div>
 </div>
@@ -1026,14 +797,6 @@ export class QueryParam&lt;T&gt; {
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
-            <script>
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-                ga('create', '131508204', '');
-                ga('send', 'pageview');
-            </script>
 
     </body>
 </html>

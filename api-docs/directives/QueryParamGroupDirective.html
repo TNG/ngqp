@@ -55,7 +55,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/query-param-group.directive.ts</code>
+            <code>src/lib/directives/query-param-group.directive.ts</code>
         </p>
 
             <p class="comment">
@@ -73,8 +73,7 @@ synchronization process can take place.</p>
                 <h3>Implements</h3>
             </p>
             <p class="comment">
-                        <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-                        <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                        <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
             </p>
 
 
@@ -82,6 +81,14 @@ synchronization process can take place.</p>
             <h3>Metadata</h3>
             <table class="table table-sm table-hover">
                 <tbody>
+                    <tr>
+                        <td class="col-md-3">Providers</td>
+                        <td class="col-md-9">
+                            <code>
+                                QueryParamGroupService
+                            </code>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td class="col-md-3">Selector</td>
@@ -126,12 +133,12 @@ synchronization process can take place.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(routerAdapter: RouterAdapter, globalRouterOptions: <a href="../interfaces/RouterOptions.html">RouterOptions</a>)</code>
+<code>constructor(groupService: <a href="../classes/QueryParamGroup.html">QueryParamGroupService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/lib/query-param-group.directive.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/lib/directives/query-param-group.directive.ts:23</a></div>
                             </td>
                         </tr>
 
@@ -149,22 +156,10 @@ synchronization process can take place.</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>routerAdapter</td>
+                                                        <td>groupService</td>
                                                   
                                                         <td>
-                                                                    <code>RouterAdapter</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>globalRouterOptions</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../interfaces/RouterOptions.html" target="_self" >RouterOptions</a></code>
+                                                                    <code><a href="../classes/QueryParamGroup.html" target="_self" >QueryParamGroupService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -201,7 +196,7 @@ synchronization process can take place.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/lib/query-param-group.directive.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/lib/directives/query-param-group.directive.ts:23</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -217,29 +212,10 @@ synchronization process can take place.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, Inject, Input, OnDestroy, OnInit, Optional } from &#x27;@angular/core&#x27;;
-import { Params } from &#x27;@angular/router&#x27;;
-import { Subject } from &#x27;rxjs&#x27;;
-import { concatMap, debounceTime, map, takeUntil, tap } from &#x27;rxjs/operators&#x27;;
-import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { QueryParamNameDirective } from &#x27;./query-param-name.directive&#x27;;
-import { QueryParam, QueryParamGroup, Unpack } from &#x27;./model&#x27;;
-import { isMissing } from &#x27;./util&#x27;;
-
-/** @internal */
-function isMultiQueryParam&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;): queryParam is QueryParam&lt;T[]&gt; {
-    return queryParam.multi;
-}
-
-/** @internal */
-function hasArrayValue&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T | T[]): value is T[] {
-    return isMultiQueryParam(queryParam);
-}
-
-/** @internal */
-function hasArraySerialization&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, values: string | string[]): values is string[] {
-    return isMultiQueryParam(queryParam);
-}
+import { QueryParamGroup } from &#x27;../model/query-param-group&#x27;;
+import { QueryParamGroupService } from &#x27;./query-param-group.service&#x27;;
 
 /**
  * Binds a {@link QueryParamGroup} to a DOM element.
@@ -250,8 +226,9 @@ function hasArraySerialization&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, v
  */
 @Directive({
     selector: &#x27;[queryParamGroup]&#x27;,
+    providers: [QueryParamGroupService],
 })
-export class QueryParamGroupDirective implements OnInit, OnDestroy {
+export class QueryParamGroupDirective implements OnChanges {
 
     /**
      * The {@link QueryParamGroup} to bind.
@@ -259,143 +236,24 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
     @Input(&#x27;queryParamGroup&#x27;)
     public queryParamGroup: QueryParamGroup;
 
-    private directives: QueryParamNameDirective[] &#x3D; [];
-    private queue$ &#x3D; new Subject&lt;Params&gt;();
-    private destroy$ &#x3D; new Subject&lt;void&gt;();
-
-    constructor(
-        @Inject(NGQP_ROUTER_ADAPTER) private routerAdapter: RouterAdapter,
-        @Optional() @Inject(NGQP_ROUTER_OPTIONS) private globalRouterOptions: RouterOptions
-    ) {
-        this.setupNavigationQueue();
+    constructor(private groupService: QueryParamGroupService) {
     }
 
     /** @ignore */
-    public ngOnInit() {
-        if (!this.queryParamGroup) {
-            throw new Error(&#x60;You added the queryParamGroup directive, but haven&#x27;t supplied a group to use.&#x60;);
+    public ngOnChanges(changes: SimpleChanges) {
+        const groupChange &#x3D; changes[&#x27;queryParamGroup&#x27;];
+        if (groupChange) {
+            if (!groupChange.firstChange) {
+                throw new Error(&#x60;Binding a different QueryParamGroup during runtime is currently not supported.&#x60;);
+            }
+
+            const queryParamGroup &#x3D; groupChange.currentValue;
+            if (!queryParamGroup) {
+                throw new Error(&#x60;You added the queryParamGroup directive, but haven&#x27;t supplied a group to use.&#x60;);
+            }
+
+            this.groupService.setQueryParamGroup(queryParamGroup);
         }
-
-        this.queryParamGroup._registerOnChange((value: Record&lt;string, any&gt;) &#x3D;&gt; {
-            let params: Params &#x3D; {};
-            Object.keys(value).forEach(queryParamName &#x3D;&gt; {
-                const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(queryParamName);
-                if (isMissing(queryParam)) {
-                    return;
-                }
-
-                params &#x3D; { ...params, ...this.getParamsForValue(queryParam, value[ queryParamName ]) };
-            });
-
-            this.enqueueNavigation(params);
-        });
-
-        Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName &#x3D;&gt; {
-            const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(queryParamName);
-            queryParam._registerOnChange((newValue: any) &#x3D;&gt;
-                this.enqueueNavigation(this.getParamsForValue(queryParam, newValue))
-            );
-        });
-
-        this.routerAdapter.queryParamMap.subscribe(queryParamMap &#x3D;&gt; {
-            Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName &#x3D;&gt; {
-                const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(queryParamName);
-                const newValue &#x3D; queryParam.multi
-                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.param))
-                    : this.deserialize(queryParam, queryParamMap.get(queryParam.param));
-
-                // Get the directive, if it has been initialized yet.
-                const directive &#x3D; this.directives.find(dir &#x3D;&gt; dir.name &#x3D;&#x3D;&#x3D; queryParamName);
-                if (!isMissing(directive)) {
-                    directive.valueAccessor.writeValue(newValue);
-                }
-
-                queryParam.value &#x3D; newValue;
-                queryParam._updateValue({ emitEvent: true, onlySelf: true });
-            });
-
-            // We used onlySelf on the queryParams so that we can emit only once on the entire group.
-            this.queryParamGroup._updateValue({ emitEvent: true });
-        });
-    }
-
-    /** @ignore */
-    public ngOnDestroy() {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
-
-    /** @internal */
-    public addQueryParam(directive: QueryParamNameDirective): void {
-        const queryParam: QueryParam&lt;any&gt; &#x3D; this.queryParamGroup.get(directive.name);
-        if (!queryParam) {
-            throw new Error(&#x60;Could not find query param with name ${directive.name}. Did you forget to add it to your QueryParamGroup?&#x60;);
-        }
-        if (!directive.valueAccessor) {
-            throw new Error(&#x60;No value accessor found for the form control. Please make sure to implement ControlValueAccessor on this component.&#x60;);
-        }
-
-        // Chances are that we read the initial route before a directive has been registered here.
-        // The value in the model will be correct, but we need to sync it to the view once initially.
-        directive.valueAccessor.writeValue(queryParam.value);
-
-        // Proxy updates from the view to debounce them (if needed).
-        const debouncedQueue$ &#x3D; new Subject&lt;any&gt;();
-        debouncedQueue$.pipe(
-            !isMissing(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
-            map((newValue: any) &#x3D;&gt; this.getParamsForValue(queryParam, newValue)),
-            takeUntil(this.destroy$),
-        ).subscribe(params &#x3D;&gt; this.enqueueNavigation(params));
-
-        directive.valueAccessor.registerOnChange((newValue: any) &#x3D;&gt; debouncedQueue$.next(newValue));
-
-        this.directives.push(directive);
-    }
-
-    private setupNavigationQueue() {
-        this.queue$.pipe(
-            takeUntil(this.destroy$),
-            concatMap(params &#x3D;&gt; this.routerAdapter.navigate(params, this.routerOptions)),
-        ).subscribe();
-    }
-
-    private enqueueNavigation(params: Params): void {
-        this.queue$.next(params);
-    }
-
-    private getParamsForValue&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T): Params {
-        const newValue &#x3D; this.serialize(queryParam, value);
-
-        const combinedParams: Params &#x3D; isMissing(queryParam.combineWith)
-            ? {} : queryParam.combineWith(queryParam.value, value);
-
-        return {
-            ...(combinedParams || {}),
-            [ queryParam.param ]: newValue,
-        };
-    }
-
-    private serialize&lt;T&gt;(queryParam: QueryParam&lt;T | T[]&gt;, value: T): string | string[] {
-        return hasArrayValue(queryParam, value)
-            ? (value || &lt;T[]&gt;[]).map(queryParam.serialize)
-            : queryParam.serialize(value);
-    }
-
-    private deserialize&lt;T&gt;(queryParam: QueryParam&lt;T&gt;, values: string | string[]): Unpack&lt;T&gt; | Unpack&lt;T&gt;[] {
-        if (hasArraySerialization(queryParam, values)) {
-            return values.map(queryParam.deserialize);
-        } else {
-            return queryParam.deserialize(values);
-        }
-    }
-
-    private get routerOptions(): RouterOptions {
-        const groupOptions &#x3D; this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
-
-        return {
-            ...(this.globalRouterOptions || {}),
-            ...groupOptions,
-        };
     }
 
 }</code></pre>
@@ -460,14 +318,6 @@ export class QueryParamGroupDirective implements OnInit, OnDestroy {
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
-            <script>
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-                ga('create', '131508204', '');
-                ga('send', 'pageview');
-            </script>
 
     </body>
 </html>

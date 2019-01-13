@@ -55,7 +55,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/control-value-accessor.directive.ts</code>
+            <code>src/lib/directives/control-value-accessor.directive.ts</code>
         </p>
 
             <p class="comment">
@@ -68,7 +68,7 @@ by proxying the required interface through events and an API.</p>
 <div><pre class="line-numbers"><code class="language-none"> &lt;app-item-selector #ctrl
           controlValueAccessor #accessor=&quot;controlValueAccessor&quot;
           (itemChange)=&quot;accessor.notifyChange($event)&quot;
-          (valueChange)=&quot;ctrl.item = $event&quot;&gt;
+          (controlValueChange)=&quot;ctrl.item = $event&quot;&gt;
  &lt;/app-item-selector&gt;</code></pre></div>
             </p>
 
@@ -139,10 +139,10 @@ by proxying the required interface through events and an API.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#disabledChange">disabledChange</a>
+                                <a href="#controlValueChange">controlValueChange</a>
                             </li>
                             <li>
-                                <a href="#valueChange">valueChange</a>
+                                <a href="#disabledChange">disabledChange</a>
                             </li>
                         </ul>
                     </td>
@@ -162,6 +162,30 @@ by proxying the required interface through events and an API.</p>
             <tbody>
                 <tr>
                     <td class="col-md-2">
+                        <a name="controlValueChange"></a>
+                        <code>controlValueChange</code>
+                    </td>
+                    <td class="col-md-10">
+                        <div><p>Fired when a value should be written (model -&gt; view).</p>
+<p>From the ControlValueAccessor perspective, this is the equivalent of
+writeValue. You should bind to this event and update your component&#39;s
+state with the given value.</p>
+</div>
+                        <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/directives/control-value-accessor.directive.ts:38</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
                         <a name="disabledChange"></a>
                         <code>disabledChange</code>
                     </td>
@@ -177,31 +201,7 @@ setDisabledState.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/lib/control-value-accessor.directive.ts:49</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-2">
-                        <a name="valueChange"></a>
-                        <code>valueChange</code>
-                    </td>
-                    <td class="col-md-10">
-                        <div><p>Fired when a value should be written (model -&gt; view).</p>
-<p>From the ControlValueAccessor perspective, this is the equivalent of
-writeValue. You should bind to this event and update your component&#39;s
-state with the given value.</p>
-</div>
-                        <em><code>$event</code> Type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/control-value-accessor.directive.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/lib/directives/control-value-accessor.directive.ts:49</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -238,7 +238,7 @@ state with the given value.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/lib/control-value-accessor.directive.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/lib/directives/control-value-accessor.directive.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -313,7 +313,7 @@ the model about the change.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/lib/control-value-accessor.directive.ts:69</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/lib/directives/control-value-accessor.directive.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -353,7 +353,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x2
  *     &lt;app-item-selector #ctrl
  *              controlValueAccessor #accessor&#x3D;&quot;controlValueAccessor&quot;
  *              (itemChange)&#x3D;&quot;accessor.notifyChange($event)&quot;
- *              (valueChange)&#x3D;&quot;ctrl.item &#x3D; $event&quot;&gt;
+ *              (controlValueChange)&#x3D;&quot;ctrl.item &#x3D; $event&quot;&gt;
  *     &lt;/app-item-selector&gt;
  */
 @Directive({
@@ -376,8 +376,8 @@ export class ControlValueAccessorDirective&lt;T&gt; implements ControlValueAcces
      * writeValue. You should bind to this event and update your component&#x27;s
      * state with the given value.
      */
-    @Output(&#x27;valueChange&#x27;)
-    public valueChange &#x3D; new EventEmitter&lt;T&gt;();
+    @Output(&#x27;controlValueChange&#x27;)
+    public controlValueChange &#x3D; new EventEmitter&lt;T&gt;();
 
     /**
      * Fired when the control&#x27;s disabled change should change.
@@ -414,7 +414,7 @@ export class ControlValueAccessorDirective&lt;T&gt; implements ControlValueAcces
 
     /** @internal */
     public writeValue(value: T) {
-        this.valueChange.emit(value);
+        this.controlValueChange.emit(value);
     }
 
     /** @internal */
@@ -494,14 +494,6 @@ export class ControlValueAccessorDirective&lt;T&gt; implements ControlValueAcces
           <script src="../js/search/search_index.js"></script>
        <script src="../js/lazy-load-graphs.js"></script>
 
-            <script>
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-                ga('create', '131508204', '');
-                ga('send', 'pageview');
-            </script>
 
     </body>
 </html>
