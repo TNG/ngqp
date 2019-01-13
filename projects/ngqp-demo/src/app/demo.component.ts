@@ -27,8 +27,4 @@ export class DemoComponent {
         analytics.startTracking(router);
     }
 
-    public onSwitchToApiDocs() {
-        this.analytics.trackEvent(`Switched to API Docs`);
-    }
-
 }
