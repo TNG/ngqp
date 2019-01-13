@@ -1,6 +1,6 @@
 {
   "name": "@ngqp/core",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Synchronizing form controls with the URL for Angular",
   "homepage": "https://ngqp.io",
   "author": "Ingo Bürk",

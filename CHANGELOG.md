@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/Airblader/ngqp/compare/v0.5.1...v0.6.0) (2019-01-13)
+
+
+### Bug Fixes
+
+* **api-docs:** Remove GA ID ([a6352fb](https://github.com/Airblader/ngqp/commit/a6352fb))
+* **core:** Added internal documentation ([6ade19d](https://github.com/Airblader/ngqp/commit/6ade19d))
+* **core:** Deregister directive on destroy ([3ab996d](https://github.com/Airblader/ngqp/commit/3ab996d)), closes [#53](https://github.com/Airblader/ngqp/issues/53)
+* **core:** Handle errors in navigation queue ([9dfaa92](https://github.com/Airblader/ngqp/commit/9dfaa92))
+* **core:** Improve cleanup behavior more ([0633526](https://github.com/Airblader/ngqp/commit/0633526))
+* **core:** Improve typings ([962bc32](https://github.com/Airblader/ngqp/commit/962bc32))
+* **core:** Only console.log error in dev mode ([ebc0d9d](https://github.com/Airblader/ngqp/commit/ebc0d9d))
+* **core:** Only require compareWith if emptyOn is provided ([d9f96e3](https://github.com/Airblader/ngqp/commit/d9f96e3))
+* **core:** Provide default comparator on custom params ([96985ca](https://github.com/Airblader/ngqp/commit/96985ca)), closes [#59](https://github.com/Airblader/ngqp/issues/59)
+* **core:** Remove string shorthand syntax ([3f30355](https://github.com/Airblader/ngqp/commit/3f30355)), closes [#63](https://github.com/Airblader/ngqp/issues/63)
+* **core:** Rename numericParam to numberParam ([ee2c473](https://github.com/Airblader/ngqp/commit/ee2c473)), closes [#62](https://github.com/Airblader/ngqp/issues/62)
+* **core:** Rename valueChanges to controLValueChanges ([60ba6dd](https://github.com/Airblader/ngqp/commit/60ba6dd)), closes [#54](https://github.com/Airblader/ngqp/issues/54)
+* **core:** Support using the same queryParamName multiple times ([1b74a5a](https://github.com/Airblader/ngqp/commit/1b74a5a))
+* **core:** Use OnChanges instead of OnInit ([cc7a558](https://github.com/Airblader/ngqp/commit/cc7a558)), closes [#52](https://github.com/Airblader/ngqp/issues/52)
+* **demo:** Don't debounce in the getting started example ([60d8bd8](https://github.com/Airblader/ngqp/commit/60d8bd8)), closes [#57](https://github.com/Airblader/ngqp/issues/57)
+* **docs:** Don't track fragment navigation as pageview ([73c58cf](https://github.com/Airblader/ngqp/commit/73c58cf))
+* **docs:** Don't track unnecessary event ([3d1a793](https://github.com/Airblader/ngqp/commit/3d1a793))
+* **docs:** Global configuration typo ([5229ba9](https://github.com/Airblader/ngqp/commit/5229ba9))
+* **docs:** Remove API docs tracking since it doesn't work ([448c51f](https://github.com/Airblader/ngqp/commit/448c51f))
+* **tests:** Change test name ([19d8180](https://github.com/Airblader/ngqp/commit/19d8180))
+* **tests:** Don't export test components ([e4ed111](https://github.com/Airblader/ngqp/commit/e4ed111))
+* **tests:** Pin versions due to broken [@angular-devkit](https://github.com/angular-devkit)/schematics release ([bbc9a66](https://github.com/Airblader/ngqp/commit/bbc9a66))
+* **tests:** Remove spec tsconfig file from angular.json ([de0d0e0](https://github.com/Airblader/ngqp/commit/de0d0e0))
+
+
+### Features
+
+* **core:** Allow comparator to return a number ([78c8c4e](https://github.com/Airblader/ngqp/commit/78c8c4e))
+* **core:** Allow passing preserveFragment ([a94ccc6](https://github.com/Airblader/ngqp/commit/a94ccc6)), closes [#39](https://github.com/Airblader/ngqp/issues/39)
+* **docs:** Track events for interaction ([1dfa9ba](https://github.com/Airblader/ngqp/commit/1dfa9ba)), closes [#38](https://github.com/Airblader/ngqp/issues/38)
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/Airblader/ngqp/compare/v0.5.0...v0.5.1) (2019-01-06)
 
