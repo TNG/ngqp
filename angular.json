@@ -55,7 +55,8 @@
                         "tsConfig": "projects/ngqp-demo/tsconfig.app.json",
                         "assets": [
                             "projects/ngqp-demo/src/favicon.ico",
-                            "projects/ngqp-demo/src/assets"
+                            "projects/ngqp-demo/src/assets",
+                            "projects/ngqp-demo/src/manifest.json"
                         ],
                         "styles": [
                             "projects/ngqp-demo/src/styles.scss"
@@ -85,7 +86,8 @@
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
                                 }
-                            ]
+                            ],
+                            "serviceWorker": true
                         }
                     }
                 },

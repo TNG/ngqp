@@ -34,6 +34,8 @@ import { GlobalConfigurationDocsComponent } from './docs-items/global-configurat
 import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
 import { ControlValueAccessorDirectiveExampleComponent } from './docs-items/examples/control-value-accessor-directive-example/control-value-accessor-directive-example.component';
 import { ManualWiringExampleComponent } from './docs-items/examples/manual-wiring-example/manual-wiring-example.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -79,6 +81,7 @@ import { ManualWiringExampleComponent } from './docs-items/examples/manual-wirin
         NgbModule,
         FontAwesomeModule,
         QueryParamModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
     bootstrap: [ DemoComponent ]
 })
