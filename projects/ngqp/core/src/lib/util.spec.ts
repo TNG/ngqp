@@ -1,4 +1,5 @@
-import { isFunction, isMissing, LOOSE_IDENTITY_COMPARATOR, wrapTryCatch } from './util';
+import { areEqualUsing, isFunction, isMissing, LOOSE_IDENTITY_COMPARATOR, wrapTryCatch } from './util';
+import { Comparator } from './types';
 
 describe(isMissing.name, () => {
     it('returns true for undefined', () => expect(isMissing(undefined)).toBe(true));
@@ -73,4 +74,24 @@ describe(LOOSE_IDENTITY_COMPARATOR.name, () => {
         it(`returns false for ${a} / ${b}`,
             () => expect(LOOSE_IDENTITY_COMPARATOR(a, b)).toBe(false));
     });
+});
+
+describe(areEqualUsing.name, () => {
+    const numericComparator: Comparator<number> = (a, b) => b - a;
+
+    it('returns true if a boolean comparator returns true', () =>
+        expect(areEqualUsing(42, 42, LOOSE_IDENTITY_COMPARATOR)).toBe(true)
+    );
+
+    it('returns false if a boolean comparator returns false', () =>
+        expect(areEqualUsing(42, 1337, LOOSE_IDENTITY_COMPARATOR)).toBe(false)
+    );
+
+    it('returns true if a numeric comparator returns 0', () =>
+        expect(areEqualUsing(42, 42, numericComparator)).toBe(true)
+    );
+
+    it('returns false if a numeric comparator returns a non-zero value', () =>
+        expect(areEqualUsing(42, 1337, numericComparator)).toBe(false)
+    );
 });

@@ -1,4 +1,6 @@
 /** See https://github.com/angular/angular/issues/25837 */
+import { Comparator } from '../lib/types';
+
 export function setupNavigationWarnStub() {
     const warn = console.warn;
 

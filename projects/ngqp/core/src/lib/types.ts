@@ -25,13 +25,14 @@ export type OnChangeFunction<T> = (value: T | null) => void;
 
 /**
  * A function which compares two values of the same type to determine
- * if they are equal.
+ * if they are equal. To support traditional comparator functions, you
+ * can also return a number where "0" means equality.
  *
  * @param a First value to compare.
  * @param b Second value to compare.
- * @returns `true` if and only if `a` and `b` should be considered equal.
+ * @returns `true` or `0` if and only if `a` and `b` should be considered equal.
  */
-export type Comparator<T> = (a: T | undefined | null, b: T | undefined | null) => boolean;
+export type Comparator<T> = (a: T | undefined | null, b: T | undefined | null) => boolean | number;
 
 /**
  * Unpacks an array type.

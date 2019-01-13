@@ -1,4 +1,4 @@
-import { isMissing } from './util';
+import { areEqualUsing, isMissing } from './util';
 import { Comparator, ParamDeserializer, ParamSerializer } from './types';
 
 /**
@@ -13,7 +13,7 @@ import { Comparator, ParamDeserializer, ParamSerializer } from './types';
  * @param compareWith The comparator function to compare two values.
  */
 export function createEmptyOnSerializer<T>(serializer: ParamSerializer<T>, emptyOn: T, compareWith: Comparator<T>): ParamSerializer<T> {
-    return model => compareWith(model, emptyOn) ? null : serializer(model);
+    return model => areEqualUsing(model, emptyOn, compareWith) ? null : serializer(model);
 }
 
 /**

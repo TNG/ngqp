@@ -1,3 +1,5 @@
+import { Comparator } from './types';
+
 /** @internal */
 // tslint:disable-next-line:triple-equals
 export const LOOSE_IDENTITY_COMPARATOR = <T>(a: T, b: T) => a == b;
@@ -22,4 +24,14 @@ export function wrapTryCatch<T extends Function>(fn: T, msg: string): T {
             return null;
         }
     };
+}
+
+/** @internal */
+export function areEqualUsing<T>(first: T, second: T, comparator: Comparator<T>): boolean {
+    const comparison = comparator(first, second);
+    if (typeof comparison === 'boolean') {
+        return comparison;
+    }
+
+    return comparison === 0;
 }
