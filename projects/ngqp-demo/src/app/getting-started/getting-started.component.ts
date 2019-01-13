@@ -29,12 +29,8 @@ const SNIPPETS: { [ key: string ]: string } = {
             constructor(private queryParamBuilder: QueryParamBuilder) {
                 this.paramGroup = queryParamBuilder.group({
                     // Defines a simple string-typed parameter which will use the query
-                    // parameter "q". Changes in the form control will be debounced by
-                    // 250ms to avoid too frequent updates.
-                    searchText: queryParamBuilder.stringParam({
-                        param: 'q',
-                        debounceTime: 250,
-                    }),
+                    // parameter "q".
+                    searchText: queryParamBuilder.stringParam({ param: 'q' }),
                 });
             }
 
@@ -56,10 +52,7 @@ export class GettingStartedComponent {
 
     constructor(private queryParamBuilder: QueryParamBuilder) {
         this.paramGroup = queryParamBuilder.group({
-            searchText: queryParamBuilder.stringParam({
-                param: 'q',
-                debounceTime: 250,
-            }),
+            searchText: queryParamBuilder.stringParam({ param: 'q' }),
         });
     }
 
