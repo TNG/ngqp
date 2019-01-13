@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit } from '@angular/core';
+import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { QueryParamNameDirective } from './query-param-name.directive';
 import { QueryParamGroup } from '../model/query-param-group';
 import { QueryParamGroupService } from './query-param-group.service';
@@ -14,7 +14,7 @@ import { QueryParamGroupService } from './query-param-group.service';
     selector: '[queryParamGroup]',
     providers: [QueryParamGroupService],
 })
-export class QueryParamGroupDirective implements OnInit {
+export class QueryParamGroupDirective implements OnChanges {
 
     /**
      * The {@link QueryParamGroup} to bind.
@@ -26,12 +26,20 @@ export class QueryParamGroupDirective implements OnInit {
     }
 
     /** @ignore */
-    public ngOnInit() {
-        if (!this.queryParamGroup) {
-            throw new Error(`You added the queryParamGroup directive, but haven't supplied a group to use.`);
-        }
+    public ngOnChanges(changes: SimpleChanges) {
+        const groupChange = changes['queryParamGroup'];
+        if (groupChange) {
+            if (!groupChange.firstChange) {
+                throw new Error(`Binding a different QueryParamGroup during runtime is currently not supported.`);
+            }
 
-        this.groupService.setQueryParamGroup(this.queryParamGroup);
+            const queryParamGroup = groupChange.currentValue;
+            if (!queryParamGroup) {
+                throw new Error(`You added the queryParamGroup directive, but haven't supplied a group to use.`);
+            }
+
+            this.groupService.setQueryParamGroup(queryParamGroup);
+        }
     }
 
 }

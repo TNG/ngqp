@@ -1,4 +1,4 @@
-import { Directive, Inject, Input, OnInit, Optional, Self } from '@angular/core';
+import { Directive, Inject, Input, OnChanges, Optional, Self, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from '../accessors/accessors';
 import { QueryParamGroupService } from './query-param-group.service';
@@ -13,7 +13,7 @@ import { QueryParamGroupService } from './query-param-group.service';
 @Directive({
     selector: '[queryParamName]',
 })
-export class QueryParamNameDirective implements OnInit {
+export class QueryParamNameDirective implements OnChanges {
 
     /**
      * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.
@@ -37,12 +37,20 @@ export class QueryParamNameDirective implements OnInit {
     }
 
     /** @ignore */
-    public ngOnInit() {
-        if (!this.name) {
-            throw new Error(`queryParamName has been added, but without specifying the name.`);
-        }
+    public ngOnChanges(changes: SimpleChanges) {
+        const nameChange = changes['name'];
+        if (nameChange) {
+            if (!nameChange.firstChange) {
+                throw new Error(`You tried to switch from queryParamName=${nameChange.previousValue} to queryParamName=${nameChange.currentValue} which is currently not supported.`);
+            }
 
-        this.groupService.addQueryParam(this);
+            const name = nameChange.currentValue;
+            if (!name) {
+                throw new Error(`queryParamName has been added, but without specifying the name.`);
+            }
+
+            this.groupService.addQueryParam(this);
+        }
     }
 
     /**
