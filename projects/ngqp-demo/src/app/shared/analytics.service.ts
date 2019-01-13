@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 declare const gtag: Function;
 
@@ -21,9 +21,14 @@ export class AnalyticsService {
         router.events.pipe(
             filter(event => event instanceof NavigationEnd),
             map(event => event as NavigationEnd),
-        ).subscribe(event => {
-            const url = event.urlAfterRedirects;
-            gtag('config', 'UA-131508204-1', { 'page_path': url });
+            map(event => event.urlAfterRedirects),
+            distinctUntilChanged(),
+        ).subscribe(url => {
+            try {
+                gtag('config', 'UA-131508204-1', { 'page_path': url });
+            } catch (ignored) {
+                // Ignored
+            }
         });
     }
 
@@ -32,7 +37,11 @@ export class AnalyticsService {
             return;
         }
 
-        gtag('event', action);
+        try {
+            gtag('event', action);
+        } catch (ignored) {
+            // Ignored
+        }
     }
 
 }

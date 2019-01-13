@@ -1,10 +1,10 @@
 import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { Params } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NGQP_ROUTER_ADAPTER, QueryParamGroup } from '@ngqp/core';
 import { TestRouterAdapter } from '../../test-router-adapter.service';
+import { AnalyticsService } from '../analytics.service';
 
 @Component({
     selector: 'demo-browser',
@@ -29,7 +29,10 @@ export class DemoBrowserComponent implements OnInit, OnDestroy {
 
     private destroy$ = new Subject<void>();
 
-    constructor(@Inject(NGQP_ROUTER_ADAPTER) public routerAdapter: TestRouterAdapter) {
+    constructor(
+        @Inject(NGQP_ROUTER_ADAPTER) public routerAdapter: TestRouterAdapter,
+        private analytics: AnalyticsService,
+    ) {
     }
 
     public ngOnInit() {
@@ -46,6 +49,16 @@ export class DemoBrowserComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+
+    public goBack(): void {
+        this.routerAdapter.goBack();
+        this.analytics.trackEvent('Pressed back button in demo browser');
+    }
+
+    public routeTo(url: string) {
+        this.routerAdapter.navigateToQueryParamString(url);
+        this.analytics.trackEvent('Changed URL in demo browser');
     }
 
 }

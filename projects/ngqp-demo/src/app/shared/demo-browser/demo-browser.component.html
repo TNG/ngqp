@@ -1,7 +1,7 @@
 <div class="demo-browser__toolbar">
     <div class="demo-browser__buttons">
         <button class="demo-browser__button" title="{{ routerAdapter.history.length }} previous route(s)"
-                (click)="routerAdapter.goBack()" [disabled]="routerAdapter.history.length === 0">
+                (click)="goBack()" [disabled]="routerAdapter.history.length === 0">
             <fa-icon [icon]="faArrowLeft" size="1x"></fa-icon>
         </button>
     </div>
@@ -12,7 +12,7 @@
             <span>app.io</span>
         </span>
         <input #urlInput type="text" class="demo-browser__url__input"
-               [ngModel]="routerAdapter.url" (keyup.enter)="routerAdapter.navigateToQueryParamString($event.target.value)" />
+               [ngModel]="routerAdapter.url" (keyup.enter)="routeTo($event.target.value)" />
     </div>
 </div>
 
