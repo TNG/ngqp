@@ -1,0 +1,75 @@
+{
+  "configVersion": 1,
+  "index": "https://www.ngqp.io/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://www.ngqp.io/favicon.ico",
+        "https://www.ngqp.io/index.html",
+        "https://www.ngqp.io/main.c41db487e180af61c553.js",
+        "https://www.ngqp.io/polyfills.deab618104b09fa70d5b.js",
+        "https://www.ngqp.io/runtime.ec2944dd8b20ec099bf3.js",
+        "https://www.ngqp.io/styles.aafc041d562e6fbca9ff.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://www.ngqp.io/assets/icons/icon-128x128.png",
+        "https://www.ngqp.io/assets/icons/icon-144x144.png",
+        "https://www.ngqp.io/assets/icons/icon-152x152.png",
+        "https://www.ngqp.io/assets/icons/icon-192x192.png",
+        "https://www.ngqp.io/assets/icons/icon-384x384.png",
+        "https://www.ngqp.io/assets/icons/icon-512x512.png",
+        "https://www.ngqp.io/assets/icons/icon-72x72.png",
+        "https://www.ngqp.io/assets/icons/icon-96x96.png",
+        "https://www.ngqp.io/assets/logo.png",
+        "https://www.ngqp.io/assets/logo.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://www.ngqp.io/assets/icons/icon-128x128.png": "72c967f1aab1dbc351f28cd39bc9f9fd8a9ca6bd",
+    "https://www.ngqp.io/assets/icons/icon-144x144.png": "cf60e45fe24b46f96595445aa57f20175e92670e",
+    "https://www.ngqp.io/assets/icons/icon-152x152.png": "c575917cc5e3b7e6e884b2fcb739787a317481c9",
+    "https://www.ngqp.io/assets/icons/icon-192x192.png": "c85d392a71a27bdd5161db6670d3cc2361203a48",
+    "https://www.ngqp.io/assets/icons/icon-384x384.png": "46d091368338994c97b0126332e51b72dfc79b7c",
+    "https://www.ngqp.io/assets/icons/icon-512x512.png": "2c9efb4d3d5e4550e0d13d9e7e5f9cbc9b3ed31b",
+    "https://www.ngqp.io/assets/icons/icon-72x72.png": "6fcec71e1a474c5732e6458131bc644a50363f27",
+    "https://www.ngqp.io/assets/icons/icon-96x96.png": "c1630af25d5e9abc3c241bcc429c9a60ff61d7c4",
+    "https://www.ngqp.io/assets/logo.png": "15ee4a615091cf5a5d412ef2c63b5f25331ef29d",
+    "https://www.ngqp.io/assets/logo.svg": "1c0429f0ff733d22a9268ed85a6d22210ac86a98",
+    "https://www.ngqp.io/favicon.ico": "3a0cdb8a4a0721e58bc49bf7b9736dc820a814da",
+    "https://www.ngqp.io/index.html": "88f1d46e9cddbe5e9f9a993ef76b0f976c92cc96",
+    "https://www.ngqp.io/main.c41db487e180af61c553.js": "bf5a5435384063a009f5664d166a63dfb4e221b0",
+    "https://www.ngqp.io/polyfills.deab618104b09fa70d5b.js": "bbc796003aa10114b04f900dbedd4492006e0165",
+    "https://www.ngqp.io/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "https://www.ngqp.io/styles.aafc041d562e6fbca9ff.css": "ec4aa4bb9db2452ad121c9de48560797c01ca689"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
