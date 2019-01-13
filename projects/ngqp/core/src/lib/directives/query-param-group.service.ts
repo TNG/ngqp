@@ -108,6 +108,18 @@ export class QueryParamGroupService implements OnDestroy {
         this.directives.push(directive);
     }
 
+    /**
+     * Deregisters a {@link QueryParamNameDirective} directive.
+     */
+    public removeQueryParam(directive: QueryParamNameDirective): void {
+        const index = this.directives.indexOf(directive);
+        if (index === -1) {
+            return;
+        }
+
+        this.directives.splice(index, 1);
+    }
+
     private startSynchronization() {
         this.setupGroupChangeListener();
         this.setupParamChangeListeners();
