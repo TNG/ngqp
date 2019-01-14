@@ -2,7 +2,7 @@ import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/cor
 import { Params } from '@angular/router';
 import { EMPTY, from, Observable, Subject } from 'rxjs';
 import { catchError, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { isMissing, NOP } from '../util';
+import { isMissing, isPresent, NOP } from '../util';
 import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
 import { QueryParam } from '../model/query-param';
@@ -102,7 +102,7 @@ export class QueryParamGroupService implements OnDestroy {
         // Proxy updates from the view to debounce them (if needed).
         const debouncedQueue$ = new Subject<any>();
         debouncedQueue$.pipe(
-            !isMissing(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
+            isPresent(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
             map((newValue: any) => this.getParamsForValue(queryParam, newValue)),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(params));
@@ -172,8 +172,8 @@ export class QueryParamGroupService implements OnDestroy {
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
                 const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
                 const newValue = queryParam.multi
-                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.param))
-                    : this.deserialize(queryParam, queryParamMap.get(queryParam.param));
+                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.urlParam))
+                    : this.deserialize(queryParam, queryParamMap.get(queryParam.urlParam));
 
                 this.directives
                     .filter(directive => directive.name === queryParamName)
@@ -229,7 +229,7 @@ export class QueryParamGroupService implements OnDestroy {
         // overriden by it.
         return {
             ...(combinedParams || {}),
-            [ queryParam.param ]: newValue,
+            [ queryParam.urlParam ]: newValue,
         };
     }
 

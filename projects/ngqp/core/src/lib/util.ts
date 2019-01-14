@@ -13,8 +13,13 @@ export function isMissing(obj: any): obj is null | undefined {
 }
 
 /** @internal */
+export function isPresent<T>(obj: T): obj is Exclude<T, null | undefined> {
+    return !isMissing(obj);
+}
+
+/** @internal */
 export function isFunction(obj: any): obj is Function {
-    return !isMissing(obj) && typeof obj === 'function';
+    return isPresent(obj) && typeof obj === 'function';
 }
 
 /** @internal */

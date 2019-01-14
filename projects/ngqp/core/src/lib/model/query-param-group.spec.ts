@@ -8,8 +8,7 @@ describe(QueryParamGroup.name, () => {
     let stringParam: QueryParam<string>;
 
     beforeEach(() => {
-        stringParam = new QueryParam({
-            param: 'q',
+        stringParam = new QueryParam('q', {
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
         });

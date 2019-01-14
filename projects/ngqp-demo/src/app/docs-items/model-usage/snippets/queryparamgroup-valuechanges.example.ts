@@ -11,7 +11,7 @@ export class ExampleComponent implements OnDestroy {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            myParam: qpb.stringParam({ param: 'q' }),
+            myParam: qpb.stringParam('q'),
         });
 
         this.paramGroup.valueChanges.pipe(

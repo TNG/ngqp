@@ -17,8 +17,7 @@ export class CombineWithExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            textInput: qpb.stringParam({
-                param: 'q',
+            textInput: qpb.stringParam('q', {
                 combineWith: (previousValue: string, value: string) => {
                     if (!this.fruits.includes(value)) {
                         return null;
@@ -27,9 +26,7 @@ export class CombineWithExampleComponent {
                     return { 'fruit': value };
                 },
             }),
-            selectedFruit: qpb.stringParam({
-                param: 'fruit',
-            }),
+            selectedFruit: qpb.stringParam('fruit'),
         });
     }
 

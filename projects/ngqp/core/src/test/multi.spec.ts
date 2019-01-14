@@ -20,8 +20,7 @@ class TestComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            param: qpb.stringParam({
-                param: 'q',
+            param: qpb.stringParam('q', {
                 multi: true,
             }),
         });

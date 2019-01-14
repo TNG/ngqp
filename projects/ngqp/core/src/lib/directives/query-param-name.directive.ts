@@ -18,7 +18,7 @@ export class QueryParamNameDirective implements OnChanges, OnDestroy {
 
     /**
      * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.
-     * Note that this does not refer to the [parameter name]{@link QueryParam#param}.
+     * Note that this does not refer to the [parameter name]{@link QueryParam#urlParam}.
      */
     @Input('queryParamName')
     public name: string;

@@ -17,8 +17,7 @@ export class MultiExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            selectedFruit: qpb.stringParam({
-                param: 'fruit',
+            selectedFruit: qpb.stringParam('fruit', {
                 multi: true,
             }),
         });

@@ -19,12 +19,10 @@ class BasicTestComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            param1: qpb.stringParam({
-                param: 'q1',
+            param1: qpb.stringParam('q1', {
                 emptyOn: 'Test',
             }),
-            param2: qpb.stringParam({
-                param: 'q2',
+            param2: qpb.stringParam('q2', {
                 emptyOn: 'Test',
                 compareWith: (a, b) => (a || '').toLowerCase() === (b || '').toLowerCase(),
             }),

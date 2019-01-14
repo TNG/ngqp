@@ -4,14 +4,6 @@ import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack
  * List of options which can be passed to {@link QueryParam}.
  */
 export interface QueryParamOpts<T> {
-    /**
-     * The name of the parameter to be used in the URL.
-     *
-     * This represents the name of the query parameter which will be
-     * used in the URL (e.g., `?q=`), which differs from the name of
-     * the {@link QueryParam} model used inside {@link QueryParamGroup}.
-     */
-    param: string;
 
     /**
      * The serializer used for this parameter.

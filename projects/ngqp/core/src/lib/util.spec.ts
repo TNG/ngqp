@@ -1,4 +1,4 @@
-import { areEqualUsing, isFunction, isMissing, LOOSE_IDENTITY_COMPARATOR, wrapTryCatch } from './util';
+import {areEqualUsing, isFunction, isMissing, isPresent, LOOSE_IDENTITY_COMPARATOR, wrapTryCatch} from './util';
 import { Comparator } from './types';
 
 describe(isMissing.name, () => {
@@ -9,6 +9,16 @@ describe(isMissing.name, () => {
     it('returns false for zero', () => expect(isMissing(0)).toBe(false));
     it('returns false for empty array', () => expect(isMissing([])).toBe(false));
     it('returns false for empty object', () => expect(isMissing({})).toBe(false));
+});
+
+describe(isPresent.name, () => {
+    it('returns false for undefined', () => expect(isPresent(undefined)).toBe(false));
+    it('returns false for null', () => expect(isPresent(null)).toBe(false));
+
+    it('returns true for empty string', () => expect(isPresent('')).toBe(true));
+    it('returns true for zero', () => expect(isPresent(0)).toBe(true));
+    it('returns true for empty array', () => expect(isPresent([])).toBe(true));
+    it('returns true for empty object', () => expect(isPresent({})).toBe(true));
 });
 
 describe(isFunction.name, () => {

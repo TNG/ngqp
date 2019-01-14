@@ -30,7 +30,7 @@ const SNIPPETS: { [ key: string ]: string } = {
                 this.paramGroup = queryParamBuilder.group({
                     // Defines a simple string-typed parameter which will use the query
                     // parameter "q".
-                    searchText: queryParamBuilder.stringParam({ param: 'q' }),
+                    searchText: queryParamBuilder.stringParam('q'),
                 });
             }
 
@@ -52,7 +52,7 @@ export class GettingStartedComponent {
 
     constructor(private queryParamBuilder: QueryParamBuilder) {
         this.paramGroup = queryParamBuilder.group({
-            searchText: queryParamBuilder.stringParam({ param: 'q' }),
+            searchText: queryParamBuilder.stringParam('q'),
         });
     }
 

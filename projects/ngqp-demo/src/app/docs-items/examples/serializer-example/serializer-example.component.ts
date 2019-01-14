@@ -16,8 +16,7 @@ export class SerializerExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            status: qpb.booleanParam({
-                param: 'status',
+            status: qpb.booleanParam('status', {
                 serialize: (value: boolean): string => value ? 'active' : 'inactive',
                 deserialize: (value: string): boolean => !value || value === 'active',
             }),

@@ -16,8 +16,7 @@ export class ControlValueAccessorDirectiveExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            page: qpb.numberParam({
-                param: 'page',
+            page: qpb.numberParam('page', {
                 emptyOn: 1,
             }),
         });
