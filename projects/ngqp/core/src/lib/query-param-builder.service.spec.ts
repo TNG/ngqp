@@ -13,7 +13,7 @@ describe(QueryParamBuilder.name, () => {
     describe('group', () => {
         it('can create a QueryParamGroup', () => {
             const group: QueryParamGroup = qpb.group({
-                q: qpb.stringParam({ param: 'q' }),
+                q: qpb.stringParam('q'),
             });
 
             expect(group).toBeTruthy();
@@ -22,44 +22,43 @@ describe(QueryParamBuilder.name, () => {
 
     describe('stringParam', () => {
         it('can create a parameter', () => {
-            const param: QueryParam<string> = qpb.stringParam({ param: 'q' });
+            const param: QueryParam<string> = qpb.stringParam('q');
             expect(param).toBeTruthy();
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<string[]> = qpb.stringParam({ param: 'q', multi: true });
+            const param: QueryParam<string[]> = qpb.stringParam('q', { multi: true });
             expect(param).toBeTruthy();
         });
     });
 
     describe('numberParam', () => {
         it('can create a parameter', () => {
-            const param: QueryParam<number> = qpb.numberParam({ param: 'q' });
+            const param: QueryParam<number> = qpb.numberParam('q');
             expect(param).toBeTruthy();
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<number[]> = qpb.numberParam({ param: 'q', multi: true });
+            const param: QueryParam<number[]> = qpb.numberParam('q', { multi: true });
             expect(param).toBeTruthy();
         });
     });
 
     describe('booleanParam', () => {
         it('can create a parameter', () => {
-            const param: QueryParam<boolean> = qpb.booleanParam({ param: 'q' });
+            const param: QueryParam<boolean> = qpb.booleanParam('q');
             expect(param).toBeTruthy();
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<boolean[]> = qpb.booleanParam({ param: 'q', multi: true });
+            const param: QueryParam<boolean[]> = qpb.booleanParam('q', { multi: true });
             expect(param).toBeTruthy();
         });
     });
 
     describe('param', () => {
         it('can create a parameter', () => {
-            const param: QueryParam<Item> = qpb.param<Item>({
-                param: 'q',
+            const param: QueryParam<Item> = qpb.param<Item>('q', {
                 serialize: () => '',
                 deserialize: () => undefined,
             });
@@ -67,8 +66,7 @@ describe(QueryParamBuilder.name, () => {
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<Item[]> = qpb.param<Item>({
-                param: 'q',
+            const param: QueryParam<Item[]> = qpb.param<Item>('q', {
                 multi: true,
                 serialize: () => '',
                 deserialize: () => undefined,

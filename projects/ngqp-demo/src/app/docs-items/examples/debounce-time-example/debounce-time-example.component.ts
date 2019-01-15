@@ -16,8 +16,7 @@ export class DebounceTimeExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            searchText: qpb.stringParam({
-                param: 'q',
+            searchText: qpb.stringParam('q', {
                 debounceTime: 1000,
             }),
         });

@@ -8,7 +8,6 @@ import { take } from 'rxjs/operators';
 describe(QueryParam.name, () => {
     describe('constructor', () => {
         const opts: Required<QueryParamOpts<any>> = {
-            param: 'q',
             serialize: (value: any) => '',
             deserialize: (value: string) => value,
             multi: false,
@@ -19,35 +18,34 @@ describe(QueryParam.name, () => {
         };
 
         it('throws an error if no parameter is provided', () => {
-            expect(() => new QueryParam({
-                ...opts,
-                param: undefined,
-            })).toThrowError('Please provide a parameter name for each query parameter.');
+            expect(() => new QueryParam(null, {
+                ...opts
+            })).toThrowError('Please provide a URL parameter name for each query parameter.');
         });
 
         it('throws an error if no serializer is provided', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 serialize: undefined,
             })).toThrowError('serialize must be a function, but received undefined');
         });
 
         it('throws an error if no deserializer is provided', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 deserialize: undefined,
             })).toThrowError('deserialize must be a function, but received undefined');
         });
 
         it('does not require compareWith if no emptyOn is provided', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 compareWith: undefined,
             })).not.toThrow();
         });
 
         it('throws an error if emptyOn, but no compareWith is provided', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 emptyOn: 42,
                 compareWith: undefined,
@@ -55,7 +53,7 @@ describe(QueryParam.name, () => {
         });
 
         it('throws an error if emptyOn is provided together with multi', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 multi: true,
                 emptyOn: 42,
@@ -64,14 +62,14 @@ describe(QueryParam.name, () => {
         });
 
         it('does not require combineWith', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 combineWith: undefined,
             })).not.toThrow();
         });
 
         it('throws an error if combineWith is not a function', () => {
-            expect(() => new QueryParam({
+            expect(() => new QueryParam('q', {
                 ...opts,
                 combineWith: 42 as any,
             })).toThrowError('combineWith must be a function, but received 42');
@@ -82,8 +80,7 @@ describe(QueryParam.name, () => {
         let queryParam: QueryParam<string>;
 
         beforeEach(() => {
-            queryParam = new QueryParam<string>({
-                param: 'q',
+            queryParam = new QueryParam<string>('q', {
                 serialize: DEFAULT_STRING_SERIALIZER,
                 deserialize: DEFAULT_STRING_DESERIALIZER,
             });
@@ -115,8 +112,7 @@ describe(QueryParam.name, () => {
         let queryParam: QueryParam<string>;
 
         beforeEach(() => {
-            queryParam = new QueryParam<string>({
-                param: 'q',
+            queryParam = new QueryParam<string>('q', {
                 serialize: DEFAULT_STRING_SERIALIZER,
                 deserialize: DEFAULT_STRING_DESERIALIZER,
             });

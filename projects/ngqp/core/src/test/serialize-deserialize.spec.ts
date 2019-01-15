@@ -18,8 +18,7 @@ class BasicTestComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            param: qpb.stringParam({
-                param: 'q',
+            param: qpb.stringParam('q', {
                 serialize: value => value ? value.toUpperCase() : null,
                 deserialize: value => value ? value.toLowerCase() : null,
             }),

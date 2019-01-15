@@ -16,8 +16,7 @@ export class ExampleComponent implements OnInit, OnDestroy {
         this.paramGroup = qpb.group({
             // We name the model "search", but in the URL we want it to be "q";
             // also, we want this input to be debounced by 300ms.
-            search: qpb.stringParam({
-                param: 'q',
+            search: qpb.stringParam('q', {
                 debounceTime: 300,
             }),
 
@@ -27,8 +26,7 @@ export class ExampleComponent implements OnInit, OnDestroy {
 
             // The price cap is a numeric parameter, and we want the default value
             // to be 0
-            priceCap: qpb.numberParam({
-                param: 'costsLessThan',
+            priceCap: qpb.numberParam('costsLessThan', {
                 emptyOn: 0,
             }),
         });

@@ -43,73 +43,85 @@ export class QueryParamBuilder {
     }
 
     /** @ignore */
-    public stringParam(opts: QueryParamOpts<string[]> & { multi: true }): QueryParam<string[]>;
+    public stringParam(urlParam: string, opts: QueryParamOpts<string[]> & { multi: true }): QueryParam<string[]>;
     /** @ignore */
-    public stringParam(opts: QueryParamOpts<string>): QueryParam<string>;
+    public stringParam(urlParam: string, opts?: QueryParamOpts<string>): QueryParam<string>;
     /**
      * Create a new parameter of type `string`.
      *
      * See {@link QueryParamOpts}.
      */
-    public stringParam(opts: QueryParamOpts<string> | QueryParamOpts<string[]>): QueryParam<string> | QueryParam<string[]> {
-        return new QueryParam<any>({
+    public stringParam(
+        urlParam: string,
+        opts: QueryParamOpts<string> | QueryParamOpts<string[]> = {}
+    ): QueryParam<string> | QueryParam<string[]> {
+        return new QueryParam<any>(urlParam, {
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        });
+        } as QueryParamOpts<any>);
     }
 
     /** @ignore */
-    public numberParam(opts: QueryParamOpts<number[]> & { multi: true }): QueryParam<number[]>;
+    public numberParam(urlParam: string, opts: QueryParamOpts<number[]> & { multi: true }): QueryParam<number[]>;
     /** @ignore */
-    public numberParam(opts: QueryParamOpts<number>): QueryParam<number>;
+    public numberParam(urlParam: string, opts?: QueryParamOpts<number>): QueryParam<number>;
     /**
      * Create a new parameter of type `number`.
      *
      * See {@link QueryParamOpts}.
      */
-    public numberParam(opts: QueryParamOpts<number> | QueryParamOpts<number[]>): QueryParam<number> | QueryParam<number[]> {
-        return new QueryParam<any>({
+    public numberParam(
+        urlParam: string,
+        opts: QueryParamOpts<number> | QueryParamOpts<number[]> = {}
+    ): QueryParam<number> | QueryParam<number[]> {
+        return new QueryParam<any>(urlParam, {
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        });
+        } as QueryParamOpts<any>);
     }
 
     /** @ignore */
-    public booleanParam(opts: QueryParamOpts<boolean[]> & { multi: true }): QueryParam<boolean[]>;
+    public booleanParam(urlParam: string, opts: QueryParamOpts<boolean[]> & { multi: true }): QueryParam<boolean[]>;
     /** @ignore */
-    public booleanParam(opts: QueryParamOpts<boolean>): QueryParam<boolean>;
+    public booleanParam(urlParam: string, opts?: QueryParamOpts<boolean>): QueryParam<boolean>;
     /**
      * Create a new parameter of type `boolean`.
      *
      * See {@link QueryParamOpts}.
      */
-    public booleanParam(opts: QueryParamOpts<boolean> | QueryParamOpts<boolean[]>): QueryParam<boolean> | QueryParam<boolean[]> {
-        return new QueryParam<any>({
+    public booleanParam(
+        urlParam: string,
+        opts: QueryParamOpts<boolean> | QueryParamOpts<boolean[]> = {}
+    ): QueryParam<boolean> | QueryParam<boolean[]> {
+        return new QueryParam<any>(urlParam, {
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        });
+        } as QueryParamOpts<any>);
     }
 
     /** @ignore */
-    public param<T>(opts: QueryParamOpts<T[]> & { multi: true }): QueryParam<T[]>;
+    public param<T>(urlParam: string, opts: QueryParamOpts<T[]> & { multi: true }): QueryParam<T[]>;
     /** @ignore */
-    public param<T>(opts: QueryParamOpts<T>): QueryParam<T>;
+    public param<T>(urlParam: string, opts?: QueryParamOpts<T>): QueryParam<T>;
     /**
      * Create a new parameter for a complex type.
      *
      * See {@link QueryParamOpts}.
      */
-    public param<T>(opts: QueryParamOpts<T> | QueryParamOpts<T[]>): QueryParam<T> | QueryParam<T[]> {
-        return new QueryParam<any>({
+    public param<T>(
+        urlParam: string,
+        opts: QueryParamOpts<T> | QueryParamOpts<T[]> = {}
+    ): QueryParam<T> | QueryParam<T[]> {
+        return new QueryParam<any>(urlParam, {
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        });
+        } as QueryParamOpts<any>);
     }
 
 }

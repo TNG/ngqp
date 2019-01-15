@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { isFunction, isMissing, wrapTryCatch } from '../util';
+import { isFunction, isMissing, isPresent, wrapTryCatch } from '../util';
 import { OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from '../types';
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from '../serializers';
 import { QueryParamGroup } from './query-param-group';
@@ -28,8 +28,14 @@ export class QueryParam<T> {
      */
     public value: T = null;
 
-    /** See {@link QueryParamOpts#param}. */
-    public readonly param: string | null;
+    /**
+     * The name of the parameter to be used in the URL.
+     *
+     * This represents the name of the query parameter which will be
+     * used in the URL (e.g., `?q=`), which differs from the name of
+     * the {@link QueryParam} model used inside {@link QueryParamGroup}.
+     */
+    public readonly urlParam: string;
 
     /** @internal */
     public readonly serialize: ParamSerializer<Unpack<T>>;
@@ -49,13 +55,13 @@ export class QueryParam<T> {
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
 
-    constructor(opts: QueryParamOpts<T>) {
-        const { param, serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
+    constructor(urlParam: string, opts: QueryParamOpts<T> = {}) {
+        const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
         const multi = opts.multi === true;
         const hasEmptyOn = emptyOn !== undefined;
 
-        if (isMissing(param)) {
-            throw new Error(`Please provide a parameter name for each query parameter.`);
+        if (isMissing(urlParam)) {
+            throw new Error(`Please provide a URL parameter name for each query parameter.`);
         }
 
         if (!isFunction(serialize)) {
@@ -70,22 +76,23 @@ export class QueryParam<T> {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 
-        if (!isMissing(combineWith) && !isFunction(combineWith)) {
+        if (isPresent(combineWith) && !isFunction(combineWith)) {
             throw new Error(`combineWith must be a function, but received ${combineWith}`);
         }
 
-        if (multi && !isMissing(emptyOn)) {
-            throw new Error(`emptyOn is only supported for single-value parameters, but ${param} is a multi-value parameter.`);
+        if (multi && isPresent(emptyOn)) {
+            throw new Error(`emptyOn is only supported for single-value parameters, but ${urlParam} is a multi-value parameter.`);
         }
 
-        this.param = param;
+        this.urlParam = urlParam;
+
         this.serialize = wrapTryCatch(
             !hasEmptyOn ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            `Error while serializing value for ${param}`
+            `Error while serializing value for ${urlParam}`
         );
         this.deserialize = wrapTryCatch(
             !hasEmptyOn ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
-            `Error while deserializing value for ${param}`
+            `Error while deserializing value for ${urlParam}`
         );
         this.multi = multi;
         this.debounceTime = debounceTime;
@@ -125,7 +132,7 @@ export class QueryParam<T> {
             this._valueChanges.next(this.value);
         }
 
-        if (!isMissing(this.parent) && !opts.onlySelf) {
+        if (isPresent(this.parent) && !opts.onlySelf) {
             this.parent._updateValue(opts);
         }
     }
