@@ -403,6 +403,12 @@ to represent the company, product, or service to which they refer.**
 @fortawesome/angular-fontawesome
 MIT
 
+@angular/forms
+MIT
+
+@ngqp/core
+MIT
+
 @fortawesome/free-solid-svg-icons
 (CC-BY-4.0 AND MIT)
 Font Awesome Free License
@@ -441,9 +447,6 @@ Awesome, nor vice versa. **Please do not use brand logos for any purpose except
 to represent the company, product, or service to which they refer.**
 
 
-@angular/forms
-MIT
-
 @ng-bootstrap/ng-bootstrap
 MIT
 The MIT License (MIT)
@@ -468,9 +471,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-
-@ngqp/core
-MIT
 
 @angular/service-worker
 MIT
