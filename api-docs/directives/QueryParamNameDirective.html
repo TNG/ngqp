@@ -192,7 +192,7 @@ which is required to have a <a href="https://angular.io/api/forms/ControlValueAc
                     </td>
                     <td class="col-md-10">
                         <div><p>The name of the <a href="../classes/QueryParam.html">QueryParam</a> inside its parent <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.
-Note that this does not refer to the <a href="../classes/QueryParam.html#param">parameter name</a>.</p>
+Note that this does not refer to the <a href="../classes/QueryParam.html#urlParam">parameter name</a>.</p>
 </div>
                             <p>
                             <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
@@ -238,7 +238,7 @@ export class QueryParamNameDirective implements OnChanges, OnDestroy {
 
     /**
      * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.
-     * Note that this does not refer to the [parameter name]{@link QueryParam#param}.
+     * Note that this does not refer to the [parameter name]{@link QueryParam#urlParam}.
      */
     @Input(&#x27;queryParamName&#x27;)
     public name: string;

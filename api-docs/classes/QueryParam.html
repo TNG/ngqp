@@ -92,7 +92,7 @@ to a form control.</p>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#param">param</a>
+                                <a href="#urlParam">urlParam</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -137,12 +137,12 @@ to a form control.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<T></a>)</code>
+<code>constructor(urlParam: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<T></a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/lib/model/query-param.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/lib/model/query-param.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -159,6 +159,18 @@ to a form control.</p>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                <tr>
+                                                        <td>urlParam</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                                 <tr>
                                                         <td>opts</td>
                                                   
@@ -189,38 +201,41 @@ to a form control.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="param"></a>
+                        <a name="urlParam"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
                                 <span class="modifier">Readonly</span>
-                            param
+                            urlParam
                             </b>
-                            <a href="#param"><span class="icon ion-ios-link"></span></a>
+                            <a href="#urlParam"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>param:     <code>string | null</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>urlParam:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>string | null</code>
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/lib/model/query-param.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/lib/model/query-param.ts:38</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html#param">QueryParamOpts</a>. </p>
+                        <div class="io-description"><p>The name of the parameter to be used in the URL.</p>
+<p>This represents the name of the query parameter which will be
+used in the URL (e.g., <code>?q=</code>), which differs from the name of
+the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.</p>
 </div>
                     </td>
                 </tr>
@@ -352,7 +367,7 @@ to a form control.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/lib/model/query-param.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/lib/model/query-param.ts:118</a></div>
                             </td>
                         </tr>
 
@@ -433,7 +448,7 @@ the value to the URL.</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable, Subject } from &#x27;rxjs&#x27;;
-import { isFunction, isMissing, wrapTryCatch } from &#x27;../util&#x27;;
+import { isFunction, isMissing, isPresent, wrapTryCatch } from &#x27;../util&#x27;;
 import { OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from &#x27;../types&#x27;;
 import { createEmptyOnDeserializer, createEmptyOnSerializer } from &#x27;../serializers&#x27;;
 import { QueryParamGroup } from &#x27;./query-param-group&#x27;;
@@ -462,8 +477,14 @@ export class QueryParam&lt;T&gt; {
      */
     public value: T &#x3D; null;
 
-    /** See {@link QueryParamOpts#param}. */
-    public readonly param: string | null;
+    /**
+     * The name of the parameter to be used in the URL.
+     *
+     * This represents the name of the query parameter which will be
+     * used in the URL (e.g., &#x60;?q&#x3D;&#x60;), which differs from the name of
+     * the {@link QueryParam} model used inside {@link QueryParamGroup}.
+     */
+    public readonly urlParam: string;
 
     /** @internal */
     public readonly serialize: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
@@ -483,13 +504,13 @@ export class QueryParam&lt;T&gt; {
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction&lt;T&gt;[] &#x3D; [];
 
-    constructor(opts: QueryParamOpts&lt;T&gt;) {
-        const { param, serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } &#x3D; opts;
+    constructor(urlParam: string, opts: QueryParamOpts&lt;T&gt; &#x3D; {}) {
+        const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } &#x3D; opts;
         const multi &#x3D; opts.multi &#x3D;&#x3D;&#x3D; true;
         const hasEmptyOn &#x3D; emptyOn !&#x3D;&#x3D; undefined;
 
-        if (isMissing(param)) {
-            throw new Error(&#x60;Please provide a parameter name for each query parameter.&#x60;);
+        if (isMissing(urlParam)) {
+            throw new Error(&#x60;Please provide a URL parameter name for each query parameter.&#x60;);
         }
 
         if (!isFunction(serialize)) {
@@ -504,22 +525,23 @@ export class QueryParam&lt;T&gt; {
             throw new Error(&#x60;compareWith must be a function, but received ${compareWith}&#x60;);
         }
 
-        if (!isMissing(combineWith) &amp;&amp; !isFunction(combineWith)) {
+        if (isPresent(combineWith) &amp;&amp; !isFunction(combineWith)) {
             throw new Error(&#x60;combineWith must be a function, but received ${combineWith}&#x60;);
         }
 
-        if (multi &amp;&amp; !isMissing(emptyOn)) {
-            throw new Error(&#x60;emptyOn is only supported for single-value parameters, but ${param} is a multi-value parameter.&#x60;);
+        if (multi &amp;&amp; isPresent(emptyOn)) {
+            throw new Error(&#x60;emptyOn is only supported for single-value parameters, but ${urlParam} is a multi-value parameter.&#x60;);
         }
 
-        this.param &#x3D; param;
+        this.urlParam &#x3D; urlParam;
+
         this.serialize &#x3D; wrapTryCatch(
             !hasEmptyOn ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            &#x60;Error while serializing value for ${param}&#x60;
+            &#x60;Error while serializing value for ${urlParam}&#x60;
         );
         this.deserialize &#x3D; wrapTryCatch(
             !hasEmptyOn ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
-            &#x60;Error while deserializing value for ${param}&#x60;
+            &#x60;Error while deserializing value for ${urlParam}&#x60;
         );
         this.multi &#x3D; multi;
         this.debounceTime &#x3D; debounceTime;
@@ -559,7 +581,7 @@ export class QueryParam&lt;T&gt; {
             this._valueChanges.next(this.value);
         }
 
-        if (!isMissing(this.parent) &amp;&amp; !opts.onlySelf) {
+        if (isPresent(this.parent) &amp;&amp; !opts.onlySelf) {
             this.parent._updateValue(opts);
         }
     }
