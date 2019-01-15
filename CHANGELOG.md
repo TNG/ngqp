@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/Airblader/ngqp/compare/v0.6.0...v0.7.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **docs:** Fix duplicate fragment ([00a5667](https://github.com/Airblader/ngqp/commit/00a5667))
+
+
+### Features
+
+* **core:** New QueryParam creation syntax ([98fe148](https://github.com/Airblader/ngqp/commit/98fe148))
+* **docs:** Added noscript ([d33fa5d](https://github.com/Airblader/ngqp/commit/d33fa5d))
+* **docs:** Turn demo app into a PWA ([f570513](https://github.com/Airblader/ngqp/commit/f570513)), closes [#30](https://github.com/Airblader/ngqp/issues/30)
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/Airblader/ngqp/compare/v0.5.1...v0.6.0) (2019-01-13)
 
