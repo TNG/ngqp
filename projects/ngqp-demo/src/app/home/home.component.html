@@ -9,11 +9,25 @@
                 <p class="lead">
                     Declaratively synchronize form controls with the URL
                 </p>
-                <p class="mb-4">
-                    ngqp is an open source library which connects form controls with query parameters and keeps them
-                    synchronized in both directions, making it easy to serialize state into the URL for shareable
-                    links and worry-free page reloading.
+                <p>
+                    ngqp synchronizes the values of form control components with query parameters in the URL, making
+                    it easy to serialize UI state into the URL to create shareable links and improve user experience.
                 </p>
+                <demo-browser [queryParamGroup]="paramGroup" class="border mt-2 mb-4">
+                    <p>Try it out! Change these values and watch the URL.</p>
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-2 mb-md-0">
+                            <input type="text" autocomplete="off" placeholder="Type here" class="form-control" queryParamName="text" />
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <select class="form-control" queryParamName="choice">
+                                <option value="Apple">Apple</option>
+                                <option value="Banana">Banana</option>
+                                <option value="Orange">Orange</option>
+                            </select>
+                        </div>
+                    </div>
+                </demo-browser>
                 <div class="row mx-n2">
                     <div class="col-md px-4 px-md-2">
                         <a class="btn btn-lg btn-primary w-100 mb-3" routerLink="/getting-started">Get started</a>

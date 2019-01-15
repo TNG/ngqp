@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IconDefinition, faGlassCheers, faCogs, faHeart, faAlignLeft } from '@fortawesome/free-solid-svg-icons';
+import { createStringDeserializer, QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
+import { faAlignLeft, faCogs, faGlassCheers, faHeart, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 interface BenefitItem {
@@ -52,5 +53,16 @@ export class HomeComponent {
             `,
         },
     ];
+
+    public paramGroup: QueryParamGroup;
+
+    constructor(qpb: QueryParamBuilder) {
+        this.paramGroup = qpb.group({
+            text: qpb.stringParam('q'),
+            choice: qpb.stringParam('fruit', {
+                deserialize: createStringDeserializer('Apple'),
+            }),
+        });
+    }
 
 }
