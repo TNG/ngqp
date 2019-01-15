@@ -14,19 +14,14 @@
                     it easy to serialize UI state into the URL to create shareable links and improve user experience.
                 </p>
                 <demo-browser [queryParamGroup]="paramGroup" class="border mt-2 mb-4">
-                    <p>Try it out! Change these values and watch the URL.</p>
-                    <div class="row">
-                        <div class="col-12 col-md-6 mb-2 mb-md-0">
-                            <input type="text" autocomplete="off" placeholder="Type here" class="form-control" queryParamName="text" />
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <select class="form-control" queryParamName="choice">
-                                <option value="Apple">Apple</option>
-                                <option value="Banana">Banana</option>
-                                <option value="Orange">Orange</option>
-                            </select>
-                        </div>
-                    </div>
+                    <p><em>Try it out!</em> Change these values and watch the URL above.</p>
+                    <input type="text" autocomplete="off" placeholder="Type here" class="form-control mb-2" queryParamName="text" />
+                    <select class="form-control" queryParamName="choice">
+                        <option [value]="null">Choose an option</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Orange">Orange</option>
+                    </select>
                 </demo-browser>
                 <div class="row mx-n2">
                     <div class="col-md px-4 px-md-2">

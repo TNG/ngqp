@@ -59,9 +59,7 @@ export class HomeComponent {
     constructor(qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
             text: qpb.stringParam('q'),
-            choice: qpb.stringParam('fruit', {
-                deserialize: createStringDeserializer('Apple'),
-            }),
+            choice: qpb.stringParam('fruit'),
         });
     }
 
