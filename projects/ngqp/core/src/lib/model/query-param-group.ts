@@ -93,44 +93,59 @@ export class QueryParamGroup {
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public patchValue(value: Record<string, any>, opts: { emitEvent?: boolean } = {}): void {
+    public patchValue(value: Record<string, any>, opts: {
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+    } = {}): void {
         Object.keys(value).forEach(queryParamName => {
             const queryParam = this.queryParams[ queryParamName ];
             if (isMissing(queryParam)) {
                 return;
             }
 
-            queryParam.setValue(value[ queryParamName ], { emitEvent: false });
+            queryParam.setValue(value[ queryParamName ], {
+                emitEvent: opts.emitEvent,
+                onlySelf: true,
+                emitModelToViewChange: false,
+            });
         });
 
-        if (opts.emitEvent !== false) {
-            this.changeFunctions.forEach(changeFn => changeFn(this.value));
-        }
+        this._updateValue(opts);
     }
 
     /**
      * Updates the value of this group by overwriting it.
      *
      * This sets the value of each provided parameter to the respective provided
-     * value. If a parameter is not listed, its value is set to `undefine`.
+     * value. If a parameter is not listed, its value is set to `undefined`.
      *
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public setValue(value: Record<string, any>, opts: { emitEvent?: boolean } = {}): void {
+    public setValue(value: Record<string, any>, opts: {
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+    } = {}): void {
         Object.keys(this.queryParams).forEach(queryParamName => {
-            this.queryParams[ queryParamName ].setValue(value[ queryParamName ], { emitEvent: false });
+            this.queryParams[ queryParamName ].setValue(value[ queryParamName ], {
+                emitEvent: opts.emitEvent,
+                onlySelf: true,
+                emitModelToViewChange: false,
+            });
         });
 
-        if (opts.emitEvent !== false) {
-            this.changeFunctions.forEach(changeFn => changeFn(this.value));
-        }
+        this._updateValue(opts);
     }
 
     /** @internal */
     public _updateValue(opts: {
         emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
     } = {}): void {
+        if (opts.emitModelToViewChange !== false) {
+            this.changeFunctions.forEach(changeFn => changeFn(this.value));
+        }
+
         if (opts.emitEvent !== false) {
             this._valueChanges.next(this.value);
         }

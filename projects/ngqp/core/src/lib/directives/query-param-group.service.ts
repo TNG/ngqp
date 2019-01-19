@@ -169,6 +169,8 @@ export class QueryParamGroupService implements OnDestroy {
         this.routerAdapter.queryParamMap.pipe(
             takeUntil(this.destroy$)
         ).subscribe(queryParamMap => {
+            const groupValue: Record<string, any> = {};
+
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
                 const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
                 const newValue = queryParam.multi
@@ -179,12 +181,13 @@ export class QueryParamGroupService implements OnDestroy {
                     .filter(directive => directive.name === queryParamName)
                     .forEach(directive => directive.valueAccessor.writeValue(newValue));
 
-                queryParam.value = newValue;
-                queryParam._updateValue({ emitEvent: true, onlySelf: true });
+                groupValue[ queryParam.urlParam ] = newValue;
             });
 
-            // We used onlySelf on the queryParams so that we can emit only once on the entire group.
-            this.queryParamGroup._updateValue({ emitEvent: true });
+            this.queryParamGroup.setValue(groupValue, {
+                emitEvent: true,
+                emitModelToViewChange: false,
+            });
         });
     }
 
