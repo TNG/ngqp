@@ -139,15 +139,15 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Listens for programmatic changes on group level and synchronizes to the router. */
     private setupGroupChangeListener() {
-        this.queryParamGroup._registerOnChange((value: Record<string, any>) => {
+        this.queryParamGroup._registerOnChange((newValue: Record<string, any>) => {
             let params: Params = {};
-            Object.keys(value).forEach(queryParamName => {
+            Object.keys(newValue).forEach(queryParamName => {
                 const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
                 if (isMissing(queryParam)) {
                     return;
                 }
 
-                params = { ...params, ...this.getParamsForValue(queryParam, value[ queryParamName ]) };
+                params = { ...params, ...this.getParamsForValue(queryParam, newValue[ queryParamName ]) };
             });
 
             this.enqueueNavigation(params);
