@@ -152,9 +152,9 @@
         by providing a <span apiDocsLink>QueryParam#combineWith</span> function.
     </p>
     <p>
-        This function will receive the previous and the new value of the parameter and is expected to return an object
-        containing any other changes to the query parameters. Note that this is a "raw" object, referencing the actual
-        URL parameter names directly. No (de-)serializers will be run and this effect does not cascade.
+        This function will receive the new value of the parameter and is expected to return an object containing any
+        other changes to the query parameters. Note that this is a "raw" object, referencing the actual URL parameter
+        names directly. No (de-)serializers will be run and this effect does not cascade.
     </p>
     <demo-combine-with-example></demo-combine-with-example>
 </docs-item>

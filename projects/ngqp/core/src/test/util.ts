@@ -1,6 +1,8 @@
-/** See https://github.com/angular/angular/issues/25837 */
-import { Comparator } from '../lib/types';
+import { Observable, ConnectableObservable } from 'rxjs';
+import { publishReplay } from 'rxjs/operators';
+import { TestScheduler } from 'rxjs/testing';
 
+/** See https://github.com/angular/angular/issues/25837 */
 export function setupNavigationWarnStub() {
     const warn = console.warn;
 
@@ -12,4 +14,14 @@ export function setupNavigationWarnStub() {
 
         return warn.apply(console, args);
     });
+}
+
+export const scheduler: TestScheduler = new TestScheduler((actual, expected) =>
+    expect(actual).toEqual(expected)
+);
+
+export function captureObservable<T>(source$: Observable<T>): Observable<T> {
+    const captured$ = source$.pipe(publishReplay()) as ConnectableObservable<T>;
+    captured$.connect();
+    return captured$;
 }

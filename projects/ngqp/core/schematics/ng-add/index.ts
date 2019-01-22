@@ -10,23 +10,28 @@ import {
 
 const NGQP_MODULE_NAME = 'QueryParamModule';
 
-function getAngularMajorVersion(): number | null {
+function getAngularVersion(): [number, number] | null {
     try {
         const version = '' + require('@angular/core/package.json').version;
-        const major = +version.split(/\./)[ 0 ];
-        return isNaN(major) ? null : major;
+        const [major, minor] = version.split(/\./);
+        return isNaN(+major) || isNaN(+minor) ? null : [+major, +minor];
     } catch (err) {
         return null;
     }
 }
 
-function getMatchingVersion(angularVersion: number, context: SchematicContext): number | null {
-    if (angularVersion <= 6) {
+function getMatchingVersion(angularVersion: [number, number], context: SchematicContext): number | null {
+    if (angularVersion[0] <= 6) {
         context.logger.warn(`You're using Angular 6 or earlier, but ngqp has been developed for Angular 7+.`);
         return null;
     }
 
-    switch (angularVersion) {
+    if (angularVersion[0] === 7 && angularVersion[1] < 2) {
+        context.logger.warn(`For Angular 7, at least version 7.2.0 is required.`);
+        return null;
+    }
+
+    switch (angularVersion[0]) {
         case 7:
             return 0;
         default:
@@ -36,7 +41,7 @@ function getMatchingVersion(angularVersion: number, context: SchematicContext): 
 
 function addMatchingVersion(): Rule {
     return (host: Tree, context: SchematicContext) => {
-        const angularVersion = getAngularMajorVersion();
+        const angularVersion = getAngularVersion();
         if (angularVersion === null) {
             context.logger.warn(`Could not determine version of @angular/core, proceeding without setting the version.`);
             return host;

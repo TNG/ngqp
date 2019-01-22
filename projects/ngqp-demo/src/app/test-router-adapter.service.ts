@@ -13,8 +13,10 @@ export class TestRouterAdapter implements RouterAdapter {
     public history: string[] = [];
 
     private _params: Params;
+    private _state: any;
 
-    public navigate(queryParams: Params, extras: RouterOptions = {}): Promise<boolean> {
+    public navigate(queryParams: Params, extras: RouterOptions & { state?: any } = {}): Promise<boolean> {
+        this._state = extras ? extras.state : null;
         const previousUrl = this.url;
 
         const newParams = {
@@ -28,7 +30,12 @@ export class TestRouterAdapter implements RouterAdapter {
         }
 
         this.emitQueryParamMap();
-        return Promise.resolve(true);
+        return Promise.resolve(true)
+            .then(() => this._state = null);
+    }
+
+    public getCurrentNavigation() {
+        return this._state ? { extras: { state: this._state } } : {};
     }
 
     public navigateToQueryParamString(value: string) {

@@ -24,6 +24,12 @@ function hasArraySerialization(queryParam: QueryParam<any>, values: string | str
     return isMultiQueryParam(queryParam);
 }
 
+/** @internal */
+class NavigationData {
+    constructor(public params: Params, public synthetic: boolean = false) {
+    }
+}
+
 /**
  * Service implementing the synchronization logic
  *
@@ -47,7 +53,7 @@ export class QueryParamGroupService implements OnDestroy {
      * A queue is used for navigations as we need to make sure all parameter changes
      * are executed in sequence as otherwise navigations might overwrite each other.
      */
-    private queue$ = new Subject<Params>();
+    private queue$ = new Subject<NavigationData>();
 
     /** @ignore */
     private destroy$ = new Subject<void>();
@@ -105,7 +111,7 @@ export class QueryParamGroupService implements OnDestroy {
             isPresent(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
             map((newValue: any) => this.getParamsForValue(queryParam, newValue)),
             takeUntil(this.destroy$),
-        ).subscribe(params => this.enqueueNavigation(params));
+        ).subscribe(params => this.enqueueNavigation(new NavigationData(params)));
 
         directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
 
@@ -150,7 +156,7 @@ export class QueryParamGroupService implements OnDestroy {
                 params = { ...params, ...this.getParamsForValue(queryParam, newValue[ queryParamName ]) };
             });
 
-            this.enqueueNavigation(params);
+            this.enqueueNavigation(new NavigationData(params, true));
         });
     }
 
@@ -159,7 +165,7 @@ export class QueryParamGroupService implements OnDestroy {
         Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
             const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
             queryParam._registerOnChange((newValue: any) =>
-                this.enqueueNavigation(this.getParamsForValue(queryParam, newValue))
+                this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
             );
         });
     }
@@ -169,6 +175,7 @@ export class QueryParamGroupService implements OnDestroy {
         this.routerAdapter.queryParamMap.pipe(
             takeUntil(this.destroy$)
         ).subscribe(queryParamMap => {
+            const synthetic = this.isSyntheticNavigation();
             const groupValue: Record<string, any> = {};
 
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
@@ -185,22 +192,31 @@ export class QueryParamGroupService implements OnDestroy {
             });
 
             this.queryParamGroup.setValue(groupValue, {
-                emitEvent: true,
+                emitEvent: !synthetic,
                 emitModelToViewChange: false,
             });
         });
+    }
+
+    /** Returns true if the current navigation is synthetic. */
+    private isSyntheticNavigation(): boolean {
+        const navigation = this.routerAdapter.getCurrentNavigation();
+        return navigation && navigation.extras && navigation.extras.state && navigation.extras.state['synthetic'];
     }
 
     /** Subscribes to the parameter queue and executes navigations in sequence. */
     private setupNavigationQueue() {
         this.queue$.pipe(
             takeUntil(this.destroy$),
-            concatMap(params => this.navigateSafely(params)),
+            concatMap(data => this.navigateSafely(data)),
         ).subscribe();
     }
 
-    private navigateSafely(params: Params): Observable<any> {
-        return from(this.routerAdapter.navigate(params, this.routerOptions)).pipe(
+    private navigateSafely(data: NavigationData): Observable<any> {
+        return from(this.routerAdapter.navigate(data.params, {
+            ...this.routerOptions,
+            state: { synthetic: data.synthetic },
+        })).pipe(
             catchError((err: any) => {
                 if (isDevMode()) {
                     console.error(`There was an error while navigating`, err);
@@ -212,8 +228,8 @@ export class QueryParamGroupService implements OnDestroy {
     }
 
     /** Sends a change of parameters to the queue. */
-    private enqueueNavigation(params: Params): void {
-        this.queue$.next(params);
+    private enqueueNavigation(data: NavigationData): void {
+        this.queue$.next(data);
     }
 
     /**
@@ -226,7 +242,7 @@ export class QueryParamGroupService implements OnDestroy {
         const newValue = this.serialize(queryParam, value);
 
         const combinedParams: Params = isMissing(queryParam.combineWith)
-            ? {} : queryParam.combineWith(queryParam.value, value);
+            ? {} : queryParam.combineWith(value);
 
         // Note that we list the side-effect parameters first so that our actual parameter can't be
         // overriden by it.

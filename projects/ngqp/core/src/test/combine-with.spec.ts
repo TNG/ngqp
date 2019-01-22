@@ -19,8 +19,8 @@ class BasicTestComponent {
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
             param: qpb.stringParam('q', {
-                combineWith: (previous, current) => {
-                    return { previous, current };
+                combineWith: current => {
+                    return { current };
                 },
             }),
         });
@@ -72,7 +72,7 @@ describe('ngqp', () => {
         input.dispatchEvent(new Event('input'));
         tick();
 
-        expect(router.url).toBe('/?current=Test_2&q=Test_2&previous=Test_1');
+        expect(router.url).toBe('/?current=Test_2&q=Test_2');
     }));
 
     it('does not consider combineWith if the URL changes', fakeAsync(() => {

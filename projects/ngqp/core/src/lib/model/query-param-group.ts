@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { isMissing } from '../util';
+import { isMissing, undefinedToNull } from '../util';
 import { OnChangeFunction } from '../types';
 import { QueryParam } from './query-param';
 import { RouterOptions } from '../router-adapter/router-adapter.interface';
@@ -127,7 +127,7 @@ export class QueryParamGroup {
         emitModelToViewChange?: boolean,
     } = {}): void {
         Object.keys(this.queryParams).forEach(queryParamName => {
-            this.queryParams[ queryParamName ].setValue(value[ queryParamName ], {
+            this.queryParams[ queryParamName ].setValue(undefinedToNull(value[ queryParamName ]), {
                 emitEvent: opts.emitEvent,
                 onlySelf: true,
                 emitModelToViewChange: false,

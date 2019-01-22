@@ -13,6 +13,15 @@ export function isMissing(obj: any): obj is null | undefined {
 }
 
 /** @internal */
+export function undefinedToNull<T>(obj: T | undefined): T | null {
+    if (obj === undefined) {
+        return null;
+    }
+
+    return obj;
+}
+
+/** @internal */
 export function isPresent<T>(obj: T): obj is Exclude<T, null | undefined> {
     return !isMissing(obj);
 }
