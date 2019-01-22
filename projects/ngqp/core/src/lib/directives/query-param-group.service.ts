@@ -188,7 +188,7 @@ export class QueryParamGroupService implements OnDestroy {
                     .filter(directive => directive.name === queryParamName)
                     .forEach(directive => directive.valueAccessor.writeValue(newValue));
 
-                groupValue[ queryParam.urlParam ] = newValue;
+                groupValue[ queryParamName ] = newValue;
             });
 
             this.queryParamGroup.setValue(groupValue, {
