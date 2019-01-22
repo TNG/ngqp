@@ -86,7 +86,20 @@ describe('ngqp', () => {
         expect(router.url).toBe('/?q=Test');
     }));
 
-    it('emits the current value', fakeAsync(() => {
+    it('emits the current value on a URL change', fakeAsync(() => {
+        scheduler.run(({ expectObservable }) => {
+            const groupValueChanges$ = captureObservable(component.paramGroup.valueChanges);
+            const paramValueChanges$ = captureObservable(component.paramGroup.get('param').valueChanges);
+
+            router.navigateByUrl('/?q=Test');
+            tick();
+
+            expectObservable(groupValueChanges$).toBe('a', { a: { param: 'Test' } });
+            expectObservable(paramValueChanges$).toBe('a', { a: 'Test' });
+        });
+    }));
+
+    it('emits the current value on a programmatic change', fakeAsync(() => {
         scheduler.run(({ expectObservable }) => {
             const groupValueChanges$ = captureObservable(component.paramGroup.valueChanges);
             const paramValueChanges$ = captureObservable(component.paramGroup.get('param').valueChanges);
@@ -99,7 +112,7 @@ describe('ngqp', () => {
         });
     }));
 
-    it('does not emit the current value if instructed not to', fakeAsync(() => {
+    it('does not emit the current value on a programmatic change if instructed not to', fakeAsync(() => {
         scheduler.run(({ expectObservable }) => {
             const groupValueChanges$ = captureObservable(component.paramGroup.valueChanges);
             const paramValueChanges$ = captureObservable(component.paramGroup.get('param').valueChanges);
