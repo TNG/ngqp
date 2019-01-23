@@ -1,9 +1,10 @@
+import { fakeAsync } from '@angular/core/testing';
 import { QueryParam } from './query-param';
 import { QueryParamOpts } from './query-param-opts';
 import { LOOSE_IDENTITY_COMPARATOR } from '../util';
 import { DEFAULT_STRING_DESERIALIZER, DEFAULT_STRING_SERIALIZER } from '../serializers';
-import { fakeAsync } from '@angular/core/testing';
-import { take } from 'rxjs/operators';
+import { QueryParamGroup } from './query-param-group';
+import { captureObservable, scheduler } from '../../test/util';
 
 describe(QueryParam.name, () => {
     describe('constructor', () => {
@@ -103,61 +104,46 @@ describe(QueryParam.name, () => {
             const spy = jasmine.createSpy('fn');
             queryParam._registerOnChange(spy);
 
-            queryParam.setValue('Test',  { emitEvent: false });
+            queryParam.setValue('Test',  { emitModelToViewChange: false });
             expect(spy).not.toHaveBeenCalled();
-        });
-    });
-
-    describe('updateValue', () => {
-        let queryParam: QueryParam<string>;
-
-        beforeEach(() => {
-            queryParam = new QueryParam<string>('q', {
-                serialize: DEFAULT_STRING_SERIALIZER,
-                deserialize: DEFAULT_STRING_DESERIALIZER,
-            });
         });
 
         it('emits the current value', fakeAsync(() => {
-            queryParam.value = 'Test';
-            queryParam.valueChanges.pipe(take(1)).subscribe({
-                next: value => expect(value).toBe('Test'),
-                error: () => fail('Expected emission'),
-            });
+            scheduler.run(({ expectObservable }) => {
+                const valueChanges$ = captureObservable(queryParam.valueChanges);
 
-            queryParam._updateValue();
+                queryParam.setValue('Test');
+                expectObservable(valueChanges$).toBe('a', { a: 'Test' });
+            });
         }));
 
         it('does not emit if instructed not to', fakeAsync(() => {
-            queryParam.value = 'Test';
-            queryParam.valueChanges.pipe(take(1)).subscribe({
-                next: value => fail(`Expected no emission, but received ${value}`),
-                error: () => fail('Expected no error'),
-            });
+            scheduler.run(({ expectObservable }) => {
+                const valueChanges$ = captureObservable(queryParam.valueChanges);
 
-            queryParam._updateValue({ emitEvent: false });
+                queryParam.setValue('Test', { emitEvent: false });
+                expectObservable(valueChanges$).toBe('');
+            });
         }));
 
         it('notifies the parent', fakeAsync(() => {
-            const parent = {
+            const parent: Partial<QueryParamGroup> = {
                 _updateValue: jasmine.createSpy('fn'),
             };
 
-            queryParam._setParent(parent as any);
-            queryParam.value = 'Test';
-            queryParam._updateValue();
+            queryParam._setParent(parent as QueryParamGroup);
+            queryParam.setValue('Test');
 
             expect(parent._updateValue).toHaveBeenCalled();
         }));
 
         it('does not notify the parent if instructed not to', fakeAsync(() => {
-            const parent = {
+            const parent: Partial<QueryParamGroup> = {
                 _updateValue: jasmine.createSpy('fn'),
             };
 
-            queryParam._setParent(parent as any);
-            queryParam.value = 'Test';
-            queryParam._updateValue({ onlySelf: true });
+            queryParam._setParent(parent as QueryParamGroup);
+            queryParam.setValue('Test', { onlySelf: true });
 
             expect(parent._updateValue).not.toHaveBeenCalled();
         }));

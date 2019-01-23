@@ -75,9 +75,15 @@ describe('emptyOn', () => {
     }));
 
     it('sets the form control value to the specified default if the query parameter is not set', fakeAsync(() => {
-        router.navigateByUrl('/');
+        input1.value = 'Other';
+        fixture.detectChanges();
+
+        // We need to pass some other argument since the router won't trigger a navigation for the URL
+        // we are already on
+        router.navigateByUrl('/?t=1');
         tick();
 
+        fixture.detectChanges();
         expect(input1.value).toBe('Test');
     }));
 

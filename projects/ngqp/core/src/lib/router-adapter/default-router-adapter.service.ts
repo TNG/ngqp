@@ -17,13 +17,17 @@ export class DefaultRouterAdapter implements RouterAdapter {
         return this.route.queryParamMap;
     }
 
-    public navigate(queryParams: Params, extras: RouterOptions = {}): Promise<boolean> {
+    public navigate(queryParams: Params, extras: RouterOptions & { state?: any } = {}): Promise<boolean> {
         return this.router.navigate([], {
             relativeTo: this.route,
             queryParamsHandling: 'merge',
             queryParams: queryParams,
             ...extras,
         });
+    }
+
+    public getCurrentNavigation() {
+        return this.router.getCurrentNavigation();
     }
 
 }

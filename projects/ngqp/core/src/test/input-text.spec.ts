@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
-import { setupNavigationWarnStub } from './util';
+import { captureObservable, scheduler, setupNavigationWarnStub } from './util';
 
 @Component({
     template: `
@@ -84,5 +84,44 @@ describe('ngqp', () => {
         tick();
 
         expect(router.url).toBe('/?q=Test');
+    }));
+
+    it('emits the current value on a URL change', fakeAsync(() => {
+        scheduler.run(({ expectObservable }) => {
+            const groupValueChanges$ = captureObservable(component.paramGroup.valueChanges);
+            const paramValueChanges$ = captureObservable(component.paramGroup.get('param').valueChanges);
+
+            router.navigateByUrl('/?q=Test');
+            tick();
+
+            expectObservable(groupValueChanges$).toBe('a', { a: { param: 'Test' } });
+            expectObservable(paramValueChanges$).toBe('a', { a: 'Test' });
+        });
+    }));
+
+    it('emits the current value on a programmatic change', fakeAsync(() => {
+        scheduler.run(({ expectObservable }) => {
+            const groupValueChanges$ = captureObservable(component.paramGroup.valueChanges);
+            const paramValueChanges$ = captureObservable(component.paramGroup.get('param').valueChanges);
+
+            component.paramGroup.setValue({ param: 'Test' });
+            tick();
+
+            expectObservable(groupValueChanges$).toBe('a', { a: { param: 'Test' } });
+            expectObservable(paramValueChanges$).toBe('a', { a: 'Test' });
+        });
+    }));
+
+    it('does not emit the current value on a programmatic change if instructed not to', fakeAsync(() => {
+        scheduler.run(({ expectObservable }) => {
+            const groupValueChanges$ = captureObservable(component.paramGroup.valueChanges);
+            const paramValueChanges$ = captureObservable(component.paramGroup.get('param').valueChanges);
+
+            component.paramGroup.setValue({ param: 'Test' }, { emitEvent: false });
+            tick();
+
+            expectObservable(groupValueChanges$).toBe('');
+            expectObservable(paramValueChanges$).toBe('');
+        });
     }));
 });

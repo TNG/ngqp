@@ -1,8 +1,8 @@
+import { fakeAsync } from '@angular/core/testing';
 import { QueryParamGroup } from './query-param-group';
 import { QueryParam } from './query-param';
 import { DEFAULT_STRING_DESERIALIZER, DEFAULT_STRING_SERIALIZER } from '../serializers';
-import { fakeAsync } from '@angular/core/testing';
-import { take } from 'rxjs/operators';
+import { captureObservable, scheduler } from '../../test/util';
 
 describe(QueryParamGroup.name, () => {
     let stringParam: QueryParam<string>;
@@ -44,7 +44,9 @@ describe(QueryParamGroup.name, () => {
 
     describe('patchValue', () => {
         let group: QueryParamGroup;
+        let queryParam: QueryParam<string>;
         beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
+        beforeEach(() => queryParam = group.get('q'));
 
         it('updates the parameter value', () => {
             group.patchValue({ q: 'Test' });
@@ -78,24 +80,51 @@ describe(QueryParamGroup.name, () => {
             const spy = jasmine.createSpy('fn');
             group._registerOnChange(spy);
 
-            group.patchValue({ q: 'Test' }, { emitEvent: false });
+            group.patchValue({ q: 'Test' }, { emitModelToViewChange: false });
             expect(spy).not.toHaveBeenCalled();
         });
+
+        it('emits the current value', fakeAsync(() => {
+            scheduler.run(({ expectObservable }) => {
+                const groupValueChanges$ = captureObservable(group.valueChanges);
+                const paramValueChanges$ = captureObservable(queryParam.valueChanges);
+
+                const value = { q: 'Test' };
+                group.patchValue(value);
+
+                expectObservable(groupValueChanges$).toBe('a', { a: value });
+                expectObservable(paramValueChanges$).toBe('a', { a: value.q });
+            });
+        }));
+
+        it('does not emit the current value if instructed not to', fakeAsync(() => {
+            scheduler.run(({ expectObservable }) => {
+                const groupValueChanges$ = captureObservable(group.valueChanges);
+                const paramValueChanges$ = captureObservable(queryParam.valueChanges);
+
+                group.patchValue({ q: 'Test' }, { emitEvent: false });
+
+                expectObservable(groupValueChanges$).toBe('');
+                expectObservable(paramValueChanges$).toBe('');
+            });
+        }));
     });
 
     describe('setValue', () => {
         let group: QueryParamGroup;
+        let queryParam: QueryParam<string>;
         beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
+        beforeEach(() => queryParam = group.get('q'));
 
         it('updates the parameter value', () => {
             group.setValue({ q: 'Test' });
             expect(stringParam.value).toBe('Test');
         });
 
-        it('updates the parameter value to undefined if it is not provided', () => {
+        it('updates the parameter value to null if it is not provided', () => {
             stringParam.value = 'Test';
             group.setValue({});
-            expect(stringParam.value).toBeUndefined();
+            expect(stringParam.value).toBeNull();
         });
 
         it('ignores non-existing parameters', () => {
@@ -115,33 +144,64 @@ describe(QueryParamGroup.name, () => {
             const spy = jasmine.createSpy('fn');
             group._registerOnChange(spy);
 
-            group.setValue({ q: 'Test' }, { emitEvent: false });
+            group.setValue({ q: 'Test' }, { emitModelToViewChange: false });
             expect(spy).not.toHaveBeenCalled();
         });
-    });
-
-    describe('updateValue', () => {
-        let group: QueryParamGroup;
-        beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
 
         it('emits the current value', fakeAsync(() => {
-            group.valueChanges.pipe(take(1)).subscribe({
-                next: value => expect(value).toEqual({ q: 'Test' }),
-                error: () => fail('Expected no error'),
-            });
+            scheduler.run(({ expectObservable }) => {
+                const groupValueChanges$ = captureObservable(group.valueChanges);
+                const paramValueChanges$ = captureObservable(queryParam.valueChanges);
 
-            stringParam.value = 'Test';
-            group._updateValue();
+                const value = { q: 'Test' };
+                group.setValue(value);
+
+                expectObservable(groupValueChanges$).toBe('a', { a: value });
+                expectObservable(paramValueChanges$).toBe('a', { a: value.q });
+            });
         }));
 
         it('does not emit the current value if instructed not to', fakeAsync(() => {
-            group.valueChanges.pipe(take(1)).subscribe({
-                next: value => fail(`Expected no emission, but received ${value}`),
-                error: () => fail('Expected no error'),
-            });
+            scheduler.run(({ expectObservable }) => {
+                const groupValueChanges$ = captureObservable(group.valueChanges);
+                const paramValueChanges$ = captureObservable(queryParam.valueChanges);
 
-            stringParam.value = 'Test';
-            group._updateValue({ emitEvent: false });
+                group.setValue({ q: 'Test' }, { emitEvent: false });
+
+                expectObservable(groupValueChanges$).toBe('');
+                expectObservable(paramValueChanges$).toBe('');
+            });
+        }));
+    });
+
+    describe('param#setValue', () => {
+        let group: QueryParamGroup;
+        let queryParam: QueryParam<string>;
+        beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
+        beforeEach(() => queryParam = group.get('q'));
+
+        it('emits the current value', fakeAsync(() => {
+            scheduler.run(({ expectObservable }) => {
+                const groupValueChanges$ = captureObservable(group.valueChanges);
+                const paramValueChanges$ = captureObservable(queryParam.valueChanges);
+
+                queryParam.setValue('Test');
+
+                expectObservable(groupValueChanges$).toBe('a', { a: { q: 'Test' } });
+                expectObservable(paramValueChanges$).toBe('a', { a: 'Test' });
+            });
+        }));
+
+        it('does not emit the current value if instructed not to', fakeAsync(() => {
+            scheduler.run(({ expectObservable }) => {
+                const groupValueChanges$ = captureObservable(group.valueChanges);
+                const paramValueChanges$ = captureObservable(queryParam.valueChanges);
+
+                queryParam.setValue('Test', { emitEvent: false });
+
+                expectObservable(groupValueChanges$).toBe('');
+                expectObservable(paramValueChanges$).toBe('');
+            });
         }));
     });
 });

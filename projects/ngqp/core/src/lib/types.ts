@@ -18,7 +18,7 @@ export type ParamDeserializer<T> = (value: string | null) => T | undefined | nul
  *
  * See {@link QueryParamOpts#combineWith}.
  */
-export type ParamCombinator<T> = (previousValue: T | undefined | null, newValue: T | undefined | null) => Params | null;
+export type ParamCombinator<T> = (newValue: T | undefined | null) => Params | null;
 
 /** @internal */
 export type OnChangeFunction<T> = (value: T | null) => void;
