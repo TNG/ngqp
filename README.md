@@ -1,12 +1,12 @@
-[![Build Status](https://travis-ci.org/Airblader/ngqp.svg?branch=master)](https://travis-ci.org/Airblader/ngqp)
+[![Build Status](https://travis-ci.org/TNG/ngqp.svg?branch=master)](https://travis-ci.org/TNG/ngqp)
 [![npm version](https://badge.fury.io/js/%40ngqp%2Fcore.svg)](https://www.npmjs.com/@ngqp/core)
-[![Coverage](https://codecov.io/gh/Airblader/ngqp/branch/master/graph/badge.svg)](https://codecov.io/gh/Airblader/ngqp/)
+[![Coverage](https://codecov.io/gh/TNG/ngqp/branch/master/graph/badge.svg)](https://codecov.io/gh/TNG/ngqp/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg)](https://conventionalcommits.org)
-[![Gitter](https://img.shields.io/gitter/room/Airblader/ngqp.svg?style=flat-square)](https://gitter.im/ngqp)
+[![Gitter](https://img.shields.io/gitter/room/TNG/ngqp.svg?style=flat-square)](https://gitter.im/ngqp)
 
 <p align="center">
     <a href="https://ngqp.io">
-        <img width="auto" height="72" src="https://raw.githubusercontent.com/Airblader/ngqp/master/logo.svg?sanitize=true" alt="ngqp logo">
+        <img width="auto" height="72" src="https://raw.githubusercontent.com/TNG/ngqp/master/logo.svg?sanitize=true" alt="ngqp logo">
     </a>
 </p>
 
@@ -44,6 +44,6 @@ Please take a moment to read the [Code of Conduct][coc].
 
 [MIT License][license]
 
-[license]: https://www.github.com/Airblader/ngqp/blob/master/LICENSE
-[contributing]: https://www.github.com/Airblader/ngqp/blob/master/CONTRIBUTING.md
-[coc]: https://www.github.com/Airblader/ngqp/blob/master/CODE_OF_CONDUCT.md
+[license]: https://www.github.com/TNG/ngqp/blob/master/LICENSE
+[contributing]: https://www.github.com/TNG/ngqp/blob/master/CONTRIBUTING.md
+[coc]: https://www.github.com/TNG/ngqp/blob/master/CODE_OF_CONDUCT.md
