@@ -200,7 +200,10 @@ export interface RouterAdapter {
     queryParamMap: Observable&lt;ParamMap&gt;;
 
     /** @internal */
-    navigate(queryParams: Params, extras?: RouterOptions): Promise&lt;boolean&gt;;
+    navigate(queryParams: Params, extras?: RouterOptions &amp; { state?: any }): Promise&lt;boolean&gt;;
+
+    /** @internal */
+    getCurrentNavigation(): { extras?: { state?: any } };
 
 }
 

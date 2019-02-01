@@ -564,25 +564,26 @@ export class QueryParam&lt;T&gt; {
      * If wired up with a {@link QueryParamGroup}, this will also synchronize
      * the value to the URL.
      */
-    public setValue(value: T | null, opts: { emitEvent?: boolean } &#x3D; {}): void {
-        this.value &#x3D; value;
-
-        if (opts.emitEvent !&#x3D;&#x3D; false) {
-            this.changeFunctions.forEach(changeFn &#x3D;&gt; changeFn(value));
-        }
-    }
-
-    /** @internal */
-    public _updateValue(opts: {
+    public setValue(value: T | null, opts: {
         emitEvent?: boolean,
         onlySelf?: boolean,
+        emitModelToViewChange?: boolean,
     } &#x3D; {}): void {
+        this.value &#x3D; value;
+
+        if (opts.emitModelToViewChange !&#x3D;&#x3D; false) {
+            this.changeFunctions.forEach(changeFn &#x3D;&gt; changeFn(value));
+        }
+
         if (opts.emitEvent !&#x3D;&#x3D; false) {
             this._valueChanges.next(this.value);
         }
 
         if (isPresent(this.parent) &amp;&amp; !opts.onlySelf) {
-            this.parent._updateValue(opts);
+            this.parent._updateValue({
+                emitEvent: opts.emitEvent,
+                emitModelToViewChange: false,
+            });
         }
     }
 

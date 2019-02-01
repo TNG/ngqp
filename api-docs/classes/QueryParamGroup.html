@@ -474,7 +474,7 @@ value. If a parameter is not listed, its value remains unchanged.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/lib/model/query-param-group.ts:120</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/lib/model/query-param-group.ts:125</a></div>
                             </td>
                         </tr>
 
@@ -483,7 +483,7 @@ value. If a parameter is not listed, its value remains unchanged.</p>
                     <td class="col-md-4">
                             <div class="io-description"><p>Updates the value of this group by overwriting it.</p>
 <p>This sets the value of each provided parameter to the respective provided
-value. If a parameter is not listed, its value is set to <code>undefine</code>.</p>
+value. If a parameter is not listed, its value is set to <code>undefined</code>.</p>
 </div>
 
                             <div class="io-description">
@@ -604,7 +604,7 @@ the value.</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable, Subject } from &#x27;rxjs&#x27;;
-import { isMissing } from &#x27;../util&#x27;;
+import { isMissing, undefinedToNull } from &#x27;../util&#x27;;
 import { OnChangeFunction } from &#x27;../types&#x27;;
 import { QueryParam } from &#x27;./query-param&#x27;;
 import { RouterOptions } from &#x27;../router-adapter/router-adapter.interface&#x27;;
@@ -698,44 +698,59 @@ export class QueryParamGroup {
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public patchValue(value: Record&lt;string, any&gt;, opts: { emitEvent?: boolean } &#x3D; {}): void {
+    public patchValue(value: Record&lt;string, any&gt;, opts: {
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+    } &#x3D; {}): void {
         Object.keys(value).forEach(queryParamName &#x3D;&gt; {
             const queryParam &#x3D; this.queryParams[ queryParamName ];
             if (isMissing(queryParam)) {
                 return;
             }
 
-            queryParam.setValue(value[ queryParamName ], { emitEvent: false });
+            queryParam.setValue(value[ queryParamName ], {
+                emitEvent: opts.emitEvent,
+                onlySelf: true,
+                emitModelToViewChange: false,
+            });
         });
 
-        if (opts.emitEvent !&#x3D;&#x3D; false) {
-            this.changeFunctions.forEach(changeFn &#x3D;&gt; changeFn(this.value));
-        }
+        this._updateValue(opts);
     }
 
     /**
      * Updates the value of this group by overwriting it.
      *
      * This sets the value of each provided parameter to the respective provided
-     * value. If a parameter is not listed, its value is set to &#x60;undefine&#x60;.
+     * value. If a parameter is not listed, its value is set to &#x60;undefined&#x60;.
      *
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public setValue(value: Record&lt;string, any&gt;, opts: { emitEvent?: boolean } &#x3D; {}): void {
+    public setValue(value: Record&lt;string, any&gt;, opts: {
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
+    } &#x3D; {}): void {
         Object.keys(this.queryParams).forEach(queryParamName &#x3D;&gt; {
-            this.queryParams[ queryParamName ].setValue(value[ queryParamName ], { emitEvent: false });
+            this.queryParams[ queryParamName ].setValue(undefinedToNull(value[ queryParamName ]), {
+                emitEvent: opts.emitEvent,
+                onlySelf: true,
+                emitModelToViewChange: false,
+            });
         });
 
-        if (opts.emitEvent !&#x3D;&#x3D; false) {
-            this.changeFunctions.forEach(changeFn &#x3D;&gt; changeFn(this.value));
-        }
+        this._updateValue(opts);
     }
 
     /** @internal */
     public _updateValue(opts: {
         emitEvent?: boolean,
+        emitModelToViewChange?: boolean,
     } &#x3D; {}): void {
+        if (opts.emitModelToViewChange !&#x3D;&#x3D; false) {
+            this.changeFunctions.forEach(changeFn &#x3D;&gt; changeFn(this.value));
+        }
+
         if (opts.emitEvent !&#x3D;&#x3D; false) {
             this._valueChanges.next(this.value);
         }
