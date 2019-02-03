@@ -14,8 +14,10 @@ export class TestRouterAdapter implements RouterAdapter {
 
     private _params: Params;
     private _state: any;
+    private _trigger: 'imperative' | 'popstate' | 'hashchange' | null;
 
     public navigate(queryParams: Params, extras: RouterOptions & { state?: any } = {}): Promise<boolean> {
+        this._trigger = this._trigger || 'imperative';
         this._state = extras ? extras.state : null;
         const previousUrl = this.url;
 
@@ -31,11 +33,15 @@ export class TestRouterAdapter implements RouterAdapter {
 
         this.emitQueryParamMap();
         return Promise.resolve(true)
-            .then(() => this._state = null);
+            .then(() => this._state = null)
+            .then(() => this._trigger = null);
     }
 
     public getCurrentNavigation() {
-        return this._state ? { extras: { state: this._state } } : {};
+        return {
+            trigger: 'imperative' as 'imperative',
+            extras: !this._state ? undefined : { state: this._state },
+        };
     }
 
     public navigateToQueryParamString(value: string) {
@@ -53,6 +59,11 @@ export class TestRouterAdapter implements RouterAdapter {
         // We need this to not be a "queryParamsHandling: merge" navigation,
         // so we fake this by removing the currently set params first.
         this._params = {};
+
+        // This function is only called from demo code mimicking router behavior
+        // such as the initial navigation; make sure this is not treated as an
+        // imperative navigation.
+        this._trigger = 'popstate';
 
         return this.navigate(params);
     }

@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { ParamMap, Params } from '@angular/router';
+import { Navigation, ParamMap, Params } from '@angular/router';
 import { Observable } from 'rxjs';
 
 /**
@@ -23,7 +23,7 @@ export interface RouterAdapter {
     navigate(queryParams: Params, extras?: RouterOptions & { state?: any }): Promise<boolean>;
 
     /** @internal */
-    getCurrentNavigation(): { extras?: { state?: any } };
+    getCurrentNavigation(): Pick<Navigation, 'trigger' | 'extras'>;
 
 }
 

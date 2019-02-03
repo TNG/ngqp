@@ -201,7 +201,15 @@ export class QueryParamGroupService implements OnDestroy {
     /** Returns true if the current navigation is synthetic. */
     private isSyntheticNavigation(): boolean {
         const navigation = this.routerAdapter.getCurrentNavigation();
-        return navigation && navigation.extras && navigation.extras.state && navigation.extras.state['synthetic'];
+        if (!navigation || navigation.trigger !== 'imperative') {
+            // When using the back / forward buttons, the state is passed along with it, even though
+            // for us it's now a navigation initiated by the user. Therefore, a navigation can only
+            // be synthetic if it has been triggered imperatively.
+            // See https://github.com/angular/angular/issues/28108.
+            return false;
+        }
+
+        return navigation.extras && navigation.extras.state && navigation.extras.state['synthetic'];
     }
 
     /** Subscribes to the parameter queue and executes navigations in sequence. */
