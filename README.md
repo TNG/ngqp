@@ -1,3 +1,5 @@
+DO NOT MERGE!
+
 [![Build Status](https://travis-ci.org/TNG/ngqp.svg?branch=master)](https://travis-ci.org/TNG/ngqp)
 [![npm version](https://badge.fury.io/js/%40ngqp%2Fcore.svg)](https://www.npmjs.com/@ngqp/core)
 [![Coverage](https://codecov.io/gh/TNG/ngqp/branch/master/graph/badge.svg)](https://codecov.io/gh/TNG/ngqp/)
