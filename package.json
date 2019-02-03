@@ -1,6 +1,7 @@
 {
     "name": "ngqp",
     "version": "0.0.0",
+    "license": "MIT",
     "scripts": {
         "ng": "ng",
         "lint": "ng lint",

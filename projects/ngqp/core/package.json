@@ -5,10 +5,10 @@
   "homepage": "https://ngqp.io",
   "author": "Ingo Bürk",
   "license": "MIT",
-  "bugs": "https://github.com/Airblader/ngqp/issues",
+  "bugs": "https://github.com/TNG/ngqp/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Airblader/ngqp.git"
+    "url": "https://github.com/TNG/ngqp.git"
   },
   "keywords": [
     "angular",
