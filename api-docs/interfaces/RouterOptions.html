@@ -179,7 +179,7 @@ These options are simply forwarded to Router#navigate.</p>
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { InjectionToken } from &#x27;@angular/core&#x27;;
-import { ParamMap, Params } from &#x27;@angular/router&#x27;;
+import { Navigation, ParamMap, Params } from &#x27;@angular/router&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 
 /**
@@ -203,7 +203,7 @@ export interface RouterAdapter {
     navigate(queryParams: Params, extras?: RouterOptions &amp; { state?: any }): Promise&lt;boolean&gt;;
 
     /** @internal */
-    getCurrentNavigation(): { extras?: { state?: any } };
+    getCurrentNavigation(): Pick&lt;Navigation, &#x27;trigger&#x27; | &#x27;extras&#x27;&gt;;
 
 }
 

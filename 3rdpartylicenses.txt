@@ -1,4 +1,5 @@
 ngqp
+MIT
 The MIT License
 
 Copyright (c) 2018 Ingo Bürk
