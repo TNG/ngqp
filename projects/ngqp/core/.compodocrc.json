@@ -9,5 +9,6 @@
     "disableDomTree": true,
     "disableRoutesGraph": true,
     "name": "ngqp – API Documentation",
-    "customFavicon": "../../ngqp-demo/src/favicon.ico"
+    "customFavicon": "../../ngqp-demo/src/favicon.ico",
+    "customLogo": "../../ngqp-demo/src/assets/icons/icon-96x96.png"
 }
