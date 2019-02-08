@@ -1,6 +1,7 @@
 {
     "extends": "./tsconfig.lib.json",
     "exclude": [
-        "./schematics/**"
+        "./schematics/**",
+        "./src/test/**"
     ]
 }
