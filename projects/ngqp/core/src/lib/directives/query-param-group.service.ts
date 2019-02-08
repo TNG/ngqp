@@ -45,7 +45,7 @@ export class QueryParamGroupService implements OnDestroy {
     private queryParamGroup: QueryParamGroup;
 
     /** List of {@link QueryParamNameDirective} directives registered to this service. */
-    private directives: QueryParamNameDirective[] = [];
+    private directives = new Map<string, QueryParamNameDirective[]>();
 
     /**
      * Queue of navigation parameters
@@ -120,23 +120,29 @@ export class QueryParamGroupService implements OnDestroy {
 
         directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
 
-        this.directives.push(directive);
+        this.directives.set(directive.name, [...(this.directives.get(directive.name) || []), directive]);
     }
 
     /**
-     * Deregisters a {@link QueryParamNameDirective} directive.
+     * Deregisters a {@link QueryParamNameDirective} directive by referencing its name.
      */
-    public deregisterQueryParamDirective(directive: QueryParamNameDirective): void {
-        const index = this.directives.indexOf(directive);
-        if (index === -1) {
+    public deregisterQueryParamDirective(queryParamName: string): void {
+        if (!queryParamName) {
             return;
         }
 
-        this.directives.splice(index, 1);
-        directive.valueAccessor.registerOnChange(NOP);
-        directive.valueAccessor.registerOnTouched(NOP);
+        const directives = this.directives.get(queryParamName);
+        if (!directives) {
+            return;
+        }
 
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
+        directives.forEach(directive => {
+            directive.valueAccessor.registerOnChange(NOP);
+            directive.valueAccessor.registerOnTouched(NOP);
+        });
+
+        this.directives.delete(queryParamName);
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
         if (queryParam) {
             queryParam._clearChangeFunctions();
         }
@@ -196,9 +202,10 @@ export class QueryParamGroupService implements OnDestroy {
                     ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.urlParam))
                     : this.deserialize(queryParam, queryParamMap.get(queryParam.urlParam));
 
-                this.directives
-                    .filter(directive => directive.name === queryParamName)
-                    .forEach(directive => directive.valueAccessor.writeValue(newValue));
+                const directives = this.directives.get(queryParamName);
+                if (directives) {
+                    directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
+                }
 
                 groupValue[ queryParamName ] = newValue;
             });
