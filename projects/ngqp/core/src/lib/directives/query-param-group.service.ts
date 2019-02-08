@@ -1,7 +1,7 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
 import { EMPTY, from, Observable, Subject } from 'rxjs';
-import { catchError, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { catchError, concatMap, debounceTime, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { isMissing, isPresent, NOP } from '../util';
 import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
@@ -56,6 +56,9 @@ export class QueryParamGroupService implements OnDestroy {
     private queue$ = new Subject<NavigationData>();
 
     /** @ignore */
+    private synchronizeRouter$ = new Subject<void>();
+
+    /** @ignore */
     private destroy$ = new Subject<void>();
 
     constructor(
@@ -69,6 +72,8 @@ export class QueryParamGroupService implements OnDestroy {
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+
+        this.synchronizeRouter$.complete();
 
         if (this.queryParamGroup) {
             this.queryParamGroup._clearChangeFunctions();
@@ -141,10 +146,12 @@ export class QueryParamGroupService implements OnDestroy {
         this.setupGroupChangeListener();
         this.setupParamChangeListeners();
         this.setupRouterListener();
+
+        this.watchNewParams();
     }
 
     /** Listens for programmatic changes on group level and synchronizes to the router. */
-    private setupGroupChangeListener() {
+    private setupGroupChangeListener(): void {
         this.queryParamGroup._registerOnChange((newValue: Record<string, any>) => {
             let params: Params = {};
             Object.keys(newValue).forEach(queryParamName => {
@@ -161,19 +168,24 @@ export class QueryParamGroupService implements OnDestroy {
     }
 
     /** Listens for programmatic changes on parameter level and synchronizes to the router. */
-    private setupParamChangeListeners() {
-        Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
-            const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
-            queryParam._registerOnChange((newValue: any) =>
-                this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
-            );
-        });
+    private setupParamChangeListeners(): void {
+        Object.keys(this.queryParamGroup.queryParams)
+            .forEach(queryParamName => this.setupParamChangeListener(queryParamName));
+    }
+
+    private setupParamChangeListener(queryParamName: string): void {
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+        queryParam._registerOnChange((newValue: any) =>
+            this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
+        );
     }
 
     /** Listens for changes in the router and synchronizes to the model. */
-    private setupRouterListener() {
-        this.routerAdapter.queryParamMap.pipe(
-            takeUntil(this.destroy$)
+    private setupRouterListener(): void {
+        this.synchronizeRouter$.pipe(
+            startWith(undefined),
+            switchMap(() => this.routerAdapter.queryParamMap),
+            takeUntil(this.destroy$),
         ).subscribe(queryParamMap => {
             const synthetic = this.isSyntheticNavigation();
             const groupValue: Record<string, any> = {};
@@ -195,6 +207,16 @@ export class QueryParamGroupService implements OnDestroy {
                 emitEvent: !synthetic,
                 emitModelToViewChange: false,
             });
+        });
+    }
+
+    /** Listens for newly added parameters and starts synchronization for them. */
+    private watchNewParams(): void {
+        this.queryParamGroup.queryParamAdded$.pipe(
+            takeUntil(this.destroy$)
+        ).subscribe(queryParamName => {
+            this.setupParamChangeListener(queryParamName);
+            this.synchronizeRouter$.next();
         });
     }
 

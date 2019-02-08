@@ -140,6 +140,10 @@ export class QueryParam<T> {
 
     /** @internal */
     public _setParent(parent: QueryParamGroup): void {
+        if (this.parent) {
+            throw new Error(`Parameter already belongs to a QueryParamGroup.`);
+        }
+
         this.parent = parent;
     }
 
