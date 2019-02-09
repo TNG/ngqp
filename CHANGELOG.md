@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/TNG/ngqp/compare/v0.7.2...v0.8.0) (2019-02-09)
+
+
+### Bug Fixes
+
+* **core:** Do not synchronize detached parameters ([1add8a8](https://github.com/TNG/ngqp/commit/1add8a8)), closes [#44](https://github.com/TNG/ngqp/issues/44)
+* **core:** Fix typo in comment ([2d8313b](https://github.com/TNG/ngqp/commit/2d8313b))
+* **docs:** Added documentation for QueryParamGroup #add / #remove ([985a96b](https://github.com/TNG/ngqp/commit/985a96b)), closes [#44](https://github.com/TNG/ngqp/issues/44)
+* **docs:** Exclude test util from API docs ([93a5281](https://github.com/TNG/ngqp/commit/93a5281))
+* **tests:** Added tests for QueryParamGroup#add / #remove ([085d120](https://github.com/TNG/ngqp/commit/085d120)), closes [#44](https://github.com/TNG/ngqp/issues/44)
+
+
+### Features
+
+* **core:** Allow changing name for queryParamName directive. ([ca6f87d](https://github.com/TNG/ngqp/commit/ca6f87d)), closes [#44](https://github.com/TNG/ngqp/issues/44)
+* **core:** Dynamically add or remove parameters ([5c76c67](https://github.com/TNG/ngqp/commit/5c76c67)), closes [#44](https://github.com/TNG/ngqp/issues/44)
+
+
+
 <a name="0.7.2"></a>
 ## [0.7.2](https://github.com/TNG/ngqp/compare/v0.7.1...v0.7.2) (2019-02-03)
 
