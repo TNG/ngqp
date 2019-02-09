@@ -13,7 +13,8 @@ import { RouterOptions } from '../router-adapter/router-adapter.interface';
  */
 export class QueryParamGroup {
 
-    private _valueChanges = new Subject<Record<string, any>>();
+    /** @internal */
+    private readonly _valueChanges = new Subject<Record<string, any>>();
 
     /**
      * Emits the values of all parameters in this group whenever at least one changes.
@@ -25,6 +26,12 @@ export class QueryParamGroup {
      * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
      */
     public readonly valueChanges: Observable<Record<string, any>> = this._valueChanges.asObservable();
+
+    /** @internal */
+    private readonly _queryParamAdded$ = new Subject<string>();
+
+    /** @internal */
+    public readonly queryParamAdded$: Observable<string> = this._queryParamAdded$.asObservable();
 
     /** @internal */
     public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> };
@@ -69,6 +76,44 @@ export class QueryParamGroup {
         }
 
         return param;
+    }
+
+    /**
+     * Adds a new {@link QueryParam} to this group.
+     *
+     * This adds the parameter under the given name to this group. The current
+     * URL will be evaluated to synchronize its value initially. Afterwards
+     * it is treated just like any other parameter in this group.
+     *
+     * @param queryParamName Name of the parameter to reference it with.
+     * @param queryParam The new parameter to add.
+     */
+    public add(queryParamName: string, queryParam: QueryParam<any>): void {
+        if (this.get(queryParamName)) {
+            throw new Error(`A parameter with name ${queryParamName} already exists.`);
+        }
+
+        this.queryParams[ queryParamName ] = queryParam;
+        this._queryParamAdded$.next(queryParamName);
+    }
+
+    /**
+     * Removes a {@link QueryParam} from this group.
+     *
+     * This removes the parameter defined by the provided name from this group.
+     * No further synchronization with this parameter will occur and it will not
+     * be reported in the value of this group anymore.
+     *
+     * @param queryParamName The name of the parameter to remove.
+     */
+    public remove(queryParamName: string): void {
+        const queryParam: QueryParam<any> = this.get(queryParamName);
+        if (!queryParam) {
+            throw new Error(`No parameter with name ${queryParamName} found.`);
+        }
+
+        delete this.queryParams[ queryParamName ];
+        queryParam._clearChangeFunctions();
     }
 
     /**

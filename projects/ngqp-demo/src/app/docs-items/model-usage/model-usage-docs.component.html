@@ -22,6 +22,16 @@
     </p>
     <demo-snippet type="typescript" [code]="qpgGetSnippet"></demo-snippet>
 
+    <docs-fragment fragment="QueryParamGroup-add-remove">
+        <h3>Adding and removing parameters</h3>
+    </docs-fragment>
+    <p>
+        You can dynamically add or remove parameters to or from a group by using <span apiDocsLink>QueryParamGroup#add</span>
+        and <span apiDocsLink>QueryParamGroup#remove</span>, respectively. Adding a parameter will resynchronize the entire
+        group with the URL.
+    </p>
+    <demo-add-remove-parameter-example></demo-add-remove-parameter-example>
+
     <docs-fragment fragment="QueryParamGroup-value">
         <h3>Reading the current value</h3>
     </docs-fragment>

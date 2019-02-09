@@ -42,22 +42,19 @@ export class QueryParamNameDirective implements OnChanges, OnDestroy {
         const nameChange = changes['name'];
         if (nameChange) {
             if (!nameChange.firstChange) {
-                throw new Error(`You tried to switch from queryParamName=${nameChange.previousValue} to queryParamName=${nameChange.currentValue} which is currently not supported.`);
+                this.groupService.deregisterQueryParamDirective(nameChange.previousValue);
             }
 
-            const name = nameChange.currentValue;
-            if (!name) {
-                throw new Error(`queryParamName has been added, but without specifying the name.`);
+            if (nameChange.currentValue) {
+                this.groupService.registerQueryParamDirective(this);
             }
-
-            this.groupService.registerQueryParamDirective(this);
         }
     }
 
     /** @ignore */
     public ngOnDestroy() {
         if (this.groupService) {
-            this.groupService.deregisterQueryParamDirective(this);
+            this.groupService.deregisterQueryParamDirective(this.name);
         }
     }
 

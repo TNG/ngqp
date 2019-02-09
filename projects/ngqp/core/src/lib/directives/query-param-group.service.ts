@@ -1,7 +1,7 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
 import { EMPTY, from, Observable, Subject } from 'rxjs';
-import { catchError, concatMap, debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { catchError, concatMap, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { isMissing, isPresent, NOP } from '../util';
 import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
@@ -45,7 +45,7 @@ export class QueryParamGroupService implements OnDestroy {
     private queryParamGroup: QueryParamGroup;
 
     /** List of {@link QueryParamNameDirective} directives registered to this service. */
-    private directives: QueryParamNameDirective[] = [];
+    private directives = new Map<string, QueryParamNameDirective[]>();
 
     /**
      * Queue of navigation parameters
@@ -54,6 +54,9 @@ export class QueryParamGroupService implements OnDestroy {
      * are executed in sequence as otherwise navigations might overwrite each other.
      */
     private queue$ = new Subject<NavigationData>();
+
+    /** @ignore */
+    private synchronizeRouter$ = new Subject<void>();
 
     /** @ignore */
     private destroy$ = new Subject<void>();
@@ -69,6 +72,8 @@ export class QueryParamGroupService implements OnDestroy {
     public ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+
+        this.synchronizeRouter$.complete();
 
         if (this.queryParamGroup) {
             this.queryParamGroup._clearChangeFunctions();
@@ -93,9 +98,13 @@ export class QueryParamGroupService implements OnDestroy {
      * Registers a {@link QueryParamNameDirective} directive.
      */
     public registerQueryParamDirective(directive: QueryParamNameDirective): void {
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
+        // Capture the name here, particularly for the queue below to avoid re-evaluating
+        // it as it might change over time.
+        const queryParamName = directive.name;
+
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
         if (!queryParam) {
-            throw new Error(`Could not find query param with name ${directive.name}. Did you forget to add it to your QueryParamGroup?`);
+            throw new Error(`Could not find query param with name ${queryParamName}. Did you forget to add it to your QueryParamGroup?`);
         }
         if (!directive.valueAccessor) {
             throw new Error(`No value accessor found for the form control. Please make sure to implement ControlValueAccessor on this component.`);
@@ -108,6 +117,9 @@ export class QueryParamGroupService implements OnDestroy {
         // Proxy updates from the view to debounce them (if needed).
         const debouncedQueue$ = new Subject<any>();
         debouncedQueue$.pipe(
+            // Do not synchronize while the param is detached from the group
+            filter(() => !!this.queryParamGroup.get(queryParamName)),
+
             isPresent(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
             map((newValue: any) => this.getParamsForValue(queryParam, newValue)),
             takeUntil(this.destroy$),
@@ -115,23 +127,29 @@ export class QueryParamGroupService implements OnDestroy {
 
         directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
 
-        this.directives.push(directive);
+        this.directives.set(queryParamName, [...(this.directives.get(queryParamName) || []), directive]);
     }
 
     /**
-     * Deregisters a {@link QueryParamNameDirective} directive.
+     * Deregisters a {@link QueryParamNameDirective} directive by referencing its name.
      */
-    public deregisterQueryParamDirective(directive: QueryParamNameDirective): void {
-        const index = this.directives.indexOf(directive);
-        if (index === -1) {
+    public deregisterQueryParamDirective(queryParamName: string): void {
+        if (!queryParamName) {
             return;
         }
 
-        this.directives.splice(index, 1);
-        directive.valueAccessor.registerOnChange(NOP);
-        directive.valueAccessor.registerOnTouched(NOP);
+        const directives = this.directives.get(queryParamName);
+        if (!directives) {
+            return;
+        }
 
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
+        directives.forEach(directive => {
+            directive.valueAccessor.registerOnChange(NOP);
+            directive.valueAccessor.registerOnTouched(NOP);
+        });
+
+        this.directives.delete(queryParamName);
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
         if (queryParam) {
             queryParam._clearChangeFunctions();
         }
@@ -141,10 +159,12 @@ export class QueryParamGroupService implements OnDestroy {
         this.setupGroupChangeListener();
         this.setupParamChangeListeners();
         this.setupRouterListener();
+
+        this.watchNewParams();
     }
 
     /** Listens for programmatic changes on group level and synchronizes to the router. */
-    private setupGroupChangeListener() {
+    private setupGroupChangeListener(): void {
         this.queryParamGroup._registerOnChange((newValue: Record<string, any>) => {
             let params: Params = {};
             Object.keys(newValue).forEach(queryParamName => {
@@ -161,19 +181,28 @@ export class QueryParamGroupService implements OnDestroy {
     }
 
     /** Listens for programmatic changes on parameter level and synchronizes to the router. */
-    private setupParamChangeListeners() {
-        Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
-            const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
-            queryParam._registerOnChange((newValue: any) =>
-                this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
-            );
-        });
+    private setupParamChangeListeners(): void {
+        Object.keys(this.queryParamGroup.queryParams)
+            .forEach(queryParamName => this.setupParamChangeListener(queryParamName));
+    }
+
+    private setupParamChangeListener(queryParamName: string): void {
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+        if (!queryParam) {
+            throw new Error(`No param in group found for name ${queryParamName}`);
+        }
+
+        queryParam._registerOnChange((newValue: any) =>
+            this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
+        );
     }
 
     /** Listens for changes in the router and synchronizes to the model. */
-    private setupRouterListener() {
-        this.routerAdapter.queryParamMap.pipe(
-            takeUntil(this.destroy$)
+    private setupRouterListener(): void {
+        this.synchronizeRouter$.pipe(
+            startWith(undefined),
+            switchMap(() => this.routerAdapter.queryParamMap),
+            takeUntil(this.destroy$),
         ).subscribe(queryParamMap => {
             const synthetic = this.isSyntheticNavigation();
             const groupValue: Record<string, any> = {};
@@ -184,9 +213,10 @@ export class QueryParamGroupService implements OnDestroy {
                     ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.urlParam))
                     : this.deserialize(queryParam, queryParamMap.get(queryParam.urlParam));
 
-                this.directives
-                    .filter(directive => directive.name === queryParamName)
-                    .forEach(directive => directive.valueAccessor.writeValue(newValue));
+                const directives = this.directives.get(queryParamName);
+                if (directives) {
+                    directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
+                }
 
                 groupValue[ queryParamName ] = newValue;
             });
@@ -195,6 +225,16 @@ export class QueryParamGroupService implements OnDestroy {
                 emitEvent: !synthetic,
                 emitModelToViewChange: false,
             });
+        });
+    }
+
+    /** Listens for newly added parameters and starts synchronization for them. */
+    private watchNewParams(): void {
+        this.queryParamGroup.queryParamAdded$.pipe(
+            takeUntil(this.destroy$)
+        ).subscribe(queryParamName => {
+            this.setupParamChangeListener(queryParamName);
+            this.synchronizeRouter$.next();
         });
     }
 
@@ -253,7 +293,7 @@ export class QueryParamGroupService implements OnDestroy {
             ? {} : queryParam.combineWith(value);
 
         // Note that we list the side-effect parameters first so that our actual parameter can't be
-        // overriden by it.
+        // overridden by it.
         return {
             ...(combinedParams || {}),
             [ queryParam.urlParam ]: newValue,
