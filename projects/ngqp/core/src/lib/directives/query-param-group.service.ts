@@ -293,7 +293,7 @@ export class QueryParamGroupService implements OnDestroy {
             ? {} : queryParam.combineWith(value);
 
         // Note that we list the side-effect parameters first so that our actual parameter can't be
-        // overriden by it.
+        // overridden by it.
         return {
             ...(combinedParams || {}),
             [ queryParam.urlParam ]: newValue,
