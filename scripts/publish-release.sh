@@ -4,3 +4,5 @@
 set -e -o pipefail
 
 cd dist/ngqp/core; npm publish --access public --registry https://registry.npmjs.org/; cd -
+
+git push --tags

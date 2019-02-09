@@ -22,6 +22,3 @@ yarn run schematics:build
 echo "[6] Copy README and LICENSE"
 cp README.md dist/ngqp/core
 cp LICENSE dist/ngqp/core
-
-echo "[7] Pushing to remote"
-git push --tags
