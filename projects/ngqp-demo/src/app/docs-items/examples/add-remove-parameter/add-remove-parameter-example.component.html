@@ -1,0 +1,21 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup" initialQueryParams="?q=Hello+World">
+        <ng-container [queryParamGroup]="paramGroup">
+            <div class="alert alert-primary">
+                Use the button to add or remove the parameter bound to the input field. Try typing or changing the URL
+                when the parameter is detached.
+            </div>
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary" (click)="toggleParam()">
+                        <ng-container *ngIf="hasParam">Remove Parameter</ng-container>
+                        <ng-container *ngIf="!hasParam">Add Parameter</ng-container>
+                    </button>
+                </div>
+
+                <input type="text" autocomplete="off" class="form-control" [queryParamName]="hasParam ? 'param' : null" />
+            </div>
+        </ng-container>
+    </demo-browser>
+</demo-example>

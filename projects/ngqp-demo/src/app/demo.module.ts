@@ -34,6 +34,7 @@ import { GlobalConfigurationDocsComponent } from './docs-items/global-configurat
 import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
 import { ControlValueAccessorDirectiveExampleComponent } from './docs-items/examples/control-value-accessor-directive-example/control-value-accessor-directive-example.component';
 import { ManualWiringExampleComponent } from './docs-items/examples/manual-wiring-example/manual-wiring-example.component';
+import { AddRemoveParameterExampleComponent } from './docs-items/examples/add-remove-parameter/add-remove-parameter-example.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -73,6 +74,7 @@ import { environment } from '../environments/environment';
         CustomControlValueAccessorDocsComponent,
         ControlValueAccessorDirectiveExampleComponent,
         ManualWiringExampleComponent,
+        AddRemoveParameterExampleComponent,
     ],
     imports: [
         BrowserModule,
