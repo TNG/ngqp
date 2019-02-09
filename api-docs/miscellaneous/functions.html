@@ -57,9 +57,6 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#captureObservable" title="src/test/util.ts"><b>captureObservable</b>&nbsp;&nbsp;&nbsp;(src/.../util.ts)</a>
-                        </li>
-                        <li>
                             <a href="#createBooleanDeserializer" title="src/lib/serializers.ts"><b>createBooleanDeserializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
                         </li>
                         <li>
@@ -83,9 +80,6 @@
                         <li>
                             <a href="#createStringSerializer" title="src/lib/serializers.ts"><b>createStringSerializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
                         </li>
-                        <li>
-                            <a href="#setupNavigationWarnStub" title="src/test/util.ts"><b>setupNavigationWarnStub</b>&nbsp;&nbsp;&nbsp;(src/.../util.ts)</a>
-                        </li>
                     </ul>
                 </td>
             </tr>
@@ -93,93 +87,6 @@
     </table>
 </section>
 
-    <h3>src/test/util.ts</h3>
-    <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="captureObservable"></a>
-                        <span class="name">
-                            <b>
-                            captureObservable
-                            </b>
-                            <a href="#captureObservable"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>captureObservable(source$)</code>
-                    </td>
-                </tr>
-
-
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>source$</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="setupNavigationWarnStub"></a>
-                        <span class="name">
-                            <b>
-                            setupNavigationWarnStub
-                            </b>
-                            <a href="#setupNavigationWarnStub"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>setupNavigationWarnStub()</code>
-                    </td>
-                </tr>
-
-
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>See <a href="https://github.com/angular/angular/issues/25837">https://github.com/angular/angular/issues/25837</a> </p>
-</div>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
     <h3>src/lib/serializers.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
@@ -229,8 +136,8 @@
                                                     
 
                                                         <td>
-                                                                <code><p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
-</code>
+                                                                <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -238,6 +145,13 @@
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;boolean&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -289,8 +203,8 @@
                                                     
 
                                                         <td>
-                                                                <code><p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
-</code>
+                                                                <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -298,6 +212,13 @@
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;boolean&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -352,8 +273,8 @@ returned instead.</p>
                                                     
 
                                                         <td>
-                                                                <code><p>The deserializer to wrap and mirror.</p>
-</code>
+                                                                <p>The deserializer to wrap and mirror.</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -365,8 +286,8 @@ returned instead.</p>
                                                     
 
                                                         <td>
-                                                                <code><p>The default value to return if the value to deserialize is <code>null</code>.</p>
-</code>
+                                                                <p>The default value to return if the value to deserialize is <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -374,6 +295,13 @@ returned instead.</p>
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -428,8 +356,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>The serializer to wrap and mirror.</p>
-</code>
+                                                                <p>The serializer to wrap and mirror.</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -441,8 +369,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>The default value for which the serialization should return <code>null</code>.</p>
-</code>
+                                                                <p>The default value for which the serialization should return <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -454,8 +382,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>The comparator function to compare two values.</p>
-</code>
+                                                                <p>The comparator function to compare two values.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -463,6 +391,13 @@ except that if the given default value equals the value to be serialized
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;T&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -514,8 +449,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
-</code>
+                                                                <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -523,6 +458,13 @@ except that if the given default value equals the value to be serialized
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;number&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -574,8 +516,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
-</code>
+                                                                <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -583,6 +525,13 @@ except that if the given default value equals the value to be serialized
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;number&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -634,8 +583,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
-</code>
+                                                                <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -643,6 +592,13 @@ except that if the given default value equals the value to be serialized
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;string&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -694,8 +650,8 @@ except that if the given default value equals the value to be serialized
                                                     
 
                                                         <td>
-                                                                <code><p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
-</code>
+                                                                <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -703,6 +659,13 @@ except that if the given default value equals the value to be serialized
                             </div>
                             <div>
                             </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;string&gt;</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
                     </td>
                 </tr>
             </tbody>

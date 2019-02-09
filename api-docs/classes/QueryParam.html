@@ -206,16 +206,9 @@ to a form control.</p>
                             <b>
                                 <span class="modifier">Public</span>
                                 <span class="modifier">Readonly</span>
-                            urlParam
-                            </b>
+                            urlParam</b>
                             <a href="#urlParam"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>urlParam:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -250,16 +243,9 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
                         <span class="name">
                             <b>
                                 <span class="modifier">Public</span>
-                            value
-                            </b>
+                            value</b>
                             <a href="#value"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>value:     <code>T</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -297,16 +283,9 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
                             <b>
                                 <span class="modifier">Public</span>
                                 <span class="modifier">Readonly</span>
-                            valueChanges
-                            </b>
+                            valueChanges</b>
                             <a href="#valueChanges"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>valueChanges:     <code>Observable&lt;T&gt;</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -589,6 +568,10 @@ export class QueryParam&lt;T&gt; {
 
     /** @internal */
     public _setParent(parent: QueryParamGroup): void {
+        if (this.parent) {
+            throw new Error(&#x60;Parameter already belongs to a QueryParamGroup.&#x60;);
+        }
+
         this.parent &#x3D; parent;
     }
 

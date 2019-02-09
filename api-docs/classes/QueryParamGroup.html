@@ -108,11 +108,19 @@ to and from the URL.</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#add">add</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#get">get</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#patchValue">patchValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#remove">remove</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -155,7 +163,7 @@ to and from the URL.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/model/query-param-group.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/model/query-param-group.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -219,16 +227,9 @@ to and from the URL.</p>
                             <b>
                                 <span class="modifier">Public</span>
                                 <span class="modifier">Readonly</span>
-                            valueChanges
-                            </b>
+                            valueChanges</b>
                             <a href="#valueChanges"><span class="icon ion-ios-link"></span></a>
                         </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span><code>valueChanges:     <code>Observable&lt;Record&lt;string, any&gt;&gt;</code>
-</code>
                     </td>
                 </tr>
                     <tr>
@@ -244,7 +245,7 @@ to and from the URL.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/lib/model/query-param-group.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/model/query-param-group.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -272,6 +273,103 @@ one parameter&#39;s value is changed.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="add"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            add
+                            </b>
+                            <a href="#add"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>add(queryParamName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, queryParam: <a href="../classes/QueryParam.html">QueryParam<any></a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/lib/model/query-param-group.ts:91</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Adds a new <a href="../classes/QueryParam.html">QueryParam</a> to this group.</p>
+<p>This adds the parameter under the given name to this group. The current
+URL will be evaluated to synchronize its value initially. Afterwards
+it is treated just like any other parameter in this group.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>queryParamName</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <p>Name of the parameter to reference it with.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>queryParam</td>
+                                                        <td>
+                                                                    <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;any&gt;</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <p>The new parameter to add.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="get"></a>
                         <span class="name">
                             <b>
@@ -292,7 +390,7 @@ one parameter&#39;s value is changed.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/lib/model/query-param-group.ts:65</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/lib/model/query-param-group.ts:72</a></div>
                             </td>
                         </tr>
 
@@ -328,8 +426,8 @@ if no parameter with that name is found in this group.</p>
                                                     
 
                                                         <td>
-                                                                <code><p>The name of the parameter instance to retrieve.</p>
-</code>
+                                                                <p>The name of the parameter instance to retrieve.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -372,7 +470,7 @@ if no parameter with that name is found in this group.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/lib/model/query-param-group.ts:96</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/lib/model/query-param-group.ts:141</a></div>
                             </td>
                         </tr>
 
@@ -411,8 +509,8 @@ value. If a parameter is not listed, its value remains unchanged.</p>
                                                         </td>
 
                                                         <td>
-                                                                <code><p>See {</p>
-</code>
+                                                                <p>See {</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -430,8 +528,89 @@ value. If a parameter is not listed, its value remains unchanged.</p>
                                                         </td>
 
                                                         <td>
-                                                                <code><p>Additional options</p>
-</code>
+                                                                <p>Additional options</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="remove"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            remove
+                            </b>
+                            <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>remove(queryParamName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/lib/model/query-param-group.ts:109</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Removes a <a href="../classes/QueryParam.html">QueryParam</a> from this group.</p>
+<p>This removes the parameter defined by the provided name from this group.
+No further synchronization with this parameter will occur and it will not
+be reported in the value of this group anymore.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>queryParamName</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                        <td>
+                                                                <p>The name of the parameter to remove.</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -474,7 +653,7 @@ value. If a parameter is not listed, its value remains unchanged.</p>
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/lib/model/query-param-group.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/lib/model/query-param-group.ts:170</a></div>
                             </td>
                         </tr>
 
@@ -513,8 +692,8 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                                                         </td>
 
                                                         <td>
-                                                                <code><p>See {</p>
-</code>
+                                                                <p>See {</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -532,8 +711,8 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                                                         </td>
 
                                                         <td>
-                                                                <code><p>Additional options</p>
-</code>
+                                                                <p>Additional options</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -579,7 +758,7 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/lib/model/query-param-group.ts:80</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/lib/model/query-param-group.ts:125</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -618,7 +797,8 @@ import { RouterOptions } from &#x27;../router-adapter/router-adapter.interface&#
  */
 export class QueryParamGroup {
 
-    private _valueChanges &#x3D; new Subject&lt;Record&lt;string, any&gt;&gt;();
+    /** @internal */
+    private readonly _valueChanges &#x3D; new Subject&lt;Record&lt;string, any&gt;&gt;();
 
     /**
      * Emits the values of all parameters in this group whenever at least one changes.
@@ -630,6 +810,12 @@ export class QueryParamGroup {
      * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
      */
     public readonly valueChanges: Observable&lt;Record&lt;string, any&gt;&gt; &#x3D; this._valueChanges.asObservable();
+
+    /** @internal */
+    private readonly _queryParamAdded$ &#x3D; new Subject&lt;string&gt;();
+
+    /** @internal */
+    public readonly queryParamAdded$: Observable&lt;string&gt; &#x3D; this._queryParamAdded$.asObservable();
 
     /** @internal */
     public readonly queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; };
@@ -674,6 +860,44 @@ export class QueryParamGroup {
         }
 
         return param;
+    }
+
+    /**
+     * Adds a new {@link QueryParam} to this group.
+     *
+     * This adds the parameter under the given name to this group. The current
+     * URL will be evaluated to synchronize its value initially. Afterwards
+     * it is treated just like any other parameter in this group.
+     *
+     * @param queryParamName Name of the parameter to reference it with.
+     * @param queryParam The new parameter to add.
+     */
+    public add(queryParamName: string, queryParam: QueryParam&lt;any&gt;): void {
+        if (this.get(queryParamName)) {
+            throw new Error(&#x60;A parameter with name ${queryParamName} already exists.&#x60;);
+        }
+
+        this.queryParams[ queryParamName ] &#x3D; queryParam;
+        this._queryParamAdded$.next(queryParamName);
+    }
+
+    /**
+     * Removes a {@link QueryParam} from this group.
+     *
+     * This removes the parameter defined by the provided name from this group.
+     * No further synchronization with this parameter will occur and it will not
+     * be reported in the value of this group anymore.
+     *
+     * @param queryParamName The name of the parameter to remove.
+     */
+    public remove(queryParamName: string): void {
+        const queryParam: QueryParam&lt;any&gt; &#x3D; this.get(queryParamName);
+        if (!queryParam) {
+            throw new Error(&#x60;No parameter with name ${queryParamName} found.&#x60;);
+        }
+
+        delete this.queryParams[ queryParamName ];
+        queryParam._clearChangeFunctions();
     }
 
     /**
