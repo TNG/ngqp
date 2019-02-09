@@ -204,4 +204,35 @@ describe(QueryParamGroup.name, () => {
             });
         }));
     });
+
+    describe('add', () => {
+        let group: QueryParamGroup;
+        beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
+
+        it('can add a new parameter to a group', () => {
+            group.add('test', stringParam);
+            expect(group.get('test')).toBe(stringParam);
+            expect(group.value).toEqual({ q: null, test: null });
+        });
+
+        it('throws if the name is already taken', () => {
+            expect(() => group.add('q', stringParam))
+                .toThrowError('A parameter with name q already exists.');
+        });
+    });
+
+    describe('remove', () => {
+        let group: QueryParamGroup;
+        beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
+
+        it('can remove an existing parameter from a group', () => {
+            group.remove('q');
+            expect(group.get('q')).toBeNull();
+        });
+
+        it('throws if the parameter does not exist', () => {
+            expect(() => group.remove('test'))
+                .toThrowError('No parameter with name test found.');
+        });
+    });
 });
