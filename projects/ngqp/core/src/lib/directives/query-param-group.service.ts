@@ -1,7 +1,7 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
 import { EMPTY, from, Observable, Subject } from 'rxjs';
-import { catchError, concatMap, debounceTime, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { catchError, concatMap, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { isMissing, isPresent, NOP } from '../util';
 import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
@@ -98,9 +98,13 @@ export class QueryParamGroupService implements OnDestroy {
      * Registers a {@link QueryParamNameDirective} directive.
      */
     public registerQueryParamDirective(directive: QueryParamNameDirective): void {
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(directive.name);
+        // Capture the name here, particularly for the queue below to avoid re-evaluating
+        // it as it might change over time.
+        const queryParamName = directive.name;
+
+        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
         if (!queryParam) {
-            throw new Error(`Could not find query param with name ${directive.name}. Did you forget to add it to your QueryParamGroup?`);
+            throw new Error(`Could not find query param with name ${queryParamName}. Did you forget to add it to your QueryParamGroup?`);
         }
         if (!directive.valueAccessor) {
             throw new Error(`No value accessor found for the form control. Please make sure to implement ControlValueAccessor on this component.`);
@@ -113,6 +117,9 @@ export class QueryParamGroupService implements OnDestroy {
         // Proxy updates from the view to debounce them (if needed).
         const debouncedQueue$ = new Subject<any>();
         debouncedQueue$.pipe(
+            // Do not synchronize while the param is detached from the group
+            filter(() => !!this.queryParamGroup.get(queryParamName)),
+
             isPresent(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
             map((newValue: any) => this.getParamsForValue(queryParam, newValue)),
             takeUntil(this.destroy$),
@@ -120,7 +127,7 @@ export class QueryParamGroupService implements OnDestroy {
 
         directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
 
-        this.directives.set(directive.name, [...(this.directives.get(directive.name) || []), directive]);
+        this.directives.set(queryParamName, [...(this.directives.get(queryParamName) || []), directive]);
     }
 
     /**
@@ -181,6 +188,10 @@ export class QueryParamGroupService implements OnDestroy {
 
     private setupParamChangeListener(queryParamName: string): void {
         const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+        if (!queryParam) {
+            throw new Error(`No param in group found for name ${queryParamName}`);
+        }
+
         queryParam._registerOnChange((newValue: any) =>
             this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
         );
