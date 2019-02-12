@@ -75,6 +75,11 @@ describe('emptyOn', () => {
     }));
 
     it('sets the form control value to the specified default if the query parameter is not set', fakeAsync(() => {
+        // Set the parameter on the route so it can actually disappear, otherwise no event
+        // is (and should be) sent
+        router.navigateByUrl(`/?q1=x`);
+        tick();
+
         input1.value = 'Other';
         fixture.detectChanges();
 
