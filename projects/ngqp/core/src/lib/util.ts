@@ -1,3 +1,4 @@
+import { convertToParamMap, ParamMap, Params } from '@angular/router';
 import { Comparator } from './types';
 
 /** @internal */
@@ -51,4 +52,48 @@ export function areEqualUsing<T>(first: T, second: T, comparator: Comparator<T>)
     }
 
     return comparison === 0;
+}
+
+/** @internal */
+export function filterParamMap(paramMap: ParamMap, keys: string[]): ParamMap {
+    const params: Params = {};
+    keys
+        .filter(key => paramMap.keys.includes(key))
+        .forEach(key => params[ key ] = paramMap.getAll(key));
+
+    return convertToParamMap(params);
+}
+
+/** @internal */
+export function compareParamMaps(first: ParamMap, second: ParamMap): boolean {
+    if ((first && !second) || (second && !first)) {
+        return false;
+    }
+
+    if (!compareStringArraysUnordered(first.keys, second.keys)) {
+        return false;
+    }
+
+    return first.keys.every(key =>
+        compareStringArraysUnordered(first.getAll(key), second.getAll(key))
+    );
+}
+
+/** @internal */
+export function compareStringArraysUnordered(first: string[], second: string[]): boolean {
+    if (!first && !second) {
+        return true;
+    }
+
+    if ((first && !second) || (second && !first)) {
+        return false;
+    }
+
+    if (first.length !== second.length) {
+        return false;
+    }
+
+    const sortedFirst = first.sort();
+    const sortedSecond = second.sort();
+    return sortedFirst.every((firstKey, index) => firstKey === sortedSecond[index]);
 }

@@ -1,8 +1,19 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
 import { EMPTY, from, Observable, Subject } from 'rxjs';
-import { catchError, concatMap, debounceTime, filter, map, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { isMissing, isPresent, NOP } from '../util';
+import {
+    catchError,
+    concatMap,
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    map,
+    startWith,
+    switchMap,
+    takeUntil,
+    tap
+} from 'rxjs/operators';
+import { compareParamMaps, filterParamMap, isMissing, isPresent, NOP } from '../util';
 import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
 import { QueryParam } from '../model/query-param';
@@ -201,7 +212,20 @@ export class QueryParamGroupService implements OnDestroy {
     private setupRouterListener(): void {
         this.synchronizeRouter$.pipe(
             startWith(undefined),
-            switchMap(() => this.routerAdapter.queryParamMap),
+            switchMap(() => this.routerAdapter.queryParamMap.pipe(
+                // We want to ignore changes to query parameters which aren't related to this
+                // particular group; however, we do need to react if one of our parameters has
+                // vanished when it was set before.
+                distinctUntilChanged((previousMap, currentMap) => {
+                    const keys = Object.values(this.queryParamGroup.queryParams)
+                        .map(queryParam => queryParam.urlParam);
+
+                    // It is important that we filter the maps only here so that both are filtered
+                    // with the same set of keys; otherwise, e.g. removing a parameter from the group
+                    // would interfere.
+                    return compareParamMaps(filterParamMap(previousMap, keys), filterParamMap(currentMap, keys));
+                }),
+            )),
             takeUntil(this.destroy$),
         ).subscribe(queryParamMap => {
             const synthetic = this.isSyntheticNavigation();

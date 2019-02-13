@@ -124,4 +124,15 @@ describe('ngqp', () => {
             expectObservable(paramValueChanges$).toBe('');
         });
     }));
+
+    it('does not emit if unrelated URL parameters change', fakeAsync(() => {
+        scheduler.run(({ expectObservable }) => {
+            const value$ = captureObservable(component.paramGroup.valueChanges);
+
+            router.navigateByUrl(`/?unrelated=42`);
+            tick();
+
+            expectObservable(value$).toBe('');
+        });
+    }));
 });

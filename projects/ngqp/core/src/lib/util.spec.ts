@@ -1,4 +1,16 @@
-import { areEqualUsing, isFunction, isMissing, isPresent, LOOSE_IDENTITY_COMPARATOR, undefinedToNull, wrapTryCatch } from './util';
+import { convertToParamMap, Params } from '@angular/router';
+import {
+    areEqualUsing,
+    compareParamMaps,
+    compareStringArraysUnordered,
+    filterParamMap,
+    isFunction,
+    isMissing,
+    isPresent,
+    LOOSE_IDENTITY_COMPARATOR,
+    undefinedToNull,
+    wrapTryCatch
+} from './util';
 import { Comparator } from './types';
 
 describe(isMissing.name, () => {
@@ -110,4 +122,148 @@ describe(areEqualUsing.name, () => {
     it('returns false if a numeric comparator returns a non-zero value', () =>
         expect(areEqualUsing(42, 1337, numericComparator)).toBe(false)
     );
+});
+
+describe(filterParamMap.name, () => {
+    it('removes keys which should be filtered out', () => {
+        const paramMap = convertToParamMap({
+            a: 'Param a',
+            b: 'Param b',
+        });
+
+        const filteredParamMap = filterParamMap(paramMap, [ 'b' ]);
+
+        expect(filteredParamMap.keys.length).toBe(1);
+        expect(filteredParamMap.keys[0]).toBe('b');
+        expect(filteredParamMap.get('b')).toBe('Param b');
+    });
+
+    it('ignores keys which do not appear in the original map', () => {
+        const paramMap = convertToParamMap({
+            a: 'Param a',
+        });
+
+        const filteredParamMap = filterParamMap(paramMap, [ 'a', 'b' ]);
+        expect(filteredParamMap.keys.length).toBe(1);
+    });
+
+    it('works with array-valued params', () => {
+        const paramMap = convertToParamMap({
+            a: [ 'a1', 'a2' ],
+        });
+
+        const filteredParamMap = filterParamMap(paramMap, [ 'a' ]);
+        expect(filteredParamMap.keys.length).toBe(1);
+        expect(filteredParamMap.get('a')).toBe('a1');
+        expect(filteredParamMap.getAll('a')).toEqual([ 'a1', 'a2' ]);
+    });
+});
+
+describe(compareStringArraysUnordered.name, () => {
+    it('returns true if both arguments are null', () => {
+        expect(compareStringArraysUnordered(null, null)).toBe(true);
+    });
+
+    it('returns false if only the first argument is null', () => {
+        expect(compareStringArraysUnordered(null, [])).toBe(false);
+    });
+
+    it('returns false if only the second argument is null', () => {
+        expect(compareStringArraysUnordered([], null)).toBe(false);
+    });
+
+    it('returns true for two empty arrays', () => {
+        expect(compareStringArraysUnordered([], [])).toBe(true);
+    });
+
+    it('returns true for two equal single-values arrays', () => {
+        expect(compareStringArraysUnordered([ 'a' ], [ 'a' ])).toBe(true);
+    });
+
+    it('returns true for two equal multi-value arrays in the same order', () => {
+        expect(compareStringArraysUnordered([ 'a', 'b' ], [ 'a', 'b' ])).toBe(true);
+    });
+
+    it('returns true for two equal multi-value arrays with different order', () => {
+        expect(compareStringArraysUnordered([ 'a', 'b' ], [ 'b', 'a' ])).toBe(true);
+    });
+
+    it('returns false for arrays of different length', () => {
+        expect(compareStringArraysUnordered([ 'a' ], [ 'a', 'b' ])).toBe(false);
+    });
+});
+
+describe(compareParamMaps.name, () => {
+    const proxiedCompareParamMaps = (first: Params, second: Params): boolean =>
+        compareParamMaps(convertToParamMap(first), convertToParamMap(second));
+
+    it('returns true for two empty maps', () => {
+        expect(proxiedCompareParamMaps(
+            {},
+            {},
+        )).toBe(true);
+    });
+
+    it('returns true for two equal single-valued one-key maps', () => {
+        expect(proxiedCompareParamMaps(
+            { a: 'a1' },
+            { a: 'a1' },
+        )).toBe(true);
+    });
+
+    it('returns true for two equal array-values one-key maps', () => {
+        expect(proxiedCompareParamMaps(
+            { a: [ 'a1', 'a2' ] },
+            { a: [ 'a1', 'a2' ] },
+        )).toBe(true);
+    });
+
+    it('returns true for two equal array-valued multi-key maps', () => {
+        expect(proxiedCompareParamMaps(
+            { a: [ 'a1' ], b: [ 'b1', 'b2' ] },
+            { a: [ 'a1' ], b: [ 'b1', 'b2' ] },
+        )).toBe(true);
+    });
+
+    it('does not care about order of keys', () => {
+        expect(proxiedCompareParamMaps(
+            { a: 'a1', b: 'b1' },
+            { b: 'b1', a: 'a1' },
+        )).toBe(true);
+    });
+
+    it('returns false for different number of keys', () => {
+        expect(proxiedCompareParamMaps(
+            { a: 'a1' },
+            { a: 'a1', b: 'b1' },
+        )).toBe(false);
+    });
+
+    it('returns false for different keys', () => {
+        expect(proxiedCompareParamMaps(
+            { a: 'a1' },
+            { b: 'a1' },
+        )).toBe(false);
+    });
+
+    it('returns false for different single-valued values', () => {
+        expect(proxiedCompareParamMaps(
+            { a: 'a1' },
+            { a: 'a2' },
+        )).toBe(false);
+    });
+
+    it('returns false for different array-valued values', () => {
+        expect(proxiedCompareParamMaps(
+            { a: [ 'a1', 'a2' ] },
+            { a: [ 'a1', 'a3' ] },
+        )).toBe(false);
+    });
+
+    it('does not care about the order of array-valued values', () => {
+        expect(proxiedCompareParamMaps(
+            { a: [ 'a1', 'a2' ] },
+            { a: [ 'a2', 'a1' ] },
+        )).toBe(true);
+    });
 });

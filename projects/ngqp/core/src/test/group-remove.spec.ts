@@ -72,9 +72,7 @@ describe('QueryParamGroup#remove', () => {
             router.navigateByUrl('/?q=Test');
             tick();
 
-            expectObservable(groupValue$).toBe('a', {
-                a: {},
-            });
+            expectObservable(groupValue$).toBe('');
             expectObservable(value$).toBe('');
         });
     }));
