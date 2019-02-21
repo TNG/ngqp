@@ -1,5 +1,10 @@
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
-import { ControlValueAccessorDirective, QueryParamGroupDirective, QueryParamNameDirective } from './directives/directives';
+import {
+    ControlValueAccessorDirective,
+    QueryParamDirective,
+    QueryParamNameDirective,
+    QueryParamGroupDirective
+} from './directives/directives';
 import {
     CheckboxControlValueAccessorDirective,
     DefaultControlValueAccessorDirective,
@@ -20,6 +25,7 @@ import {
 
 /** @ignore */
 const DIRECTIVES: Type<any>[] = [
+    QueryParamDirective,
     QueryParamNameDirective,
     QueryParamGroupDirective,
     ControlValueAccessorDirective,
