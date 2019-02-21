@@ -30,6 +30,7 @@ export class DocsNavigationComponent {
                 { page: DocsPage.MODEL_CONFIGURATION },
                 { page: DocsPage.MODEL_USAGE },
                 { page: DocsPage.GLOBAL_CONFIGURATION },
+                { page: DocsPage.STANDALONE_QUERY_PARAM },
             ],
         },
         {
