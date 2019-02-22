@@ -70,8 +70,9 @@ Thank you for your contribution!
 Please see [conventionalcommits.org][conventionalcommits] to learn how to format your commit messages. We use the following
 scopes:
 
-- docs – For changes in the API documentation or the demo application.
 - core – For changes to `@ngqp/core`.
 - other – For anything that doesn't fit in the previous categories.
+
+For changes to the documentation / website you can use the type "docs" directly.
 
 [conventionalcommits]: https://www.conventionalcommits.org
