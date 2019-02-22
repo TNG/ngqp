@@ -1,75 +1,141 @@
 <docs-item>
-    <p>
-        Let's take a look at the three basic steps you should follow to use ngqp. This will show you the basic usage
-        of ngqp in order to synchronize your controls with the URL and how to connect this to your application so that
-        you can actually perform actions when parameters change.
-    </p>
-
-    <docs-fragment fragment="define-model">
-        <h2>Step 1: Defining the Model</h2>
+    <docs-fragment fragment="concepts">
+        <h2>Concepts</h2>
     </docs-fragment>
     <p>
-        First, we need to define what our model, the <span apiDocsLink>QueryParamGroup</span>, looks like. In here you
-        define which query parameters you need as well as how they are defined: what type do they have, how are the values
-        (de-)serialized to and from the URL as well as a bunch of other options.
+        Using ngqp generally consists of three steps: creating the model which defines the parameters you want to
+        orchestrate, binding these parameters to components and observing changes in the model's value in order to
+        do some work.
     </p>
     <p>
-        In order to define the model, you can inject the <span apiDocsLink>QueryParamBuilder</span> into your component
-        and use its <code>group</code> method to create the model. Inside the group, you can use its other methods to
-        create the individual models for each query parameter.
+        Since ngqp mirrors the API of Angular's reactive forms, many of its concepts are the same or very similary with
+        some new names. Here's a quick overview of how certain APIs match to ngqp:
+    </p>
+    <table class="table table-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Reactive Forms</th>
+                <th>ngqp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>FormGroup</code></td>
+                <td><code>QueryParamGroup</code></td>
+            </tr>
+            <tr>
+                <td><code>FormControl</code></td>
+                <td><code>QueryParam</code></td>
+            </tr>
+            <tr>
+                <td><code>FormBuilder</code></td>
+                <td><code>QueryParamBuilder</code></td>
+            </tr>
+            <tr>
+                <td><code>formGroup</code></td>
+                <td><code>queryParamGroup</code></td>
+            </tr>
+            <tr>
+                <td><code>formControlName</code></td>
+                <td><code>queryParamName</code></td>
+            </tr>
+            <tr>
+                <td><code>formControl</code></td>
+                <td><code>queryParam</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <docs-fragment fragment="define-model">
+        <h3>Defining a model</h3>
+    </docs-fragment>
+    <p>
+        The first step is to use the declarative API and build a model defining the parameters. Each parameter defines
+        the URL parameter used to represent it (e.g., the <code>q</code> in <code>?q=Angular</code>) and is added to
+        a <span apiDocsLink>QueryParamGroup</span> with some name (the name and URL parameter can, but don't have to
+        be the same). Additionally, parameters can define additional options specifying their behavior further.
     </p>
     <p>
-        Here's a simple example of what this looks like in an application. To learn about the features we ship and how
-        to configure them, see <docs-link [page]="DocsPage.MODEL_CONFIGURATION"></docs-link>.
+        In order to create a model, inject the <span apiDocsLink>QueryParamBuilder</span> into your component and use
+        the <span apiDocsLink="QueryParamBuilder#group">group</span> method to build a new group. This returns a
+        <span apiDocsLink>QueryParamGroup</span> which you want to assign to a property in your component as we will
+        need it later on. Insider the call to <span apiDocsLink="QueryParamBuilder#group">group</span> you can pass an
+        object associating parameters with a name. These parameters can be created using one of
+        <span apiDocsLink="QueryParamBuilder#stringParam">stringParam</span>,
+        <span apiDocsLink="QueryParamBuilder#numberParam">numberParam</span>,
+        <span apiDocsLink="QueryParamBuilder#booleanParam">booleanParam</span> or
+        <span apiDocsLink="QueryParamBuilder#param">param</span>.
+    </p>
+    <p>
+        For example, the following snippets shows how you might define a model which can capture a text input
+        (assigned to <code>q</code> in the URL) and a numerical input (assigned to <code>count</code>):
     </p>
     <demo-snippet type="typescript" [code]="defineModelSnippet"></demo-snippet>
 
     <docs-fragment fragment="bind-model">
-        <h2>Step 2: Binding the Model</h2>
+        <h3>Binding to components</h3>
     </docs-fragment>
     <p>
-        Now that we define what the model for our parameters looks like, it's time to bind this model to the form
-        controls that the user interacts with. To do this, we need a parent with
-        <span apiDocsLink="QueryParamGroupDirective">queryParamGroup</span> and then the individual form controls which
-        are bound using <span apiDocsLink="QueryParamNameDirective">queryParamName</span>.
+        The next step is to bind the model to our template so that ngqp knows which components to associate with the
+        parameters. To achieve this we use the <span apiDocsLink="QueryParamGroupDirective">queryParamGroup</span>
+        directive to provide our model to the children of the component to which we attached it. It doesn't matter
+        too much which component you use as long as it's a parent of all the form components we need.
+    </p>
+    <p>
+        Inside this parent component, we can now reference the individual parameters by name and associate them to
+        form components by using the <span apiDocsLink="QueryParamNameDirective">queryParamName</span> directive.
     </p>
     <div class="alert alert-info">
-        To bind a component to the model, the component has to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
-        provided to it (the same mechanism that is used in the Forms API). ngqp ships standard implementations for basic
-        form elements such as inputs, but if you have custom components you may need to implement this.
-        For more information, see <docs-link [page]="DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR"></docs-link>.
+        Keep in mind that each parameter has a "URL parameter" with which it is represented on the URL and a name you
+        gave it inside its <span apiDocsLink>QueryParamGroup</span>. In this case, we mean the <em>latter</em> of the
+        two.
     </div>
-    <demo-snippet type="html" [code]="bindModelSnippet"></demo-snippet>
+    <div class="alert alert-info">
+        The component to which you bind a parameter needs to have a
+        <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a> available to it so that
+        ngqp knows how to read from and write to it. For basic HTML form elements such as <code>input</code>,
+        <code>select</code> and <code>textarea</code> ngqp comes pre-packaged with suitable implementations, and most
+        UI component libraries probably ship these, too.
+    </div>
     <p>
-        As you can see, <span apiDocsLink="QueryParamNameDirective">queryParamName</span> refers to the name we gave to
-        the query param model. The <span apiDocsLink="QueryParam">urlParam</span> attribute specified inside the model is
-        the name of the parameter we will actually see in the URL.
+        Following our example above, the template of your component might now look something like this. At this point
+        you can start your application and observe how changing the values of the form components updates the URL and
+        vice versa.
     </p>
+    <demo-snippet type="html" [code]="bindModelSnippet"></demo-snippet>
 
     <docs-fragment fragment="use-model">
-        <h2>Step 3: Using the Model</h2>
+        <h3>Observing changes</h3>
     </docs-fragment>
     <p>
-        At this point, the synchronization is already working: if we change the form controls, the URL will update and
-        vice versa. However, we want to actually <em>do</em> something with these values &mdash; like re-fetching some
-        resources based on these settings.
-    </p>
-    <p>
-        In order to do this, we can use the <span apiDocsLink>QueryParamGroup#valueChanges</span> observable.
-        It will emit whenever the values change, so we don't need to worry about tracking the URL ourselves. Every value
-        it emits contains the current value of each parameter in our model.
-    </p>
-    <p>
-        To learn more about reading from the model or programmatically changing it, head over to <docs-link [page]="DocsPage.MODEL_USAGE"></docs-link>.
+        In this final step we discuss how you can observe changes in the model and actually use those in order to
+        update your view. For this we can use <span apiDocsLink>QueryParamGroup#valueChanges</span> which is an
+        observable that will emit whenever the value of our model changes. This means you don't need to manually track
+        the URL or the different form components. The emitted value reflects exactly the structure of the group in
+        the sense that it is an object with the parameter names as keys and their current value as values.
     </p>
     <div class="alert alert-warning">
-        As with other observables, don't forget to unsubscribe from this observable, e.g., by using a
+        As with other observables, don't forget to unsubscribe from this observable, e.g., by using the
         <code>takeUntil</code> operator.
     </div>
-    <div class="alert alert-info">
-        For the common use-case of fetching resources from an API, you should pipe the <code>valueChanges</code> observable
-        to your API using an operator such as <code>switchMap</code>. This avoids race conditions if the values change
-        multiple times in quick succession.
-    </div>
+    <p>
+        If the work you do is asynchronous – like fetching a new response from your backend – it is recommended that
+        you use the <code>switchMap</code> operator from rxjs. This ensures that should the model update multiple times
+        in quick succession, previous requests get cancelled and discarded, thus avoiding race conditions in your
+        application.
+    </p>
+    <p>
+        Again following up on our previous example, this is what it might look like:
+    </p>
     <demo-snippet type="typescript" [code]="usingModelSnippet"></demo-snippet>
+
+    <docs-fragment fragment="standalone">
+        <h2>Binding parameters without a group</h2>
+    </docs-fragment>
+    <p>
+        If you only require a single parameter you can also skip the step of creating an entire
+        <span apiDocsLink>QueryParamGroup</span>. Instead, simply store the reference to your parameter and bind it
+        to a component by using the <span apiDocsLink="QueryParamDirective">queryParam</span> directive.
+    </p>
+    <demo-standalone-example></demo-standalone-example>
 </docs-item>

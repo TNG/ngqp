@@ -12,15 +12,6 @@ export class UsageGuideDocsComponent {
 
     public defineModelSnippet = require('!raw-loader!./snippets/define-model.example.ts');
     public bindModelSnippet = require('!raw-loader!./snippets/bind-model.example.html');
-    public usingModelSnippet = `
-public ngOnInit() {
-    this.paramGroup.valueChanges.pipe(
-        // Don't forget to unsubscribe!
-        takeUntil(this.componentDestroyed$),
-
-        switchMap(({ simple, stringParam, boolParam }) => this.api.fetch(/* … */)),
-    ).subscribe(result => { /* … */ });
-}
-`;
+    public usingModelSnippet = require('!raw-loader!./snippets/use-model.example.ts');
 
 }

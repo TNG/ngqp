@@ -8,8 +8,8 @@ export class ExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            stringParam: qpb.stringParam('p2'),
-            boolParam: qpb.booleanParam('p3'),
+            searchText: qpb.stringParam('q'),
+            numberOfItems: qpb.numberParam('count'),
         });
     }
 

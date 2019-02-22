@@ -7,7 +7,6 @@ import { ModelConfigurationDocsComponent } from './docs-items/model-configuratio
 import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
 import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
-import { StandaloneQueryParamDocsComponent } from './docs-items/standalone-query-param/standalone-query-param-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -56,13 +55,6 @@ export const DOCS_ROUTES: Routes = [
         component: GlobalConfigurationDocsComponent,
         data: {
             docsPage: DocsPage.GLOBAL_CONFIGURATION,
-        },
-    },
-    {
-        path: 'standalone-query-param',
-        component: StandaloneQueryParamDocsComponent,
-        data: {
-            docsPage: DocsPage.STANDALONE_QUERY_PARAM,
         },
     },
     {

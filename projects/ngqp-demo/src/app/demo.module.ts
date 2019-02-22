@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { QueryParamModule } from '@ngqp/core';
 import { DemoRoutingModule } from './demo-routing.module';
 import { DemoComponent } from './demo.component';
@@ -35,9 +37,7 @@ import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-con
 import { ControlValueAccessorDirectiveExampleComponent } from './docs-items/examples/control-value-accessor-directive-example/control-value-accessor-directive-example.component';
 import { ManualWiringExampleComponent } from './docs-items/examples/manual-wiring-example/manual-wiring-example.component';
 import { AddRemoveParameterExampleComponent } from './docs-items/examples/add-remove-parameter/add-remove-parameter-example.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { StandaloneQueryParamDocsComponent } from './docs-items/standalone-query-param/standalone-query-param-docs.component';
+import { StandaloneExampleComponent } from './docs-items/examples/standalone-example/standalone-example.component';
 
 @NgModule({
     declarations: [
@@ -72,11 +72,11 @@ import { StandaloneQueryParamDocsComponent } from './docs-items/standalone-query
         ModelUsageDocsComponent,
         PatchSetValueExampleComponent,
         GlobalConfigurationDocsComponent,
-        StandaloneQueryParamDocsComponent,
         CustomControlValueAccessorDocsComponent,
         ControlValueAccessorDirectiveExampleComponent,
         ManualWiringExampleComponent,
         AddRemoveParameterExampleComponent,
+        StandaloneExampleComponent,
     ],
     imports: [
         BrowserModule,
