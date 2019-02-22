@@ -10,7 +10,7 @@ export const NGQP_SELECT_VALUE_ACCESSOR: StaticProvider = {
 
 /** @ignore */
 @Directive({
-    selector: 'select:not([multiple])[queryParamName]',
+    selector: 'select:not([multiple])[queryParamName],select:not([multiple])[queryParam]',
     providers: [NGQP_SELECT_VALUE_ACCESSOR],
 })
 export class SelectControlValueAccessorDirective<T> implements ControlValueAccessor {

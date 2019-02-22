@@ -37,6 +37,7 @@ import { ManualWiringExampleComponent } from './docs-items/examples/manual-wirin
 import { AddRemoveParameterExampleComponent } from './docs-items/examples/add-remove-parameter/add-remove-parameter-example.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { StandaloneQueryParamDocsComponent } from './docs-items/standalone-query-param/standalone-query-param-docs.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import { environment } from '../environments/environment';
         ModelUsageDocsComponent,
         PatchSetValueExampleComponent,
         GlobalConfigurationDocsComponent,
+        StandaloneQueryParamDocsComponent,
         CustomControlValueAccessorDocsComponent,
         ControlValueAccessorDirectiveExampleComponent,
         ManualWiringExampleComponent,

@@ -1,27 +1,33 @@
 import { Directive, Inject, Input, OnChanges, OnDestroy, Optional, Self, SimpleChanges } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryParamGroupService } from './query-param-group.service';
 import { QueryParamController } from './query-param-controller.interface';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { selectValueAccessor } from '../accessors/util';
+import { QueryParam } from '../model/query-param';
+import { QueryParamGroup } from '../model/query-param-group';
 
 /**
- * Binds a {@link QueryParam} to a DOM element.
+ * Binds a standalone {@link QueryParam} to a DOM element.
  *
- * This directive accepts the name of a {@link QueryParam} inside its parent {@link QueryParamGroup}.
+ * This directive accepts a {@link QueryParam} without having outer {@link QueryParamGroup}.
  * It binds this parameter to the host element, which is required to have a [ControlValueAccessor]
  * {@link https://angular.io/api/forms/ControlValueAccessor}.
  */
 @Directive({
-    selector: '[queryParamName]',
+    selector: '[queryParam]',
+    providers: [QueryParamGroupService],
 })
-export class QueryParamNameDirective implements QueryParamController, OnChanges, OnDestroy {
+export class QueryParamDirective implements QueryParamController, OnChanges, OnDestroy  {
 
     /**
-     * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.
+     * Reference to standalone {@link QueryParam} instance.
      * Note that this does not refer to the [parameter name]{@link QueryParam#urlParam}.
      */
-    @Input('queryParamName')
-    public name: string;
+    @Input('queryParam')
+    public queryParam: QueryParam<any>;
+
+    /** @internal */
+    public readonly name = 'param';
 
     /** @internal */
     public valueAccessor: ControlValueAccessor | null = null;
@@ -30,29 +36,27 @@ export class QueryParamNameDirective implements QueryParamController, OnChanges,
         @Optional() private groupService: QueryParamGroupService,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],
     ) {
-        if (!this.groupService) {
-            throw new Error(`No parent configuration found. Did you forget to add [queryParamGroup]?`);
-        }
-
         this.valueAccessor = selectValueAccessor(valueAccessors);
     }
 
     /** @ignore */
-    public ngOnChanges(changes: SimpleChanges) {
-        const nameChange = changes['name'];
+    public ngOnChanges(changes: SimpleChanges): void {
+        const nameChange = changes['queryParam'];
+
         if (nameChange) {
             if (!nameChange.firstChange) {
-                this.groupService.deregisterQueryParamDirective(nameChange.previousValue);
+                throw new Error('Changing the QueryParam bound in standalone mode is currently not supported.');
             }
 
             if (nameChange.currentValue) {
+                this.groupService.setQueryParamGroup(new QueryParamGroup({[this.name]: nameChange.currentValue}));
                 this.groupService.registerQueryParamDirective(this);
             }
         }
     }
 
     /** @ignore */
-    public ngOnDestroy() {
+    public ngOnDestroy(): void {
         if (this.groupService) {
             this.groupService.deregisterQueryParamDirective(this.name);
         }
