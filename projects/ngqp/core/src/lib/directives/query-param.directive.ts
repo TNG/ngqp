@@ -7,10 +7,10 @@ import { QueryParam } from '../model/query-param';
 import { QueryParamGroup } from '../model/query-param-group';
 
 /**
- * Binds a standalone {@link QueryParam} to a DOM element.
+ * Binds a {@link QueryParam} to a component directly.
  *
- * This directive accepts a {@link QueryParam} without having outer {@link QueryParamGroup}.
- * It binds this parameter to the host element, which is required to have a [ControlValueAccessor]
+ * This directive accepts a {@link QueryParam} without requiring an outer {@link QueryParamGroup}.
+ * It binds this parameter to the host component, which is required to have a [ControlValueAccessor]
  * {@link https://angular.io/api/forms/ControlValueAccessor}.
  */
 @Directive({
@@ -20,8 +20,7 @@ import { QueryParamGroup } from '../model/query-param-group';
 export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDestroy  {
 
     /**
-     * Reference to standalone {@link QueryParam} instance.
-     * Note that this does not refer to the [parameter name]{@link QueryParam#urlParam}.
+     * The {@link QueryParam} to bind to the host component.
      */
     @Input('queryParam')
     public queryParam: QueryParam<any>;
