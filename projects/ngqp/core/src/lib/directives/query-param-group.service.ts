@@ -18,7 +18,7 @@ import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
 import { QueryParam } from '../model/query-param';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
-import { QueryParamController } from './query-param-controller.interface';
+import { QueryParamAccessor } from './query-param-accessor.interface';
 
 /** @internal */
 function isMultiQueryParam<T>(queryParam: QueryParam<T> | QueryParam<T[]>): queryParam is QueryParam<T[]> {
@@ -55,8 +55,8 @@ export class QueryParamGroupService implements OnDestroy {
     /** The {@link QueryParamGroup} to bind. */
     private queryParamGroup: QueryParamGroup;
 
-    /** List of {@link QueryParamController} registered to this service. */
-    private directives = new Map<string, QueryParamController[]>();
+    /** List of {@link QueryParamAccessor} registered to this service. */
+    private directives = new Map<string, QueryParamAccessor[]>();
 
     /**
      * Queue of navigation parameters
@@ -106,9 +106,9 @@ export class QueryParamGroupService implements OnDestroy {
     }
 
     /**
-     * Registers a {@link QueryParamController}.
+     * Registers a {@link QueryParamAccessor}.
      */
-    public registerQueryParamDirective(directive: QueryParamController): void {
+    public registerQueryParamDirective(directive: QueryParamAccessor): void {
         // Capture the name here, particularly for the queue below to avoid re-evaluating
         // it as it might change over time.
         const queryParamName = directive.name;
@@ -142,7 +142,7 @@ export class QueryParamGroupService implements OnDestroy {
     }
 
     /**
-     * Deregisters a {@link QueryParamController} by referencing its name.
+     * Deregisters a {@link QueryParamAccessor} by referencing its name.
      */
     public deregisterQueryParamDirective(queryParamName: string): void {
         if (!queryParamName) {

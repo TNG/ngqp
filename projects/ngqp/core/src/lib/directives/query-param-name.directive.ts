@@ -1,7 +1,7 @@
 import { Directive, Inject, Input, OnChanges, OnDestroy, Optional, Self, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryParamGroupService } from './query-param-group.service';
-import { QueryParamController } from './query-param-controller.interface';
+import { QueryParamAccessor } from './query-param-accessor.interface';
 import { selectValueAccessor } from '../accessors/util';
 
 /**
@@ -14,7 +14,7 @@ import { selectValueAccessor } from '../accessors/util';
 @Directive({
     selector: '[queryParamName]',
 })
-export class QueryParamNameDirective implements QueryParamController, OnChanges, OnDestroy {
+export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, OnDestroy {
 
     /**
      * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.

@@ -6,7 +6,7 @@ import { ControlValueAccessor } from '@angular/forms';
  *
  * @internal
  */
-export interface QueryParamController {
+export interface QueryParamAccessor {
     name: string;
     valueAccessor: ControlValueAccessor;
 }
