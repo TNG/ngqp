@@ -10,7 +10,7 @@ export class ExampleComponent {
     public param: QueryParam<string>;
 
     constructor(private qpb: QueryParamBuilder) {
-        this.param = qpb.stringParam('p');
+        this.param = qpb.stringParam('q');
     }
 
 }
