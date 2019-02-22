@@ -3,114 +3,35 @@
         <h2>What is ngqp?</h2>
     </docs-fragment>
     <p>
-        ngqp is all about the URL &mdash; or, to be precise, about the very last part of it. Let's take a look at this
-        example:
-    </p>
-
-    <div class="my-3">
-        <demo-snippet type="none" code="https://app.io/categories/computer/products?q=X1&manufacturer=Lenovo&costsLessThan=1500"></demo-snippet>
-    </div>
-
-    <p>
-        This, and any other, URL consists of a few different parts. As an Angular developer, chances are you are most
-        familiar with the <em>route</em> of it. However, if we look beyond the route, we can see the <em>query parameters</em>.
-        These are an arbitrary list of parameters to the URL which can occur in arbitrary order or even multiple times.
-    </p>
-    <p>
-        This makes query parameters an ideal choice for representing state such as filter or search settings. You may
-        be thinking to yourself: why should I even bother? Fair point! Here's a couple of reasons for why encoding such
-        state in the URL is a worthwhile effort:
+        ngqp gives you a declarative approach to synchronizing the state of UI components (such as inputs or selects)
+        to the URL as query parameters (e.g., <code class="nobreak">?q=Hello+World</code>). In doing so you can improve
+        user experience in your application by retaining state when users…
     </p>
     <ul class="checkmark-list">
-        <li>The state can be persisted across reloads</li>
-        <li>URLs can be bookmarked and shared</li>
-        <li>If the user navigates away and comes back using the back button, the state will remain active</li>
+        <li>refresh the page either actively or accidentally (think mobile browsers)</li>
+        <li>navigate in your app and use the back button</li>
+        <li>want to bookmark or share a specific state of the application</li>
     </ul>
     <p>
-        However, keeping these parameters in sync with your application's state can be tricky, particularly if you want
-        to make sure that changes to the parameters can happen either from the URL or programmatically, or if you need
-        to serialize more complex state into the URL.
+        Implementing this from scratch not only requires a lot of boilerplate code, but also requires careful
+        orchestration between the URL, the components bound to these parameters and the actual work you want to do
+        based on them (network requests, applying filters, paginating, …)
     </p>
     <p>
-        This is where ngqp comes in: it provides you with a simple, declarative approach to define a <em>model</em> of
-        what parameters you want to work with. This model can then be wired up with your form controls and ngqp will
-        worry about the rest.
+        Using ngqp's declarative approach you can focus on the <em>what</em> rather than the <em>how</em>. It is heavily
+        inspired by the Reactive Forms API (<code>@angular/forms</code>), mirroring its APIs in order to make using it
+        intuitive and easy.
+    </p>
+    <p>
+        Learn how ngqp works and how to use it by going to the <docs-link [page]="DocsPage.USAGE_GUIDE">next section</docs-link>.
     </p>
 
-    <docs-fragment fragment="simple-example">
-        <h2>Our first example</h2>
+    <docs-fragment fragment="limitations">
+        <h2>Limitations</h2>
     </docs-fragment>
     <p>
-        You might be thinking »That sounds great, but what does this look like in practice?« To answer this question,
-        we'll just take a look at our first example; and we'll use the URL we discussed above to demonstrate it!
-    </p>
-    <demo-example [markup]="markup" [typescript]="typescript">
-        <demo-browser [group]="paramGroup" initialQueryParams="?q=X1&manufacturer=Lenovo&costsLessThan=1500">
-            <ng-container [queryParamGroup]="paramGroup">
-                <div class="row">
-                    <div class="col col-12 col-md-9">
-                        <div class="form-group">
-                            <label for="search">Keywords</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <fa-icon [icon]="faSearch" class="input-group-text"></fa-icon>
-                                </div>
-                                <input id="search" type="text" placeholder="Search" queryParamName="search"
-                                       autocomplete="off" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-12 col-md-3">
-                        <div class="form-group">
-                            <label for="manufacturer">Manufacturer</label>
-                            <select id="manufacturer" class="form-control" queryParamName="manufacturer">
-                                <option *ngFor="let manufacturer of manufacturers" [value]="manufacturer">
-                                    {{ manufacturer }}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="priceCap">Price less than</label>
-                    <input id="priceCap" type="number" min="500" max="3000" step="100" class="form-control"
-                           queryParamName="priceCap" />
-                </div>
-            </ng-container>
-        </demo-browser>
-    </demo-example>
-
-    <docs-fragment fragment="when-to-use">
-        <h2>When should I use ngqp?</h2>
-    </docs-fragment>
-    <p>
-        ngqp is a great choice if you want to synchronize the URL with the state of some form controls if the following
-        crtieria apply to your case:
-    </p>
-    <ul>
-        <li>They represent a transient state such as search input, filter or sorting settings or pagination</li>
-        <li>They are not used with the (Reactive) Forms API (using <code>ngModel</code> or <code>formControlName</code>)</li>
-        <li>The represented state should persist across page reloads</li>
-        <li>The URL can or should be shareable or bookmarkable</li>
-    </ul>
-
-    <docs-fragment fragment="when-not-to-use">
-        <h2>When should I <em>not</em> use ngqp?</h2>
-    </docs-fragment>
-    <p>
-        If it isn't a nail, don't use a hammer &mdash; ngqp might not be the best choice for all use-cases. Here are
-        some indicators for situations where you might not want to use ngqp:
-    </p>
-    <ul>
-        <li>You need to submit this state in a form (there's no need to real-time synchronize parameters here)</li>
-        <li>You need to use the Forms API or Reactive Forms API (this unfortunately interferes with ngqp)</li>
-    </ul>
-
-    <docs-fragment fragment="next">
-        <h2>What's next?</h2>
-    </docs-fragment>
-    <p>
-        Now that you have an idea of what ngqp is, let's learn how to use it. Simply head on to the next section,
-        <docs-link [page]="DocsPage.USAGE_GUIDE"></docs-link>.
+        Since ngqp needs to have full control over the bound components you cannot use Angular forms or reactive forms
+        on the same components, i.e., use <code>ngModel</code>, <code>formControl</code> or <code>formControlName</code>
+        on them.
     </p>
 </docs-item>
