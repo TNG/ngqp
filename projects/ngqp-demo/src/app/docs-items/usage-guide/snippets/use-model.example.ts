@@ -1,8 +1,8 @@
 this.paramGroup.valueChanges.pipe(
+    switchMap(({ searchText, numberOfItems }) => this.api.fetch(searchText, numberOfItems)),
+
     // Don't forget to unsubscribe!
     takeUntil(this.componentDestroyed$),
-
-    switchMap(({ searchText, numberOfItems }) => this.api.fetch(searchText, numberOfItems)),
 ).subscribe(response => {
     // …
 });
