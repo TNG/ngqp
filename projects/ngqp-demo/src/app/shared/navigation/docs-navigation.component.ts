@@ -25,19 +25,32 @@ export class DocsNavigationComponent {
         { page: DocsPage.USAGE_GUIDE },
         { page: DocsPage.GETTING_HELP },
         {
-            name: 'Fundamentals',
+            name: 'Configuration',
             children: [
-                { page: DocsPage.MODEL_CONFIGURATION },
-                { page: DocsPage.MODEL_USAGE },
-                { page: DocsPage.GLOBAL_CONFIGURATION },
+                { page: DocsPage.CONFIGURATION_QUERYPARAMMODULE },
+                { page: DocsPage.CONFIGURATION_QUERYPARAMGROUP },
+                { page: DocsPage.CONFIGURATION_QUERYPARAM },
+            ],
+        },
+        {
+            name: 'Programmatic Access',
+            children: [
+                { page: DocsPage.PROGRAMMATIC_QUERYPARAMGROUP },
+                { page: DocsPage.PROGRAMMATIC_QUERYPARAM },
             ],
         },
         {
             name: 'Advanced',
             children: [
                 { page: DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR },
+                // TODO: Custom URL Serializer
             ],
         },
+        // {
+        //     name: 'Examples',
+        //     children: [
+        //     ],
+        // },
     ];
 
 }

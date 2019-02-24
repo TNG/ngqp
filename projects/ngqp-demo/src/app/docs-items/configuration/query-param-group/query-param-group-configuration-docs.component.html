@@ -1,0 +1,33 @@
+<docs-item>
+    <p>
+        When creating a <span apiDocsLink>QueryParamGroup</span> using <span apiDocsLink>QueryParamBuilder#group</span>
+        you can pass further configuration using its second parameter.
+    </p>
+    <demo-snippet type="typescript" [code]="configSnippet"></demo-snippet>
+
+    <docs-fragment fragment="router-options">
+        <h2>Router Options</h2>
+    </docs-fragment>
+    <p>
+        Define how ngqp interacts with the Angular Router. These options are simply forwarded to the router. To learn
+        more about how they work consult the Angular documentation. If not specified, ngqp uses the
+        <docs-link [page]="DocsPage.CONFIGURATION_QUERYPARAMMODULE">global configuration</docs-link>.
+    </p>
+
+    <docs-fragment fragment="replaceUrl">
+        <h3>replaceUrl</h3>
+    </docs-fragment>
+    <p>
+        Defines whether updating the URL due to a change in the model adds or replaces the state in the URL. This
+        essentially defines whether the user can undo it via the back button.
+    </p>
+    <demo-replace-url-example></demo-replace-url-example>
+
+    <docs-fragment fragment="preserveFragment">
+        <h3>preserveFragment</h3>
+    </docs-fragment>
+    <p>
+        Defines whether a possibly set fragment in the URL should be preserved.
+    </p>
+    <demo-snippet type="typescript" [code]="preserveFragmentConfigSnippet"></demo-snippet>
+</docs-item>

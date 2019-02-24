@@ -11,13 +11,13 @@ export class ExampleComponent implements OnDestroy {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            myParam: qpb.stringParam('q'),
+            searchText: qpb.stringParam('q'),
         });
 
         this.paramGroup.valueChanges.pipe(
             takeUntil(this.componentDestroyed$)
-        ).subscribe(({ myParam }) => {
-            console.log('paramGroup emitted: ', { myParam });
+        ).subscribe(value => {
+            console.log('Emitted: ', value);
         });
     }
 

@@ -20,7 +20,7 @@ export class DocsItemComponent {
 
     constructor(public fragmentService: FragmentsService,
                 private route: ActivatedRoute) {
-        this.docsPage = getPageForRoute(this.route.snapshot.url[0]);
+        this.docsPage = getPageForRoute(this.route.snapshot.url.join('/'));
     }
 
 }

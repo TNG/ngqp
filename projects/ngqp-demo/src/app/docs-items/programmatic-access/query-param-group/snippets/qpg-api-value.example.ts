@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { QueryParamBuilder, QueryParam, QueryParamGroup } from '@ngqp/core';
+import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 
 @Component({ selector: 'app-example' })
 export class ExampleComponent {
@@ -8,10 +8,11 @@ export class ExampleComponent {
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({
-            myParam: qpb.stringParam('q'),
+            searchText: qpb.stringParam('q'),
         });
 
-        const myParam: QueryParam<string> = this.paramGroup.get('myParam');
+        const value = this.paramGroup.value;
+        console.log(value.searchText);
     }
 
 }
