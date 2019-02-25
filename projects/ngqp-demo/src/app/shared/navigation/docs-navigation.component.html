@@ -24,6 +24,7 @@
 
     <ng-template #linkItemTemplate>
         <a class="item__text" (click)="navigate.emit()" [routerLink]="item.page | docsPageRoute" routerLinkActive="active">
+            <fa-icon *ngIf="item.icon" [icon]="item.icon" class="mr-2"></fa-icon>
             {{ item.page | docsPageName }}
         </a>
     </ng-template>
