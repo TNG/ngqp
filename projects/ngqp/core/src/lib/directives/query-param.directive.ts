@@ -31,11 +31,15 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
     /** @internal */
     public valueAccessor: ControlValueAccessor | null = null;
 
+    /** @internal */
+    private group = new QueryParamGroup({});
+
     constructor(
         @Optional() private groupService: QueryParamGroupService,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],
     ) {
         this.valueAccessor = selectValueAccessor(valueAccessors);
+        this.groupService.setQueryParamGroup(this.group);
     }
 
     /** @ignore */
@@ -43,12 +47,13 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
         const paramChange = changes['queryParam'];
 
         if (paramChange) {
-            if (!paramChange.firstChange) {
-                throw new Error('Changing the QueryParam bound in standalone mode is currently not supported.');
+            if (this.group.get(this.name)) {
+                this.groupService.deregisterQueryParamDirective(this.name);
+                this.group.remove(this.name);
             }
 
             if (paramChange.currentValue) {
-                this.groupService.setQueryParamGroup(new QueryParamGroup({[this.name]: paramChange.currentValue}));
+                this.group.add(this.name, paramChange.currentValue);
                 this.groupService.registerQueryParamDirective(this);
             }
         }

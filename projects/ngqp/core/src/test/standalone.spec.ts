@@ -8,7 +8,7 @@ import { captureObservable, scheduler, setupNavigationWarnStub } from './util';
 @Component({
     template: `<input type="text" [queryParam]="param" />`,
 })
-class BasicTestComponent {
+class StaticStandaloneExampleComponent {
 
     public param: QueryParam<string>;
 
@@ -18,9 +18,23 @@ class BasicTestComponent {
 
 }
 
+@Component({
+    template: `<input type="text" [queryParam]="bound ? param : null" />`,
+})
+class ToggleStandaloneExampleComponent {
+
+    public param: QueryParam<string>;
+    public bound = false;
+
+    constructor(private qpb: QueryParamBuilder) {
+        this.param = qpb.stringParam('q');
+    }
+
+}
+
 describe('ngqp standalone parameters', () => {
-    let fixture: ComponentFixture<BasicTestComponent>;
-    let component: BasicTestComponent;
+    let fixture: ComponentFixture<StaticStandaloneExampleComponent>;
+    let component: StaticStandaloneExampleComponent;
     let input: HTMLInputElement;
     let router: Router;
 
@@ -33,7 +47,7 @@ describe('ngqp standalone parameters', () => {
                 QueryParamModule,
             ],
             declarations: [
-                BasicTestComponent,
+                StaticStandaloneExampleComponent,
             ],
         });
 
@@ -43,7 +57,7 @@ describe('ngqp standalone parameters', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(BasicTestComponent);
+        fixture = TestBed.createComponent(StaticStandaloneExampleComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         input = (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
@@ -113,6 +127,80 @@ describe('ngqp standalone parameters', () => {
             tick();
 
             expectObservable(value$).toBe('');
+        });
+    }));
+});
+
+describe('Standalone parameters', () => {
+    let fixture: ComponentFixture<ToggleStandaloneExampleComponent>;
+    let component: ToggleStandaloneExampleComponent;
+    let input: HTMLInputElement;
+    let router: Router;
+
+    beforeEach(() => setupNavigationWarnStub());
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule.withRoutes([]),
+                QueryParamModule,
+            ],
+            declarations: [
+                ToggleStandaloneExampleComponent,
+            ],
+        });
+
+        router = TestBed.get(Router);
+        TestBed.compileComponents();
+        router.initialNavigation();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ToggleStandaloneExampleComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+        input = (fixture.nativeElement as HTMLElement).querySelector('input') as HTMLInputElement;
+        fixture.detectChanges();
+    });
+
+    it('can be bound at runtime', fakeAsync(() => {
+        component.bound = true;
+        fixture.detectChanges();
+
+        input.value = 'Test';
+        input.dispatchEvent(new Event('input'));
+        tick();
+
+        expect(router.url).toBe(`/?q=Test`);
+    }));
+
+    it('can be unbound at runtime', fakeAsync(() => {
+        component.bound = true;
+        fixture.detectChanges();
+
+        router.navigateByUrl(`/?q=One`);
+        tick();
+        expect(input.value).toBe('One');
+
+        component.bound = false;
+        fixture.detectChanges();
+
+        router.navigateByUrl(`/?q=Two`);
+        tick();
+        expect(input.value).toBe('One');
+    }));
+
+    it('synchronizes with the URL upon being bound', fakeAsync(() => {
+        scheduler.run(({ expectObservable }) => {
+            router.navigateByUrl(`/?q=One`);
+            tick();
+
+            const paramValueChanges$ = captureObservable(component.param.valueChanges);
+
+            component.bound = true;
+            fixture.detectChanges();
+
+            expectObservable(paramValueChanges$).toBe('a', {a: 'One'});
         });
     }));
 });
