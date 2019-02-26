@@ -1,0 +1,42 @@
+<docs-item>
+    <p>
+        When importing <span apiDocsLink>QueryParamModule</span> you can use the
+        <span apiDocsLink="QueryParamModule#withConfig">withConfig</span> method to change the global configuration of
+        the module.
+    </p>
+    <demo-snippet type="typescript" [code]="withConfigSnippet"></demo-snippet>
+
+    <docs-fragment fragment="router-options">
+        <h2>Router Options</h2>
+    </docs-fragment>
+    <p>
+        Use the <code>routerOptions</code> configuration key to define how ngqp interacts with the Angular Router. These
+        options are simply passed along to the router. To learn more about how they work consult the Angular
+        documentation.
+    </p>
+
+    <docs-fragment fragment="replaceUrl">
+        <h3>replaceUrl</h3>
+    </docs-fragment>
+    <p>
+        Defines whether updating the URL due to a change in the model adds or replaces the state in the URL. This
+        essentially defines whether the user can undo it via the back button. By default, ngqp sets this to
+        <code>true</code>, i.e., changing the value of the model does not add a new state to the history.
+    </p>
+    <demo-snippet type="typescript" [code]="replaceUrlConfigSnippet"></demo-snippet>
+    <div class="alert alert-info">
+        Each <span apiDocsLink>QueryParamGroup</span> instance can additionally overwrite this configuration.
+    </div>
+
+    <docs-fragment fragment="preserveFragment">
+        <h3>preserveFragment</h3>
+    </docs-fragment>
+    <p>
+        Defines whether a possibly set fragment in the URL should be preserved. By default, ngqp sets this to
+        <code>true</code>.
+    </p>
+    <demo-snippet type="typescript" [code]="preserveFragmentConfigSnippet"></demo-snippet>
+    <div class="alert alert-info">
+        Each <span apiDocsLink>QueryParamGroup</span> instance can additionally overwrite this configuration.
+    </div>
+</docs-item>

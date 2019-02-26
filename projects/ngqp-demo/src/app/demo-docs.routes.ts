@@ -3,10 +3,12 @@ import { DocsPage } from './docs-page';
 import { IntroductionDocsComponent } from './docs-items/introduction/introduction-docs.component';
 import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-docs.component';
 import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
-import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
-import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
-import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
-import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
+import { CustomControlValueAccessorDocsComponent } from './docs-items/advanced/custom-control-value-accessor/custom-control-value-accessor-docs.component';
+import { QueryParamModuleConfigurationDocsComponent } from './docs-items/configuration/query-param-module/query-param-module-configuration-docs.component';
+import { QueryParamGroupConfigurationDocsComponent } from './docs-items/configuration/query-param-group/query-param-group-configuration-docs.component';
+import { QueryParamConfigurationDocsComponent } from './docs-items/configuration/query-param/query-param-configuration-docs.component';
+import { QueryParamGroupProgrammaticAccessDocsComponent } from './docs-items/programmatic-access/query-param-group/query-param-group-programmatic-access-docs.component';
+import { QueryParamProgrammaticAccessDocsComponent } from './docs-items/programmatic-access/query-param/query-param-programmatic-access-docs.component';
 
 export const DOCS_ROUTES: Routes = [
     {
@@ -37,28 +39,42 @@ export const DOCS_ROUTES: Routes = [
         },
     },
     {
-        path: 'model-configuration',
-        component: ModelConfigurationDocsComponent,
+        path: 'configuration/query-param-module',
+        component: QueryParamModuleConfigurationDocsComponent,
         data: {
-            docsPage: DocsPage.MODEL_CONFIGURATION,
+            docsPage: DocsPage.CONFIGURATION_QUERYPARAMMODULE,
         },
     },
     {
-        path: 'model-usage',
-        component: ModelUsageDocsComponent,
+        path: 'configuration/query-param-group',
+        component: QueryParamGroupConfigurationDocsComponent,
         data: {
-            docsPage: DocsPage.MODEL_USAGE,
+            docsPage: DocsPage.CONFIGURATION_QUERYPARAMGROUP,
         },
     },
     {
-        path: 'global-configuration',
-        component: GlobalConfigurationDocsComponent,
+        path: 'configuration/query-param',
+        component: QueryParamConfigurationDocsComponent,
         data: {
-            docsPage: DocsPage.GLOBAL_CONFIGURATION,
+            docsPage: DocsPage.CONFIGURATION_QUERYPARAM,
         },
     },
     {
-        path: 'custom-accessor',
+        path: 'programmatic-access/query-param-group',
+        component: QueryParamGroupProgrammaticAccessDocsComponent,
+        data: {
+            docsPage: DocsPage.PROGRAMMATIC_QUERYPARAMGROUP,
+        },
+    },
+    {
+        path: 'programmatic-access/query-param',
+        component: QueryParamProgrammaticAccessDocsComponent,
+        data: {
+            docsPage: DocsPage.PROGRAMMATIC_QUERYPARAM,
+        },
+    },
+    {
+        path: 'advanced/custom-accessor',
         component: CustomControlValueAccessorDocsComponent,
         data: {
             docsPage: DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR,
@@ -75,10 +91,10 @@ export function getRouteForPage(page: DocsPage): string {
     return `/docs/${foundRoute.path}`;
 }
 
-export function getPageForRoute(segment: UrlSegment): DocsPage {
-    const foundPage = DOCS_ROUTES.find(route => route.path === segment.path);
+export function getPageForRoute(path: string): DocsPage {
+    const foundPage = DOCS_ROUTES.find(route => route.path === path);
     if (!foundPage) {
-        throw new Error(`Cannot find route for segment ${segment.path}`);
+        throw new Error(`Cannot find route for segment ${path}`);
     }
 
     return foundPage.data.docsPage as DocsPage;

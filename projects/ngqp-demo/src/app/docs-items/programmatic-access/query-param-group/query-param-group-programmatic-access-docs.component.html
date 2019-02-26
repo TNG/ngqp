@@ -1,0 +1,60 @@
+<docs-item>
+    <docs-fragment fragment="get">
+        <h2>Accessing parameters</h2>
+    </docs-fragment>
+    <p>
+        To get access to a specific <span apiDocsLink>QueryParam</span> use the
+        <span apiDocsLink>QueryParamGroup#get</span> method by passing the name of the parameter to it. This will
+        return the appropriate <span apiDocsLink>QueryParam</span> instance.
+    </p>
+    <div class="alert alert-info">
+        Remember that this refers to the name with which the parameter is associated in its group, not the URL parameter
+        used to represent it on the URL.
+    </div>
+    <demo-snippet type="typescript" [code]="getSnippet"></demo-snippet>
+
+    <docs-fragment fragment="add-remove">
+        <h2>Adding and removing parameters</h2>
+    </docs-fragment>
+    <p>
+        Parameters can be added to or removed from a group using the <span apiDocsLink>QueryParamGroup#add</span> and
+        <span apiDocsLink>QueryParamGroup#remove</span>, respectively. When a new parameter is added to a group and the
+        group is bound this will resynchronize the entire group with the URL.
+    </p>
+    <demo-add-remove-parameter-example></demo-add-remove-parameter-example>
+
+    <docs-fragment fragment="value">
+        <h2>Reading the current value</h2>
+    </docs-fragment>
+    <p>
+        The current value of a group can be accessed via <span apiDocsLink>QueryParamGroup#value</span>. This returns
+        an object with the parameter names as keys and the current parameter's value as values.
+    </p>
+    <demo-snippet type="typescript" [code]="valueSnippet"></demo-snippet>
+
+    <docs-fragment fragment="valueChanges">
+        <h2>Observing value changes</h2>
+    </docs-fragment>
+    <p>
+        The <span apiDocsLink>QueryParamGroup#valueChanges</span> observable emits the current value of the group
+        whenever it changes (see above for a description of the format of the emitted values). This observable is
+        particularly useful in order to bind the group to some action such as querying your backend, see
+        <docs-link [page]="DocsPage.USAGE_GUIDE"></docs-link>.
+    </p>
+    <div class="alert alert-warning">
+        Always make sure that you unsubscribe from this observable if you no longer need the data. Note that it never
+        completes on its own.
+    </div>
+    <demo-snippet type="typescript" [code]="valueChangesSnippet"></demo-snippet>
+
+    <docs-fragment fragment="patchValue-setValue">
+        <h2>Changing the value</h2>
+    </docs-fragment>
+    <p>
+        The value of a group can be changed programmatically through the
+        <span apiDocsLink="QueryParamGroup#patchValue">patchValue</span> and
+        <span apiDocsLink="QueryParamGroup#setValue">setValue</span> methods. Similarly to their namesakes from the
+        Reactive Forms API this performs either a partial or complete update of the value.
+    </p>
+    <demo-patch-set-value-example></demo-patch-set-value-example>
+</docs-item>

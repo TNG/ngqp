@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { DocsPage } from '../../docs-page';
+import { faHandsHelping, faRibbon, faStar } from '@fortawesome/free-solid-svg-icons';
 
 interface DocsNavigationItem {
     page: DocsPage;
+    icon?: unknown;
 }
 
 interface DocsNavigationItemGroup {
@@ -21,23 +23,45 @@ export class DocsNavigationComponent {
     public navigate = new EventEmitter<void>();
 
     public items: (DocsNavigationItem | DocsNavigationItemGroup)[] = [
-        { page: DocsPage.INTRODUCTION },
-        { page: DocsPage.USAGE_GUIDE },
-        { page: DocsPage.GETTING_HELP },
         {
-            name: 'Fundamentals',
+            page: DocsPage.INTRODUCTION,
+            icon: faRibbon,
+        },
+        {
+            page: DocsPage.USAGE_GUIDE,
+            icon: faStar,
+        },
+        {
+            page: DocsPage.GETTING_HELP,
+            icon: faHandsHelping,
+        },
+        {
+            name: 'Configuration',
             children: [
-                { page: DocsPage.MODEL_CONFIGURATION },
-                { page: DocsPage.MODEL_USAGE },
-                { page: DocsPage.GLOBAL_CONFIGURATION },
+                { page: DocsPage.CONFIGURATION_QUERYPARAMMODULE },
+                { page: DocsPage.CONFIGURATION_QUERYPARAMGROUP },
+                { page: DocsPage.CONFIGURATION_QUERYPARAM },
+            ],
+        },
+        {
+            name: 'Programmatic Access',
+            children: [
+                { page: DocsPage.PROGRAMMATIC_QUERYPARAMGROUP },
+                { page: DocsPage.PROGRAMMATIC_QUERYPARAM },
             ],
         },
         {
             name: 'Advanced',
             children: [
                 { page: DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR },
+                // TODO: Custom URL Serializer
             ],
         },
+        // {
+        //     name: 'Examples',
+        //     children: [
+        //     ],
+        // },
     ];
 
 }

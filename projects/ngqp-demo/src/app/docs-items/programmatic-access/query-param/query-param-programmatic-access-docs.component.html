@@ -1,0 +1,31 @@
+<docs-item>
+    <docs-fragment fragment="value">
+        <h2>Reading the current value</h2>
+    </docs-fragment>
+    <p>
+        The current value can be accessed via <span apiDocsLink>QueryParam#value</span>.
+    </p>
+    <demo-snippet type="typescript" [code]="valueSnippet"></demo-snippet>
+
+    <docs-fragment fragment="valueChanges">
+        <h2>Observing value changes</h2>
+    </docs-fragment>
+    <p>
+        The <span apiDocsLink>QueryParam#valueChanges</span> observable emits the current value of the parameter
+        whenever it changes.
+    </p>
+    <div class="alert alert-warning">
+        Always make sure that you unsubscribe from this observable if you no longer need the data. Note that it never
+        completes on its own.
+    </div>
+    <demo-snippet type="typescript" [code]="valueChangesSnippet"></demo-snippet>
+
+    <docs-fragment fragment="setValue">
+        <h2>Changing the value</h2>
+    </docs-fragment>
+    <p>
+        The value of a parameter can be changed programmatically through the
+        <span apiDocsLink="QueryParam#setValue">setValue</span> method.
+    </p>
+    <demo-snippet type="typescript" [code]="setValueSnippet"></demo-snippet>
+</docs-item>

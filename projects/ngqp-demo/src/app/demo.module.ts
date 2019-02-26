@@ -22,7 +22,6 @@ import { UsageGuideDocsComponent } from './docs-items/usage-guide/usage-guide-do
 import { DocsPageNamePipe, DocsPageRoutePipe } from './shared/docs-page.pipes';
 import { DocsLinkComponent } from './shared/docs-link/docs-link.component';
 import { GettingHelpDocsComponent } from './docs-items/getting-help/getting-help-docs.component';
-import { ModelConfigurationDocsComponent } from './docs-items/model-configuration/model-configuration-docs.component';
 import { ApiDocsLinkComponent } from './shared/api-docs-link/api-docs-link.component';
 import { ReplaceUrlExampleComponent } from './docs-items/examples/replace-url-example/replace-url-example.component';
 import { SerializerExampleComponent } from './docs-items/examples/serializer-example/serializer-example.component';
@@ -30,14 +29,17 @@ import { MultiExampleComponent } from './docs-items/examples/multi-example/multi
 import { DebounceTimeExampleComponent } from './docs-items/examples/debounce-time-example/debounce-time-example.component';
 import { EmptyOnExampleComponent } from './docs-items/examples/empty-on-example/empty-on-example.component';
 import { CombineWithExampleComponent } from './docs-items/examples/combine-with-example/combine-with-example.component';
-import { ModelUsageDocsComponent } from './docs-items/model-usage/model-usage-docs.component';
 import { PatchSetValueExampleComponent } from './docs-items/examples/patch-set-value-example/patch-set-value-example.component';
-import { GlobalConfigurationDocsComponent } from './docs-items/global-configuration/global-configuration-docs.component';
-import { CustomControlValueAccessorDocsComponent } from './docs-items/custom-control-value-accessor/custom-control-value-accessor-docs.component';
+import { CustomControlValueAccessorDocsComponent } from './docs-items/advanced/custom-control-value-accessor/custom-control-value-accessor-docs.component';
 import { ControlValueAccessorDirectiveExampleComponent } from './docs-items/examples/control-value-accessor-directive-example/control-value-accessor-directive-example.component';
 import { ManualWiringExampleComponent } from './docs-items/examples/manual-wiring-example/manual-wiring-example.component';
 import { AddRemoveParameterExampleComponent } from './docs-items/examples/add-remove-parameter/add-remove-parameter-example.component';
 import { StandaloneExampleComponent } from './docs-items/examples/standalone-example/standalone-example.component';
+import { QueryParamModuleConfigurationDocsComponent } from './docs-items/configuration/query-param-module/query-param-module-configuration-docs.component';
+import { QueryParamGroupConfigurationDocsComponent } from './docs-items/configuration/query-param-group/query-param-group-configuration-docs.component';
+import { QueryParamConfigurationDocsComponent } from './docs-items/configuration/query-param/query-param-configuration-docs.component';
+import { QueryParamGroupProgrammaticAccessDocsComponent } from './docs-items/programmatic-access/query-param-group/query-param-group-programmatic-access-docs.component';
+import { QueryParamProgrammaticAccessDocsComponent } from './docs-items/programmatic-access/query-param/query-param-programmatic-access-docs.component';
 
 @NgModule({
     declarations: [
@@ -54,6 +56,20 @@ import { StandaloneExampleComponent } from './docs-items/examples/standalone-exa
         DocsPageNamePipe,
         DocsPageRoutePipe,
         DocsLinkComponent,
+        ApiDocsLinkComponent,
+
+        // Examples
+        ReplaceUrlExampleComponent,
+        SerializerExampleComponent,
+        MultiExampleComponent,
+        DebounceTimeExampleComponent,
+        EmptyOnExampleComponent,
+        CombineWithExampleComponent,
+        PatchSetValueExampleComponent,
+        ControlValueAccessorDirectiveExampleComponent,
+        ManualWiringExampleComponent,
+        AddRemoveParameterExampleComponent,
+        StandaloneExampleComponent,
 
         HomeComponent,
         GettingStartedComponent,
@@ -61,22 +77,18 @@ import { StandaloneExampleComponent } from './docs-items/examples/standalone-exa
         IntroductionDocsComponent,
         UsageGuideDocsComponent,
         GettingHelpDocsComponent,
-        ModelConfigurationDocsComponent,
-        ApiDocsLinkComponent,
-        ReplaceUrlExampleComponent,
-        SerializerExampleComponent,
-        MultiExampleComponent,
-        DebounceTimeExampleComponent,
-        EmptyOnExampleComponent,
-        CombineWithExampleComponent,
-        ModelUsageDocsComponent,
-        PatchSetValueExampleComponent,
-        GlobalConfigurationDocsComponent,
+
+        // Configuration
+        QueryParamModuleConfigurationDocsComponent,
+        QueryParamGroupConfigurationDocsComponent,
+        QueryParamConfigurationDocsComponent,
+
+        // Programmatic Access
+        QueryParamGroupProgrammaticAccessDocsComponent,
+        QueryParamProgrammaticAccessDocsComponent,
+
+        // Advanced
         CustomControlValueAccessorDocsComponent,
-        ControlValueAccessorDirectiveExampleComponent,
-        ManualWiringExampleComponent,
-        AddRemoveParameterExampleComponent,
-        StandaloneExampleComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocsPage } from '../../docs-page';
+import { DocsPage } from '../../../docs-page';
 
 @Component({
     selector: 'demo-custom-control-value-accessor-docs',
