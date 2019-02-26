@@ -40,15 +40,15 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
 
     /** @ignore */
     public ngOnChanges(changes: SimpleChanges): void {
-        const nameChange = changes['queryParam'];
+        const paramChange = changes['queryParam'];
 
-        if (nameChange) {
-            if (!nameChange.firstChange) {
+        if (paramChange) {
+            if (!paramChange.firstChange) {
                 throw new Error('Changing the QueryParam bound in standalone mode is currently not supported.');
             }
 
-            if (nameChange.currentValue) {
-                this.groupService.setQueryParamGroup(new QueryParamGroup({[this.name]: nameChange.currentValue}));
+            if (paramChange.currentValue) {
+                this.groupService.setQueryParamGroup(new QueryParamGroup({[this.name]: paramChange.currentValue}));
                 this.groupService.registerQueryParamDirective(this);
             }
         }
