@@ -4,12 +4,18 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { RouterTestingModule } from '@angular/router/testing';
 import { QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
 import { setupNavigationWarnStub } from './util';
+import { compareStringArraysUnordered } from '../lib/util';
 
 @Component({
     template: `
         <div [queryParamGroup]="paramGroup">
             <input type="text" queryParamName="param1" />
             <input type="text" queryParamName="param2" />
+            <select multiple queryParamName="param3">
+                <option value="Test1"></option>
+                <option value="Test2"></option>
+                <option value="Test3"></option>
+            </select>
         </div>
     `,
 })
@@ -26,6 +32,11 @@ class BasicTestComponent {
                 emptyOn: 'Test',
                 compareWith: (a, b) => (a || '').toLowerCase() === (b || '').toLowerCase(),
             }),
+            param3: qpb.stringParam('q3', {
+                multi: true,
+                emptyOn: ['Test1', 'Test2'],
+                compareWith: compareStringArraysUnordered,
+            }),
         });
     }
 
@@ -36,6 +47,7 @@ describe('emptyOn', () => {
     let component: BasicTestComponent;
     let input1: HTMLInputElement;
     let input2: HTMLInputElement;
+    let select3: HTMLSelectElement;
     let router: Router;
 
     beforeEach(() => setupNavigationWarnStub());
@@ -63,6 +75,7 @@ describe('emptyOn', () => {
 
         input1 = (fixture.nativeElement as HTMLElement).querySelectorAll('input')[0] as HTMLInputElement;
         input2 = (fixture.nativeElement as HTMLElement).querySelectorAll('input')[1] as HTMLInputElement;
+        select3 = (fixture.nativeElement as HTMLElement).querySelectorAll('select')[0] as HTMLSelectElement;
         fixture.detectChanges();
     });
 
@@ -103,5 +116,20 @@ describe('emptyOn', () => {
         tick();
 
         expect(router.url).toBe('/');
+    }));
+
+    it('works for multi: true', fakeAsync(() => {
+        (select3.querySelectorAll('option')[0] as HTMLOptionElement).selected = true;
+        (select3.querySelectorAll('option')[1] as HTMLOptionElement).selected = true;
+        select3.dispatchEvent(new Event('change'));
+        tick();
+
+        expect(router.url).toBe('/');
+
+        (select3.querySelectorAll('option')[2] as HTMLOptionElement).selected = true;
+        select3.dispatchEvent(new Event('change'));
+        tick();
+
+        expect(router.url).toBe('/?q3=Test1&q3=Test2&q3=Test3');
     }));
 });

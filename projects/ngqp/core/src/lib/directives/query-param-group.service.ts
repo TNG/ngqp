@@ -13,25 +13,19 @@ import {
     takeUntil,
     tap
 } from 'rxjs/operators';
-import { compareParamMaps, filterParamMap, isMissing, isPresent, NOP } from '../util';
-import { Unpack } from '../types';
+import { areEqualUsing, compareParamMaps, filterParamMap, isMissing, isPresent, NOP, wrapTryCatch } from '../util';
 import { QueryParamGroup } from '../model/query-param-group';
-import { QueryParam } from '../model/query-param';
+import { MultiQueryParam, QueryParam } from '../model/query-param';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 import { QueryParamAccessor } from './query-param-accessor.interface';
 
 /** @internal */
-function isMultiQueryParam<T>(queryParam: QueryParam<T> | QueryParam<T[]>): queryParam is QueryParam<T[]> {
+function isMultiQueryParam<T>(queryParam: QueryParam<T> | MultiQueryParam<T>): queryParam is MultiQueryParam<T> {
     return queryParam.multi;
 }
 
 /** @internal */
-function hasArrayValue<T>(queryParam: QueryParam<T> | QueryParam<T[]>, value: T | T[]): value is T[] {
-    return isMultiQueryParam(queryParam);
-}
-
-/** @internal */
-function hasArraySerialization(queryParam: QueryParam<any>, values: string | string[] | null): values is string[] {
+function hasArrayValue<T>(queryParam: QueryParam<T> | MultiQueryParam<T>, value: T | T[]): value is T[] {
     return isMultiQueryParam(queryParam);
 }
 
@@ -233,8 +227,8 @@ export class QueryParamGroupService implements OnDestroy {
 
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
                 const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
-                const newValue = queryParam.multi
-                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.urlParam))
+                const newValue = isMultiQueryParam(queryParam)
+                    ? this.deserializeMulti(queryParam, queryParamMap.getAll(queryParam.urlParam))
                     : this.deserialize(queryParam, queryParamMap.get(queryParam.urlParam));
 
                 const directives = this.directives.get(queryParamName);
@@ -310,8 +304,10 @@ export class QueryParamGroupService implements OnDestroy {
      * This consists mainly of properly serializing the model value and ensuring to take
      * side effect changes into account that may have been configured.
      */
-    private getParamsForValue<T>(queryParam: QueryParam<any>, value: T | undefined | null): Params {
-        const newValue = this.serialize(queryParam, value);
+    private getParamsForValue(queryParam: QueryParam<any> | MultiQueryParam<any>, value: any | undefined | null): Params {
+        const newValue = isMultiQueryParam(queryParam)
+            ? this.serializeMulti(queryParam, value)
+            : this.serialize(queryParam, value);
 
         const combinedParams: Params = isMissing(queryParam.combineWith)
             ? {} : queryParam.combineWith(value);
@@ -324,20 +320,36 @@ export class QueryParamGroupService implements OnDestroy {
         };
     }
 
-    private serialize<T>(queryParam: QueryParam<any>, value: T): string | string[] {
-        if (hasArrayValue(queryParam, value)) {
-            return (value || []).map(queryParam.serialize);
-        } else {
-            return queryParam.serialize(value);
+    private serialize<T>(queryParam: QueryParam<T>, value: T): string {
+        if (queryParam.emptyOn !== undefined && areEqualUsing(value, queryParam.emptyOn, queryParam.compareWith)) {
+            return null;
         }
+
+        return queryParam.serialize(value);
     }
 
-    private deserialize<T>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
-        if (hasArraySerialization(queryParam, values)) {
-            return values.map(queryParam.deserialize);
-        } else {
-            return queryParam.deserialize(values);
+    private serializeMulti<T>(queryParam: MultiQueryParam<T>, value: T[]): string[] {
+        if (queryParam.emptyOn !== undefined && areEqualUsing(value, queryParam.emptyOn, queryParam.compareWith)) {
+            return null;
         }
+
+        return (value || []).map(queryParam.serialize.bind(queryParam));
+    }
+
+    private deserialize<T>(queryParam: QueryParam<T>, value: string): T {
+        if (queryParam.emptyOn !== undefined && value === null) {
+            return queryParam.emptyOn;
+        }
+
+        return queryParam.deserialize(value);
+    }
+
+    private deserializeMulti<T>(queryParam: MultiQueryParam<T>, values: string[]): T[] {
+        if (queryParam.emptyOn !== undefined && values === null) {
+            return queryParam.emptyOn;
+        }
+
+        return values.map(queryParam.deserialize.bind(queryParam));
     }
 
     /**

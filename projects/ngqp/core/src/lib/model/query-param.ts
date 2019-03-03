@@ -1,9 +1,8 @@
 import { Observable, Subject } from 'rxjs';
 import { isFunction, isMissing, isPresent, wrapTryCatch } from '../util';
-import { OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from '../types';
-import { createEmptyOnDeserializer, createEmptyOnSerializer } from '../serializers';
+import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
 import { QueryParamGroup } from './query-param-group';
-import { QueryParamOpts } from './query-param-opts';
+import { MultiQueryParamOpts, QueryParamOpts } from './query-param-opts';
 
 /**
  * Describes a single parameter.
@@ -12,7 +11,7 @@ import { QueryParamOpts } from './query-param-opts';
  * as the glue between its representation in the URL and its connection
  * to a form control.
  */
-export class QueryParam<T> {
+export class QueryParam<U, T = U> implements Required<Readonly<QueryParamOpts<U, T>>> {
 
     private _valueChanges = new Subject<T>();
 
@@ -37,28 +36,37 @@ export class QueryParam<T> {
      */
     public readonly urlParam: string;
 
-    /** @internal */
-    public readonly serialize: ParamSerializer<Unpack<T>>;
+    /** See {@link QueryParamOpts}. */
+    public readonly serialize: ParamSerializer<U>;
 
-    /** @internal */
-    public readonly deserialize: ParamDeserializer<Unpack<T>>;
+    /** See {@link QueryParamOpts}. */
+    public readonly deserialize: ParamDeserializer<U>;
 
-    /** @internal */
+    /** See {@link QueryParamOpts}. */
     public readonly multi: boolean;
 
-    /** @internal */
+    /** See {@link QueryParamOpts}. */
     public readonly debounceTime: number | null;
 
-    /** @internal */
+    /** See {@link QueryParamOpts}. */
+    public readonly emptyOn: T;
+
+    /** See {@link QueryParamOpts}. */
+    public readonly compareWith: Comparator<T>;
+
+    /** See {@link QueryParamOpts}. */
     public readonly combineWith: ParamCombinator<T>;
 
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
 
-    constructor(urlParam: string, opts: QueryParamOpts<T> = {}) {
-        const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
-        const multi = opts.multi === true;
-        const hasEmptyOn = emptyOn !== undefined;
+    constructor(urlParam: string, opts: QueryParamOpts<U, T> = {}) {
+        opts = {
+            multi: false,
+            ...opts,
+        };
+
+        const { serialize, deserialize, multi, debounceTime, compareWith, emptyOn, combineWith } = opts;
 
         if (isMissing(urlParam)) {
             throw new Error(`Please provide a URL parameter name for each query parameter.`);
@@ -72,7 +80,7 @@ export class QueryParam<T> {
             throw new Error(`deserialize must be a function, but received ${deserialize}`);
         }
 
-        if (hasEmptyOn && !isFunction(compareWith)) {
+        if (emptyOn !== undefined && !isFunction(compareWith)) {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 
@@ -80,22 +88,13 @@ export class QueryParam<T> {
             throw new Error(`combineWith must be a function, but received ${combineWith}`);
         }
 
-        if (multi && isPresent(emptyOn)) {
-            throw new Error(`emptyOn is only supported for single-value parameters, but ${urlParam} is a multi-value parameter.`);
-        }
-
         this.urlParam = urlParam;
-
-        this.serialize = wrapTryCatch(
-            !hasEmptyOn ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            `Error while serializing value for ${urlParam}`
-        );
-        this.deserialize = wrapTryCatch(
-            !hasEmptyOn ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
-            `Error while deserializing value for ${urlParam}`
-        );
-        this.multi = multi;
+        this.serialize = wrapTryCatch(serialize, `Error while serializing value for ${this.urlParam}`);
+        this.deserialize = wrapTryCatch(deserialize, `Error while deserializing value for ${this.urlParam}`);
+        this.multi = !!multi;
         this.debounceTime = debounceTime;
+        this.emptyOn = emptyOn;
+        this.compareWith = compareWith;
         this.combineWith = combineWith;
     }
 
@@ -145,6 +144,26 @@ export class QueryParam<T> {
         }
 
         this.parent = parent;
+    }
+
+}
+
+/**
+ * Like {@link QueryParam}, but for array-typed parameters
+ *
+ * This is a strongly typed equivalent for {@link QueryParam} where the
+ * value type is an array of the base type.
+ */
+export class MultiQueryParam<T> extends QueryParam<T, T[]> {
+
+    /** See {@link QueryParamOpts}. */
+    public readonly multi: true;
+
+    constructor(urlParam: string, opts: MultiQueryParamOpts<T>) {
+        super(urlParam, {
+            ...(opts || {}),
+            multi: true,
+        });
     }
 
 }
