@@ -9,9 +9,13 @@ import {
 } from './serializers';
 import { LOOSE_IDENTITY_COMPARATOR } from './util';
 import { RouterOptions } from './router-adapter/router-adapter.interface';
-import { QueryParam } from './model/query-param';
+import { MultiQueryParam, QueryParam } from './model/query-param';
 import { QueryParamGroup } from './model/query-param-group';
-import { QueryParamOpts } from './model/query-param-opts';
+import { MultiQueryParamOpts, QueryParamOpts } from './model/query-param-opts';
+
+function isMultiOpts<T>(opts: QueryParamOpts<T> | MultiQueryParamOpts<T>): opts is MultiQueryParamOpts<T> {
+    return opts.multi === true;
+}
 
 /**
  * Service to create parameters and groups.
@@ -35,7 +39,7 @@ export class QueryParamBuilder {
      * @returns The new {@link QueryParamGroup}.
      */
     public group(
-        queryParams: { [ name: string ]: QueryParam<any> },
+        queryParams: { [ name: string ]: QueryParam<unknown> | MultiQueryParam<unknown> },
         extras: RouterOptions = {}
     ): QueryParamGroup {
         // TODO Maybe we should first validate that no two queryParams defined the same "param".
@@ -43,7 +47,7 @@ export class QueryParamBuilder {
     }
 
     /** @ignore */
-    public stringParam(urlParam: string, opts: QueryParamOpts<string[]> & { multi: true }): QueryParam<string[]>;
+    public stringParam(urlParam: string, opts: MultiQueryParamOpts<string>): MultiQueryParam<string>;
     /** @ignore */
     public stringParam(urlParam: string, opts?: QueryParamOpts<string>): QueryParam<string>;
     /**
@@ -53,18 +57,24 @@ export class QueryParamBuilder {
      */
     public stringParam(
         urlParam: string,
-        opts: QueryParamOpts<string> | QueryParamOpts<string[]> = {}
-    ): QueryParam<string> | QueryParam<string[]> {
-        return new QueryParam<any>(urlParam, {
+        opts: QueryParamOpts<string> | MultiQueryParamOpts<string> = {}
+    ): QueryParam<string> | MultiQueryParam<string> {
+        opts = {
             serialize: DEFAULT_STRING_SERIALIZER,
             deserialize: DEFAULT_STRING_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        } as QueryParamOpts<any>);
+        };
+
+        if (isMultiOpts(opts)) {
+            return new MultiQueryParam<string>(urlParam, opts);
+        } else {
+            return new QueryParam<string>(urlParam, opts);
+        }
     }
 
     /** @ignore */
-    public numberParam(urlParam: string, opts: QueryParamOpts<number[]> & { multi: true }): QueryParam<number[]>;
+    public numberParam(urlParam: string, opts: MultiQueryParamOpts<number>): MultiQueryParam<number>;
     /** @ignore */
     public numberParam(urlParam: string, opts?: QueryParamOpts<number>): QueryParam<number>;
     /**
@@ -74,18 +84,24 @@ export class QueryParamBuilder {
      */
     public numberParam(
         urlParam: string,
-        opts: QueryParamOpts<number> | QueryParamOpts<number[]> = {}
-    ): QueryParam<number> | QueryParam<number[]> {
-        return new QueryParam<any>(urlParam, {
+        opts: QueryParamOpts<number> | MultiQueryParamOpts<number> = {}
+    ): QueryParam<number> | MultiQueryParam<number> {
+        opts = {
             serialize: DEFAULT_NUMBER_SERIALIZER,
             deserialize: DEFAULT_NUMBER_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        } as QueryParamOpts<any>);
+        };
+
+        if (isMultiOpts(opts)) {
+            return new MultiQueryParam<number>(urlParam, opts);
+        } else {
+            return new QueryParam<number>(urlParam, opts);
+        }
     }
 
     /** @ignore */
-    public booleanParam(urlParam: string, opts: QueryParamOpts<boolean[]> & { multi: true }): QueryParam<boolean[]>;
+    public booleanParam(urlParam: string, opts: MultiQueryParamOpts<boolean>): MultiQueryParam<boolean>;
     /** @ignore */
     public booleanParam(urlParam: string, opts?: QueryParamOpts<boolean>): QueryParam<boolean>;
     /**
@@ -95,18 +111,24 @@ export class QueryParamBuilder {
      */
     public booleanParam(
         urlParam: string,
-        opts: QueryParamOpts<boolean> | QueryParamOpts<boolean[]> = {}
-    ): QueryParam<boolean> | QueryParam<boolean[]> {
-        return new QueryParam<any>(urlParam, {
+        opts: QueryParamOpts<boolean> | MultiQueryParamOpts<boolean> = {}
+    ): QueryParam<boolean> | MultiQueryParam<boolean> {
+        opts = {
             serialize: DEFAULT_BOOLEAN_SERIALIZER,
             deserialize: DEFAULT_BOOLEAN_DESERIALIZER,
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        } as QueryParamOpts<any>);
+        };
+
+        if (isMultiOpts(opts)) {
+            return new MultiQueryParam<boolean>(urlParam, opts);
+        } else {
+            return new QueryParam<boolean>(urlParam, opts);
+        }
     }
 
     /** @ignore */
-    public param<T>(urlParam: string, opts: QueryParamOpts<T[]> & { multi: true }): QueryParam<T[]>;
+    public param<T>(urlParam: string, opts: MultiQueryParamOpts<T>): MultiQueryParam<T>;
     /** @ignore */
     public param<T>(urlParam: string, opts?: QueryParamOpts<T>): QueryParam<T>;
     /**
@@ -116,12 +138,18 @@ export class QueryParamBuilder {
      */
     public param<T>(
         urlParam: string,
-        opts: QueryParamOpts<T> | QueryParamOpts<T[]> = {}
-    ): QueryParam<T> | QueryParam<T[]> {
-        return new QueryParam<any>(urlParam, {
+        opts: QueryParamOpts<T> | MultiQueryParamOpts<T> = {}
+    ): QueryParam<T> | MultiQueryParam<T> {
+        opts = {
             compareWith: LOOSE_IDENTITY_COMPARATOR,
             ...opts,
-        } as QueryParamOpts<any>);
+        };
+
+        if (isMultiOpts(opts)) {
+            return new MultiQueryParam<T>(urlParam, opts);
+        } else {
+            return new QueryParam<T>(urlParam, opts);
+        }
     }
 
 }

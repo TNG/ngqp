@@ -29,11 +29,10 @@ export class ManualWiringExampleComponent implements OnDestroy {
         this.pageParam.valueChanges.pipe(
             takeUntil(this.componentDestroyed$)
         ).subscribe(page => this.currentPage = page);
-
     }
 
     public get pageParam(): QueryParam<number> {
-        return this.paramGroup.get('page');
+        return this.paramGroup.get('page') as QueryParam<number>;
     }
 
     public onPageChange(page: number) {

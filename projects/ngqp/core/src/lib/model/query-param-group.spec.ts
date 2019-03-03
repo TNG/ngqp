@@ -46,7 +46,7 @@ describe(QueryParamGroup.name, () => {
         let group: QueryParamGroup;
         let queryParam: QueryParam<string>;
         beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
-        beforeEach(() => queryParam = group.get('q'));
+        beforeEach(() => queryParam = group.get('q') as QueryParam<string> );
 
         it('updates the parameter value', () => {
             group.patchValue({ q: 'Test' });
@@ -114,7 +114,7 @@ describe(QueryParamGroup.name, () => {
         let group: QueryParamGroup;
         let queryParam: QueryParam<string>;
         beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
-        beforeEach(() => queryParam = group.get('q'));
+        beforeEach(() => queryParam = group.get('q') as QueryParam<string>);
 
         it('updates the parameter value', () => {
             group.setValue({ q: 'Test' });
@@ -178,7 +178,7 @@ describe(QueryParamGroup.name, () => {
         let group: QueryParamGroup;
         let queryParam: QueryParam<string>;
         beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
-        beforeEach(() => queryParam = group.get('q'));
+        beforeEach(() => queryParam = group.get('q') as QueryParam<string>);
 
         it('emits the current value', fakeAsync(() => {
             scheduler.run(({ expectObservable }) => {

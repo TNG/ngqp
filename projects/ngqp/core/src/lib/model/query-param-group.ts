@@ -1,7 +1,7 @@
 import { Observable, Subject } from 'rxjs';
 import { isMissing, undefinedToNull } from '../util';
 import { OnChangeFunction } from '../types';
-import { QueryParam } from './query-param';
+import { MultiQueryParam, QueryParam } from './query-param';
 import { RouterOptions } from '../router-adapter/router-adapter.interface';
 
 /**
@@ -34,7 +34,7 @@ export class QueryParamGroup {
     public readonly queryParamAdded$: Observable<string> = this._queryParamAdded$.asObservable();
 
     /** @internal */
-    public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> };
+    public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> | MultiQueryParam<any> };
 
     /** @internal */
     public readonly routerOptions: RouterOptions;
@@ -42,7 +42,7 @@ export class QueryParamGroup {
     private changeFunctions: OnChangeFunction<Record<string, any>>[] = [];
 
     constructor(
-        queryParams: { [ queryParamName: string ]: QueryParam<any> },
+        queryParams: { [ queryParamName: string ]: QueryParam<any> | MultiQueryParam<any> },
         extras: RouterOptions = {}
     ) {
         this.queryParams = queryParams;
@@ -69,7 +69,7 @@ export class QueryParamGroup {
      *
      * @param queryParamName The name of the parameter instance to retrieve.
      */
-    public get(queryParamName: string): QueryParam<any> | null {
+    public get(queryParamName: string): QueryParam<any> | MultiQueryParam<any> | null {
         const param = this.queryParams[ queryParamName ];
         if (!param) {
             return null;
@@ -88,7 +88,7 @@ export class QueryParamGroup {
      * @param queryParamName Name of the parameter to reference it with.
      * @param queryParam The new parameter to add.
      */
-    public add(queryParamName: string, queryParam: QueryParam<any>): void {
+    public add(queryParamName: string, queryParam: QueryParam<any> | MultiQueryParam<any>): void {
         if (this.get(queryParamName)) {
             throw new Error(`A parameter with name ${queryParamName} already exists.`);
         }
@@ -107,7 +107,7 @@ export class QueryParamGroup {
      * @param queryParamName The name of the parameter to remove.
      */
     public remove(queryParamName: string): void {
-        const queryParam: QueryParam<any> = this.get(queryParamName);
+        const queryParam = this.get(queryParamName);
         if (!queryParam) {
             throw new Error(`No parameter with name ${queryParamName} found.`);
         }

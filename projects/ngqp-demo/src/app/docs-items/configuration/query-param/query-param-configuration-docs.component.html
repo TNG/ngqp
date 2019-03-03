@@ -29,6 +29,10 @@
         <span apiDocsLink="QueryParam#multi">multi</span> option to <code>true</code>. This will use the default
         behavior of the router to have query parameters with multiple values.
     </p>
+    <div class="alert alert-info">
+        When using <code>multi: true</code>, APIs such as <span apiDocsLink>QueryParamGroup#get</span> will actually
+        return <span apiDocsLink>MultiQueryParam</span> instead of <span apiDocsLink>QueryParam</span>.
+    </div>
     <demo-multi-example></demo-multi-example>
 
     <docs-fragment fragment="debounceTime">
@@ -54,9 +58,6 @@
     <docs-fragment fragment="emptyOn-compareWith">
         <h2>Default values</h2>
     </docs-fragment>
-    <div class="alert alert-warning">
-        This feature is currently not supported if you are using <span apiDocsLink>QueryParam#multi</span>.
-    </div>
     <p>
         By default, if a parameter value is <code>null</code>, the parameter will be removed from the URL. For example,
         this prevents useless URL segments such as <code>?q=</code> (without a value). However, in some cases you might

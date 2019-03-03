@@ -1,3 +1,3 @@
-export { QueryParamOpts } from './query-param-opts';
+export { QueryParamOpts, MultiQueryParamOpts } from './query-param-opts';
 export { QueryParamGroup } from './query-param-group';
-export { QueryParam } from './query-param';
+export { AbstractQueryParam, QueryParam, MultiQueryParam } from './query-param';

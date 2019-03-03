@@ -33,11 +33,3 @@ export type OnChangeFunction<T> = (value: T | null) => void;
  * @returns `true` or `0` if and only if `a` and `b` should be considered equal.
  */
 export type Comparator<T> = (a: T | undefined | null, b: T | undefined | null) => boolean | number;
-
-/**
- * Unpacks an array type.
- *
- * If the given type is an array, this returns the element type,
- * otherwise it returns the provided type unchanged.
- */
-export type Unpack<T> = T extends (infer U)[] ? U : T;
