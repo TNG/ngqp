@@ -16,15 +16,15 @@ export class DocsPageNamePipe implements PipeTransform {
             case DocsPage.GETTING_HELP:
                 return 'Getting Help';
             case DocsPage.CONFIGURATION_QUERYPARAMMODULE:
-                return 'QueryParamModule';
+                return 'Global';
             case DocsPage.CONFIGURATION_QUERYPARAMGROUP:
-                return 'QueryParamGroup';
+                return 'Groups';
             case DocsPage.CONFIGURATION_QUERYPARAM:
-                return 'QueryParam';
+                return 'Parameters';
             case DocsPage.PROGRAMMATIC_QUERYPARAMGROUP:
-                return 'QueryParamGroup';
+                return 'Groups';
             case DocsPage.PROGRAMMATIC_QUERYPARAM:
-                return 'QueryParam';
+                return 'Parameters';
             case DocsPage.CUSTOM_CONTROL_VALUE_ACCESSOR:
                 return 'Controls without ControlValueAccessor';
             default:

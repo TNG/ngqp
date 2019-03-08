@@ -1,12 +1,11 @@
 import { fakeAsync } from '@angular/core/testing';
 import { QueryParam } from './query-param';
 import { QueryParamOpts } from './query-param-opts';
-import { LOOSE_IDENTITY_COMPARATOR } from '../util';
 import { DEFAULT_STRING_DESERIALIZER, DEFAULT_STRING_SERIALIZER } from '../serializers';
 import { QueryParamGroup } from './query-param-group';
 import { captureObservable, scheduler } from '../../test/util';
 
-describe(QueryParam.name, () => {
+describe('QueryParam', () => {
     describe('constructor', () => {
         const opts: Required<QueryParamOpts<any>> = {
             serialize: (value: any) => '',
@@ -51,15 +50,6 @@ describe(QueryParam.name, () => {
                 emptyOn: 42,
                 compareWith: undefined,
             })).toThrowError('compareWith must be a function, but received undefined');
-        });
-
-        it('throws an error if emptyOn is provided together with multi', () => {
-            expect(() => new QueryParam('q', {
-                ...opts,
-                multi: true,
-                emptyOn: 42,
-                compareWith: LOOSE_IDENTITY_COMPARATOR,
-            })).toThrowError('emptyOn is only supported for single-value parameters, but q is a multi-value parameter.');
         });
 
         it('does not require combineWith', () => {

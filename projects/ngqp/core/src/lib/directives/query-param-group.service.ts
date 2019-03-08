@@ -14,25 +14,14 @@ import {
     tap
 } from 'rxjs/operators';
 import { compareParamMaps, filterParamMap, isMissing, isPresent, NOP } from '../util';
-import { Unpack } from '../types';
 import { QueryParamGroup } from '../model/query-param-group';
-import { QueryParam } from '../model/query-param';
+import { MultiQueryParam, QueryParam } from '../model/query-param';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 import { QueryParamAccessor } from './query-param-accessor.interface';
 
 /** @internal */
-function isMultiQueryParam<T>(queryParam: QueryParam<T> | QueryParam<T[]>): queryParam is QueryParam<T[]> {
+function isMultiQueryParam<T>(queryParam: QueryParam<T> | MultiQueryParam<T>): queryParam is MultiQueryParam<T> {
     return queryParam.multi;
-}
-
-/** @internal */
-function hasArrayValue<T>(queryParam: QueryParam<T> | QueryParam<T[]>, value: T | T[]): value is T[] {
-    return isMultiQueryParam(queryParam);
-}
-
-/** @internal */
-function hasArraySerialization(queryParam: QueryParam<any>, values: string | string[] | null): values is string[] {
-    return isMultiQueryParam(queryParam);
 }
 
 /** @internal */
@@ -113,7 +102,7 @@ export class QueryParamGroupService implements OnDestroy {
         // it as it might change over time.
         const queryParamName = directive.name;
 
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+        const queryParam = this.queryParamGroup.get(queryParamName);
         if (!queryParam) {
             throw new Error(`Could not find query param with name ${queryParamName}. Did you forget to add it to your QueryParamGroup?`);
         }
@@ -160,7 +149,7 @@ export class QueryParamGroupService implements OnDestroy {
         });
 
         this.directives.delete(queryParamName);
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+        const queryParam = this.queryParamGroup.get(queryParamName);
         if (queryParam) {
             queryParam._clearChangeFunctions();
         }
@@ -179,7 +168,7 @@ export class QueryParamGroupService implements OnDestroy {
         this.queryParamGroup._registerOnChange((newValue: Record<string, any>) => {
             let params: Params = {};
             Object.keys(newValue).forEach(queryParamName => {
-                const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+                const queryParam = this.queryParamGroup.get(queryParamName);
                 if (isMissing(queryParam)) {
                     return;
                 }
@@ -198,7 +187,7 @@ export class QueryParamGroupService implements OnDestroy {
     }
 
     private setupParamChangeListener(queryParamName: string): void {
-        const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
+        const queryParam = this.queryParamGroup.get(queryParamName);
         if (!queryParam) {
             throw new Error(`No param in group found for name ${queryParamName}`);
         }
@@ -232,10 +221,10 @@ export class QueryParamGroupService implements OnDestroy {
             const groupValue: Record<string, any> = {};
 
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
-                const queryParam: QueryParam<any> = this.queryParamGroup.get(queryParamName);
-                const newValue = queryParam.multi
-                    ? this.deserialize(queryParam, queryParamMap.getAll(queryParam.urlParam))
-                    : this.deserialize(queryParam, queryParamMap.get(queryParam.urlParam));
+                const queryParam = this.queryParamGroup.get(queryParamName);
+                const newValue = isMultiQueryParam(queryParam)
+                    ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
+                    : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam));
 
                 const directives = this.directives.get(queryParamName);
                 if (directives) {
@@ -310,8 +299,8 @@ export class QueryParamGroupService implements OnDestroy {
      * This consists mainly of properly serializing the model value and ensuring to take
      * side effect changes into account that may have been configured.
      */
-    private getParamsForValue<T>(queryParam: QueryParam<any>, value: T | undefined | null): Params {
-        const newValue = this.serialize(queryParam, value);
+    private getParamsForValue(queryParam: QueryParam<any> | MultiQueryParam<any>, value: any | undefined | null): Params {
+        const newValue = queryParam.serializeValue(value);
 
         const combinedParams: Params = isMissing(queryParam.combineWith)
             ? {} : queryParam.combineWith(value);
@@ -322,22 +311,6 @@ export class QueryParamGroupService implements OnDestroy {
             ...(combinedParams || {}),
             [ queryParam.urlParam ]: newValue,
         };
-    }
-
-    private serialize<T>(queryParam: QueryParam<any>, value: T): string | string[] {
-        if (hasArrayValue(queryParam, value)) {
-            return (value || []).map(queryParam.serialize);
-        } else {
-            return queryParam.serialize(value);
-        }
-    }
-
-    private deserialize<T>(queryParam: QueryParam<T>, values: string | string[]): Unpack<T> | Unpack<T>[] {
-        if (hasArraySerialization(queryParam, values)) {
-            return values.map(queryParam.deserialize);
-        } else {
-            return queryParam.deserialize(values);
-        }
     }
 
     /**

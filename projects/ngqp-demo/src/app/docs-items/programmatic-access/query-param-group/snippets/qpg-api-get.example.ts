@@ -11,7 +11,7 @@ export class ExampleComponent {
             searchText: qpb.stringParam('q'),
         });
 
-        const searchText: QueryParam<string> = this.paramGroup.get('searchText');
+        const searchText: QueryParam<string> = this.paramGroup.get('searchText') as QueryParam<string>;
     }
 
 }

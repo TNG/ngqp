@@ -1,8 +1,6 @@
 import {
     createBooleanDeserializer,
     createBooleanSerializer,
-    createEmptyOnDeserializer,
-    createEmptyOnSerializer,
     createNumberDeserializer,
     createNumberSerializer,
     createStringDeserializer,
@@ -81,53 +79,6 @@ describe('Default (de-)serializer', () => {
             testDeserialize(deserializer, 'foo', false);
         });
     })(DEFAULT_BOOLEAN_DESERIALIZER);
-});
-
-describe('emptyOn (de-)serializer', () => {
-    (serializer => {
-        describe('for strings', () => {
-            testSerialize(serializer, '', '');
-            testSerialize(serializer, 'Test', null);
-        });
-    })(createEmptyOnSerializer(createStringSerializer(), 'Test', LOOSE_IDENTITY_COMPARATOR));
-
-    (deserializer => {
-        describe('for strings', () => {
-            testDeserialize(deserializer, '', '');
-            testDeserialize(deserializer, 'Test', 'Test');
-            testDeserialize(deserializer, null, 'Test');
-        });
-    })(createEmptyOnDeserializer(createStringDeserializer(), 'Test'));
-
-    (serializer => {
-        describe('for numbers', () => {
-            testSerialize(serializer, 42, null);
-            testSerialize(serializer, 13.37, '13.37');
-        });
-    })(createEmptyOnSerializer(createNumberSerializer(), 42, LOOSE_IDENTITY_COMPARATOR));
-
-    (deserializer => {
-    describe('for numbers', () => {
-        testDeserialize(deserializer, null, 42);
-        testDeserialize(deserializer, '42', 42);
-        testDeserialize(deserializer, '13.37', 13.37);
-    });
-    })(createEmptyOnDeserializer(createNumberDeserializer(), 42));
-
-    (serializer => {
-        describe('for booleans', () => {
-            testSerialize(serializer, true, null);
-            testSerialize(serializer, false, 'false');
-        });
-    })(createEmptyOnSerializer(createBooleanSerializer(), true, LOOSE_IDENTITY_COMPARATOR));
-
-    (deserializer => {
-        describe('for booleans', () => {
-            testDeserialize(deserializer, 'true', true);
-            testDeserialize(deserializer, null, true);
-            testDeserialize(deserializer, 'false', false);
-        });
-    })(createEmptyOnDeserializer(createBooleanDeserializer(), true));
 });
 
 describe(LOOSE_IDENTITY_COMPARATOR.name, () => {

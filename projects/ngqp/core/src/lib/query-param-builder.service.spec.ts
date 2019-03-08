@@ -1,6 +1,6 @@
 import { QueryParamBuilder } from './query-param-builder.service';
 import { QueryParamGroup } from './model/query-param-group';
-import { QueryParam } from './model/query-param';
+import { MultiQueryParam, QueryParam } from './model/query-param';
 
 interface Item {
     name: string;
@@ -27,7 +27,7 @@ describe(QueryParamBuilder.name, () => {
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<string[]> = qpb.stringParam('q', { multi: true });
+            const param: MultiQueryParam<string> = qpb.stringParam('q', { multi: true });
             expect(param).toBeTruthy();
         });
     });
@@ -39,7 +39,7 @@ describe(QueryParamBuilder.name, () => {
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<number[]> = qpb.numberParam('q', { multi: true });
+            const param: MultiQueryParam<number> = qpb.numberParam('q', { multi: true });
             expect(param).toBeTruthy();
         });
     });
@@ -51,7 +51,7 @@ describe(QueryParamBuilder.name, () => {
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<boolean[]> = qpb.booleanParam('q', { multi: true });
+            const param: MultiQueryParam<boolean> = qpb.booleanParam('q', { multi: true });
             expect(param).toBeTruthy();
         });
     });
@@ -66,7 +66,7 @@ describe(QueryParamBuilder.name, () => {
         });
 
         it('can create a multi parameter', () => {
-            const param: QueryParam<Item[]> = qpb.param<Item>('q', {
+            const param: MultiQueryParam<Item> = qpb.param<Item>('q', {
                 multi: true,
                 serialize: () => '',
                 deserialize: () => undefined,

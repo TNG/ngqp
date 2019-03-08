@@ -1,32 +1,23 @@
-import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from '../types';
+import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
 
 /**
  * List of options which can be passed to {@link QueryParam}.
  */
-export interface QueryParamOpts<T> {
+export interface QueryParamOptsBase<U, T> {
 
     /**
      * The serializer used for this parameter.
      *
      * See {@link ParamSerializer}.
      */
-    serialize?: ParamSerializer<Unpack<T>>;
+    serialize?: ParamSerializer<U>;
 
     /**
      * The deserializer used for this parameter.
      *
      * See {@link ParamDeserializer}.
      */
-    deserialize?: ParamDeserializer<Unpack<T>>;
-
-    /**
-     * Whether this parameter can take on multiple values at once.
-     *
-     * If set to true, this parameter is array-typed. How this is represented
-     * on the URL is defined by the Angular Router, which defines the parameter
-     * multiple times, e.g. `https://www.app.io?param=A&param=B&param=C`.
-     */
-    multi?: boolean;
+    deserialize?: ParamDeserializer<U>;
 
     /**
      * Defines, in milliseconds, how much changes to the value should be debounced.
@@ -46,10 +37,8 @@ export interface QueryParamOpts<T> {
      * that if the parameter is not defined on the URL, this value will be written
      * to the form control. Vice versa, if the form control takes on this value,
      * the URL parameter will be removed.
-     *
-     * NOTE: This does currently not work in combination with {@link QueryParamOpts#multi}.
      */
-    emptyOn?: Unpack<T>;
+    emptyOn?: T;
 
     /**
      * The comparator to be used with {@link QueryParamOpts#emptyOn}.
@@ -59,7 +48,7 @@ export interface QueryParamOpts<T> {
      *
      * See {@link Comparator}.
      */
-    compareWith?: Comparator<Unpack<T>>;
+    compareWith?: Comparator<T>;
 
     /**
      * Execute a side effect on other query parameters.
@@ -72,4 +61,22 @@ export interface QueryParamOpts<T> {
      *       (de-)serializers are run and no recursion is applied.
      */
     combineWith?: ParamCombinator<T>;
+}
+
+/** See {@link QueryParamOpts}. */
+export interface QueryParamOpts<T> extends QueryParamOptsBase<T, T> {
+    /** See {@link MultiQueryParamOpts}. */
+    multi?: false;
+}
+
+/** See {@link QueryParamOpts}. */
+export interface MultiQueryParamOpts<T> extends QueryParamOptsBase<T, T[]> {
+    /**
+     * Whether this parameter can take on multiple values at once.
+     *
+     * If set to true, this parameter is array-typed. How this is represented
+     * on the URL is defined by the Angular Router, which defines the parameter
+     * multiple times, e.g. `https://www.app.io?param=A&param=B&param=C`.
+     */
+    multi: true;
 }

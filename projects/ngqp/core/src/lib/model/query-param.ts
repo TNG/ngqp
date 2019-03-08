@@ -1,18 +1,16 @@
 import { Observable, Subject } from 'rxjs';
-import { isFunction, isMissing, isPresent, wrapTryCatch } from '../util';
-import { OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from '../types';
-import { createEmptyOnDeserializer, createEmptyOnSerializer } from '../serializers';
+import { areEqualUsing, isFunction, isMissing, isPresent, wrapTryCatch } from '../util';
+import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
 import { QueryParamGroup } from './query-param-group';
-import { QueryParamOpts } from './query-param-opts';
+import { MultiQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from './query-param-opts';
 
 /**
- * Describes a single parameter.
+ * Abstract base for {@link QueryParam} and {@link MultiQueryParam}.
  *
- * This is the description of a single parameter and essentially serves
- * as the glue between its representation in the URL and its connection
- * to a form control.
+ * This base class holds most of the parameter's options, but is unaware of
+ * how to actually (de-)serialize any values.
  */
-export class QueryParam<T> {
+export abstract class AbstractQueryParam<U, T> {
 
     private _valueChanges = new Subject<T>();
 
@@ -37,28 +35,29 @@ export class QueryParam<T> {
      */
     public readonly urlParam: string;
 
-    /** @internal */
-    public readonly serialize: ParamSerializer<Unpack<T>>;
+    /** See {@link QueryParamOpts}. */
+    public readonly serialize: ParamSerializer<U>;
 
-    /** @internal */
-    public readonly deserialize: ParamDeserializer<Unpack<T>>;
+    /** See {@link QueryParamOpts}. */
+    public readonly deserialize: ParamDeserializer<U>;
 
-    /** @internal */
-    public readonly multi: boolean;
-
-    /** @internal */
+    /** See {@link QueryParamOpts}. */
     public readonly debounceTime: number | null;
 
-    /** @internal */
+    /** See {@link QueryParamOpts}. */
+    public readonly emptyOn: T;
+
+    /** See {@link QueryParamOpts}. */
+    public readonly compareWith: Comparator<T>;
+
+    /** See {@link QueryParamOpts}. */
     public readonly combineWith: ParamCombinator<T>;
 
     private parent: QueryParamGroup;
     private changeFunctions: OnChangeFunction<T>[] = [];
 
-    constructor(urlParam: string, opts: QueryParamOpts<T> = {}) {
+    constructor(urlParam: string, opts: QueryParamOptsBase<U, T> = {}) {
         const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
-        const multi = opts.multi === true;
-        const hasEmptyOn = emptyOn !== undefined;
 
         if (isMissing(urlParam)) {
             throw new Error(`Please provide a URL parameter name for each query parameter.`);
@@ -72,7 +71,7 @@ export class QueryParam<T> {
             throw new Error(`deserialize must be a function, but received ${deserialize}`);
         }
 
-        if (hasEmptyOn && !isFunction(compareWith)) {
+        if (emptyOn !== undefined && !isFunction(compareWith)) {
             throw new Error(`compareWith must be a function, but received ${compareWith}`);
         }
 
@@ -80,24 +79,20 @@ export class QueryParam<T> {
             throw new Error(`combineWith must be a function, but received ${combineWith}`);
         }
 
-        if (multi && isPresent(emptyOn)) {
-            throw new Error(`emptyOn is only supported for single-value parameters, but ${urlParam} is a multi-value parameter.`);
-        }
-
         this.urlParam = urlParam;
-
-        this.serialize = wrapTryCatch(
-            !hasEmptyOn ? serialize : createEmptyOnSerializer(serialize, emptyOn, compareWith),
-            `Error while serializing value for ${urlParam}`
-        );
-        this.deserialize = wrapTryCatch(
-            !hasEmptyOn ? deserialize : createEmptyOnDeserializer(deserialize, emptyOn),
-            `Error while deserializing value for ${urlParam}`
-        );
-        this.multi = multi;
+        this.serialize = wrapTryCatch(serialize, `Error while serializing value for ${this.urlParam}`);
+        this.deserialize = wrapTryCatch(deserialize, `Error while deserializing value for ${this.urlParam}`);
         this.debounceTime = debounceTime;
+        this.emptyOn = emptyOn;
+        this.compareWith = compareWith;
         this.combineWith = combineWith;
     }
+
+    /** @internal */
+    public abstract serializeValue(value: T): string | string[];
+
+    /** @internal */
+    public abstract deserializeValue(value: string | string[]): T;
 
     /** @internal */
     public _registerOnChange(fn: OnChangeFunction<T>): void {
@@ -145,6 +140,74 @@ export class QueryParam<T> {
         }
 
         this.parent = parent;
+    }
+
+}
+
+/**
+ * Describes a single parameter.
+ *
+ * This is the description of a single parameter and essentially serves
+ * as the glue between its representation in the URL and its connection
+ * to a form control.
+ */
+export class QueryParam<T> extends AbstractQueryParam<T, T> implements Required<Readonly<QueryParamOpts<T>>> {
+
+    /** See {@link QueryParamOpts}. */
+    public readonly multi = false;
+
+    constructor(urlParam: string, opts: QueryParamOpts<T>) {
+        super(urlParam, opts);
+    }
+
+    /** @internal */
+    public serializeValue(value: T): string {
+        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith)) {
+            return null;
+        }
+
+        return this.serialize(value);
+    }
+
+    /** @internal */
+    public deserializeValue(value: string): T {
+        if (this.emptyOn !== undefined && value === null) {
+            return this.emptyOn;
+        }
+
+        return this.deserialize(value);
+    }
+
+}
+
+/**
+ * Like {@link QueryParam}, but for array-typed parameters
+ */
+export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Required<Readonly<MultiQueryParamOpts<T>>> {
+
+    /** See {@link QueryParamOpts}. */
+    public readonly multi = true;
+
+    constructor(urlParam: string, opts: MultiQueryParamOpts<T>) {
+        super(urlParam, opts);
+    }
+
+    /** @internal */
+    public serializeValue(value: T[]): string[] {
+        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith)) {
+            return null;
+        }
+
+        return (value || []).map(this.serialize.bind(this));
+    }
+
+    /** @internal */
+    public deserializeValue(value: string[]): T[] {
+        if (this.emptyOn !== undefined && value.length === 0) {
+            return this.emptyOn;
+        }
+
+        return value.map(this.deserialize.bind(this));
     }
 
 }

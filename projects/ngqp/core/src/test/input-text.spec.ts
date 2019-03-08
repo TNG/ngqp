@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
+import { QueryParam, QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
 import { captureObservable, scheduler, setupNavigationWarnStub } from './util';
 
 @Component({
@@ -73,7 +73,7 @@ describe('ngqp', () => {
     }));
 
     it('synchronizes a programmatic change of the param to the URL', fakeAsync(() => {
-        component.paramGroup.get('param').setValue('Test');
+        (component.paramGroup.get('param') as QueryParam<string>).setValue('Test');
         tick();
 
         expect(router.url).toBe('/?q=Test');
