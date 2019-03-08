@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/TNG/ngqp/compare/v0.8.0...v0.9.0) (2019-03-08)
+
+
+### Bug Fixes
+
+* **core:** Adjust name of variable (copy&paste error) ([6420b9e](https://github.com/TNG/ngqp/commit/6420b9e))
+* **core:** Ignore changes in unrelated query parameters ([32b080e](https://github.com/TNG/ngqp/commit/32b080e)), closes [#81](https://github.com/TNG/ngqp/issues/81)
+* **core:** Improve typing and support emptyOn for multi:true ([0e28c35](https://github.com/TNG/ngqp/commit/0e28c35)), closes [#92](https://github.com/TNG/ngqp/issues/92) [#27](https://github.com/TNG/ngqp/issues/27)
+* **core:** Reword documentation ([644cc20](https://github.com/TNG/ngqp/commit/644cc20))
+* **other:** Push only after release is published ([ecf709e](https://github.com/TNG/ngqp/commit/ecf709e))
+* **other:** Update commit guidelines ([bcfd06e](https://github.com/TNG/ngqp/commit/bcfd06e))
+* **travis:** Only trigger branch builds for master ([a579a4a](https://github.com/TNG/ngqp/commit/a579a4a))
+
+
+### Features
+
+* **core:** Added QueryParamDirective for standalone parameters ([05b48ca](https://github.com/TNG/ngqp/commit/05b48ca))
+* **core:** Support changing the bound standalone parameter ([f1cdfeb](https://github.com/TNG/ngqp/commit/f1cdfeb))
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/TNG/ngqp/compare/v0.7.2...v0.8.0) (2019-02-09)
 
