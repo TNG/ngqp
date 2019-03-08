@@ -68,10 +68,16 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>List of options which can be passed to <a href="../classes/QueryParam.html">QueryParam</a>.</p>
+                <p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
 
             </p>
 
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/QueryParamOptsBase.html" target="_self" >QueryParamOptsBase</a></code>
+            </p>
 
         <section>
             <h3 id="index">Index</h3>
@@ -87,31 +93,7 @@
                             <ul class="index-list">
                                 <li>
                                             <span class="modifier">Optional</span>
-                                        <a href="#combineWith">combineWith</a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#compareWith">compareWith</a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#debounceTime">debounceTime</a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#deserialize">deserialize</a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#emptyOn">emptyOn</a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
                                         <a href="#multi">multi</a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#serialize">serialize</a>
                                 </li>
                             </ul>
                         </td>
@@ -128,242 +110,18 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="combineWith"></a>
-                                        <span class="name"><b>combineWith</b><a href="#combineWith"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>combineWith:     <code><a href="../miscellaneous/typealiases.html#ParamCombinator" target="_self" >ParamCombinator&lt;T&gt;</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#ParamCombinator" target="_self" >ParamCombinator&lt;T&gt;</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Execute a side effect on other query parameters.</p>
-<p>If the value of this parameter changes, this function is invoked. It can return an
-additional set of query parameters to change, e.g., to reset the current page in a
-pagination when the direction in which to sort has been changed.</p>
-<p>NOTE: This function must return the raw query parameter names and values. No
-       (de-)serializers are run and no recursion is applied.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="compareWith"></a>
-                                        <span class="name"><b>compareWith</b><a href="#compareWith"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>compareWith:     <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >Comparator&lt;Unpack&lt;T&gt;&gt;</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >Comparator&lt;Unpack&lt;T&gt;&gt;</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The comparator to be used with <a href="../interfaces/QueryParamOpts.html#emptyOn">QueryParamOpts</a>.</p>
-<p>This function will be used to determine whether the current value equals the defined
-default value. By default, a loose equals comparison is made (i.e., &quot;==&quot;).</p>
-<p>See <a href="../miscellaneous/typealiases.html#Comparator">Comparator</a>.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="debounceTime"></a>
-                                        <span class="name"><b>debounceTime</b><a href="#debounceTime"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>debounceTime:     <code>number | null</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>number | null</code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Defines, in milliseconds, how much changes to the value should be debounced.</p>
-<p>When set, a change of the parameter value coming from either the form control
-or a programmatic change will be debounced by the given value (in milliseconds).
-This is useful for, e.g., text inputs.</p>
-<p>If the value changes through a change of the URL, this debounce will not apply.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="deserialize"></a>
-                                        <span class="name"><b>deserialize</b><a href="#deserialize"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>deserialize:     <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >ParamDeserializer&lt;Unpack&lt;T&gt;&gt;</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >ParamDeserializer&lt;Unpack&lt;T&gt;&gt;</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The deserializer used for this parameter.</p>
-<p>See <a href="../miscellaneous/typealiases.html#ParamDeserializer">ParamDeserializer</a>.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="emptyOn"></a>
-                                        <span class="name"><b>emptyOn</b><a href="#emptyOn"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>emptyOn:     <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >Unpack&lt;T&gt;</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >Unpack&lt;T&gt;</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Default value of the parameter.</p>
-<p>If set, the parameter will be considered to default to this value. This means
-that if the parameter is not defined on the URL, this value will be written
-to the form control. Vice versa, if the form control takes on this value,
-the URL parameter will be removed.</p>
-<p>NOTE: This does currently not work in combination with <a href="../interfaces/QueryParamOpts.html#multi">QueryParamOpts</a>.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
                                         <a name="multi"></a>
                                         <span class="name"><b>multi</b><a href="#multi"><span class="icon ion-ios-link"></span></a></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>multi:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                        <code>multi:     <code></code>
 </code>
                                     </td>
                                 </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                                        </td>
-                                    </tr>
 
                                     <tr>
                                         <td class="col-md-4">
@@ -376,51 +134,7 @@ the URL parameter will be removed.</p>
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Whether this parameter can take on multiple values at once.</p>
-<p>If set to true, this parameter is array-typed. How this is represented
-on the URL is defined by the Angular Router, which defines the parameter
-multiple times, e.g. <code>https://www.app.io?param=A&amp;param=B&amp;param=C</code>.</p>
-</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="serialize"></a>
-                                        <span class="name"><b>serialize</b><a href="#serialize"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>serialize:     <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >ParamSerializer&lt;Unpack&lt;T&gt;&gt;</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#Unpack" target="_self" >ParamSerializer&lt;Unpack&lt;T&gt;&gt;</a></code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>The serializer used for this parameter.</p>
-<p>See <a href="../miscellaneous/typealiases.html#ParamSerializer">ParamSerializer</a>.</p>
+                                    <div class="io-description"><p>See <a href="../interfaces/MultiQueryParamOpts.html">MultiQueryParamOpts</a>. </p>
 </div>
                                 </td>
                             </tr>
@@ -431,35 +145,26 @@ multiple times, e.g. <code>https://www.app.io?param=A&amp;param=B&amp;param=C</c
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer, Unpack } from &#x27;../types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer } from &#x27;../types&#x27;;
 
 /**
  * List of options which can be passed to {@link QueryParam}.
  */
-export interface QueryParamOpts&lt;T&gt; {
+export interface QueryParamOptsBase&lt;U, T&gt; {
 
     /**
      * The serializer used for this parameter.
      *
      * See {@link ParamSerializer}.
      */
-    serialize?: ParamSerializer&lt;Unpack&lt;T&gt;&gt;;
+    serialize?: ParamSerializer&lt;U&gt;;
 
     /**
      * The deserializer used for this parameter.
      *
      * See {@link ParamDeserializer}.
      */
-    deserialize?: ParamDeserializer&lt;Unpack&lt;T&gt;&gt;;
-
-    /**
-     * Whether this parameter can take on multiple values at once.
-     *
-     * If set to true, this parameter is array-typed. How this is represented
-     * on the URL is defined by the Angular Router, which defines the parameter
-     * multiple times, e.g. &#x60;https://www.app.io?param&#x3D;A&amp;param&#x3D;B&amp;param&#x3D;C&#x60;.
-     */
-    multi?: boolean;
+    deserialize?: ParamDeserializer&lt;U&gt;;
 
     /**
      * Defines, in milliseconds, how much changes to the value should be debounced.
@@ -479,10 +184,8 @@ export interface QueryParamOpts&lt;T&gt; {
      * that if the parameter is not defined on the URL, this value will be written
      * to the form control. Vice versa, if the form control takes on this value,
      * the URL parameter will be removed.
-     *
-     * NOTE: This does currently not work in combination with {@link QueryParamOpts#multi}.
      */
-    emptyOn?: Unpack&lt;T&gt;;
+    emptyOn?: T;
 
     /**
      * The comparator to be used with {@link QueryParamOpts#emptyOn}.
@@ -492,7 +195,7 @@ export interface QueryParamOpts&lt;T&gt; {
      *
      * See {@link Comparator}.
      */
-    compareWith?: Comparator&lt;Unpack&lt;T&gt;&gt;;
+    compareWith?: Comparator&lt;T&gt;;
 
     /**
      * Execute a side effect on other query parameters.
@@ -505,6 +208,24 @@ export interface QueryParamOpts&lt;T&gt; {
      *       (de-)serializers are run and no recursion is applied.
      */
     combineWith?: ParamCombinator&lt;T&gt;;
+}
+
+/** See {@link QueryParamOpts}. */
+export interface QueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T, T&gt; {
+    /** See {@link MultiQueryParamOpts}. */
+    multi?: false;
+}
+
+/** See {@link QueryParamOpts}. */
+export interface MultiQueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T, T[]&gt; {
+    /**
+     * Whether this parameter can take on multiple values at once.
+     *
+     * If set to true, this parameter is array-typed. How this is represented
+     * on the URL is defined by the Angular Router, which defines the parameter
+     * multiple times, e.g. &#x60;https://www.app.io?param&#x3D;A&amp;param&#x3D;B&amp;param&#x3D;C&#x60;.
+     */
+    multi: true;
 }</code></pre>
     </div>
 </div>

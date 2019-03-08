@@ -17,7 +17,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
             <ul class="list">
                 <li class="title">
                     <a href="index.html" data-type="index-link">
-                        <img alt="" class="img-responsive" data-type="compodoc-logo" data-src="images/logo.png">
+                        <img alt="" class="img-responsive" data-type="compodoc-logo" data-src=images/icon-96x96.png> 
                     </a>
                 </li>
 
@@ -80,6 +80,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="directives/ControlValueAccessorDirective.html" data-type="entity-link">ControlValueAccessorDirective</a>
                                 </li>
                                 <li class="link">
+                                    <a href="directives/QueryParamDirective.html" data-type="entity-link">QueryParamDirective</a>
+                                </li>
+                                <li class="link">
                                     <a href="directives/QueryParamGroupDirective.html" data-type="entity-link">QueryParamGroupDirective</a>
                                 </li>
                                 <li class="link">
@@ -95,6 +98,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse" ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
+                            <li class="link">
+                                <a href="classes/AbstractQueryParam.html" data-type="entity-link">AbstractQueryParam</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/MultiQueryParam.html" data-type="entity-link">MultiQueryParam</a>
+                            </li>
                             <li class="link">
                                 <a href="classes/QueryParam.html" data-type="entity-link">QueryParam</a>
                             </li>
@@ -125,7 +134,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse" ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
+                                <a href="interfaces/MultiQueryParamOpts.html" data-type="entity-link">MultiQueryParamOpts</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/QueryParamOpts.html" data-type="entity-link">QueryParamOpts</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/QueryParamOptsBase.html" data-type="entity-link">QueryParamOptsBase</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/RouterOptions.html" data-type="entity-link">RouterOptions</a>

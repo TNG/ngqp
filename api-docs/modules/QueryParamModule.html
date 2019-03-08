@@ -67,92 +67,97 @@
 
         <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="withConfig"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Static</span>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="withConfig"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
                             withConfig
-                            </b>
-                            <a href="#withConfig"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>withConfig(config: literal type)</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#withConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>withConfig(config: literal type)</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/lib/query-param.module.ts:55</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/lib/query-param.module.ts:61</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                                    <td>Default value</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>config</td>
-                                                        <td>
-                                                                    <code>literal type</code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                        <td>
-                                                                <code>{}</code>
-                                                        </td>
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>config</td>
+                                    <td>
+                                            <code>literal type</code>
+                                    </td>
 
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../classes/QueryParam.html" target="_self" >ModuleWithProviders&lt;QueryParamModule&gt;</a></code>
+                                    <td>
+                                        No
+                                    </td>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                    <td>
+                                        <code>{}</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/QueryParam.html" target="_self" >ModuleWithProviders&lt;QueryParamModule&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ModuleWithProviders, NgModule, Type } from &#x27;@angular/core&#x27;;
-import { ControlValueAccessorDirective, QueryParamGroupDirective, QueryParamNameDirective } from &#x27;./directives/directives&#x27;;
+import {
+    ControlValueAccessorDirective,
+    QueryParamDirective,
+    QueryParamNameDirective,
+    QueryParamGroupDirective
+} from &#x27;./directives/directives&#x27;;
 import {
     CheckboxControlValueAccessorDirective,
     DefaultControlValueAccessorDirective,
@@ -173,6 +178,7 @@ import {
 
 /** @ignore */
 const DIRECTIVES: Type&lt;any&gt;[] &#x3D; [
+    QueryParamDirective,
     QueryParamNameDirective,
     QueryParamGroupDirective,
     ControlValueAccessorDirective,

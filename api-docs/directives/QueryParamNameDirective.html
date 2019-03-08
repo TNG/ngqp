@@ -63,9 +63,9 @@
             </p>
             <p class="comment">
                 <p>Binds a <a href="../classes/QueryParam.html">QueryParam</a> to a DOM element.</p>
-<p>This directive accepts the name of a <a href="../classes/QueryParam.html">QueryParam</a> inside its parent
-<a href="../classes/QueryParamGroup.html">QueryParamGroup</a>. It binds this parameter to the host element,
-which is required to have a <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>.</p>
+<p>This directive accepts the name of a <a href="../classes/QueryParam.html">QueryParam</a> inside its parent <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.
+It binds this parameter to the host element, which is required to have a [ControlValueAccessor]
+<a href="https://angular.io/api/forms/ControlValueAccessor">https://angular.io/api/forms/ControlValueAccessor</a>.</p>
 
             </p>
 
@@ -73,8 +73,9 @@ which is required to have a <a href="https://angular.io/api/forms/ControlValueAc
                 <h3>Implements</h3>
             </p>
             <p class="comment">
-                        <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
-                        <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                            <code><a href="../classes/QueryParam.html" target="_self" >QueryParamAccessor</a></code>
+                            <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                            <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
             </p>
 
 
@@ -126,7 +127,7 @@ which is required to have a <a href="https://angular.io/api/forms/ControlValueAc
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(groupService: <a href="../classes/QueryParamGroup.html">QueryParamGroupService</a>, valueAccessors: ControlValueAccessor[])</code>
+<code>constructor(groupService: QueryParamGroupService, valueAccessors: ControlValueAccessor[])</code>
                     </td>
                 </tr>
                         <tr>
@@ -152,7 +153,7 @@ which is required to have a <a href="https://angular.io/api/forms/ControlValueAc
                                                         <td>groupService</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../classes/QueryParamGroup.html" target="_self" >QueryParamGroupService</a></code>
+                                                                    <code>QueryParamGroupService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -193,7 +194,7 @@ which is required to have a <a href="https://angular.io/api/forms/ControlValueAc
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
@@ -224,21 +225,21 @@ Note that this does not refer to the <a href="../classes/QueryParam.html#urlPara
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, Inject, Input, OnChanges, OnDestroy, Optional, Self, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
-import { Subject } from &#x27;rxjs&#x27;;
-import { DefaultControlValueAccessorDirective, NGQP_BUILT_IN_ACCESSORS } from &#x27;../accessors/accessors&#x27;;
 import { QueryParamGroupService } from &#x27;./query-param-group.service&#x27;;
+import { QueryParamAccessor } from &#x27;./query-param-accessor.interface&#x27;;
+import { selectValueAccessor } from &#x27;../accessors/util&#x27;;
 
 /**
  * Binds a {@link QueryParam} to a DOM element.
  *
- * This directive accepts the name of a {@link QueryParam} inside its parent
- * {@link QueryParamGroup}. It binds this parameter to the host element,
- * which is required to have a [ControlValueAccessor]{@link https://angular.io/api/forms/ControlValueAccessor}.
+ * This directive accepts the name of a {@link QueryParam} inside its parent {@link QueryParamGroup}.
+ * It binds this parameter to the host element, which is required to have a [ControlValueAccessor]
+ * {@link https://angular.io/api/forms/ControlValueAccessor}.
  */
 @Directive({
     selector: &#x27;[queryParamName]&#x27;,
 })
-export class QueryParamNameDirective implements OnChanges, OnDestroy {
+export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, OnDestroy {
 
     /**
      * The name of the {@link QueryParam} inside its parent {@link QueryParamGroup}.
@@ -258,7 +259,7 @@ export class QueryParamNameDirective implements OnChanges, OnDestroy {
             throw new Error(&#x60;No parent configuration found. Did you forget to add [queryParamGroup]?&#x60;);
         }
 
-        this.valueAccessor &#x3D; this.selectValueAccessor(valueAccessors);
+        this.valueAccessor &#x3D; selectValueAccessor(valueAccessors);
     }
 
     /** @ignore */
@@ -280,53 +281,6 @@ export class QueryParamNameDirective implements OnChanges, OnDestroy {
         if (this.groupService) {
             this.groupService.deregisterQueryParamDirective(this.name);
         }
-    }
-
-    /**
-     * This resembles the selectControlValueAccessor function from
-     *   https://github.com/angular/angular/blob/7.1.2/packages/forms/src/directives/shared.ts#L186
-     * We can&#x27;t use it directly since it isn&#x27;t exported in the public API, but let&#x27;s hope choosing
-     * any accessor is good enough for our purposes.
-     */
-    private selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor | null {
-        if (!valueAccessors || !Array.isArray(valueAccessors)) {
-            return null;
-        }
-
-        let defaultAccessor: ControlValueAccessor | null &#x3D; null;
-        let builtInAccessor: ControlValueAccessor | null &#x3D; null;
-        let customAccessor: ControlValueAccessor | null &#x3D; null;
-        valueAccessors.forEach(valueAccessor &#x3D;&gt; {
-            if (valueAccessor.constructor &#x3D;&#x3D;&#x3D; DefaultControlValueAccessorDirective) {
-                defaultAccessor &#x3D; valueAccessor;
-            } else if (NGQP_BUILT_IN_ACCESSORS.some(current &#x3D;&gt; valueAccessor.constructor &#x3D;&#x3D;&#x3D; current)) {
-                if (builtInAccessor !&#x3D;&#x3D; null) {
-                    throw new Error(&#x60;More than one built-in ControlValueAccessor matches&#x60;);
-                }
-
-                builtInAccessor &#x3D; valueAccessor;
-            } else {
-                if (customAccessor !&#x3D;&#x3D; null) {
-                    throw new Error(&#x60;More than one custom ControlValueAccessor has been found on the form control&#x60;);
-                }
-
-                customAccessor &#x3D; valueAccessor;
-            }
-        });
-
-        if (customAccessor !&#x3D;&#x3D; null) {
-            return customAccessor;
-        }
-
-        if (builtInAccessor !&#x3D;&#x3D; null) {
-            return builtInAccessor;
-        }
-
-        if (defaultAccessor !&#x3D;&#x3D; null) {
-            return defaultAccessor;
-        }
-
-        throw new Error(&#x60;No matching ControlValueAccessor has been found for this form control&#x60;);
     }
 
 }

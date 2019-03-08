@@ -37,7 +37,7 @@
 
 <ol class="breadcrumb">
   <li>Directives</li>
-  <li>QueryParamGroupDirective</li>
+  <li>QueryParamDirective</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -55,17 +55,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/lib/directives/query-param-group.directive.ts</code>
+            <code>src/lib/directives/query-param.directive.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Binds a <a href="../classes/QueryParamGroup.html">QueryParamGroup</a> to a DOM element.</p>
-<p>This directive accepts an instance of <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>. Any child using
-<a href="../directives/QueryParamNameDirective.html">QueryParamNameDirective</a> will then be matched against this group, and the
-synchronization process can take place.</p>
+                <p>Binds a <a href="../classes/QueryParam.html">QueryParam</a> to a component directly.</p>
+<p>This directive accepts a <a href="../classes/QueryParam.html">QueryParam</a> without requiring an outer <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.
+It binds this parameter to the host component, which is required to have a [ControlValueAccessor]
+<a href="https://angular.io/api/forms/ControlValueAccessor">https://angular.io/api/forms/ControlValueAccessor</a>.</p>
 
             </p>
 
@@ -73,7 +73,9 @@ synchronization process can take place.</p>
                 <h3>Implements</h3>
             </p>
             <p class="comment">
+                            <code><a href="../classes/QueryParam.html" target="_self" >QueryParamAccessor</a></code>
                             <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                            <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
             </p>
 
 
@@ -92,7 +94,7 @@ synchronization process can take place.</p>
 
                     <tr>
                         <td class="col-md-3">Selector</td>
-                        <td class="col-md-9"><code>[queryParamGroup]</code></td>
+                        <td class="col-md-9"><code>[queryParam]</code></td>
                     </tr>
 
                 </tbody>
@@ -114,7 +116,7 @@ synchronization process can take place.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#queryParamGroup">queryParamGroup</a>
+                                <a href="#queryParam">queryParam</a>
                             </li>
                         </ul>
                     </td>
@@ -133,12 +135,12 @@ synchronization process can take place.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(groupService: QueryParamGroupService)</code>
+<code>constructor(groupService: QueryParamGroupService, valueAccessors: ControlValueAccessor[])</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/lib/directives/query-param-group.directive.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/lib/directives/query-param.directive.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -167,6 +169,18 @@ synchronization process can take place.</p>
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>valueAccessors</td>
+                                                  
+                                                        <td>
+                                                                    <code>ControlValueAccessor[]</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -182,24 +196,24 @@ synchronization process can take place.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="queryParamGroup"></a>
-                        <b>queryParamGroup</b>
+                        <a name="queryParam"></a>
+                        <b>queryParam</b>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../classes/QueryParamGroup.html" target="_self" >QueryParamGroup</a></code>
+                        <i>Type : </i>        <code><a href="../classes/QueryParam.html" target="_self" >QueryParam&lt;any&gt;</a></code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/lib/directives/query-param-group.directive.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/lib/directives/query-param.directive.ts:26</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>The <a href="../classes/QueryParamGroup.html">QueryParamGroup</a> to bind.</p>
+                        <div class="io-description"><p>The <a href="../classes/QueryParam.html">QueryParam</a> to bind to the host component.</p>
 </div>
                     </td>
                 </tr>
@@ -216,47 +230,71 @@ synchronization process can take place.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
-import { QueryParamNameDirective } from &#x27;./query-param-name.directive&#x27;;
-import { QueryParamGroup } from &#x27;../model/query-param-group&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, Inject, Input, OnChanges, OnDestroy, Optional, Self, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { QueryParamGroupService } from &#x27;./query-param-group.service&#x27;;
+import { QueryParamAccessor } from &#x27;./query-param-accessor.interface&#x27;;
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
+import { selectValueAccessor } from &#x27;../accessors/util&#x27;;
+import { QueryParam } from &#x27;../model/query-param&#x27;;
+import { QueryParamGroup } from &#x27;../model/query-param-group&#x27;;
 
 /**
- * Binds a {@link QueryParamGroup} to a DOM element.
+ * Binds a {@link QueryParam} to a component directly.
  *
- * This directive accepts an instance of {@link QueryParamGroup}. Any child using
- * {@link QueryParamNameDirective} will then be matched against this group, and the
- * synchronization process can take place.
+ * This directive accepts a {@link QueryParam} without requiring an outer {@link QueryParamGroup}.
+ * It binds this parameter to the host component, which is required to have a [ControlValueAccessor]
+ * {@link https://angular.io/api/forms/ControlValueAccessor}.
  */
 @Directive({
-    selector: &#x27;[queryParamGroup]&#x27;,
+    selector: &#x27;[queryParam]&#x27;,
     providers: [QueryParamGroupService],
 })
-export class QueryParamGroupDirective implements OnChanges {
+export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDestroy  {
 
     /**
-     * The {@link QueryParamGroup} to bind.
+     * The {@link QueryParam} to bind to the host component.
      */
-    @Input(&#x27;queryParamGroup&#x27;)
-    public queryParamGroup: QueryParamGroup;
+    @Input(&#x27;queryParam&#x27;)
+    public queryParam: QueryParam&lt;any&gt;;
 
-    constructor(private groupService: QueryParamGroupService) {
+    /** @internal */
+    public readonly name &#x3D; &#x27;param&#x27;;
+
+    /** @internal */
+    public valueAccessor: ControlValueAccessor | null &#x3D; null;
+
+    /** @internal */
+    private group &#x3D; new QueryParamGroup({});
+
+    constructor(
+        @Optional() private groupService: QueryParamGroupService,
+        @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],
+    ) {
+        this.valueAccessor &#x3D; selectValueAccessor(valueAccessors);
+        this.groupService.setQueryParamGroup(this.group);
     }
 
     /** @ignore */
-    public ngOnChanges(changes: SimpleChanges) {
-        const groupChange &#x3D; changes[&#x27;queryParamGroup&#x27;];
-        if (groupChange) {
-            if (!groupChange.firstChange) {
-                throw new Error(&#x60;Binding a different QueryParamGroup during runtime is currently not supported.&#x60;);
+    public ngOnChanges(changes: SimpleChanges): void {
+        const paramChange &#x3D; changes[&#x27;queryParam&#x27;];
+
+        if (paramChange) {
+            if (this.group.get(this.name)) {
+                this.groupService.deregisterQueryParamDirective(this.name);
+                this.group.remove(this.name);
             }
 
-            const queryParamGroup &#x3D; groupChange.currentValue;
-            if (!queryParamGroup) {
-                throw new Error(&#x60;You added the queryParamGroup directive, but haven&#x27;t supplied a group to use.&#x60;);
+            if (paramChange.currentValue) {
+                this.group.add(this.name, paramChange.currentValue);
+                this.groupService.registerQueryParamDirective(this);
             }
+        }
+    }
 
-            this.groupService.setQueryParamGroup(queryParamGroup);
+    /** @ignore */
+    public ngOnDestroy(): void {
+        if (this.groupService) {
+            this.groupService.deregisterQueryParamDirective(this.name);
         }
     }
 
@@ -293,7 +331,7 @@ export class QueryParamGroupDirective implements OnChanges {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
-            var COMPODOC_CURRENT_PAGE_URL = 'QueryParamGroupDirective.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'QueryParamDirective.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

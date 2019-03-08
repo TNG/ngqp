@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>QueryParam</li>
+  <li>AbstractQueryParam</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -67,26 +67,13 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Describes a single parameter.</p>
-<p>This is the description of a single parameter and essentially serves
-as the glue between its representation in the URL and its connection
-to a form control.</p>
+                <p>Abstract base for <a href="../classes/QueryParam.html">QueryParam</a> and <a href="../classes/MultiQueryParam.html">MultiQueryParam</a>.</p>
+<p>This base class holds most of the parameter&#39;s options, but is unaware of
+how to actually (de-)serialize any values.</p>
 
             </p>
 
-            <p class="comment">
-                <h3>Extends</h3>
-            </p>
-            <p class="comment">
-                        <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-            </p>
 
-            <p class="comment">
-                <h3>Implements</h3>
-            </p>
-            <p class="comment">
-                        <code>Required</code>
-            </p>
 
 
             <section>
@@ -101,11 +88,6 @@ to a form control.</p>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#multi">multi</a>
-                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Readonly</span>
@@ -184,12 +166,12 @@ to a form control.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(urlParam: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<T></a>)</code>
+<code>constructor(urlParam: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, opts: <a href="../classes/QueryParam.html">QueryParamOptsBase<U | T></a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/lib/model/query-param.ts:157</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/lib/model/query-param.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -222,7 +204,7 @@ to a form control.</p>
                                                         <td>opts</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOpts&lt;T&gt;</a></code>
+                                                                        <code><a href="../classes/QueryParam.html" target="_self" >QueryParamOptsBase&lt;U | T&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -248,40 +230,6 @@ to a form control.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="multi"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            multi</b>
-                            <a href="#multi"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/lib/model/query-param.ts:157</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="combineWith"></a>
                         <span class="name">
                             <b>
@@ -298,16 +246,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:54</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/lib/model/query-param.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -340,16 +281,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:51</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/lib/model/query-param.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -382,16 +316,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:45</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/lib/model/query-param.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -424,16 +351,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:42</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/model/query-param.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -466,16 +386,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:48</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/lib/model/query-param.ts:48</a></div>
                             </td>
                         </tr>
 
@@ -508,16 +421,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:39</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/lib/model/query-param.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -550,16 +456,9 @@ to a form control.</p>
 
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:36</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/lib/model/query-param.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -599,16 +498,9 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
                             <i>Default value : </i><code>null</code>
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:27</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/lib/model/query-param.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -646,16 +538,9 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
                             <i>Default value : </i><code>this._valueChanges.asObservable()</code>
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:22</a></code>
-</div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/lib/model/query-param.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -700,14 +585,8 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../classes/AbstractQueryParam.html" target="_self" >AbstractQueryParam</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:113</a></code>
-</div>
+                    <div class="io-line">Defined in <a href="" data-line="113"
+                            class="link-to-prism">src/lib/model/query-param.ts:113</a></div>
                 </td>
             </tr>
 
@@ -1025,7 +904,7 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T[]&gt; i
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'QueryParam.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'AbstractQueryParam.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

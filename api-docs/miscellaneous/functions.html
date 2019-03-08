@@ -63,12 +63,6 @@
                             <a href="#createBooleanSerializer" title="src/lib/serializers.ts"><b>createBooleanSerializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
                         </li>
                         <li>
-                            <a href="#createEmptyOnDeserializer" title="src/lib/serializers.ts"><b>createEmptyOnDeserializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#createEmptyOnSerializer" title="src/lib/serializers.ts"><b>createEmptyOnSerializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
-                        </li>
-                        <li>
                             <a href="#createNumberDeserializer" title="src/lib/serializers.ts"><b>createNumberDeserializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
                         </li>
                         <li>
@@ -80,6 +74,9 @@
                         <li>
                             <a href="#createStringSerializer" title="src/lib/serializers.ts"><b>createStringSerializer</b>&nbsp;&nbsp;&nbsp;(src/.../serializers.ts)</a>
                         </li>
+                        <li>
+                            <a href="#isMultiOpts" title="src/lib/query-param-builder.service.ts"><b>isMultiOpts</b>&nbsp;&nbsp;&nbsp;(src/.../query-param-builder.service.ts)</a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -89,589 +86,471 @@
 
     <h3>src/lib/serializers.ts</h3>
     <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createBooleanDeserializer"></a>
-                        <span class="name">
-                            <b>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createBooleanDeserializer"></a>
+                    <span class="name">
+                        <b>
                             createBooleanDeserializer
-                            </b>
-                            <a href="#createBooleanDeserializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#createBooleanDeserializer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>createBooleanDeserializer(defaultValue)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates a deserializer for parameters of type <code>boolean</code>.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a deserializer for parameters of type <code>boolean</code>.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>defaultValue</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>defaultValue</td>
 
-                                                        <td>
-                                                                <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;boolean&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createBooleanSerializer"></a>
-                        <span class="name">
-                            <b>
+                                    <td>
+                                        <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;boolean&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createBooleanSerializer"></a>
+                    <span class="name">
+                        <b>
                             createBooleanSerializer
-                            </b>
-                            <a href="#createBooleanSerializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#createBooleanSerializer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>createBooleanSerializer(defaultValue)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates a serializer for parameters of type <code>boolean</code>.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a serializer for parameters of type <code>boolean</code>.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>defaultValue</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>defaultValue</td>
 
-                                                        <td>
-                                                                <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
-
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;boolean&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createEmptyOnDeserializer"></a>
-                        <span class="name">
-                            <b>
-                            createEmptyOnDeserializer
-                            </b>
-                            <a href="#createEmptyOnDeserializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>createEmptyOnDeserializer(deserializer, emptyOn)</code>
-                    </td>
-                </tr>
+                                    <td>
+                                        No
+                                    </td>
 
 
+                                    <td>
+                                        <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
 
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;boolean&gt;</a></code>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Wraps a deserializer which defaults to the given value.</p>
-<p>This function returns a new deserializer which mirrors the given deserializer,
-except that on a <code>null</code> value to deserialize, the given default value is
-returned instead.</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>deserializer</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <p>The deserializer to wrap and mirror.</p>
-
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>emptyOn</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <p>The default value to return if the value to deserialize is <code>null</code>.</p>
-
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;T&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createEmptyOnSerializer"></a>
-                        <span class="name">
-                            <b>
-                            createEmptyOnSerializer
-                            </b>
-                            <a href="#createEmptyOnSerializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>createEmptyOnSerializer(serializer, emptyOn, compareWith)</code>
-                    </td>
-                </tr>
-
-
-
-
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Wraps a serializer which defaults to the given value.</p>
-<p>This function returns a new serializer which mirrors the given serializer,
-except that if the given default value equals the value to be serialized
-(using the provided comparator), <code>null</code> is returned instead.</p>
-</div>
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>serializer</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <p>The serializer to wrap and mirror.</p>
-
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>emptyOn</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <p>The default value for which the serialization should return <code>null</code>.</p>
-
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>compareWith</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                        <td>
-                                                                <p>The comparator function to compare two values.</p>
-
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;T&gt;</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createNumberDeserializer"></a>
-                        <span class="name">
-                            <b>
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createNumberDeserializer"></a>
+                    <span class="name">
+                        <b>
                             createNumberDeserializer
-                            </b>
-                            <a href="#createNumberDeserializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#createNumberDeserializer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>createNumberDeserializer(defaultValue)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates a deserializer for parameters of type <code>number</code>.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a deserializer for parameters of type <code>number</code>.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>defaultValue</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>defaultValue</td>
 
-                                                        <td>
-                                                                <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;number&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createNumberSerializer"></a>
-                        <span class="name">
-                            <b>
+                                    <td>
+                                        <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;number&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createNumberSerializer"></a>
+                    <span class="name">
+                        <b>
                             createNumberSerializer
-                            </b>
-                            <a href="#createNumberSerializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#createNumberSerializer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>createNumberSerializer(defaultValue)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates a serializer for parameters of type <code>number</code>.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a serializer for parameters of type <code>number</code>.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>defaultValue</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>defaultValue</td>
 
-                                                        <td>
-                                                                <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;number&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createStringDeserializer"></a>
-                        <span class="name">
-                            <b>
+                                    <td>
+                                        <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;number&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createStringDeserializer"></a>
+                    <span class="name">
+                        <b>
                             createStringDeserializer
-                            </b>
-                            <a href="#createStringDeserializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#createStringDeserializer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>createStringDeserializer(defaultValue)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates a deserializer for parameters of type <code>string</code>.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a deserializer for parameters of type <code>string</code>.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>defaultValue</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>defaultValue</td>
 
-                                                        <td>
-                                                                <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;string&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="createStringSerializer"></a>
-                        <span class="name">
-                            <b>
+                                    <td>
+                                        <p>Optional default value to return if the value to deserialize is <code>undefined</code> or <code>null</code>.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;string&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createStringSerializer"></a>
+                    <span class="name">
+                        <b>
                             createStringSerializer
-                            </b>
-                            <a href="#createStringSerializer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#createStringSerializer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>createStringSerializer(defaultValue)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Creates a serializer for parameters of type <code>string</code>.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Creates a serializer for parameters of type <code>string</code>.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>defaultValue</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>defaultValue</td>
 
-                                                        <td>
-                                                                <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;string&gt;</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                    <td>
+                                        <p>Optional default value to return if the value to serialize is <code>undefined</code> or <code>null</code>.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;string&gt;</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>src/lib/query-param-builder.service.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isMultiOpts"></a>
+                    <span class="name">
+                        <b>
+                            isMultiOpts
+                        </b>
+                        <a href="#isMultiOpts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isMultiOpts(opts)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>opts</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>MultiQueryParamOpts&lt;T&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
 
                    </div><div class="search-results">

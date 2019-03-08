@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>QueryParam</li>
+  <li>MultiQueryParam</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -67,10 +67,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Describes a single parameter.</p>
-<p>This is the description of a single parameter and essentially serves
-as the glue between its representation in the URL and its connection
-to a form control.</p>
+                <p>Like <a href="../classes/QueryParam.html">QueryParam</a>, but for array-typed parameters</p>
 
             </p>
 
@@ -184,12 +181,12 @@ to a form control.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(urlParam: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, opts: <a href="../interfaces/QueryParamOpts.html">QueryParamOpts<T></a>)</code>
+<code>constructor(urlParam: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, opts: MultiQueryParamOpts<T>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/lib/model/query-param.ts:157</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/lib/model/query-param.ts:189</a></div>
                             </td>
                         </tr>
 
@@ -222,7 +219,7 @@ to a form control.</p>
                                                         <td>opts</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/QueryParamOpts.html" target="_self" >QueryParamOpts&lt;T&gt;</a></code>
+                                                                    <code>MultiQueryParamOpts&lt;T&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -260,12 +257,12 @@ to a form control.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                            <i>Default value : </i><code>true</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/lib/model/query-param.ts:157</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/lib/model/query-param.ts:189</a></div>
                             </td>
                         </tr>
 
@@ -1025,7 +1022,7 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T[]&gt; i
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'QueryParam.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MultiQueryParam.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
