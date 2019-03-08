@@ -31,7 +31,7 @@
     "schematics-utilities": "^1.1.1"
   },
   "resolutions": {
-    "@angular-devkit/core": "^7.1.4",
-    "@angular-devkit/schematics": "^7.1.4"
+    "@angular-devkit/core": "^7.3.5",
+    "@angular-devkit/schematics": "^7.3.5"
   }
 }
