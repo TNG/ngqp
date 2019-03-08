@@ -1,0 +1,1 @@
+export { QueryParamMaterialModule } from './query-param-material.module';

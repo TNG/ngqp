@@ -71,6 +71,7 @@ Please see [conventionalcommits.org][conventionalcommits] to learn how to format
 scopes:
 
 - core – For changes to `@ngqp/core`.
+- material – For changes to `@ngqp/material`.
 - other – For anything that doesn't fit in the previous categories.
 
 For changes to the documentation / website you can use the type "docs" directly.

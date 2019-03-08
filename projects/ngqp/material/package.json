@@ -1,0 +1,23 @@
+{
+    "name": "@ngqp/material",
+    "version": "0.0.2",
+    "description": "@ngqp/core additions for @angular/material",
+    "homepage": "https://ngqp.io",
+    "author": "Ingo Bürk",
+    "license": "MIT",
+    "bugs": "https://github.com/TNG/ngqp/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/TNG/ngqp.git"
+    },
+    "keywords": [
+        "ngqp",
+        "angular",
+        "material"
+    ],
+    "peerDependencies": {
+        "@angular/common": "^7.2.0",
+        "@angular/core": "^7.2.0",
+        "@angular/material": "^7.0.0"
+    }
+}

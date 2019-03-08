@@ -24,6 +24,12 @@
             ],
             "@ngqp/core/*": [
                 "dist/ngqp/core/*"
+            ],
+            "@ngqp/material": [
+                "dist/ngqp/material"
+            ],
+            "@ngqp/material/*": [
+                "dist/ngqp/material/*"
             ]
         }
     }

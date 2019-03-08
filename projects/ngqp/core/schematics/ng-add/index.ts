@@ -8,8 +8,6 @@ import {
     NodeDependencyType
 } from 'schematics-utilities';
 
-const NGQP_MODULE_NAME = 'QueryParamModule';
-
 function getAngularVersion(): [number, number] | null {
     try {
         const version = '' + require('@angular/core/package.json').version;
@@ -39,7 +37,24 @@ function getMatchingVersion(angularVersion: [number, number], context: Schematic
     }
 }
 
-function addMatchingVersion(): Rule {
+function addModuleToImportsInTree(host: Tree, context: SchematicContext, moduleName: string, options: any) {
+    if (options && options.skipModuleImport) {
+        return host;
+    }
+
+    const workspace = getWorkspace(host);
+    const project = getProjectFromWorkspace(
+        workspace,
+        options.project ? options.project : Object.keys(workspace[ 'projects' ])[ 0 ]
+    );
+
+    addModuleImportToRootModule(host, moduleName, '@ngqp/core', project);
+    context.logger.log('info', `✅️ "${moduleName}" has been imported`);
+
+    return host;
+}
+
+function addMatchingVersion(options: any): Rule {
     return (host: Tree, context: SchematicContext) => {
         const angularVersion = getAngularVersion();
         if (angularVersion === null) {
@@ -62,28 +77,34 @@ function addMatchingVersion(): Rule {
         });
 
         context.addTask(new NodePackageInstallTask({ packageName: '@ngqp/core' }));
+        addModuleToImportsInTree(host, context, 'QueryParamModule', options);
         return host;
     };
 }
 
-function addModuleToImports(options: any): Rule {
+function addMaterialSupport(options: any): Rule {
     return (host: Tree, context: SchematicContext) => {
-        const workspace = getWorkspace(host);
-        const project = getProjectFromWorkspace(
-            workspace,
-            options.project ? options.project : Object.keys(workspace[ 'projects' ])[ 0 ]
-        );
+        const hasMaterial = !!require('@angular/core/package.json').dependencies['@angular/material'];
+        if (!hasMaterial) {
+            return host;
+        }
 
-        addModuleImportToRootModule(host, NGQP_MODULE_NAME, '@ngqp/core', project);
-        context.logger.log('info', `✅️ "${NGQP_MODULE_NAME}" has been imported`);
+        context.logger.info(`Detected that @angular/material is installed, installing @ngqp/material.`);
+        addPackageJsonDependency(host, {
+            name: '@ngqp/material',
+            type: NodeDependencyType.Default,
+            overwrite: true,
+        });
 
+        context.addTask(new NodePackageInstallTask({ packageName: '@ngqp/material' }));
+        addModuleToImportsInTree(host, context, 'QueryParamMaterialModule', options);
         return host;
     };
 }
 
 export default function(options: any): Rule {
     return chain([
-        addMatchingVersion(),
-        options && options.skipModuleImport ? noop() : addModuleToImports(options),
+        addMatchingVersion(options),
+        addMaterialSupport(options),
     ]);
 }
