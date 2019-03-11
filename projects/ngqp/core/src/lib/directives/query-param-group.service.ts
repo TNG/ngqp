@@ -115,17 +115,17 @@ export class QueryParamGroupService implements OnDestroy {
         directive.valueAccessor.writeValue(queryParam.value);
 
         // Proxy updates from the view to debounce them (if needed).
-        const debouncedQueue$ = new Subject<any>();
+        const debouncedQueue$ = new Subject<unknown>();
         debouncedQueue$.pipe(
             // Do not synchronize while the param is detached from the group
             filter(() => !!this.queryParamGroup.get(queryParamName)),
 
             isPresent(queryParam.debounceTime) ? debounceTime(queryParam.debounceTime) : tap(),
-            map((newValue: any) => this.getParamsForValue(queryParam, newValue)),
+            map((newValue: unknown) => this.getParamsForValue(queryParam, newValue)),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(new NavigationData(params)));
 
-        directive.valueAccessor.registerOnChange((newValue: any) => debouncedQueue$.next(newValue));
+        directive.valueAccessor.registerOnChange((newValue: unknown) => debouncedQueue$.next(newValue));
 
         this.directives.set(queryParamName, [...(this.directives.get(queryParamName) || []), directive]);
     }
@@ -165,7 +165,7 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Listens for programmatic changes on group level and synchronizes to the router. */
     private setupGroupChangeListener(): void {
-        this.queryParamGroup._registerOnChange((newValue: Record<string, any>) => {
+        this.queryParamGroup._registerOnChange((newValue: Record<string, unknown>) => {
             let params: Params = {};
             Object.keys(newValue).forEach(queryParamName => {
                 const queryParam = this.queryParamGroup.get(queryParamName);
@@ -192,7 +192,7 @@ export class QueryParamGroupService implements OnDestroy {
             throw new Error(`No param in group found for name ${queryParamName}`);
         }
 
-        queryParam._registerOnChange((newValue: any) =>
+        queryParam._registerOnChange((newValue: unknown) =>
             this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
         );
     }
@@ -218,7 +218,7 @@ export class QueryParamGroupService implements OnDestroy {
             takeUntil(this.destroy$),
         ).subscribe(queryParamMap => {
             const synthetic = this.isSyntheticNavigation();
-            const groupValue: Record<string, any> = {};
+            const groupValue: Record<string, unknown> = {};
 
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
                 const queryParam = this.queryParamGroup.get(queryParamName);
@@ -273,12 +273,12 @@ export class QueryParamGroupService implements OnDestroy {
         ).subscribe();
     }
 
-    private navigateSafely(data: NavigationData): Observable<any> {
+    private navigateSafely(data: NavigationData): Observable<boolean> {
         return from(this.routerAdapter.navigate(data.params, {
             ...this.routerOptions,
             state: { synthetic: data.synthetic },
         })).pipe(
-            catchError((err: any) => {
+            catchError((err: unknown) => {
                 if (isDevMode()) {
                     console.error(`There was an error while navigating`, err);
                 }
@@ -299,7 +299,7 @@ export class QueryParamGroupService implements OnDestroy {
      * This consists mainly of properly serializing the model value and ensuring to take
      * side effect changes into account that may have been configured.
      */
-    private getParamsForValue(queryParam: QueryParam<any> | MultiQueryParam<any>, value: any | undefined | null): Params {
+    private getParamsForValue(queryParam: QueryParam<unknown> | MultiQueryParam<unknown>, value: any): Params {
         const newValue = queryParam.serializeValue(value);
 
         const combinedParams: Params = isMissing(queryParam.combineWith)
