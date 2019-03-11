@@ -34,7 +34,7 @@ export class QueryParamGroup {
     public readonly queryParamAdded$: Observable<string> = this._queryParamAdded$.asObservable();
 
     /** @internal */
-    public readonly queryParams: { [ queryParamName: string ]: QueryParam<any> | MultiQueryParam<any> };
+    public readonly queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> };
 
     /** @internal */
     public readonly routerOptions: RouterOptions;
@@ -42,7 +42,7 @@ export class QueryParamGroup {
     private changeFunctions: OnChangeFunction<Record<string, any>>[] = [];
 
     constructor(
-        queryParams: { [ queryParamName: string ]: QueryParam<any> | MultiQueryParam<any> },
+        queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> },
         extras: RouterOptions = {}
     ) {
         this.queryParams = queryParams;
@@ -69,7 +69,7 @@ export class QueryParamGroup {
      *
      * @param queryParamName The name of the parameter instance to retrieve.
      */
-    public get(queryParamName: string): QueryParam<any> | MultiQueryParam<any> | null {
+    public get(queryParamName: string): QueryParam<unknown> | MultiQueryParam<unknown> | null {
         const param = this.queryParams[ queryParamName ];
         if (!param) {
             return null;
@@ -88,7 +88,7 @@ export class QueryParamGroup {
      * @param queryParamName Name of the parameter to reference it with.
      * @param queryParam The new parameter to add.
      */
-    public add(queryParamName: string, queryParam: QueryParam<any> | MultiQueryParam<any>): void {
+    public add(queryParamName: string, queryParam: QueryParam<unknown> | MultiQueryParam<unknown>): void {
         if (this.get(queryParamName)) {
             throw new Error(`A parameter with name ${queryParamName} already exists.`);
         }
