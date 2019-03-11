@@ -2,6 +2,7 @@
     "name": "ngqp",
     "version": "0.0.0",
     "license": "MIT",
+    "private": true,
     "scripts": {
         "ng": "ng",
         "lint": "ng lint",
@@ -23,7 +24,11 @@
         "api-docs:serve": "compodoc -s -d ./dist/ngqp-demo/api-docs",
         "release": "yarn core:release:publish && yarn demo:release:publish"
     },
-    "private": true,
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
     "dependencies": {
         "@angular/animations": "~7.2.8",
         "@angular/common": "~7.2.8",
@@ -55,6 +60,9 @@
         "@angular/cli": "~7.3.5",
         "@angular/compiler-cli": "~7.2.8",
         "@angular/language-service": "~7.2.8",
+        "@commitlint/cli": "^7.5.2",
+        "@commitlint/config-conventional": "^7.5.0",
+        "@commitlint/travis-cli": "^7.5.2",
         "@compodoc/compodoc": "^1.1.9",
         "@types/jasmine": "~2.8.8",
         "@types/jasminewd2": "~2.0.3",
@@ -63,6 +71,7 @@
         "angular-cli-ghpages": "^0.5.3",
         "codecov": "^3.1.0",
         "codelyzer": "~4.5.0",
+        "husky": "^1.3.1",
         "jasmine-core": "~2.99.1",
         "jasmine-spec-reporter": "~4.2.1",
         "karma": "~3.1.1",

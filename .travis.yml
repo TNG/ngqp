@@ -12,6 +12,7 @@ notifications:
         recipients:
             - ci@ngqp.io
 script:
+    - commitlint-travis
     - yarn run lint
     - yarn run core:build
     - yarn run core:test
