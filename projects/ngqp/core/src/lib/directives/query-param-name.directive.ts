@@ -26,6 +26,7 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
     /** @internal */
     public valueAccessor: ControlValueAccessor | null = null;
 
+    /** @internal */
     constructor(
         @Optional() private groupService: QueryParamGroupService,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],

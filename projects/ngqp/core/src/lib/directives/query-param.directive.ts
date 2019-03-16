@@ -34,6 +34,7 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
     /** @internal */
     private group = new QueryParamGroup({});
 
+    /** @internal */
     constructor(
         @Optional() private groupService: QueryParamGroupService,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],
