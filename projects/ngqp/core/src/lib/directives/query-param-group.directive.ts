@@ -22,6 +22,7 @@ export class QueryParamGroupDirective implements OnChanges {
     @Input('queryParamGroup')
     public queryParamGroup: QueryParamGroup;
 
+    /** @internal */
     constructor(private groupService: QueryParamGroupService) {
     }
 
