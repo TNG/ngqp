@@ -28,10 +28,6 @@
     "rxjs": "^6.0.0"
   },
   "dependencies": {
-    "schematics-utilities": "^1.1.1"
-  },
-  "resolutions": {
-    "@angular-devkit/core": "^7.3.5",
-    "@angular-devkit/schematics": "^7.3.5"
+    "schematics-utilities": "^1.1.2"
   }
 }
