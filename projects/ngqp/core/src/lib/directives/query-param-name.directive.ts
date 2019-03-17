@@ -43,11 +43,11 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
         const nameChange = changes['name'];
         if (nameChange) {
             if (!nameChange.firstChange) {
-                this.groupService.deregisterQueryParamDirective(nameChange.previousValue);
+                this.groupService.deregisterQueryParamAccessor(nameChange.previousValue);
             }
 
             if (nameChange.currentValue) {
-                this.groupService.registerQueryParamDirective(this);
+                this.groupService.registerQueryParamAccessor(this);
             }
         }
     }
@@ -55,7 +55,7 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
     /** @ignore */
     public ngOnDestroy() {
         if (this.groupService) {
-            this.groupService.deregisterQueryParamDirective(this.name);
+            this.groupService.deregisterQueryParamAccessor(this.name);
         }
     }
 

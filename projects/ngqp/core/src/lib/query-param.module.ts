@@ -3,6 +3,7 @@ import {
     ControlValueAccessorDirective,
     QueryParamDirective,
     QueryParamNameDirective,
+    QueryParamNamesDirective,
     QueryParamGroupDirective
 } from './directives/directives';
 import {
@@ -27,6 +28,7 @@ import {
 const DIRECTIVES: Type<any>[] = [
     QueryParamDirective,
     QueryParamNameDirective,
+    QueryParamNamesDirective,
     QueryParamGroupDirective,
     ControlValueAccessorDirective,
 

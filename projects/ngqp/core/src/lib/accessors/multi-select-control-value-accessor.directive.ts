@@ -11,7 +11,7 @@ export const NGQP_MULTI_SELECT_VALUE_ACCESSOR: StaticProvider = {
 
 /** @ignore */
 @Directive({
-    selector: 'select[multiple][queryParamName],select[multiple][queryParam]',
+    selector: 'select[multiple][queryParamName],select[multiple][queryParamNames],select[multiple][queryParam]',
     providers: [NGQP_MULTI_SELECT_VALUE_ACCESSOR],
 })
 export class MultiSelectControlValueAccessorDirective<T> implements ControlValueAccessor {

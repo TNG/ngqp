@@ -17,7 +17,8 @@ function isAndroid(navigator: Navigator): boolean {
 /** @ignore */
 @Directive({
     selector: 'input:not([type=checkbox]):not([type=radio])[queryParamName],textarea[queryParamName],' +
-              'input:not([type=checkbox]):not([type=radio])[queryParam],textarea[queryParam]',
+        'input:not([type=checkbox]):not([type=radio])[queryParamNames],textarea[queryParamNames],' +
+        'input:not([type=checkbox]):not([type=radio])[queryParam],textarea[queryParam]',
     providers: [NGQP_DEFAULT_VALUE_ACCESSOR],
 })
 export class DefaultControlValueAccessorDirective implements ControlValueAccessor {

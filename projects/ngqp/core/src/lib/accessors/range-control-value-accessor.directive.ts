@@ -10,7 +10,7 @@ export const NGQP_RANGE_VALUE_ACCESSOR: any = {
 
 /** @ignore */
 @Directive({
-    selector: 'input[type=range][queryParamName],input[type=range][queryParam]',
+    selector: 'input[type=range][queryParamName],input[type=range][queryParamNames],input[type=range][queryParam]',
     providers: [NGQP_RANGE_VALUE_ACCESSOR],
 })
 export class RangeControlValueAccessorDirective implements ControlValueAccessor {

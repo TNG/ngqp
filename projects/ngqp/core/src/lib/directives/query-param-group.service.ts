@@ -18,6 +18,7 @@ import { QueryParamGroup } from '../model/query-param-group';
 import { MultiQueryParam, QueryParam } from '../model/query-param';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 import { QueryParamAccessor } from './query-param-accessor.interface';
+import { ControlValueAccessor } from '@angular/forms';
 
 /** @internal */
 function isMultiQueryParam<T>(queryParam: QueryParam<T> | MultiQueryParam<T>): queryParam is MultiQueryParam<T> {
@@ -41,11 +42,14 @@ class NavigationData {
 @Injectable()
 export class QueryParamGroupService implements OnDestroy {
 
+    // TODO #90: Move this into a context service
+    public currentQueryParamName: string;
+
     /** The {@link QueryParamGroup} to bind. */
     private queryParamGroup: QueryParamGroup;
 
     /** List of {@link QueryParamAccessor} registered to this service. */
-    private directives = new Map<string, QueryParamAccessor[]>();
+    private accessors = new Map<string, QueryParamAccessor[]>();
 
     /**
      * Queue of navigation parameters
@@ -97,22 +101,22 @@ export class QueryParamGroupService implements OnDestroy {
     /**
      * Registers a {@link QueryParamAccessor}.
      */
-    public registerQueryParamDirective(directive: QueryParamAccessor): void {
+    public registerQueryParamAccessor(accessor: QueryParamAccessor): void {
         // Capture the name here, particularly for the queue below to avoid re-evaluating
         // it as it might change over time.
-        const queryParamName = directive.name;
+        const queryParamName = accessor.name;
 
         const queryParam = this.queryParamGroup.get(queryParamName);
         if (!queryParam) {
             throw new Error(`Could not find query param with name ${queryParamName}. Did you forget to add it to your QueryParamGroup?`);
         }
-        if (!directive.valueAccessor) {
+        if (!accessor.valueAccessor) {
             throw new Error(`No value accessor found for the form control. Please make sure to implement ControlValueAccessor on this component.`);
         }
 
         // Chances are that we read the initial route before a directive has been registered here.
         // The value in the model will be correct, but we need to sync it to the view once initially.
-        directive.valueAccessor.writeValue(queryParam.value);
+        this.callValueAccessorWithContext(accessor, valueAccessor => valueAccessor.writeValue(queryParam.value));
 
         // Proxy updates from the view to debounce them (if needed).
         const debouncedQueue$ = new Subject<unknown>();
@@ -125,30 +129,32 @@ export class QueryParamGroupService implements OnDestroy {
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(new NavigationData(params)));
 
-        directive.valueAccessor.registerOnChange((newValue: unknown) => debouncedQueue$.next(newValue));
+        this.callValueAccessorWithContext(accessor, valueAccessor =>
+            valueAccessor.registerOnChange((newValue: unknown) => debouncedQueue$.next(newValue))
+        );
 
-        this.directives.set(queryParamName, [...(this.directives.get(queryParamName) || []), directive]);
+        this.accessors.set(queryParamName, [...(this.accessors.get(queryParamName) || []), accessor]);
     }
 
     /**
      * Deregisters a {@link QueryParamAccessor} by referencing its name.
      */
-    public deregisterQueryParamDirective(queryParamName: string): void {
+    public deregisterQueryParamAccessor(queryParamName: string): void {
         if (!queryParamName) {
             return;
         }
 
-        const directives = this.directives.get(queryParamName);
-        if (!directives) {
+        const accessors = this.accessors.get(queryParamName);
+        if (!accessors) {
             return;
         }
 
-        directives.forEach(directive => {
-            directive.valueAccessor.registerOnChange(NOP);
-            directive.valueAccessor.registerOnTouched(NOP);
-        });
+        accessors.forEach(accessor => this.callValueAccessorWithContext(accessor, valueAccessor => {
+            valueAccessor.registerOnChange(NOP);
+            valueAccessor.registerOnTouched(NOP);
+        }));
 
-        this.directives.delete(queryParamName);
+        this.accessors.delete(queryParamName);
         const queryParam = this.queryParamGroup.get(queryParamName);
         if (queryParam) {
             queryParam._clearChangeFunctions();
@@ -226,9 +232,11 @@ export class QueryParamGroupService implements OnDestroy {
                     ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
                     : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam));
 
-                const directives = this.directives.get(queryParamName);
-                if (directives) {
-                    directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
+                const accessors = this.accessors.get(queryParamName);
+                if (accessors) {
+                    accessors.forEach(accessor =>
+                        this.callValueAccessorWithContext(accessor, valueAccessor => valueAccessor.writeValue(newValue))
+                    );
                 }
 
                 groupValue[ queryParamName ] = newValue;
@@ -239,6 +247,13 @@ export class QueryParamGroupService implements OnDestroy {
                 emitModelToViewChange: false,
             });
         });
+    }
+
+    // TODO #90: Documentation, use context service, move method down
+    private callValueAccessorWithContext(accessor: QueryParamAccessor, fn: (valueAccessor: ControlValueAccessor) => void): void {
+        this.currentQueryParamName = accessor.name;
+        fn(accessor.valueAccessor);
+        this.currentQueryParamName = null;
     }
 
     /** Listens for newly added parameters and starts synchronization for them. */

@@ -10,7 +10,7 @@ export const NGQP_CHECKBOX_VALUE_ACCESSOR: any = {
 
 /** @ignore */
 @Directive({
-    selector: 'input[type=checkbox][queryParamName],input[type=checkbox][queryParam]',
+    selector: 'input[type=checkbox][queryParamName],input[type=checkbox][queryParamNames],input[type=checkbox][queryParam]',
     providers: [NGQP_CHECKBOX_VALUE_ACCESSOR],
 })
 export class CheckboxControlValueAccessorDirective implements ControlValueAccessor {

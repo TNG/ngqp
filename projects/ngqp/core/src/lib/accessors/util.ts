@@ -10,7 +10,21 @@ import { NGQP_BUILT_IN_ACCESSORS } from './ngqp-accessors';
  *
  * @internal
  */
-export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor | null {
+export function selectValueAccessor(
+    valueAccessors: ControlValueAccessor[],
+    excludeAccessor?: ControlValueAccessor,
+): ControlValueAccessor | null {
+    const orderedAccessors = orderByPriority(valueAccessors)
+        .filter(accessor => !excludeAccessor || accessor !== excludeAccessor);
+
+    if (orderedAccessors.length === 0) {
+        throw new Error(`No matching ControlValueAccessor has been found for this form control`);
+    }
+
+    return orderedAccessors[0];
+}
+
+function orderByPriority(valueAccessors: ControlValueAccessor[]): ControlValueAccessor[] {
     if (!valueAccessors || !Array.isArray(valueAccessors)) {
         return null;
     }
@@ -37,17 +51,19 @@ export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): Con
         }
     });
 
+    const result = new Set<ControlValueAccessor>();
     if (customAccessor !== null) {
-        return customAccessor;
+        result.add(customAccessor);
     }
 
     if (builtInAccessor !== null) {
-        return builtInAccessor;
+        result.add(builtInAccessor);
     }
 
     if (defaultAccessor !== null) {
-        return defaultAccessor;
+        result.add(defaultAccessor);
     }
 
-    throw new Error(`No matching ControlValueAccessor has been found for this form control`);
+    valueAccessors.forEach(accessor => result.add(accessor));
+    return Array.from(result);
 }

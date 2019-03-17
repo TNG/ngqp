@@ -49,13 +49,13 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
 
         if (paramChange) {
             if (this.group.get(this.name)) {
-                this.groupService.deregisterQueryParamDirective(this.name);
+                this.groupService.deregisterQueryParamAccessor(this.name);
                 this.group.remove(this.name);
             }
 
             if (paramChange.currentValue) {
                 this.group.add(this.name, paramChange.currentValue);
-                this.groupService.registerQueryParamDirective(this);
+                this.groupService.registerQueryParamAccessor(this);
             }
         }
     }
@@ -63,7 +63,7 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
     /** @ignore */
     public ngOnDestroy(): void {
         if (this.groupService) {
-            this.groupService.deregisterQueryParamDirective(this.name);
+            this.groupService.deregisterQueryParamAccessor(this.name);
         }
     }
 

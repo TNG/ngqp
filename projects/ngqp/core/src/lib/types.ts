@@ -12,6 +12,12 @@ export type ParamSerializer<T> = (model: T | undefined | null) => string | null;
  */
 export type ParamDeserializer<T> = (value: string | null) => T | undefined | null;
 
+// TODO #90: Documentation
+export type Inflator<T> = (value: T) => unknown[];
+
+// TODO #90: Documentation
+export type Deflator<T> = (values: unknown[]) => T;
+
 /**
  * Defines a function which describes side effects on other
  * URL parameters.

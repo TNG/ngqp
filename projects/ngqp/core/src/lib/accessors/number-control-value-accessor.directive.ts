@@ -10,7 +10,7 @@ export const NGQP_NUMBER_VALUE_ACCESSOR: any = {
 
 /** @ignore */
 @Directive({
-    selector: 'input[type=number][queryParamName],input[type=number][queryParam]',
+    selector: 'input[type=number][queryParamName],input[type=number][queryParamNames],input[type=number][queryParam]',
     providers: [NGQP_NUMBER_VALUE_ACCESSOR],
 })
 export class NumberControlValueAccessorDirective implements ControlValueAccessor {
