@@ -1,0 +1,14 @@
+<demo-example [markup]="markup" [typescript]="typescript">
+    <demo-browser [group]="paramGroup">
+        <ng-container [queryParamGroup]="paramGroup">
+            <div class="form-group">
+                <select queryParamName="sorting">
+                    <option value="name_asc">Name Asc</option>
+                    <option value="name_desc">Name Desc</option>
+                    <option value="price_asc">Price Asc</option>
+                    <option value="price_desc">Price Desc</option>
+                </select>
+            </div>
+        </ng-container>
+    </demo-browser>
+</demo-example>

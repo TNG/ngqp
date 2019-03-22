@@ -9,9 +9,9 @@ import {
 } from './serializers';
 import { LOOSE_IDENTITY_COMPARATOR } from './util';
 import { RouterOptions } from './router-adapter/router-adapter.interface';
-import { MultiQueryParam, QueryParam } from './model/query-param';
+import { MultiQueryParam, QueryParam, PartitionedQueryParam } from './model/query-param';
 import { QueryParamGroup } from './model/query-param-group';
-import { MultiQueryParamOpts, QueryParamOpts } from './model/query-param-opts';
+import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts } from './model/query-param-opts';
 
 function isMultiOpts<T>(opts: QueryParamOpts<T> | MultiQueryParamOpts<T>): opts is MultiQueryParamOpts<T> {
     return opts.multi === true;
@@ -39,11 +39,44 @@ export class QueryParamBuilder {
      * @returns The new {@link QueryParamGroup}.
      */
     public group(
-        queryParams: { [ name: string ]: QueryParam<unknown> | MultiQueryParam<unknown> },
+        queryParams: { [ name: string ]: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown> },
         extras: RouterOptions = {}
     ): QueryParamGroup {
         // TODO Maybe we should first validate that no two queryParams defined the same "param".
         return new QueryParamGroup(queryParams, extras);
+    }
+
+    /** @ignore */
+    public partition<T, G1>(
+        queryParams: [QueryParam<G1> | MultiQueryParam<G1>],
+        opts: PartitionedQueryParamOpts<T, [G1]>
+    ): PartitionedQueryParam<T, [G1]>;
+    /** @ignore */
+    public partition<T, G1, G2>(
+        queryParams: [QueryParam<G1> | MultiQueryParam<G1>, QueryParam<G2> | MultiQueryParam<G2>],
+        opts: PartitionedQueryParamOpts<T, [G1, G2]>
+    ): PartitionedQueryParam<T, [G1, G2]>;
+    /** @ignore */
+    public partition<T, G1, G2, G3>(
+        queryParams: [QueryParam<G1> | MultiQueryParam<G1>, QueryParam<G2> | MultiQueryParam<G2>, QueryParam<G3> | MultiQueryParam<G3>],
+        opts: PartitionedQueryParamOpts<T, [G1, G2, G3]>
+    ): PartitionedQueryParam<T, [G1, G2, G3]>;
+    /**
+     * Partition a query parameter into multiple others.
+     *
+     * Partitioning is useful if you need to bind a single form control to multiple query parameters.
+     * For example, consider a {@code <select>} which represents both a field to sort by and the
+     * direction to sort in. If you want to encode these two information on separate URL parameters,
+     * you can define a single query parameter that is partitioned into two others.
+     *
+     * @param queryParams The query parameters making up this partition.
+     * @param opts See {@link PartitionedQueryParamOpts}.
+     */
+    public partition(
+        queryParams: (QueryParam<unknown> | MultiQueryParam<unknown>)[],
+        opts: PartitionedQueryParamOpts<unknown, unknown[]>
+    ): PartitionedQueryParam<unknown, unknown[]> {
+        return new PartitionedQueryParam(queryParams, opts);
     }
 
     /** @ignore */

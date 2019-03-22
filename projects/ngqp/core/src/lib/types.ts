@@ -13,6 +13,16 @@ export type ParamSerializer<T> = (model: T | undefined | null) => string | null;
 export type ParamDeserializer<T> = (value: string | null) => T | undefined | null;
 
 /**
+ * A partitioner can split a value into an array of parts.
+ */
+export type Partitioner<T, R extends unknown[]> = (value: T) => R;
+
+/**
+ * A reducer can combine an array of values into a single value.
+ */
+export type Reducer<T extends unknown[], R> = (values: T) => R;
+
+/**
  * Defines a function which describes side effects on other
  * URL parameters.
  *

@@ -40,6 +40,7 @@ import { QueryParamGroupConfigurationDocsComponent } from './docs-items/configur
 import { QueryParamConfigurationDocsComponent } from './docs-items/configuration/query-param/query-param-configuration-docs.component';
 import { QueryParamGroupProgrammaticAccessDocsComponent } from './docs-items/programmatic-access/query-param-group/query-param-group-programmatic-access-docs.component';
 import { QueryParamProgrammaticAccessDocsComponent } from './docs-items/programmatic-access/query-param/query-param-programmatic-access-docs.component';
+import { PartitionExampleComponent } from './docs-items/examples/partition-example/partition-example.component';
 
 @NgModule({
     declarations: [
@@ -70,6 +71,7 @@ import { QueryParamProgrammaticAccessDocsComponent } from './docs-items/programm
         ManualWiringExampleComponent,
         AddRemoveParameterExampleComponent,
         StandaloneExampleComponent,
+        PartitionExampleComponent,
 
         HomeComponent,
         GettingStartedComponent,

@@ -1,4 +1,4 @@
-import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
+import { Comparator, Reducer, Partitioner, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
 
 /**
  * List of options which can be passed to {@link QueryParam}.
@@ -79,4 +79,23 @@ export interface MultiQueryParamOpts<T> extends QueryParamOptsBase<T, T[]> {
      * multiple times, e.g. `https://www.app.io?param=A&param=B&param=C`.
      */
     multi: true;
+}
+
+/**
+ * Options when creating a partitioned query parameter.
+ */
+export interface PartitionedQueryParamOpts<T, R extends unknown[]> {
+    /**
+     * Partitioner function to split a value into its parts.
+     *
+     * The individual parts are used as the value passed to the {@link QueryParam}
+     * instances into which the parameter is partitioned.
+     */
+    partition: Partitioner<T, R>;
+
+    /**
+     * Reducer function to combine parts back to a value.
+     *
+     */
+    reduce: Reducer<R, T>;
 }
