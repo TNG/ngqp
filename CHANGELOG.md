@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/TNG/ngqp/compare/v0.9.0...v0.10.0) (2019-03-27)
+
+
+### Bug Fixes
+
+* **core:** Prefer unknown over any where possible ([62f357c](https://github.com/TNG/ngqp/commit/62f357c))
+* **deps:** bump dependencies ([4ae172a](https://github.com/TNG/ngqp/commit/4ae172a))
+* **deps:** pin rxjs version ([50ebf0d](https://github.com/TNG/ngqp/commit/50ebf0d))
+* **deps:** reduce rxjs dependency to what Angular needs ([81336f4](https://github.com/TNG/ngqp/commit/81336f4))
+* **docs:** Hide directive constructors from API docs ([dc628b6](https://github.com/TNG/ngqp/commit/dc628b6)), closes [#97](https://github.com/TNG/ngqp/issues/97)
+* **scripts:** Sign release commits ([0bcff67](https://github.com/TNG/ngqp/commit/0bcff67))
+
+
+### Features
+
+* Adapt commitlint configuration to our project ([c91c440](https://github.com/TNG/ngqp/commit/c91c440))
+* **core:** add support for partitioned parameters ([ad3f917](https://github.com/TNG/ngqp/commit/ad3f917)), closes [#90](https://github.com/TNG/ngqp/issues/90)
+* **core:** run commitlint on Travis ([a1b5349](https://github.com/TNG/ngqp/commit/a1b5349))
+* **other:** added commitlint and husky ([7022023](https://github.com/TNG/ngqp/commit/7022023))
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/TNG/ngqp/compare/v0.8.0...v0.9.0) (2019-03-08)
 
