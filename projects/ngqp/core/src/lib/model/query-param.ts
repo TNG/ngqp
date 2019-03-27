@@ -1,18 +1,17 @@
 import { Observable, Subject } from 'rxjs';
 import { areEqualUsing, isFunction, isMissing, isPresent, wrapTryCatch } from '../util';
-import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
+import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from '../types';
 import { QueryParamGroup } from './query-param-group';
-import { MultiQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from './query-param-opts';
+import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from './query-param-opts';
 
-/**
- * Abstract base for {@link QueryParam} and {@link MultiQueryParam}.
- *
- * This base class holds most of the parameter's options, but is unaware of
- * how to actually (de-)serialize any values.
- */
-export abstract class AbstractQueryParam<U, T> {
+/** @internal */
+abstract class AbstractQueryParamBase<T> {
 
-    private _valueChanges = new Subject<T>();
+    public abstract value: T;
+
+    protected parent: QueryParamGroup;
+    protected _valueChanges = new Subject<T>();
+    protected changeFunctions: OnChangeFunction<T>[] = [];
 
     /**
      * Emits the current value of this parameter whenever it changes.
@@ -20,6 +19,38 @@ export abstract class AbstractQueryParam<U, T> {
      * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
      */
     public readonly valueChanges: Observable<T> = this._valueChanges.asObservable();
+
+    public _registerOnChange(fn: OnChangeFunction<T>): void {
+        this.changeFunctions.push(fn);
+    }
+
+    public _clearChangeFunctions(): void {
+        this.changeFunctions = [];
+    }
+
+    public abstract setValue(value: T | null, opts: {
+        emitEvent?: boolean,
+        onlySelf?: boolean,
+        emitModelToViewChange?: boolean,
+    }): void;
+
+    public _setParent(parent: QueryParamGroup): void {
+        if (this.parent) {
+            throw new Error(`Parameter already belongs to a QueryParamGroup.`);
+        }
+
+        this.parent = parent;
+    }
+
+}
+
+/**
+ * Abstract base for {@link QueryParam} and {@link MultiQueryParam}.
+ *
+ * This base class holds most of the parameter's options, but is unaware of
+ * how to actually (de-)serialize any values.
+ */
+export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T> {
 
     /**
      * The current value of this parameter.
@@ -53,10 +84,8 @@ export abstract class AbstractQueryParam<U, T> {
     /** See {@link QueryParamOpts}. */
     public readonly combineWith: ParamCombinator<T>;
 
-    private parent: QueryParamGroup;
-    private changeFunctions: OnChangeFunction<T>[] = [];
-
     constructor(urlParam: string, opts: QueryParamOptsBase<U, T> = {}) {
+        super();
         const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
 
         if (isMissing(urlParam)) {
@@ -94,16 +123,6 @@ export abstract class AbstractQueryParam<U, T> {
     /** @internal */
     public abstract deserializeValue(value: string | string[]): T;
 
-    /** @internal */
-    public _registerOnChange(fn: OnChangeFunction<T>): void {
-        this.changeFunctions.push(fn);
-    }
-
-    /** @internal */
-    public _clearChangeFunctions(): void {
-        this.changeFunctions = [];
-    }
-
     /**
      * Updates the value of this parameter.
      *
@@ -131,15 +150,6 @@ export abstract class AbstractQueryParam<U, T> {
                 emitModelToViewChange: false,
             });
         }
-    }
-
-    /** @internal */
-    public _setParent(parent: QueryParamGroup): void {
-        if (this.parent) {
-            throw new Error(`Parameter already belongs to a QueryParamGroup.`);
-        }
-
-        this.parent = parent;
     }
 
 }
@@ -208,6 +218,74 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Re
         }
 
         return value.map(this.deserialize.bind(this));
+    }
+
+}
+
+/**
+ * Describes a partitioned query parameter.
+ *
+ * This encapsulates a list of query parameters such that a single form control
+ * can be bound against multiple URL parameters. To achieve this, functions must
+ * be defined which can convert the models between the parameters.
+ */
+export class PartitionedQueryParam<T, G extends unknown[] = unknown[]> extends AbstractQueryParamBase<T> {
+
+    /** @internal */
+    public readonly queryParams: { [I in keyof G]: G[I] extends G[number] ? (QueryParam<G[I]> | MultiQueryParam<G[I]>) : G[I] };
+
+    /** @internal */
+    public readonly partition: Partitioner<T, G>;
+
+    /** @internal */
+    public readonly reduce: Reducer<G, T>;
+
+    constructor(
+        queryParams: { [I in keyof G]: G[I] extends G[number] ? (QueryParam<G[I]> | MultiQueryParam<G[I]>) : G[I] },
+        opts: PartitionedQueryParamOpts<T, G>,
+    ) {
+        super();
+
+        if (queryParams.length === 0) {
+            throw new Error(`Partitioned parameters must contain at least one parameter.`);
+        }
+
+        if (!isFunction(opts.partition)) {
+            throw new Error(`partition must be a function, but received ${opts.partition}`);
+        }
+
+        if (!isFunction(opts.reduce)) {
+            throw new Error(`reduce must be a function, but received ${opts.reduce}`);
+        }
+
+        this.queryParams = queryParams;
+        this.partition = opts.partition;
+        this.reduce = opts.reduce;
+    }
+
+    public get value(): T {
+        return this.reduce(this.queryParams.map(queryParam => queryParam.value) as G);
+    }
+
+    public setValue(value: T, opts: {
+        emitEvent?: boolean,
+        onlySelf?: boolean,
+        emitModelToViewChange?: boolean,
+    } = {}): void {
+        const partitioned = this.partition(value);
+        this.queryParams.forEach((queryParam, index) => queryParam.setValue(partitioned[index] as any, {
+            emitEvent: opts.emitEvent,
+            onlySelf: true,
+            emitModelToViewChange: false,
+        }));
+
+        if (opts.emitModelToViewChange !== false) {
+            this.changeFunctions.forEach(changeFn => changeFn(this.value));
+        }
+
+        if (opts.emitEvent !== false) {
+            this._valueChanges.next(this.value);
+        }
     }
 
 }

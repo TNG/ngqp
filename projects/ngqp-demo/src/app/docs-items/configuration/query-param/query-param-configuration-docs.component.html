@@ -94,4 +94,20 @@
         names directly. No (de-)serializers will be run and this effect does not cascade.
     </p>
     <demo-combine-with-example></demo-combine-with-example>
+
+    <docs-fragment fragment="partition">
+        <h2>Partitioned parameters</h2>
+    </docs-fragment>
+    <p>
+        You can bind a single form control to multiple parameters by using partitioned parameters. This can be useful,
+        e.g., if you have a dropdown representing how to sort a table and would like the field to sort by and the
+        direction to sort in to be two separate URL parameters.
+    </p>
+    <p>
+        To use partitioned parameters, use <span apiDocsLink>QueryParamBuilder#partition</span> and pass the list of
+        parameters (which have to be »regular« parameters) as an argument. Additionally, you will need to define
+        functions which define how to convert between the single form control's model and the model of the individual
+        parameters.
+    </p>
+    <partition-example></partition-example>
 </docs-item>

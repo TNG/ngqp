@@ -1,7 +1,7 @@
 import { Observable, Subject } from 'rxjs';
 import { isMissing, undefinedToNull } from '../util';
 import { OnChangeFunction } from '../types';
-import { MultiQueryParam, QueryParam } from './query-param';
+import { MultiQueryParam, QueryParam, PartitionedQueryParam } from './query-param';
 import { RouterOptions } from '../router-adapter/router-adapter.interface';
 
 /**
@@ -34,7 +34,7 @@ export class QueryParamGroup {
     public readonly queryParamAdded$: Observable<string> = this._queryParamAdded$.asObservable();
 
     /** @internal */
-    public readonly queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> };
+    public readonly queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown> };
 
     /** @internal */
     public readonly routerOptions: RouterOptions;
@@ -42,7 +42,7 @@ export class QueryParamGroup {
     private changeFunctions: OnChangeFunction<Record<string, any>>[] = [];
 
     constructor(
-        queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> },
+        queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown> },
         extras: RouterOptions = {}
     ) {
         this.queryParams = queryParams;
@@ -62,14 +62,15 @@ export class QueryParamGroup {
     }
 
     /**
-     * Retrieves a specific {@link QueryParam} from this group by name.
+     * Retrieves a specific parameter from this group by name.
      *
-     * This returns the {@link QueryParam} with the given name, or `null`
+     * This returns an instance of either {@link QueryParam}, {@link MultiQueryParam}
+     * or {@link PartitionedQueryParam} depending on the configuration, or `null`
      * if no parameter with that name is found in this group.
      *
      * @param queryParamName The name of the parameter instance to retrieve.
      */
-    public get(queryParamName: string): QueryParam<unknown> | MultiQueryParam<unknown> | null {
+    public get(queryParamName: string): QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown> | null {
         const param = this.queryParams[ queryParamName ];
         if (!param) {
             return null;
@@ -88,7 +89,7 @@ export class QueryParamGroup {
      * @param queryParamName Name of the parameter to reference it with.
      * @param queryParam The new parameter to add.
      */
-    public add(queryParamName: string, queryParam: QueryParam<unknown> | MultiQueryParam<unknown>): void {
+    public add(queryParamName: string, queryParam: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown>): void {
         if (this.get(queryParamName)) {
             throw new Error(`A parameter with name ${queryParamName} already exists.`);
         }
