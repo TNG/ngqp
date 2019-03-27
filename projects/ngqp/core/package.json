@@ -29,8 +29,5 @@
   },
   "dependencies": {
     "schematics-utilities": "^1.1.2"
-  },
-  "resolutions": {
-    "rxjs": "6.3.3"
   }
 }
