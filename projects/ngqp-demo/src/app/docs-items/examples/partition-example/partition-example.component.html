@@ -1,8 +1,13 @@
 <demo-example [markup]="markup" [typescript]="typescript">
     <demo-browser [group]="paramGroup">
         <ng-container [queryParamGroup]="paramGroup">
+            <div class="alert alert-info">
+                This <code>select</code> encodes two different URL parameters. Note how the <code>emptyOn</code> setting
+                is taken into account separately as well.
+            </div>
+
             <div class="form-group">
-                <select queryParamName="sorting">
+                <select queryParamName="sorting" class="form-control">
                     <option value="name_asc">Name Asc</option>
                     <option value="name_desc">Name Desc</option>
                     <option value="price_asc">Price Asc</option>
