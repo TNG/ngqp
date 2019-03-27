@@ -102,6 +102,10 @@ instances and is the recommended way to set them up.</p>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#partition">partition</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#stringParam">stringParam</a>
                             </li>
                         </ul>
@@ -146,8 +150,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="112"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:112</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="145"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:145</a></div>
                 </td>
             </tr>
 
@@ -343,8 +347,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="85"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:85</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="118"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:118</a></div>
                 </td>
             </tr>
 
@@ -436,8 +440,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="139"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:139</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="172"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:172</a></div>
                 </td>
             </tr>
 
@@ -517,6 +521,105 @@ instances and is the recommended way to set them up.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="partition"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            partition
+                        </b>
+                        <a href="#partition"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>partition(queryParams: (QueryParam<unknown> | MultiQueryParam<unknown>)[], opts: PartitionedQueryParamOpts<unknown | unknown[]>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Partition a query parameter into multiple others.</p>
+<p>Partitioning is useful if you need to bind a single form control to multiple query parameters.
+For example, consider a {@code <select>} which represents both a field to sort by and the
+direction to sort in. If you want to encode these two information on separate URL parameters,
+you can define a single query parameter that is partitioned into two others.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>queryParams</td>
+                                    <td>
+                                            <code>(QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt;)[]</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>The query parameters making up this partition.</p>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>opts</td>
+                                    <td>
+                                            <code>PartitionedQueryParamOpts&lt;unknown | unknown[]&gt;</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>See {</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>PartitionedQueryParam&lt;unknown, unknown[]&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="stringParam"></a>
                     <span class="name">
                         <b>
@@ -537,8 +640,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="58"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:58</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="91"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:91</a></div>
                 </td>
             </tr>
 
@@ -623,9 +726,9 @@ import {
 } from &#x27;./serializers&#x27;;
 import { LOOSE_IDENTITY_COMPARATOR } from &#x27;./util&#x27;;
 import { RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
-import { MultiQueryParam, QueryParam } from &#x27;./model/query-param&#x27;;
+import { MultiQueryParam, QueryParam, PartitionedQueryParam } from &#x27;./model/query-param&#x27;;
 import { QueryParamGroup } from &#x27;./model/query-param-group&#x27;;
-import { MultiQueryParamOpts, QueryParamOpts } from &#x27;./model/query-param-opts&#x27;;
+import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts } from &#x27;./model/query-param-opts&#x27;;
 
 function isMultiOpts&lt;T&gt;(opts: QueryParamOpts&lt;T&gt; | MultiQueryParamOpts&lt;T&gt;): opts is MultiQueryParamOpts&lt;T&gt; {
     return opts.multi &#x3D;&#x3D;&#x3D; true;
@@ -653,11 +756,44 @@ export class QueryParamBuilder {
      * @returns The new {@link QueryParamGroup}.
      */
     public group(
-        queryParams: { [ name: string ]: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; },
+        queryParams: { [ name: string ]: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt; },
         extras: RouterOptions &#x3D; {}
     ): QueryParamGroup {
         // TODO Maybe we should first validate that no two queryParams defined the same &quot;param&quot;.
         return new QueryParamGroup(queryParams, extras);
+    }
+
+    /** @ignore */
+    public partition&lt;T, G1&gt;(
+        queryParams: [QueryParam&lt;G1&gt; | MultiQueryParam&lt;G1&gt;],
+        opts: PartitionedQueryParamOpts&lt;T, [G1]&gt;
+    ): PartitionedQueryParam&lt;T, [G1]&gt;;
+    /** @ignore */
+    public partition&lt;T, G1, G2&gt;(
+        queryParams: [QueryParam&lt;G1&gt; | MultiQueryParam&lt;G1&gt;, QueryParam&lt;G2&gt; | MultiQueryParam&lt;G2&gt;],
+        opts: PartitionedQueryParamOpts&lt;T, [G1, G2]&gt;
+    ): PartitionedQueryParam&lt;T, [G1, G2]&gt;;
+    /** @ignore */
+    public partition&lt;T, G1, G2, G3&gt;(
+        queryParams: [QueryParam&lt;G1&gt; | MultiQueryParam&lt;G1&gt;, QueryParam&lt;G2&gt; | MultiQueryParam&lt;G2&gt;, QueryParam&lt;G3&gt; | MultiQueryParam&lt;G3&gt;],
+        opts: PartitionedQueryParamOpts&lt;T, [G1, G2, G3]&gt;
+    ): PartitionedQueryParam&lt;T, [G1, G2, G3]&gt;;
+    /**
+     * Partition a query parameter into multiple others.
+     *
+     * Partitioning is useful if you need to bind a single form control to multiple query parameters.
+     * For example, consider a {@code &lt;select&gt;} which represents both a field to sort by and the
+     * direction to sort in. If you want to encode these two information on separate URL parameters,
+     * you can define a single query parameter that is partitioned into two others.
+     *
+     * @param queryParams The query parameters making up this partition.
+     * @param opts See {@link PartitionedQueryParamOpts}.
+     */
+    public partition(
+        queryParams: (QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt;)[],
+        opts: PartitionedQueryParamOpts&lt;unknown, unknown[]&gt;
+    ): PartitionedQueryParam&lt;unknown, unknown[]&gt; {
+        return new PartitionedQueryParam(queryParams, opts);
     }
 
     /** @ignore */

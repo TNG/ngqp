@@ -105,6 +105,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/MultiQueryParam.html" data-type="entity-link">MultiQueryParam</a>
                             </li>
                             <li class="link">
+                                <a href="classes/PartitionedQueryParam.html" data-type="entity-link">PartitionedQueryParam</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/QueryParam.html" data-type="entity-link">QueryParam</a>
                             </li>
                             <li class="link">
@@ -135,6 +138,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse" ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
                                 <a href="interfaces/MultiQueryParamOpts.html" data-type="entity-link">MultiQueryParamOpts</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PartitionedQueryParamOpts.html" data-type="entity-link">PartitionedQueryParamOpts</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/QueryParamOpts.html" data-type="entity-link">QueryParamOpts</a>

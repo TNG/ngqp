@@ -121,66 +121,6 @@ It binds this parameter to the host element, which is required to have a [Contro
     </table>
 </section>
 
-            <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(groupService: QueryParamGroupService, valueAccessors: ControlValueAccessor[])</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/lib/directives/query-param-name.directive.ts:27</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>groupService</td>
-                                                  
-                                                        <td>
-                                                                    <code>QueryParamGroupService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>valueAccessors</td>
-                                                  
-                                                        <td>
-                                                                    <code>ControlValueAccessor[]</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
             <section>
     <h3 id="inputs">Inputs</h3>
@@ -251,6 +191,7 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
     /** @internal */
     public valueAccessor: ControlValueAccessor | null &#x3D; null;
 
+    /** @internal */
     constructor(
         @Optional() private groupService: QueryParamGroupService,
         @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],

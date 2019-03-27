@@ -42,7 +42,7 @@
 
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>AbstractQueryParam</li>
+  <li>PartitionedQueryParam</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -67,9 +67,10 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Abstract base for <a href="../classes/QueryParam.html">QueryParam</a> and <a href="../classes/MultiQueryParam.html">MultiQueryParam</a>.</p>
-<p>This base class holds most of the parameter&#39;s options, but is unaware of
-how to actually (de-)serialize any values.</p>
+                <p>Describes a partitioned query parameter.</p>
+<p>This encapsulates a list of query parameters such that a single form control
+can be bound against multiple URL parameters. To achieve this, functions must
+be defined which can convert the models between the parameters.</p>
 
             </p>
 
@@ -86,56 +87,6 @@ how to actually (de-)serialize any values.</p>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#combineWith">combineWith</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#compareWith">compareWith</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#debounceTime">debounceTime</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#deserialize">deserialize</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#emptyOn">emptyOn</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#serialize">serialize</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#urlParam">urlParam</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#value">value</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -157,6 +108,20 @@ how to actually (de-)serialize any values.</p>
 
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#value">value</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         </tbody>
     </table>
 </section>
@@ -167,12 +132,12 @@ how to actually (de-)serialize any values.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(urlParam: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, opts: <a href="../classes/QueryParam.html">QueryParamOptsBase<U | T></a>)</code>
+<code>constructor(queryParams, opts: PartitionedQueryParamOpts<T | G>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/lib/model/query-param.ts:85</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="241" class="link-to-prism">src/lib/model/query-param.ts:241</a></div>
                             </td>
                         </tr>
 
@@ -190,10 +155,9 @@ how to actually (de-)serialize any values.</p>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>urlParam</td>
+                                                        <td>queryParams</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -205,7 +169,7 @@ how to actually (de-)serialize any values.</p>
                                                         <td>opts</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../classes/QueryParam.html" target="_self" >QueryParamOptsBase&lt;U | T&gt;</a></code>
+                                                                    <code>PartitionedQueryParamOpts&lt;T | G&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -222,299 +186,6 @@ how to actually (de-)serialize any values.</p>
         </table>
 </section>
 
-            <section>
-    
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="combineWith"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            combineWith</b>
-                            <a href="#combineWith"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ParamCombinator" target="_self" >ParamCombinator&lt;T&gt;</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/lib/model/query-param.ts:85</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="compareWith"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            compareWith</b>
-                            <a href="#compareWith"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Comparator" target="_self" >Comparator&lt;T&gt;</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/lib/model/query-param.ts:82</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="debounceTime"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            debounceTime</b>
-                            <a href="#debounceTime"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>number | null</code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/lib/model/query-param.ts:76</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="deserialize"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            deserialize</b>
-                            <a href="#deserialize"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ParamDeserializer" target="_self" >ParamDeserializer&lt;U&gt;</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/lib/model/query-param.ts:73</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="emptyOn"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            emptyOn</b>
-                            <a href="#emptyOn"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>T</code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/lib/model/query-param.ts:79</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="serialize"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            serialize</b>
-                            <a href="#serialize"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ParamSerializer" target="_self" >ParamSerializer&lt;U&gt;</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/lib/model/query-param.ts:70</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>See <a href="../interfaces/QueryParamOpts.html">QueryParamOpts</a>. </p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="urlParam"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            urlParam</b>
-                            <a href="#urlParam"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/lib/model/query-param.ts:67</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The name of the parameter to be used in the URL.</p>
-<p>This represents the name of the query parameter which will be
-used in the URL (e.g., <code>?q=</code>), which differs from the name of
-the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="value"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            value</b>
-                            <a href="#value"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>T</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>null</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/lib/model/query-param.ts:58</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The current value of this parameter.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-</section>
 
             <section>
     
@@ -538,25 +209,21 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setValue(value: T | null, opts: literal type)</code>
+                    <code>setValue(value: T, opts: literal type)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="132"
-                            class="link-to-prism">src/lib/model/query-param.ts:132</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="270"
+                            class="link-to-prism">src/lib/model/query-param.ts:270</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Updates the value of this parameter.</p>
-<p>If wired up with a <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>, this will also synchronize
-the value to the URL.</p>
-</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -573,7 +240,7 @@ the value to the URL.</p>
                                 <tr>
                                     <td>value</td>
                                     <td>
-                                            <code>T | null</code>
+                                            <code>T</code>
                                     </td>
 
                                     <td>
@@ -621,6 +288,33 @@ the value to the URL.</p>
 
 
 
+            <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <span class="name"><b>value</b><a href="#value"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>value()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="266" class="link-to-prism">src/lib/model/query-param.ts:266</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
     </div>
 
 
@@ -942,7 +636,7 @@ export class PartitionedQueryParam&lt;T, G extends unknown[] &#x3D; unknown[]&gt
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
-            var COMPODOC_CURRENT_PAGE_URL = 'AbstractQueryParam.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'PartitionedQueryParam.html';
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

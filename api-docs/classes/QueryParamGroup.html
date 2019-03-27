@@ -286,15 +286,15 @@ one parameter&#39;s value is changed.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>add(queryParamName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, queryParam: QueryParam<any> | MultiQueryParam<any>)</code>
+                    <code>add(queryParamName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, queryParam: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="91"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:91</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:92</a></div>
                 </td>
             </tr>
 
@@ -338,7 +338,7 @@ it is treated just like any other parameter in this group.</p>
                                 <tr>
                                     <td>queryParam</td>
                                     <td>
-                                            <code>QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt;</code>
+                                            <code>QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt;</code>
                                     </td>
 
                                     <td>
@@ -391,16 +391,17 @@ it is treated just like any other parameter in this group.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="72"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:72</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="73"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:73</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Retrieves a specific <a href="../classes/QueryParam.html">QueryParam</a> from this group by name.</p>
-<p>This returns the <a href="../classes/QueryParam.html">QueryParam</a> with the given name, or <code>null</code>
+                    <div class="io-description"><p>Retrieves a specific parameter from this group by name.</p>
+<p>This returns an instance of either <a href="../classes/QueryParam.html">QueryParam</a>, <a href="../classes/MultiQueryParam.html">MultiQueryParam</a>
+or <a href="../classes/PartitionedQueryParam.html">PartitionedQueryParam</a> depending on the configuration, or <code>null</code>
 if no parameter with that name is found in this group.</p>
 </div>
 
@@ -438,7 +439,7 @@ if no parameter with that name is found in this group.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>QueryParam | MultiQueryParam | null</code>
+                        <b>Returns : </b>    <code>QueryParam | MultiQueryParam | PartitionedQueryParam | null</code>
 
                     </div>
                     <div class="io-description">
@@ -472,8 +473,8 @@ if no parameter with that name is found in this group.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="141"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:141</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="142"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:142</a></div>
                 </td>
             </tr>
 
@@ -575,8 +576,8 @@ value. If a parameter is not listed, its value remains unchanged.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="109"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:109</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="110"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:110</a></div>
                 </td>
             </tr>
 
@@ -657,8 +658,8 @@ be reported in the value of this group anymore.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="170"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:170</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="171"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:171</a></div>
                 </td>
             </tr>
 
@@ -762,7 +763,7 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/lib/model/query-param-group.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/lib/model/query-param-group.ts:126</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -789,7 +790,7 @@ the value.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable, Subject } from &#x27;rxjs&#x27;;
 import { isMissing, undefinedToNull } from &#x27;../util&#x27;;
 import { OnChangeFunction } from &#x27;../types&#x27;;
-import { MultiQueryParam, QueryParam } from &#x27;./query-param&#x27;;
+import { MultiQueryParam, QueryParam, PartitionedQueryParam } from &#x27;./query-param&#x27;;
 import { RouterOptions } from &#x27;../router-adapter/router-adapter.interface&#x27;;
 
 /**
@@ -822,7 +823,7 @@ export class QueryParamGroup {
     public readonly queryParamAdded$: Observable&lt;string&gt; &#x3D; this._queryParamAdded$.asObservable();
 
     /** @internal */
-    public readonly queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt; };
+    public readonly queryParams: { [ queryParamName: string ]: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt; };
 
     /** @internal */
     public readonly routerOptions: RouterOptions;
@@ -830,7 +831,7 @@ export class QueryParamGroup {
     private changeFunctions: OnChangeFunction&lt;Record&lt;string, any&gt;&gt;[] &#x3D; [];
 
     constructor(
-        queryParams: { [ queryParamName: string ]: QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt; },
+        queryParams: { [ queryParamName: string ]: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt; },
         extras: RouterOptions &#x3D; {}
     ) {
         this.queryParams &#x3D; queryParams;
@@ -850,14 +851,15 @@ export class QueryParamGroup {
     }
 
     /**
-     * Retrieves a specific {@link QueryParam} from this group by name.
+     * Retrieves a specific parameter from this group by name.
      *
-     * This returns the {@link QueryParam} with the given name, or &#x60;null&#x60;
+     * This returns an instance of either {@link QueryParam}, {@link MultiQueryParam}
+     * or {@link PartitionedQueryParam} depending on the configuration, or &#x60;null&#x60;
      * if no parameter with that name is found in this group.
      *
      * @param queryParamName The name of the parameter instance to retrieve.
      */
-    public get(queryParamName: string): QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt; | null {
+    public get(queryParamName: string): QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt; | null {
         const param &#x3D; this.queryParams[ queryParamName ];
         if (!param) {
             return null;
@@ -876,7 +878,7 @@ export class QueryParamGroup {
      * @param queryParamName Name of the parameter to reference it with.
      * @param queryParam The new parameter to add.
      */
-    public add(queryParamName: string, queryParam: QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt;): void {
+    public add(queryParamName: string, queryParam: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt;): void {
         if (this.get(queryParamName)) {
             throw new Error(&#x60;A parameter with name ${queryParamName} already exists.&#x60;);
         }

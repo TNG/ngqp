@@ -142,7 +142,7 @@ multiple times, e.g. <code>https://www.app.io?param=A&amp;param=B&amp;param=C</c
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Comparator, ParamCombinator, ParamDeserializer, ParamSerializer } from &#x27;../types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Comparator, Reducer, Partitioner, ParamCombinator, ParamDeserializer, ParamSerializer } from &#x27;../types&#x27;;
 
 /**
  * List of options which can be passed to {@link QueryParam}.
@@ -223,6 +223,25 @@ export interface MultiQueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T, T
      * multiple times, e.g. &#x60;https://www.app.io?param&#x3D;A&amp;param&#x3D;B&amp;param&#x3D;C&#x60;.
      */
     multi: true;
+}
+
+/**
+ * Options when creating a partitioned query parameter.
+ */
+export interface PartitionedQueryParamOpts&lt;T, R extends unknown[]&gt; {
+    /**
+     * Partitioner function to split a value into its parts.
+     *
+     * The individual parts are used as the value passed to the {@link QueryParam}
+     * instances into which the parameter is partitioned.
+     */
+    partition: Partitioner&lt;T, R&gt;;
+
+    /**
+     * Reducer function to combine parts back to a value.
+     *
+     */
+    reduce: Reducer&lt;R, T&gt;;
 }</code></pre>
     </div>
 </div>
