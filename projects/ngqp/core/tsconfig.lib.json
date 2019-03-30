@@ -12,6 +12,8 @@
         "experimentalDecorators": true,
         "importHelpers": true,
         "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
         "types": [],
         "lib": [
             "dom",
