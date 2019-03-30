@@ -115,6 +115,7 @@ export class QueryParamGroup {
         }
 
         delete this.queryParams[ queryParamName ];
+        queryParam._setParent(null);
         queryParam._clearChangeFunctions();
     }
 

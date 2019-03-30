@@ -230,6 +230,7 @@ describe(QueryParamGroup.name, () => {
         it('can remove an existing parameter from a group', () => {
             group.remove('q');
             expect(group.get('q')).toBeNull();
+            expect((stringParam as any).parent).toBe(null);
         });
 
         it('throws if the parameter does not exist', () => {

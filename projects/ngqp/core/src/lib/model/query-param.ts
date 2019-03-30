@@ -9,7 +9,7 @@ abstract class AbstractQueryParamBase<T> {
 
     public abstract value: T;
 
-    protected parent: QueryParamGroup;
+    protected parent: QueryParamGroup | null = null;
     protected _valueChanges = new Subject<T>();
     protected changeFunctions: OnChangeFunction<T>[] = [];
 
@@ -35,7 +35,7 @@ abstract class AbstractQueryParamBase<T> {
     }): void;
 
     public _setParent(parent: QueryParamGroup): void {
-        if (this.parent) {
+        if (this.parent && parent) {
             throw new Error(`Parameter already belongs to a QueryParamGroup.`);
         }
 
