@@ -207,17 +207,19 @@ describe(QueryParamGroup.name, () => {
 
     describe('add', () => {
         let group: QueryParamGroup;
-        beforeEach(() => group = new QueryParamGroup({ q: stringParam }));
+        beforeEach(() => group = new QueryParamGroup({}));
 
         it('can add a new parameter to a group', () => {
             group.add('test', stringParam);
             expect(group.get('test')).toBe(stringParam);
-            expect(group.value).toEqual({ q: null, test: null });
+            expect(group.value).toEqual({ test: null });
+            expect((stringParam as any).parent).not.toBe(null);
         });
 
         it('throws if the name is already taken', () => {
-            expect(() => group.add('q', stringParam))
-                .toThrowError('A parameter with name q already exists.');
+            group.add('test', stringParam);
+            expect(() => group.add('test', stringParam))
+                .toThrowError('A parameter with name test already exists.');
         });
     });
 
@@ -228,6 +230,7 @@ describe(QueryParamGroup.name, () => {
         it('can remove an existing parameter from a group', () => {
             group.remove('q');
             expect(group.get('q')).toBeNull();
+            expect((stringParam as any).parent).toBe(null);
         });
 
         it('throws if the parameter does not exist', () => {
