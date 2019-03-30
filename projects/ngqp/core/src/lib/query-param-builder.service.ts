@@ -72,10 +72,10 @@ export class QueryParamBuilder {
      * @param queryParams The query parameters making up this partition.
      * @param opts See {@link PartitionedQueryParamOpts}.
      */
-    public partition(
-        queryParams: (QueryParam<unknown> | MultiQueryParam<unknown>)[],
-        opts: PartitionedQueryParamOpts<unknown, unknown[]>
-    ): PartitionedQueryParam<unknown, unknown[]> {
+    public partition<T, G extends unknown[]>(
+        queryParams: (QueryParam<G[number]> | MultiQueryParam<G[number]>)[],
+        opts: PartitionedQueryParamOpts<T, G>
+    ): PartitionedQueryParam<T, G> {
         return new PartitionedQueryParam(queryParams, opts);
     }
 

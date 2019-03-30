@@ -232,7 +232,7 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Re
 export class PartitionedQueryParam<T, G extends unknown[] = unknown[]> extends AbstractQueryParamBase<T> {
 
     /** @internal */
-    public readonly queryParams: { [I in keyof G]: QueryParam<G[I]> | MultiQueryParam<G[I]> };
+    public readonly queryParams: (QueryParam<G[number]> | MultiQueryParam<G[number]>)[];
 
     /** @internal */
     public readonly partition: Partitioner<T, G>;
@@ -241,7 +241,7 @@ export class PartitionedQueryParam<T, G extends unknown[] = unknown[]> extends A
     public readonly reduce: Reducer<G, T>;
 
     constructor(
-        queryParams: { [I in keyof G]: QueryParam<G[I]> | MultiQueryParam<G[I]> },
+        queryParams: (QueryParam<G[number]> | MultiQueryParam<G[number]>)[],
         opts: PartitionedQueryParamOpts<T, G>,
     ) {
         super();
