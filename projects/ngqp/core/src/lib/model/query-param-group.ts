@@ -95,6 +95,7 @@ export class QueryParamGroup {
         }
 
         this.queryParams[ queryParamName ] = queryParam;
+        queryParam._setParent(this);
         this._queryParamAdded$.next(queryParamName);
     }
 
