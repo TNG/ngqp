@@ -84,7 +84,7 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
     /** See {@link QueryParamOpts}. */
     public readonly combineWith?: ParamCombinator<T>;
 
-    constructor(urlParam: string, opts: QueryParamOptsBase<U, T> = {}) {
+    protected constructor(urlParam: string, opts: QueryParamOptsBase<U, T> = {}) {
         super();
         const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } = opts;
 
