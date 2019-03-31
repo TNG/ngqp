@@ -1,5 +1,5 @@
 import { Observable, Subject } from 'rxjs';
-import { areEqualUsing, isFunction, isMissing, isPresent, wrapTryCatch } from '../util';
+import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapTryCatch } from '../util';
 import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from '../types';
 import { QueryParamGroup } from './query-param-group';
 import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from './query-param-opts';
@@ -7,10 +7,10 @@ import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryPa
 /** @internal */
 abstract class AbstractQueryParamBase<T> {
 
-    public abstract value: T;
+    public abstract value: T | null;
 
     protected parent: QueryParamGroup | null = null;
-    protected _valueChanges = new Subject<T>();
+    protected readonly _valueChanges = new Subject<T | null>();
     protected changeFunctions: OnChangeFunction<T>[] = [];
 
     /**
@@ -18,7 +18,7 @@ abstract class AbstractQueryParamBase<T> {
      *
      * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
      */
-    public readonly valueChanges: Observable<T> = this._valueChanges.asObservable();
+    public readonly valueChanges: Observable<T | null> = this._valueChanges.asObservable();
 
     public _registerOnChange(fn: OnChangeFunction<T>): void {
         this.changeFunctions.push(fn);
@@ -34,7 +34,7 @@ abstract class AbstractQueryParamBase<T> {
         emitModelToViewChange?: boolean,
     }): void;
 
-    public _setParent(parent: QueryParamGroup): void {
+    public _setParent(parent: QueryParamGroup | null): void {
         if (this.parent && parent) {
             throw new Error(`Parameter already belongs to a QueryParamGroup.`);
         }
@@ -55,7 +55,7 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
     /**
      * The current value of this parameter.
      */
-    public value: T = null;
+    public value: T | null = null;
 
     /**
      * The name of the parameter to be used in the URL.
@@ -76,13 +76,13 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
     public readonly debounceTime: number | null;
 
     /** See {@link QueryParamOpts}. */
-    public readonly emptyOn: T;
+    public readonly emptyOn?: T;
 
     /** See {@link QueryParamOpts}. */
-    public readonly compareWith: Comparator<T>;
+    public readonly compareWith?: Comparator<T>;
 
     /** See {@link QueryParamOpts}. */
-    public readonly combineWith: ParamCombinator<T>;
+    public readonly combineWith?: ParamCombinator<T>;
 
     constructor(urlParam: string, opts: QueryParamOptsBase<U, T> = {}) {
         super();
@@ -111,17 +111,17 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
         this.urlParam = urlParam;
         this.serialize = wrapTryCatch(serialize, `Error while serializing value for ${this.urlParam}`);
         this.deserialize = wrapTryCatch(deserialize, `Error while deserializing value for ${this.urlParam}`);
-        this.debounceTime = debounceTime;
+        this.debounceTime = undefinedToNull(debounceTime);
         this.emptyOn = emptyOn;
         this.compareWith = compareWith;
         this.combineWith = combineWith;
     }
 
     /** @internal */
-    public abstract serializeValue(value: T): string | string[];
+    public abstract serializeValue(value: T | null): string | string[] | null;
 
     /** @internal */
-    public abstract deserializeValue(value: string | string[]): T;
+    public abstract deserializeValue(value: string | string[] | null): T | null;
 
     /**
      * Updates the value of this parameter.
@@ -161,7 +161,7 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
  * as the glue between its representation in the URL and its connection
  * to a form control.
  */
-export class QueryParam<T> extends AbstractQueryParam<T, T> implements Required<Readonly<QueryParamOpts<T>>> {
+export class QueryParam<T> extends AbstractQueryParam<T, T> implements Readonly<QueryParamOpts<T>> {
 
     /** See {@link QueryParamOpts}. */
     public readonly multi = false;
@@ -171,8 +171,8 @@ export class QueryParam<T> extends AbstractQueryParam<T, T> implements Required<
     }
 
     /** @internal */
-    public serializeValue(value: T): string {
-        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith)) {
+    public serializeValue(value: T | null): string | null {
+        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
         }
 
@@ -180,7 +180,7 @@ export class QueryParam<T> extends AbstractQueryParam<T, T> implements Required<
     }
 
     /** @internal */
-    public deserializeValue(value: string): T {
+    public deserializeValue(value: string | null): T | null {
         if (this.emptyOn !== undefined && value === null) {
             return this.emptyOn;
         }
@@ -193,7 +193,7 @@ export class QueryParam<T> extends AbstractQueryParam<T, T> implements Required<
 /**
  * Like {@link QueryParam}, but for array-typed parameters
  */
-export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Required<Readonly<MultiQueryParamOpts<T>>> {
+export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Readonly<MultiQueryParamOpts<T>> {
 
     /** See {@link QueryParamOpts}. */
     public readonly multi = true;
@@ -203,8 +203,8 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Re
     }
 
     /** @internal */
-    public serializeValue(value: T[]): string[] {
-        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith)) {
+    public serializeValue(value: T[] | null): string[] | null {
+        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
         }
 
@@ -212,12 +212,12 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Re
     }
 
     /** @internal */
-    public deserializeValue(value: string[]): T[] {
-        if (this.emptyOn !== undefined && value.length === 0) {
+    public deserializeValue(value: string[] | null): T[] | null {
+        if (this.emptyOn !== undefined && (value || []).length === 0) {
             return this.emptyOn;
         }
 
-        return value.map(this.deserialize.bind(this));
+        return (value || []).map(this.deserialize.bind(this));
     }
 
 }

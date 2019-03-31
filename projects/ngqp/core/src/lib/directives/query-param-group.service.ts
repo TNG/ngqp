@@ -170,7 +170,11 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Listens for programmatic changes on group level and synchronizes to the router. */
     private setupGroupChangeListener(): void {
-        this.queryParamGroup._registerOnChange((newValue: Record<string, unknown>) => {
+        this.queryParamGroup._registerOnChange((newValue: Record<string, unknown> | null) => {
+            if (newValue === null) {
+                throw new Error(`Received null value from QueryParamGroup.`);
+            }
+
             let params: Params = {};
             Object.keys(newValue).forEach(queryParamName => {
                 const queryParam = this.queryParamGroup.get(queryParamName);
@@ -229,7 +233,7 @@ export class QueryParamGroupService implements OnDestroy {
 
             Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
                 const partitionedQueryParam = this.getQueryParamAsPartition(queryParamName);
-                const newValues = partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam(queryParam)
+                const newValues = partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam<unknown>(queryParam)
                     ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
                     : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam))
                 );
