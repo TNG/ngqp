@@ -24,7 +24,7 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
     public name: string;
 
     /** @internal */
-    public valueAccessor: ControlValueAccessor | null = null;
+    public valueAccessor: ControlValueAccessor;
 
     /** @internal */
     constructor(

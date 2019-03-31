@@ -4,13 +4,13 @@ import { Params } from '@angular/router';
  * A serializer defines how the represented form control's
  * value is converted into a string to be used in the URL.
  */
-export type ParamSerializer<T> = (model: T | undefined | null) => string | null;
+export type ParamSerializer<T> = (model: T | null) => string | null;
 
 /**
  * A deserializer defines how a URL parameter is converted
  * into the represented form control's value.
  */
-export type ParamDeserializer<T> = (value: string | null) => T | undefined | null;
+export type ParamDeserializer<T> = (value: string | null) => T | null;
 
 /**
  * A partitioner can split a value into an array of parts.
@@ -28,7 +28,7 @@ export type Reducer<T extends unknown[], R> = (values: T) => R;
  *
  * See {@link QueryParamOpts#combineWith}.
  */
-export type ParamCombinator<T> = (newValue: T | undefined | null) => Params | null;
+export type ParamCombinator<T> = (newValue: T | null) => Params | null;
 
 /** @internal */
 export type OnChangeFunction<T> = (value: T | null) => void;
@@ -42,4 +42,4 @@ export type OnChangeFunction<T> = (value: T | null) => void;
  * @param b Second value to compare.
  * @returns `true` or `0` if and only if `a` and `b` should be considered equal.
  */
-export type Comparator<T> = (a: T | undefined | null, b: T | undefined | null) => boolean | number;
+export type Comparator<T> = (a: T | null, b: T | null) => boolean | number;

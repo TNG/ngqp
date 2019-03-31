@@ -29,7 +29,7 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
     public readonly name = 'param';
 
     /** @internal */
-    public valueAccessor: ControlValueAccessor | null = null;
+    public valueAccessor: ControlValueAccessor;
 
     /** @internal */
     private group = new QueryParamGroup({});

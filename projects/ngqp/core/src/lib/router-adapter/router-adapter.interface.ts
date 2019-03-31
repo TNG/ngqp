@@ -23,7 +23,7 @@ export interface RouterAdapter {
     navigate(queryParams: Params, extras?: RouterOptions & { state?: any }): Promise<boolean>;
 
     /** @internal */
-    getCurrentNavigation(): Pick<Navigation, 'trigger' | 'extras'>;
+    getCurrentNavigation(): Pick<Navigation, 'trigger' | 'extras'> | null;
 
 }
 
