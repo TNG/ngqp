@@ -76,7 +76,7 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
     public readonly debounceTime: number | null;
 
     /** See {@link QueryParamOpts}. */
-    public readonly emptyOn?: T;
+    public readonly emptyOn?: T | null;
 
     /** See {@link QueryParamOpts}. */
     public readonly compareWith?: Comparator<T>;
@@ -118,10 +118,10 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
     }
 
     /** @internal */
-    public abstract serializeValue(value: T | null): string | string[] | null;
+    public abstract serializeValue(value: T | null): (string | null) | (string | null)[];
 
     /** @internal */
-    public abstract deserializeValue(value: string | string[] | null): T | null;
+    public abstract deserializeValue(value: (string | null) | (string | null)[]): T | null;
 
     /**
      * Updates the value of this parameter.
@@ -161,7 +161,7 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
  * as the glue between its representation in the URL and its connection
  * to a form control.
  */
-export class QueryParam<T> extends AbstractQueryParam<T, T> implements Readonly<QueryParamOpts<T>> {
+export class QueryParam<T> extends AbstractQueryParam<T | null, T | null> implements Readonly<QueryParamOpts<T>> {
 
     /** See {@link QueryParamOpts}. */
     public readonly multi = false;
@@ -193,7 +193,7 @@ export class QueryParam<T> extends AbstractQueryParam<T, T> implements Readonly<
 /**
  * Like {@link QueryParam}, but for array-typed parameters
  */
-export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Readonly<MultiQueryParamOpts<T>> {
+export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[]> implements Readonly<MultiQueryParamOpts<T>> {
 
     /** See {@link QueryParamOpts}. */
     public readonly multi = true;
@@ -203,7 +203,7 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Re
     }
 
     /** @internal */
-    public serializeValue(value: T[] | null): string[] | null {
+    public serializeValue(value: (T | null)[] | null): (string | null)[] | null {
         if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
         }
@@ -212,7 +212,7 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T, T[]> implements Re
     }
 
     /** @internal */
-    public deserializeValue(value: string[] | null): T[] | null {
+    public deserializeValue(value: (string | null)[] | null): (T | null)[] | null {
         if (this.emptyOn !== undefined && (value || []).length === 0) {
             return this.emptyOn;
         }
