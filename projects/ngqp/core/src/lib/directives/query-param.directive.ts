@@ -23,7 +23,7 @@ export class QueryParamDirective implements QueryParamAccessor, OnChanges, OnDes
      * The {@link QueryParam} to bind to the host component.
      */
     @Input('queryParam')
-    public queryParam: QueryParam<unknown>;
+    public queryParam: QueryParam<unknown> | null = null;
 
     /** @internal */
     public readonly name = 'param';
