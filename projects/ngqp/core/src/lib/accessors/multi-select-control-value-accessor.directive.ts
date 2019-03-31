@@ -49,8 +49,7 @@ export class MultiSelectControlValueAccessorDirective<T> implements ControlValue
 
         this.selectedIds = values
             .map(value => this.getOptionId(value))
-            .filter(id => id !== null)
-            .map(id => id as string);
+            .filter((id: string | null): id is string => id !== null);
         this.options.forEach((option, id) => option.selected = this.selectedIds.includes(id));
     }
 
