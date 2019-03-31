@@ -11,10 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "importHelpers": true,
-        "noImplicitAny": true,
-        "noImplicitThis": true,
-        "noImplicitReturns": true,
-        "strictFunctionTypes": true,
+        "strict": true,
         "types": [],
         "lib": [
             "dom",

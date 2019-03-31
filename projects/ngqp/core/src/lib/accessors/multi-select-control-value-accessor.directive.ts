@@ -29,7 +29,7 @@ export class MultiSelectControlValueAccessorDirective<T> implements ControlValue
         this.selectedIds = Array.from(this.options.entries())
             .filter(([id, option]) => option.selected)
             .map(([id]) => id);
-        const values = this.selectedIds.map(id => this.optionMap.get(id));
+        const values = this.selectedIds.map(id => this.optionMap.get(id)!);
         this.fnChange(values);
     }
 
@@ -49,7 +49,7 @@ export class MultiSelectControlValueAccessorDirective<T> implements ControlValue
 
         this.selectedIds = values
             .map(value => this.getOptionId(value))
-            .filter(id => id !== null);
+            .filter((id: string | null): id is string => id !== null);
         this.options.forEach((option, id) => option.selected = this.selectedIds.includes(id));
     }
 

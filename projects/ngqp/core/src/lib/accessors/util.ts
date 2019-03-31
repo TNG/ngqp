@@ -10,9 +10,9 @@ import { NGQP_BUILT_IN_ACCESSORS } from './ngqp-accessors';
  *
  * @internal
  */
-export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor | null {
+export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor {
     if (!valueAccessors || !Array.isArray(valueAccessors)) {
-        return null;
+        throw new Error(`No matching ControlValueAccessor has been found for this form control`);
     }
 
     let defaultAccessor: ControlValueAccessor | null = null;

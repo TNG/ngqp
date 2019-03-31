@@ -15,7 +15,7 @@ export const NGQP_RANGE_VALUE_ACCESSOR: any = {
 })
 export class RangeControlValueAccessorDirective implements ControlValueAccessor {
 
-    private fnChange = (_: number) => {};
+    private fnChange = (_: number | null) => {};
     private fnTouched = () => {};
 
     @HostListener('input', ['$event'])

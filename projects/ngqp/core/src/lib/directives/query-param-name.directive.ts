@@ -21,10 +21,22 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
      * Note that this does not refer to the [parameter name]{@link QueryParam#urlParam}.
      */
     @Input('queryParamName')
-    public name: string;
+    public set name(name: string) {
+        this._name = name;
+    }
+
+    public get name(): string {
+        if (!this._name) {
+            throw new Error(`No queryParamName has been specified.`);
+        }
+
+        return this._name;
+    }
 
     /** @internal */
-    public valueAccessor: ControlValueAccessor | null = null;
+    public valueAccessor: ControlValueAccessor;
+
+    private _name: string | null = null;
 
     /** @internal */
     constructor(

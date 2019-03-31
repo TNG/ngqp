@@ -27,14 +27,14 @@ export class MultiSelectOptionDirective<T> implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         if (this.parent) {
-            this.parent.deregisterOption(this.id);
+            this.parent.deregisterOption(this.id!);
         }
     }
 
     @Input('value')
     public set value(value: T) {
         if (this.parent) {
-            this.parent.updateOptionValue(this.id, value);
+            this.parent.updateOptionValue(this.id!, value);
         }
     }
 

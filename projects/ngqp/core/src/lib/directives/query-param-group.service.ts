@@ -42,7 +42,7 @@ class NavigationData {
 export class QueryParamGroupService implements OnDestroy {
 
     /** The {@link QueryParamGroup} to bind. */
-    private queryParamGroup: QueryParamGroup;
+    private queryParamGroup: QueryParamGroup | null = null;
 
     /** List of {@link QueryParamAccessor} registered to this service. */
     private directives = new Map<string, QueryParamAccessor[]>();
@@ -122,7 +122,7 @@ export class QueryParamGroupService implements OnDestroy {
             })
         ).pipe(
             // Do not synchronize while the param is detached from the group
-            filter(() => !!this.queryParamGroup.get(queryParamName)),
+            filter(() => !!this.getQueryParamGroup().get(queryParamName)),
             map((newValue: unknown[]) => this.getParamsForValue(partitionedQueryParam, partitionedQueryParam.reduce(newValue))),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(new NavigationData(params)));
@@ -154,7 +154,7 @@ export class QueryParamGroupService implements OnDestroy {
         });
 
         this.directives.delete(queryParamName);
-        const queryParam = this.queryParamGroup.get(queryParamName);
+        const queryParam = this.getQueryParamGroup().get(queryParamName);
         if (queryParam) {
             queryParam._clearChangeFunctions();
         }
@@ -170,10 +170,14 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Listens for programmatic changes on group level and synchronizes to the router. */
     private setupGroupChangeListener(): void {
-        this.queryParamGroup._registerOnChange((newValue: Record<string, unknown>) => {
+        this.getQueryParamGroup()._registerOnChange((newValue: Record<string, unknown> | null) => {
+            if (newValue === null) {
+                throw new Error(`Received null value from QueryParamGroup.`);
+            }
+
             let params: Params = {};
             Object.keys(newValue).forEach(queryParamName => {
-                const queryParam = this.queryParamGroup.get(queryParamName);
+                const queryParam = this.getQueryParamGroup().get(queryParamName);
                 if (isMissing(queryParam)) {
                     return;
                 }
@@ -187,12 +191,12 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Listens for programmatic changes on parameter level and synchronizes to the router. */
     private setupParamChangeListeners(): void {
-        Object.keys(this.queryParamGroup.queryParams)
+        Object.keys(this.getQueryParamGroup().queryParams)
             .forEach(queryParamName => this.setupParamChangeListener(queryParamName));
     }
 
     private setupParamChangeListener(queryParamName: string): void {
-        const queryParam = this.queryParamGroup.get(queryParamName);
+        const queryParam = this.getQueryParamGroup().get(queryParamName);
         if (!queryParam) {
             throw new Error(`No param in group found for name ${queryParamName}`);
         }
@@ -211,7 +215,7 @@ export class QueryParamGroupService implements OnDestroy {
                 // particular group; however, we do need to react if one of our parameters has
                 // vanished when it was set before.
                 distinctUntilChanged((previousMap, currentMap) => {
-                    const keys = Object.values(this.queryParamGroup.queryParams)
+                    const keys = Object.values(this.getQueryParamGroup().queryParams)
                         .map(queryParam => this.wrapIntoPartition(queryParam))
                         .map(partitionedQueryParam => partitionedQueryParam.queryParams.map(queryParam => queryParam.urlParam))
                         .reduce((a, b) => [...a, ...b], []);
@@ -227,9 +231,9 @@ export class QueryParamGroupService implements OnDestroy {
             const synthetic = this.isSyntheticNavigation();
             const groupValue: Record<string, unknown> = {};
 
-            Object.keys(this.queryParamGroup.queryParams).forEach(queryParamName => {
+            Object.keys(this.getQueryParamGroup().queryParams).forEach(queryParamName => {
                 const partitionedQueryParam = this.getQueryParamAsPartition(queryParamName);
-                const newValues = partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam(queryParam)
+                const newValues = partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam<unknown>(queryParam)
                     ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
                     : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam))
                 );
@@ -243,7 +247,7 @@ export class QueryParamGroupService implements OnDestroy {
                 groupValue[ queryParamName ] = newValue;
             });
 
-            this.queryParamGroup.setValue(groupValue, {
+            this.getQueryParamGroup().setValue(groupValue, {
                 emitEvent: !synthetic,
                 emitModelToViewChange: false,
             });
@@ -252,7 +256,7 @@ export class QueryParamGroupService implements OnDestroy {
 
     /** Listens for newly added parameters and starts synchronization for them. */
     private watchNewParams(): void {
-        this.queryParamGroup.queryParamAdded$.pipe(
+        this.getQueryParamGroup().queryParamAdded$.pipe(
             takeUntil(this.destroy$)
         ).subscribe(queryParamName => {
             this.setupParamChangeListener(queryParamName);
@@ -342,7 +346,7 @@ export class QueryParamGroupService implements OnDestroy {
      * This merges the global configuration with the group specific configuration.
      */
     private get routerOptions(): RouterOptions {
-        const groupOptions = this.queryParamGroup ? this.queryParamGroup.routerOptions : {};
+        const groupOptions = this.getQueryParamGroup().routerOptions;
 
         return {
             ...(this.globalRouterOptions || {}),
@@ -358,7 +362,7 @@ export class QueryParamGroupService implements OnDestroy {
      * query parameters independent of whether they are partitioned.
      */
     private getQueryParamAsPartition(queryParamName: string): PartitionedQueryParam<unknown> {
-        const queryParam = this.queryParamGroup.get(queryParamName);
+        const queryParam = this.getQueryParamGroup().get(queryParamName);
         if (!queryParam) {
             throw new Error(`Could not find query param with name ${queryParamName}. Did you forget to add it to your QueryParamGroup?`);
         }
@@ -380,6 +384,14 @@ export class QueryParamGroupService implements OnDestroy {
             partition: value => [value],
             reduce: values => values[0],
         });
+    }
+
+    private getQueryParamGroup(): QueryParamGroup {
+        if (!this.queryParamGroup) {
+            throw new Error(`No QueryParamGroup has been registered yet.`);
+        }
+
+        return this.queryParamGroup;
     }
 
 }

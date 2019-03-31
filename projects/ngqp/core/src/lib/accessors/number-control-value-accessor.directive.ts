@@ -15,7 +15,7 @@ export const NGQP_NUMBER_VALUE_ACCESSOR: any = {
 })
 export class NumberControlValueAccessorDirective implements ControlValueAccessor {
 
-    private fnChange = (_: number) => {};
+    private fnChange = (_: number | null) => {};
     private fnTouched = () => {};
 
     @HostListener('input', ['$event'])

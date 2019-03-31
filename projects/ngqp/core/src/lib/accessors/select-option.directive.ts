@@ -27,7 +27,7 @@ export class SelectOptionDirective<T> implements OnInit, OnDestroy {
 
     public ngOnDestroy() {
         if (this.parent) {
-            this.parent.deregisterOption(this.id);
+            this.parent.deregisterOption(this.id!);
             this.parent.writeValue(this.parent.value);
         }
     }
@@ -35,7 +35,7 @@ export class SelectOptionDirective<T> implements OnInit, OnDestroy {
     @Input('value')
     public set value(value: T) {
         if (this.parent) {
-            this.parent.updateOptionValue(this.id, value);
+            this.parent.updateOptionValue(this.id!, value);
             this.parent.writeValue(this.parent.value);
         }
     }

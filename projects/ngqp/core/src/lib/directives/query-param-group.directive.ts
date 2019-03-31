@@ -20,7 +20,7 @@ export class QueryParamGroupDirective implements OnChanges {
      * The {@link QueryParamGroup} to bind.
      */
     @Input('queryParamGroup')
-    public queryParamGroup: QueryParamGroup;
+    public queryParamGroup: QueryParamGroup | null = null;
 
     /** @internal */
     constructor(private groupService: QueryParamGroupService) {
