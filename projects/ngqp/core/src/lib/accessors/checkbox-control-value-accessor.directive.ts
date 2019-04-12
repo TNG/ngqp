@@ -1,8 +1,8 @@
+import { Directive, ElementRef, forwardRef, HostListener, Provider, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
 
 /** @ignore */
-export const NGQP_CHECKBOX_VALUE_ACCESSOR: any = {
+const NGQP_CHECKBOX_VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CheckboxControlValueAccessorDirective),
     multi: true
