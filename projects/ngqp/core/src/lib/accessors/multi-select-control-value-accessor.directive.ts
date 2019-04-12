@@ -1,9 +1,9 @@
-import { Directive, ElementRef, forwardRef, HostListener, Renderer2, StaticProvider } from '@angular/core';
+import { Directive, ElementRef, forwardRef, HostListener, Provider, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MultiSelectOptionDirective } from './multi-select-option.directive';
 
 /** @ignore */
-export const NGQP_MULTI_SELECT_VALUE_ACCESSOR: StaticProvider = {
+const NGQP_MULTI_SELECT_VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => MultiSelectControlValueAccessorDirective),
     multi: true

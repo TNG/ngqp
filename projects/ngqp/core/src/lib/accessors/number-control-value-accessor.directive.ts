@@ -1,8 +1,8 @@
-import { Directive, ElementRef, forwardRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, forwardRef, HostListener, Provider, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /** @ignore */
-export const NGQP_NUMBER_VALUE_ACCESSOR: any = {
+const NGQP_NUMBER_VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NumberControlValueAccessorDirective),
     multi: true

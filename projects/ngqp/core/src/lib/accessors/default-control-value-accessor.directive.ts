@@ -1,9 +1,9 @@
-import { Directive, ElementRef, forwardRef, HostListener, Inject, Optional, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, forwardRef, HostListener, Inject, Optional, PLATFORM_ID, Provider, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 
 /** @ignore */
-export const NGQP_DEFAULT_VALUE_ACCESSOR: any = {
+const NGQP_DEFAULT_VALUE_ACCESSOR: Provider = {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => DefaultControlValueAccessorDirective),
     multi: true
