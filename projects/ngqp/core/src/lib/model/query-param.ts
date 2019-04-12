@@ -1,4 +1,4 @@
-import { Observable, Subject } from 'rxjs';
+import { forkJoin, isObservable, Observable, of, Subject } from 'rxjs';
 import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapTryCatch } from '../util';
 import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from '../types';
 import { QueryParamGroup } from './query-param-group';
@@ -117,12 +117,6 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
         this.combineWith = combineWith;
     }
 
-    /** @internal */
-    public abstract serializeValue(value: T | null): (string | null) | (string | null)[];
-
-    /** @internal */
-    public abstract deserializeValue(value: (string | null) | (string | null)[]): T | null;
-
     /**
      * Updates the value of this parameter.
      *
@@ -180,12 +174,17 @@ export class QueryParam<T> extends AbstractQueryParam<T | null, T | null> implem
     }
 
     /** @internal */
-    public deserializeValue(value: string | null): T | null {
+    public deserializeValue(value: string | null): Observable<T | null> {
         if (this.emptyOn !== undefined && value === null) {
-            return this.emptyOn;
+            return of(this.emptyOn);
         }
 
-        return this.deserialize(value);
+        const deserialized = this.deserialize(value);
+        if (isObservable<T | null>(deserialized)) {
+            return deserialized;
+        }
+
+        return of(deserialized);
     }
 
 }
@@ -212,12 +211,21 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
     }
 
     /** @internal */
-    public deserializeValue(value: (string | null)[] | null): (T | null)[] | null {
+    public deserializeValue(value: (string | null)[] | null): Observable<(T | null)[] | null> {
         if (this.emptyOn !== undefined && (value || []).length === 0) {
-            return this.emptyOn;
+            return of(this.emptyOn);
         }
 
-        return (value || []).map(this.deserialize.bind(this));
+        return forkJoin<T | null>(...(value || [])
+            .map(v => {
+                const deserialized = this.deserialize(v);
+                if (isObservable<T | null>(deserialized)) {
+                    return deserialized;
+                }
+
+                return of(deserialized);
+            })
+        );
     }
 
 }

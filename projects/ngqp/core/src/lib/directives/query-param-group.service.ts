@@ -1,6 +1,6 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
-import { EMPTY, from, Observable, Subject, zip } from 'rxjs';
+import { EMPTY, forkJoin, from, Observable, Subject, zip } from 'rxjs';
 import {
     catchError,
     concatMap,
@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 import { compareParamMaps, filterParamMap, isMissing, isPresent, NOP } from '../util';
 import { QueryParamGroup } from '../model/query-param-group';
-import { MultiQueryParam, QueryParam, PartitionedQueryParam } from '../model/query-param';
+import { MultiQueryParam, PartitionedQueryParam, QueryParam } from '../model/query-param';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 import { QueryParamAccessor } from './query-param-accessor.interface';
 
@@ -227,31 +227,40 @@ export class QueryParamGroupService implements OnDestroy {
                 }),
             )),
             takeUntil(this.destroy$),
-        ).subscribe(queryParamMap => {
-            const synthetic = this.isSyntheticNavigation();
-            const groupValue: Record<string, unknown> = {};
+            switchMap(queryParamMap => {
+                const synthetic = this.isSyntheticNavigation();
 
-            Object.keys(this.getQueryParamGroup().queryParams).forEach(queryParamName => {
-                const partitionedQueryParam = this.getQueryParamAsPartition(queryParamName);
-                const newValues = partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam<unknown>(queryParam)
-                    ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
-                    : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam))
+                return forkJoin(...Object.keys(this.getQueryParamGroup().queryParams).map(queryParamName => {
+                    const partitionedQueryParam = this.getQueryParamAsPartition(queryParamName);
+                    return forkJoin(...partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam<unknown>(queryParam)
+                        ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
+                        : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam))
+                    )).pipe(
+                        map(newValues => partitionedQueryParam.reduce(newValues)),
+                        tap(newValue => {
+                            const directives = this.directives.get(queryParamName);
+                            if (directives) {
+                                directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
+                            }
+                        }),
+                        map(newValue => {
+                            return { [ queryParamName ]: newValue };
+                        }),
+                    );
+                })).pipe(
+                    map((values: Record<string, unknown>[]) => values.reduce((groupValue, value) => {
+                        return {
+                            ...groupValue,
+                            ...value,
+                        };
+                    }, {})),
+                    tap(groupValue => this.getQueryParamGroup().setValue(groupValue, {
+                        emitEvent: !synthetic,
+                        emitModelToViewChange: false,
+                    })),
                 );
-                const newValue = partitionedQueryParam.reduce(newValues);
-
-                const directives = this.directives.get(queryParamName);
-                if (directives) {
-                    directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
-                }
-
-                groupValue[ queryParamName ] = newValue;
-            });
-
-            this.getQueryParamGroup().setValue(groupValue, {
-                emitEvent: !synthetic,
-                emitModelToViewChange: false,
-            });
-        });
+            }),
+        ).subscribe();
     }
 
     /** Listens for newly added parameters and starts synchronization for them. */
@@ -350,7 +359,7 @@ export class QueryParamGroupService implements OnDestroy {
 
         return {
             ...(this.globalRouterOptions || {}),
-            ...groupOptions,
+            ...(groupOptions || {}),
         };
     }
 
