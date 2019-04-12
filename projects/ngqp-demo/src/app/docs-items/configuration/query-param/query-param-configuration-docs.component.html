@@ -20,6 +20,18 @@
         provide your own (de-)serializers, you can pass them to <span apiDocsLink>QueryParamBuilder#param</span>.
     </p>
     <demo-serializer-example></demo-serializer-example>
+    <div class="alert alert-info mt-3">
+        <p>
+            Deserializers can also be asynchronous by returning an Observable instead. This can be useful, e.g., if you
+            have a user's name in the URL and need to deserialize it into a user object, but fetching the list of users
+            is an asynchronous operation.
+        </p>
+        <p>
+            Note that for asynchronous deserializers, ngqp will use the <em>first</em> emitted value rather than the
+            last one. Furthermore, the <code>valueChanges</code> observables will only emit after the deserializer has
+            emitted.
+        </p>
+    </div>
 
     <docs-fragment fragment="multi">
         <h2>Components with multiple values</h2>

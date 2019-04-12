@@ -1,5 +1,6 @@
-import { Observable, Subject } from 'rxjs';
-import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapTryCatch } from '../util';
+import { forkJoin, isObservable, Observable, of, Subject } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapIntoObservable, wrapTryCatch } from '../util';
 import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from '../types';
 import { QueryParamGroup } from './query-param-group';
 import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from './query-param-opts';
@@ -117,12 +118,6 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
         this.combineWith = combineWith;
     }
 
-    /** @internal */
-    public abstract serializeValue(value: T | null): (string | null) | (string | null)[];
-
-    /** @internal */
-    public abstract deserializeValue(value: (string | null) | (string | null)[]): T | null;
-
     /**
      * Updates the value of this parameter.
      *
@@ -180,12 +175,12 @@ export class QueryParam<T> extends AbstractQueryParam<T | null, T | null> implem
     }
 
     /** @internal */
-    public deserializeValue(value: string | null): T | null {
+    public deserializeValue(value: string | null): Observable<T | null> {
         if (this.emptyOn !== undefined && value === null) {
-            return this.emptyOn;
+            return of(this.emptyOn);
         }
 
-        return this.deserialize(value);
+        return wrapIntoObservable(this.deserialize(value)).pipe(first());
     }
 
 }
@@ -212,12 +207,14 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
     }
 
     /** @internal */
-    public deserializeValue(value: (string | null)[] | null): (T | null)[] | null {
-        if (this.emptyOn !== undefined && (value || []).length === 0) {
-            return this.emptyOn;
+    public deserializeValue(values: (string | null)[] | null): Observable<(T | null)[] | null> {
+        if (this.emptyOn !== undefined && (values || []).length === 0) {
+            return of(this.emptyOn);
         }
 
-        return (value || []).map(this.deserialize.bind(this));
+        return forkJoin<T | null>(...(values || [])
+            .map(value => wrapIntoObservable(this.deserialize(value)).pipe(first()))
+        );
     }
 
 }
