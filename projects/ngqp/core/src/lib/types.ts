@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
  * A serializer defines how the represented form control's
  * value is converted into a string to be used in the URL.
  */
-export type ParamSerializer<T> = (model: T | null) => string | null;
+export type ParamSerializer<T> = (model: T | null) => (string | null) | Observable<string | null>;
 
 /**
  * A deserializer defines how a URL parameter is converted

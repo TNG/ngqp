@@ -1,6 +1,6 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
-import { EMPTY, forkJoin, from, Observable, Subject, zip } from 'rxjs';
+import { EMPTY, forkJoin, from, Observable, of, Subject, zip } from 'rxjs';
 import {
     catchError,
     concatMap,
@@ -123,7 +123,7 @@ export class QueryParamGroupService implements OnDestroy {
         ).pipe(
             // Do not synchronize while the param is detached from the group
             filter(() => !!this.getQueryParamGroup().get(queryParamName)),
-            map((newValue: unknown[]) => this.getParamsForValue(partitionedQueryParam, partitionedQueryParam.reduce(newValue))),
+            switchMap((newValue: unknown[]) => this.getParamsForValue(partitionedQueryParam, partitionedQueryParam.reduce(newValue))),
             takeUntil(this.destroy$),
         ).subscribe(params => this.enqueueNavigation(new NavigationData(params)));
 
@@ -175,17 +175,23 @@ export class QueryParamGroupService implements OnDestroy {
                 throw new Error(`Received null value from QueryParamGroup.`);
             }
 
-            let params: Params = {};
-            Object.keys(newValue).forEach(queryParamName => {
-                const queryParam = this.getQueryParamGroup().get(queryParamName);
-                if (isMissing(queryParam)) {
-                    return;
-                }
+            // TODO: Maybe we need to proxy registerOnChange through a subject here to avoid race conditions
+            // But how to make sure we unsubscribe?
+            forkJoin<Params>(
+                ...Object.keys(newValue)
+                    .map(queryParamName => {
+                        const queryParam = this.getQueryParamGroup().get(queryParamName);
+                        if (isMissing(queryParam)) {
+                            return of({});
+                        }
 
-                params = { ...params, ...this.getParamsForValue(queryParam, newValue[ queryParamName ]) };
-            });
-
-            this.enqueueNavigation(new NavigationData(params, true));
+                        return this.getParamsForValue(queryParam, newValue[ queryParamName ]);
+                    })
+            ).pipe(
+                map(paramsList => paramsList.reduce((a, b) => {
+                    return { ...a, ...b };
+                }, {})),
+            ).subscribe(params => this.enqueueNavigation(new NavigationData(params, true)));
         });
     }
 
@@ -202,7 +208,10 @@ export class QueryParamGroupService implements OnDestroy {
         }
 
         queryParam._registerOnChange((newValue: unknown) =>
-            this.enqueueNavigation(new NavigationData(this.getParamsForValue(queryParam, newValue), true))
+            // TODO: Maybe we need to proxy registerOnChange through a subject here to avoid race conditions
+            // But how to make sure we unsubscribe?
+            this.getParamsForValue(queryParam, newValue)
+                .subscribe(params => this.enqueueNavigation(new NavigationData(params, true)))
         );
     }
 
@@ -329,7 +338,9 @@ export class QueryParamGroupService implements OnDestroy {
      * This consists mainly of properly serializing the model value and ensuring to take
      * side effect changes into account that may have been configured.
      */
-    private getParamsForValue(queryParam: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown>, value: any): Params {
+    private getParamsForValue(
+        queryParam: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown>, value: any
+    ): Observable<Params> {
         const partitionedQueryParam = this.wrapIntoPartition(queryParam);
         const partitioned = partitionedQueryParam.partition(value);
 
@@ -339,22 +350,28 @@ export class QueryParamGroupService implements OnDestroy {
                 return { ...(a || {}), ...(b || {}) };
             }, {});
 
-        const newValues = partitionedQueryParam.queryParams
-            .map((current, index) => {
-                return {
-                    [ current.urlParam ]: current.serializeValue(partitioned[index] as any),
-                };
-            })
-            .reduce((a, b) => {
+        return forkJoin<Params>(
+            ...partitionedQueryParam.queryParams
+                .map((current, index) => (<Observable<unknown>>current.serializeValue(partitioned[ index ] as any)).pipe(
+                    map(serialized => {
+                        return {
+                            [ current.urlParam ]: serialized,
+                        };
+                    }),
+                ))
+        ).pipe(
+            map(parts => parts.reduce((a, b) => {
                 return { ...a, ...b };
-            }, {});
-
-        // Note that we list the side-effect parameters first so that our actual parameter can't be
-        // overridden by it.
-        return {
-            ...combinedParams,
-            ...newValues,
-        };
+            }, {})),
+            map(newValues => {
+                // Note that we list the side-effect parameters first so that our actual parameter can't be
+                // overridden by it.
+                return {
+                    ...combinedParams,
+                    ...newValues,
+                };
+            }),
+        );
     }
 
     /**

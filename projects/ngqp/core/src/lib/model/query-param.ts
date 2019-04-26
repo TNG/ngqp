@@ -166,12 +166,12 @@ export class QueryParam<T> extends AbstractQueryParam<T | null, T | null> implem
     }
 
     /** @internal */
-    public serializeValue(value: T | null): string | null {
+    public serializeValue(value: T | null): Observable<string | null> {
         if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith!)) {
-            return null;
+            return of(null);
         }
 
-        return this.serialize(value);
+        return wrapIntoObservable(this.serialize(value)).pipe(first());
     }
 
     /** @internal */
@@ -198,12 +198,14 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
     }
 
     /** @internal */
-    public serializeValue(value: (T | null)[] | null): (string | null)[] | null {
-        if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith!)) {
-            return null;
+    public serializeValue(values: (T | null)[] | null): Observable<(string | null)[] | null> {
+        if (this.emptyOn !== undefined && areEqualUsing(values, this.emptyOn, this.compareWith!)) {
+            return of(null);
         }
 
-        return (value || []).map(this.serialize.bind(this));
+        return forkJoin<string | null>(...(values || [])
+            .map(value => wrapIntoObservable(this.serialize(value)).pipe(first()))
+        );
     }
 
     /** @internal */
