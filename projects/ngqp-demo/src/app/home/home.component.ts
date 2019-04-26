@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { createStringDeserializer, QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
+import { QueryParamBuilder, QueryParamGroup } from '@ngqp/core';
 import { faAlignLeft, faCogs, faGlassCheers, faHeart, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 

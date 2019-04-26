@@ -1,6 +1,6 @@
 import { Inject, Injectable, isDevMode, OnDestroy, Optional } from '@angular/core';
 import { Params } from '@angular/router';
-import { EMPTY, from, Observable, Subject, zip } from 'rxjs';
+import { EMPTY, forkJoin, from, Observable, Subject, zip } from 'rxjs';
 import {
     catchError,
     concatMap,
@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 import { compareParamMaps, filterParamMap, isMissing, isPresent, NOP } from '../util';
 import { QueryParamGroup } from '../model/query-param-group';
-import { MultiQueryParam, QueryParam, PartitionedQueryParam } from '../model/query-param';
+import { MultiQueryParam, PartitionedQueryParam, QueryParam } from '../model/query-param';
 import { NGQP_ROUTER_ADAPTER, NGQP_ROUTER_OPTIONS, RouterAdapter, RouterOptions } from '../router-adapter/router-adapter.interface';
 import { QueryParamAccessor } from './query-param-accessor.interface';
 
@@ -226,32 +226,49 @@ export class QueryParamGroupService implements OnDestroy {
                     return compareParamMaps(filterParamMap(previousMap, keys), filterParamMap(currentMap, keys));
                 }),
             )),
-            takeUntil(this.destroy$),
-        ).subscribe(queryParamMap => {
-            const synthetic = this.isSyntheticNavigation();
-            const groupValue: Record<string, unknown> = {};
+            switchMap(queryParamMap => {
+                // We need to capture this right here since this is only set during the on-going navigation.
+                const synthetic = this.isSyntheticNavigation();
+                const queryParamNames = Object.keys(this.getQueryParamGroup().queryParams);
 
-            Object.keys(this.getQueryParamGroup().queryParams).forEach(queryParamName => {
-                const partitionedQueryParam = this.getQueryParamAsPartition(queryParamName);
-                const newValues = partitionedQueryParam.queryParams.map(queryParam => isMultiQueryParam<unknown>(queryParam)
-                    ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
-                    : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam))
+                return forkJoin<Record<string, unknown>>(...queryParamNames
+                    .map(queryParamName => {
+                        const partitionedQueryParam = this.getQueryParamAsPartition(queryParamName);
+
+                        return forkJoin<unknown>(...partitionedQueryParam.queryParams
+                            .map(queryParam => isMultiQueryParam<unknown>(queryParam)
+                                ? queryParam.deserializeValue(queryParamMap.getAll(queryParam.urlParam))
+                                : queryParam.deserializeValue(queryParamMap.get(queryParam.urlParam))
+                            )
+                        ).pipe(
+                            map(newValues => partitionedQueryParam.reduce(newValues)),
+                            tap(newValue => {
+                                const directives = this.directives.get(queryParamName);
+                                if (directives) {
+                                    directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
+                                }
+                            }),
+                            map(newValue => {
+                                return { [ queryParamName ]: newValue };
+                            }),
+                            takeUntil(this.destroy$),
+                        );
+                    })
+                ).pipe(
+                    map((values: Record<string, unknown>[]) => values.reduce((groupValue, value) => {
+                        return {
+                            ...groupValue,
+                            ...value,
+                        };
+                    }, {})),
+                    tap(groupValue => this.getQueryParamGroup().setValue(groupValue, {
+                        emitEvent: !synthetic,
+                        emitModelToViewChange: false,
+                    })),
                 );
-                const newValue = partitionedQueryParam.reduce(newValues);
-
-                const directives = this.directives.get(queryParamName);
-                if (directives) {
-                    directives.forEach(directive => directive.valueAccessor.writeValue(newValue));
-                }
-
-                groupValue[ queryParamName ] = newValue;
-            });
-
-            this.getQueryParamGroup().setValue(groupValue, {
-                emitEvent: !synthetic,
-                emitModelToViewChange: false,
-            });
-        });
+            }),
+            takeUntil(this.destroy$),
+        ).subscribe();
     }
 
     /** Listens for newly added parameters and starts synchronization for them. */
@@ -350,7 +367,7 @@ export class QueryParamGroupService implements OnDestroy {
 
         return {
             ...(this.globalRouterOptions || {}),
-            ...groupOptions,
+            ...(groupOptions || {}),
         };
     }
 

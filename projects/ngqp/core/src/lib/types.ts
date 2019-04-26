@@ -1,4 +1,5 @@
 import { Params } from '@angular/router';
+import { Observable } from 'rxjs';
 
 /**
  * A serializer defines how the represented form control's
@@ -10,7 +11,7 @@ export type ParamSerializer<T> = (model: T | null) => string | null;
  * A deserializer defines how a URL parameter is converted
  * into the represented form control's value.
  */
-export type ParamDeserializer<T> = (value: string | null) => T | null;
+export type ParamDeserializer<T> = (value: string | null) => (T | null) | Observable<T | null>;
 
 /**
  * A partitioner can split a value into an array of parts.

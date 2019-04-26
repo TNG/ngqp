@@ -1,4 +1,5 @@
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
+import { isObservable, Observable, of } from 'rxjs';
 import { Comparator } from './types';
 
 /** @internal */
@@ -96,4 +97,13 @@ export function compareStringArraysUnordered(first: string[], second: string[]):
     const sortedFirst = first.sort();
     const sortedSecond = second.sort();
     return sortedFirst.every((firstKey, index) => firstKey === sortedSecond[index]);
+}
+
+/** @internal */
+export function wrapIntoObservable<T>(input: T | Observable<T>): Observable<T> {
+    if (isObservable(input)) {
+        return input;
+    }
+
+    return of(input);
 }

@@ -1,4 +1,5 @@
 import { convertToParamMap, Params } from '@angular/router';
+import { of } from 'rxjs';
 import {
     areEqualUsing,
     compareParamMaps,
@@ -9,6 +10,7 @@ import {
     isPresent,
     LOOSE_IDENTITY_COMPARATOR,
     undefinedToNull,
+    wrapIntoObservable,
     wrapTryCatch
 } from './util';
 import { Comparator } from './types';
@@ -265,5 +267,28 @@ describe(compareParamMaps.name, () => {
             { a: [ 'a1', 'a2' ] },
             { a: [ 'a2', 'a1' ] },
         )).toBe(true);
+    });
+});
+
+describe(wrapIntoObservable.name, async () => {
+    it('wraps null', async () => {
+        const obs$ = wrapIntoObservable(null);
+        expect(obs$).toBeDefined();
+
+        obs$.subscribe(v => expect(v).toBe(null));
+    });
+
+    it('wraps a primitive value', async () => {
+        const obs$ = wrapIntoObservable(42);
+        expect(obs$).toBeDefined();
+
+        obs$.subscribe(v => expect(v).toBe(42));
+    });
+
+    it('does not wrap an observable', async () => {
+        const obs$ = wrapIntoObservable(of(42));
+        expect(obs$).toBeDefined();
+
+        obs$.subscribe(v => expect(v).toBe(42));
     });
 });
