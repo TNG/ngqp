@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/TNG/ngqp/compare/v0.10.0...v0.11.0) (2019-05-24)
+
+
+### Bug Fixes
+
+* **core:** Enable complete strict mode ([c3c0c54](https://github.com/TNG/ngqp/commit/c3c0c54))
+* **core:** Enable strictPropertyInitialization ([f5c7262](https://github.com/TNG/ngqp/commit/f5c7262))
+* **core:** Enforce strictNullChecks ([69ec667](https://github.com/TNG/ngqp/commit/69ec667))
+* **core:** Improve typings involving null ([a8a47ae](https://github.com/TNG/ngqp/commit/a8a47ae))
+* **core:** Make abstract constructor protected ([e98c601](https://github.com/TNG/ngqp/commit/e98c601))
+* **core:** remove parameter's parent upon remove ([b70262e](https://github.com/TNG/ngqp/commit/b70262e)), closes [#120](https://github.com/TNG/ngqp/issues/120)
+* **core:** Replace map() with proper type guard ([5808d4a](https://github.com/TNG/ngqp/commit/5808d4a))
+* **core:** set parent of parameter when using add ([ba1403d](https://github.com/TNG/ngqp/commit/ba1403d)), closes [#120](https://github.com/TNG/ngqp/issues/120)
+* **core:** Simplify type signature ([e90aa0e](https://github.com/TNG/ngqp/commit/e90aa0e))
+
+
+### Chores
+
+* prepare release v1 ([ca1971d](https://github.com/TNG/ngqp/commit/ca1971d)), closes [#32](https://github.com/TNG/ngqp/issues/32)
+
+
+### Features
+
+* **core:** support asynchronous deserializers ([428e266](https://github.com/TNG/ngqp/commit/428e266)), closes [#93](https://github.com/TNG/ngqp/issues/93)
+
+
+### BREAKING CHANGES
+
+* v1
+
+Signed-off-by: Ingo Bürk <ingo.buerk@tngtech.com>
+
+
+
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/TNG/ngqp/compare/v0.9.0...v0.10.0) (2019-03-27)
 
