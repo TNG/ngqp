@@ -33,7 +33,7 @@ function getMatchingVersion(angularVersion: [number, number], context: Schematic
 
     switch (angularVersion[0]) {
         case 7:
-            return 0;
+            return 1;
         default:
             return null;
     }
