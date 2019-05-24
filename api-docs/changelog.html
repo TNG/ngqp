@@ -32,9 +32,36 @@
 
 <h1 id="change-log">Change Log</h1>
 <p>All notable changes to this project will be documented in this file. See <a href="https://github.com/conventional-changelog/standard-version">standard-version</a> for commit guidelines.</p>
+<p><a name="0.11.0"></a></p>
+<h1 id="0110-2019-05-24"><a href="https://github.com/TNG/ngqp/compare/v0.10.0...v0.11.0">0.11.0</a> (2019-05-24)</h1>
+<h3 id="bug-fixes">Bug Fixes</h3>
+<ul>
+<li><strong>core:</strong> Enable complete strict mode (<a href="https://github.com/TNG/ngqp/commit/c3c0c54">c3c0c54</a>)</li>
+<li><strong>core:</strong> Enable strictPropertyInitialization (<a href="https://github.com/TNG/ngqp/commit/f5c7262">f5c7262</a>)</li>
+<li><strong>core:</strong> Enforce strictNullChecks (<a href="https://github.com/TNG/ngqp/commit/69ec667">69ec667</a>)</li>
+<li><strong>core:</strong> Improve typings involving null (<a href="https://github.com/TNG/ngqp/commit/a8a47ae">a8a47ae</a>)</li>
+<li><strong>core:</strong> Make abstract constructor protected (<a href="https://github.com/TNG/ngqp/commit/e98c601">e98c601</a>)</li>
+<li><strong>core:</strong> remove parameter&#39;s parent upon remove (<a href="https://github.com/TNG/ngqp/commit/b70262e">b70262e</a>), closes <a href="https://github.com/TNG/ngqp/issues/120">#120</a></li>
+<li><strong>core:</strong> Replace map() with proper type guard (<a href="https://github.com/TNG/ngqp/commit/5808d4a">5808d4a</a>)</li>
+<li><strong>core:</strong> set parent of parameter when using add (<a href="https://github.com/TNG/ngqp/commit/ba1403d">ba1403d</a>), closes <a href="https://github.com/TNG/ngqp/issues/120">#120</a></li>
+<li><strong>core:</strong> Simplify type signature (<a href="https://github.com/TNG/ngqp/commit/e90aa0e">e90aa0e</a>)</li>
+</ul>
+<h3 id="chores">Chores</h3>
+<ul>
+<li>prepare release v1 (<a href="https://github.com/TNG/ngqp/commit/ca1971d">ca1971d</a>), closes <a href="https://github.com/TNG/ngqp/issues/32">#32</a></li>
+</ul>
+<h3 id="features">Features</h3>
+<ul>
+<li><strong>core:</strong> support asynchronous deserializers (<a href="https://github.com/TNG/ngqp/commit/428e266">428e266</a>), closes <a href="https://github.com/TNG/ngqp/issues/93">#93</a></li>
+</ul>
+<h3 id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li>v1</li>
+</ul>
+<p>Signed-off-by: Ingo Bürk <a href="mailto:&#105;&#x6e;&#x67;&#x6f;&#x2e;&#x62;&#x75;&#101;&#x72;&#107;&#64;&#116;&#110;&#103;&#116;&#x65;&#x63;&#104;&#46;&#x63;&#x6f;&#x6d;">&#105;&#x6e;&#x67;&#x6f;&#x2e;&#x62;&#x75;&#101;&#x72;&#107;&#64;&#116;&#110;&#103;&#116;&#x65;&#x63;&#104;&#46;&#x63;&#x6f;&#x6d;</a></p>
 <p><a name="0.10.0"></a></p>
 <h1 id="0100-2019-03-27"><a href="https://github.com/TNG/ngqp/compare/v0.9.0...v0.10.0">0.10.0</a> (2019-03-27)</h1>
-<h3 id="bug-fixes">Bug Fixes</h3>
+<h3 id="bug-fixes-1">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Prefer unknown over any where possible (<a href="https://github.com/TNG/ngqp/commit/62f357c">62f357c</a>)</li>
 <li><strong>deps:</strong> bump dependencies (<a href="https://github.com/TNG/ngqp/commit/4ae172a">4ae172a</a>)</li>
@@ -43,7 +70,7 @@
 <li><strong>docs:</strong> Hide directive constructors from API docs (<a href="https://github.com/TNG/ngqp/commit/dc628b6">dc628b6</a>), closes <a href="https://github.com/TNG/ngqp/issues/97">#97</a></li>
 <li><strong>scripts:</strong> Sign release commits (<a href="https://github.com/TNG/ngqp/commit/0bcff67">0bcff67</a>)</li>
 </ul>
-<h3 id="features">Features</h3>
+<h3 id="features-1">Features</h3>
 <ul>
 <li>Adapt commitlint configuration to our project (<a href="https://github.com/TNG/ngqp/commit/c91c440">c91c440</a>)</li>
 <li><strong>core:</strong> add support for partitioned parameters (<a href="https://github.com/TNG/ngqp/commit/ad3f917">ad3f917</a>), closes <a href="https://github.com/TNG/ngqp/issues/90">#90</a></li>
@@ -52,7 +79,7 @@
 </ul>
 <p><a name="0.9.0"></a></p>
 <h1 id="090-2019-03-08"><a href="https://github.com/TNG/ngqp/compare/v0.8.0...v0.9.0">0.9.0</a> (2019-03-08)</h1>
-<h3 id="bug-fixes-1">Bug Fixes</h3>
+<h3 id="bug-fixes-2">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Adjust name of variable (copy&amp;paste error) (<a href="https://github.com/TNG/ngqp/commit/6420b9e">6420b9e</a>)</li>
 <li><strong>core:</strong> Ignore changes in unrelated query parameters (<a href="https://github.com/TNG/ngqp/commit/32b080e">32b080e</a>), closes <a href="https://github.com/TNG/ngqp/issues/81">#81</a></li>
@@ -62,14 +89,14 @@
 <li><strong>other:</strong> Update commit guidelines (<a href="https://github.com/TNG/ngqp/commit/bcfd06e">bcfd06e</a>)</li>
 <li><strong>travis:</strong> Only trigger branch builds for master (<a href="https://github.com/TNG/ngqp/commit/a579a4a">a579a4a</a>)</li>
 </ul>
-<h3 id="features-1">Features</h3>
+<h3 id="features-2">Features</h3>
 <ul>
 <li><strong>core:</strong> Added QueryParamDirective for standalone parameters (<a href="https://github.com/TNG/ngqp/commit/05b48ca">05b48ca</a>)</li>
 <li><strong>core:</strong> Support changing the bound standalone parameter (<a href="https://github.com/TNG/ngqp/commit/f1cdfeb">f1cdfeb</a>)</li>
 </ul>
 <p><a name="0.8.0"></a></p>
 <h1 id="080-2019-02-09"><a href="https://github.com/TNG/ngqp/compare/v0.7.2...v0.8.0">0.8.0</a> (2019-02-09)</h1>
-<h3 id="bug-fixes-2">Bug Fixes</h3>
+<h3 id="bug-fixes-3">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Do not synchronize detached parameters (<a href="https://github.com/TNG/ngqp/commit/1add8a8">1add8a8</a>), closes <a href="https://github.com/TNG/ngqp/issues/44">#44</a></li>
 <li><strong>core:</strong> Fix typo in comment (<a href="https://github.com/TNG/ngqp/commit/2d8313b">2d8313b</a>)</li>
@@ -77,20 +104,20 @@
 <li><strong>docs:</strong> Exclude test util from API docs (<a href="https://github.com/TNG/ngqp/commit/93a5281">93a5281</a>)</li>
 <li><strong>tests:</strong> Added tests for QueryParamGroup#add / #remove (<a href="https://github.com/TNG/ngqp/commit/085d120">085d120</a>), closes <a href="https://github.com/TNG/ngqp/issues/44">#44</a></li>
 </ul>
-<h3 id="features-2">Features</h3>
+<h3 id="features-3">Features</h3>
 <ul>
 <li><strong>core:</strong> Allow changing name for queryParamName directive. (<a href="https://github.com/TNG/ngqp/commit/ca6f87d">ca6f87d</a>), closes <a href="https://github.com/TNG/ngqp/issues/44">#44</a></li>
 <li><strong>core:</strong> Dynamically add or remove parameters (<a href="https://github.com/TNG/ngqp/commit/5c76c67">5c76c67</a>), closes <a href="https://github.com/TNG/ngqp/issues/44">#44</a></li>
 </ul>
 <p><a name="0.7.2"></a></p>
 <h2 id="072-2019-02-03"><a href="https://github.com/TNG/ngqp/compare/v0.7.1...v0.7.2">0.7.2</a> (2019-02-03)</h2>
-<h3 id="bug-fixes-3">Bug Fixes</h3>
+<h3 id="bug-fixes-4">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Do not detect non-imperative navigations as synthetic (<a href="https://github.com/TNG/ngqp/commit/9e7fdb4">9e7fdb4</a>), closes <a href="https://github.com/TNG/ngqp/issues/73">#73</a></li>
 </ul>
 <p><a name="0.7.1"></a></p>
 <h2 id="071-2019-02-01"><a href="https://github.com/Airblader/ngqp/compare/v0.7.0...v0.7.1">0.7.1</a> (2019-02-01)</h2>
-<h3 id="bug-fixes-4">Bug Fixes</h3>
+<h3 id="bug-fixes-5">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Align event propagation with Forms API (<a href="https://github.com/Airblader/ngqp/commit/0529276">0529276</a>)</li>
 <li><strong>core:</strong> Rework event handling of QueryParam(Group) (<a href="https://github.com/Airblader/ngqp/commit/a5f4d74">a5f4d74</a>), closes <a href="https://github.com/Airblader/ngqp/issues/67">#67</a></li>
@@ -98,11 +125,11 @@
 </ul>
 <p><a name="0.7.0"></a></p>
 <h1 id="070-2019-01-15"><a href="https://github.com/TNG/ngqp/compare/v0.6.0...v0.7.0">0.7.0</a> (2019-01-15)</h1>
-<h3 id="bug-fixes-5">Bug Fixes</h3>
+<h3 id="bug-fixes-6">Bug Fixes</h3>
 <ul>
 <li><strong>docs:</strong> Fix duplicate fragment (<a href="https://github.com/TNG/ngqp/commit/00a5667">00a5667</a>)</li>
 </ul>
-<h3 id="features-3">Features</h3>
+<h3 id="features-4">Features</h3>
 <ul>
 <li><strong>core:</strong> New QueryParam creation syntax (<a href="https://github.com/TNG/ngqp/commit/98fe148">98fe148</a>)</li>
 <li><strong>docs:</strong> Added noscript (<a href="https://github.com/TNG/ngqp/commit/d33fa5d">d33fa5d</a>)</li>
@@ -110,7 +137,7 @@
 </ul>
 <p><a name="0.6.0"></a></p>
 <h1 id="060-2019-01-13"><a href="https://github.com/TNG/ngqp/compare/v0.5.1...v0.6.0">0.6.0</a> (2019-01-13)</h1>
-<h3 id="bug-fixes-6">Bug Fixes</h3>
+<h3 id="bug-fixes-7">Bug Fixes</h3>
 <ul>
 <li><strong>api-docs:</strong> Remove GA ID (<a href="https://github.com/TNG/ngqp/commit/a6352fb">a6352fb</a>)</li>
 <li><strong>core:</strong> Added internal documentation (<a href="https://github.com/TNG/ngqp/commit/6ade19d">6ade19d</a>)</li>
@@ -136,7 +163,7 @@
 <li><strong>tests:</strong> Pin versions due to broken <a href="https://github.com/angular-devkit">@angular-devkit</a>/schematics release (<a href="https://github.com/TNG/ngqp/commit/bbc9a66">bbc9a66</a>)</li>
 <li><strong>tests:</strong> Remove spec tsconfig file from angular.json (<a href="https://github.com/TNG/ngqp/commit/de0d0e0">de0d0e0</a>)</li>
 </ul>
-<h3 id="features-4">Features</h3>
+<h3 id="features-5">Features</h3>
 <ul>
 <li><strong>core:</strong> Allow comparator to return a number (<a href="https://github.com/TNG/ngqp/commit/78c8c4e">78c8c4e</a>)</li>
 <li><strong>core:</strong> Allow passing preserveFragment (<a href="https://github.com/TNG/ngqp/commit/a94ccc6">a94ccc6</a>), closes <a href="https://github.com/TNG/ngqp/issues/39">#39</a></li>
@@ -144,7 +171,7 @@
 </ul>
 <p><a name="0.5.1"></a></p>
 <h2 id="051-2019-01-06"><a href="https://github.com/TNG/ngqp/compare/v0.5.0...v0.5.1">0.5.1</a> (2019-01-06)</h2>
-<h3 id="bug-fixes-7">Bug Fixes</h3>
+<h3 id="bug-fixes-8">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Allow combineWith returning null | undefined (<a href="https://github.com/TNG/ngqp/commit/3bfc1b0">3bfc1b0</a>)</li>
 <li><strong>core:</strong> Do not serialize non-multi params into an array (<a href="https://github.com/TNG/ngqp/commit/bf6c355">bf6c355</a>)</li>
@@ -164,7 +191,7 @@
 </ul>
 <p><a name="0.5.0"></a></p>
 <h1 id="050-2019-01-03"><a href="https://github.com/TNG/ngqp/compare/v0.4.2...v0.5.0">0.5.0</a> (2019-01-03)</h1>
-<h3 id="bug-fixes-8">Bug Fixes</h3>
+<h3 id="bug-fixes-9">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Do not create an empty-on serializer if emptyOn wasn&#39;t given (<a href="https://github.com/TNG/ngqp/commit/f394fa6">f394fa6</a>)</li>
 <li><strong>core:</strong> Fix list of built-in accessors (<a href="https://github.com/TNG/ngqp/commit/2e39369">2e39369</a>)</li>
@@ -185,25 +212,25 @@
 <li><strong>docs:</strong> Remove GitHub button for now (<a href="https://github.com/TNG/ngqp/commit/aadad1b">aadad1b</a>), closes <a href="https://github.com/TNG/ngqp/issues/36">#36</a></li>
 <li><strong>docs:</strong> Use PNG instead of SVG (<a href="https://github.com/TNG/ngqp/commit/cfa25df">cfa25df</a>)</li>
 </ul>
-<h3 id="features-5">Features</h3>
+<h3 id="features-6">Features</h3>
 <ul>
 <li><strong>docs:</strong> Added Google Analytics (<a href="https://github.com/TNG/ngqp/commit/aea857a">aea857a</a>), closes <a href="https://github.com/TNG/ngqp/issues/35">#35</a></li>
 </ul>
 <p><a name="0.4.2"></a></p>
 <h2 id="042-2018-12-30"><a href="https://github.com/TNG/ngqp/compare/v0.4.1...v0.4.2">0.4.2</a> (2018-12-30)</h2>
-<h3 id="bug-fixes-9">Bug Fixes</h3>
+<h3 id="bug-fixes-10">Bug Fixes</h3>
 <ul>
 <li><strong>docs:</strong> Build API docs after demo project (<a href="https://github.com/TNG/ngqp/commit/dec2d0f">dec2d0f</a>)</li>
 </ul>
 <p><a name="0.4.1"></a></p>
 <h2 id="041-2018-12-30"><a href="https://github.com/TNG/ngqp/compare/v0.4.0...v0.4.1">0.4.1</a> (2018-12-30)</h2>
-<h3 id="bug-fixes-10">Bug Fixes</h3>
+<h3 id="bug-fixes-11">Bug Fixes</h3>
 <ul>
 <li><strong>docs:</strong> chmod +x script (<a href="https://github.com/TNG/ngqp/commit/21e44c1">21e44c1</a>)</li>
 </ul>
 <p><a name="0.4.0"></a></p>
 <h1 id="040-2018-12-30"><a href="https://github.com/TNG/ngqp/compare/v0.3.2...v0.4.0">0.4.0</a> (2018-12-30)</h1>
-<h3 id="bug-fixes-11">Bug Fixes</h3>
+<h3 id="bug-fixes-12">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Fix select accessor which didn&#39;t write the value in some cases (<a href="https://github.com/TNG/ngqp/commit/91d4c8a">91d4c8a</a>)</li>
 <li><strong>core:</strong> Provide proper generic to ElementRef in accessors (<a href="https://github.com/TNG/ngqp/commit/35a48be">35a48be</a>)</li>
@@ -212,27 +239,27 @@
 <li><strong>docs:</strong> Remove line that was forgotten (<a href="https://github.com/TNG/ngqp/commit/466c39c">466c39c</a>)</li>
 <li><strong>scripts:</strong> Push tags on release (<a href="https://github.com/TNG/ngqp/commit/63d6358">63d6358</a>)</li>
 </ul>
-<h3 id="features-6">Features</h3>
+<h3 id="features-7">Features</h3>
 <ul>
 <li><strong>docs:</strong> Added GitHub widget (<a href="https://github.com/TNG/ngqp/commit/0351f05">0351f05</a>)</li>
 <li><strong>docs:</strong> Skeleton for docs pages (<a href="https://github.com/TNG/ngqp/commit/5d65a55">5d65a55</a>)</li>
 </ul>
 <p><a name="0.3.2"></a></p>
 <h2 id="032-2018-12-27"><a href="https://github.com/TNG/ngqp/compare/v0.3.1...v0.3.2">0.3.2</a> (2018-12-27)</h2>
-<h3 id="bug-fixes-12">Bug Fixes</h3>
+<h3 id="bug-fixes-13">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Do not consider undefined for emptyOn (<a href="https://github.com/TNG/ngqp/commit/91a75ba">91a75ba</a>)</li>
 <li><strong>docs:</strong> Disable autocomplete in example (<a href="https://github.com/TNG/ngqp/commit/d1d0a1b">d1d0a1b</a>)</li>
 </ul>
 <p><a name="0.3.1"></a></p>
 <h2 id="031-2018-12-27"><a href="https://github.com/TNG/ngqp/compare/v0.3.0...v0.3.1">0.3.1</a> (2018-12-27)</h2>
-<h3 id="bug-fixes-13">Bug Fixes</h3>
+<h3 id="bug-fixes-14">Bug Fixes</h3>
 <ul>
 <li><strong>schematics:</strong> Fix schematics (<a href="https://github.com/TNG/ngqp/commit/82987c7">82987c7</a>)</li>
 </ul>
 <p><a name="0.3.0"></a></p>
 <h1 id="030-2018-12-27"><a href="https://github.com/TNG/ngqp/compare/v0.2.8...v0.3.0">0.3.0</a> (2018-12-27)</h1>
-<h3 id="bug-fixes-14">Bug Fixes</h3>
+<h3 id="bug-fixes-15">Bug Fixes</h3>
 <ul>
 <li><strong>demo:</strong> Remove console.log (<a href="https://github.com/TNG/ngqp/commit/3dd2028">3dd2028</a>)</li>
 <li><strong>docs:</strong> Fix wording (<a href="https://github.com/TNG/ngqp/commit/6ebdc96">6ebdc96</a>)</li>
@@ -244,7 +271,7 @@
 <li><strong>readme:</strong> Mention &quot;ng add&quot; in instructions (<a href="https://github.com/TNG/ngqp/commit/bad6c06">bad6c06</a>)</li>
 <li><strong>schematics:</strong> Try to infer the correct version to install (<a href="https://github.com/TNG/ngqp/commit/5e0ab8b">5e0ab8b</a>), closes <a href="https://github.com/TNG/ngqp/issues/31">#31</a></li>
 </ul>
-<h3 id="features-7">Features</h3>
+<h3 id="features-8">Features</h3>
 <ul>
 <li><strong>docs:</strong> Added benefits &amp; attribution to ngx-bootstrap (<a href="https://github.com/TNG/ngqp/commit/a1997c7">a1997c7</a>)</li>
 <li><strong>docs:</strong> Added first version of landing page (<a href="https://github.com/TNG/ngqp/commit/a0de621">a0de621</a>)</li>
@@ -254,7 +281,7 @@
 </ul>
 <p><a name="0.2.8"></a></p>
 <h2 id="028-2018-12-26"><a href="https://github.com/TNG/ngqp/compare/v0.2.7...v0.2.8">0.2.8</a> (2018-12-26)</h2>
-<h3 id="bug-fixes-15">Bug Fixes</h3>
+<h3 id="bug-fixes-16">Bug Fixes</h3>
 <ul>
 <li><strong>scripts:</strong> Explicitly add npm registry (<a href="https://github.com/TNG/ngqp/commit/5e2e50c">5e2e50c</a>)</li>
 </ul>
@@ -262,14 +289,14 @@
 <h2 id="027-2018-12-26"><a href="https://github.com/TNG/ngqp/compare/v0.2.6...v0.2.7">0.2.7</a> (2018-12-26)</h2>
 <p><a name="0.2.6"></a></p>
 <h2 id="026-2018-12-26"><a href="https://github.com/TNG/ngqp/compare/v0.2.5...v0.2.6">0.2.6</a> (2018-12-26)</h2>
-<h3 id="bug-fixes-16">Bug Fixes</h3>
+<h3 id="bug-fixes-17">Bug Fixes</h3>
 <ul>
 <li><strong>scripts:</strong> Clean up release targets (<a href="https://github.com/TNG/ngqp/commit/b706777">b706777</a>)</li>
 <li><strong>scripts:</strong> Make cd independent of command success (<a href="https://github.com/TNG/ngqp/commit/7ee98f3">7ee98f3</a>)</li>
 </ul>
 <p><a name="0.2.5"></a></p>
 <h2 id="025-2018-12-26"><a href="https://github.com/TNG/ngqp/compare/v0.2.4...v0.2.5">0.2.5</a> (2018-12-26)</h2>
-<h3 id="bug-fixes-17">Bug Fixes</h3>
+<h3 id="bug-fixes-18">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Fix deserialization on non-multi controls (<a href="https://github.com/TNG/ngqp/commit/4fdcfe1">4fdcfe1</a>)</li>
 <li><strong>docs:</strong> Navigating by URL always needs to be non-merge (<a href="https://github.com/TNG/ngqp/commit/c4787a4">c4787a4</a>)</li>
@@ -281,7 +308,7 @@
 </ul>
 <p><a name="0.2.4"></a></p>
 <h2 id="024-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.2.3...v0.2.4">0.2.4</a> (2018-12-25)</h2>
-<h3 id="bug-fixes-18">Bug Fixes</h3>
+<h3 id="bug-fixes-19">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Set providers outside of forRoot (<a href="https://github.com/TNG/ngqp/commit/131508b">131508b</a>)</li>
 <li><strong>other:</strong> Fix travis config (<a href="https://github.com/TNG/ngqp/commit/d2c1d08">d2c1d08</a>)</li>
@@ -289,29 +316,29 @@
 </ul>
 <p><a name="0.2.3"></a></p>
 <h2 id="023-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.2.2...v0.2.3">0.2.3</a> (2018-12-25)</h2>
-<h3 id="bug-fixes-19">Bug Fixes</h3>
+<h3 id="bug-fixes-20">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Move schematics-utilities to normal dependencies (<a href="https://github.com/TNG/ngqp/commit/971cae4">971cae4</a>)</li>
 </ul>
 <p><a name="0.2.2"></a></p>
 <h2 id="022-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.2.1...v0.2.2">0.2.2</a> (2018-12-25)</h2>
-<h3 id="bug-fixes-20">Bug Fixes</h3>
+<h3 id="bug-fixes-21">Bug Fixes</h3>
 <ul>
 <li><strong>other:</strong> Fix path to collections file (<a href="https://github.com/TNG/ngqp/commit/90a61bb">90a61bb</a>)</li>
 </ul>
 <p><a name="0.2.1"></a></p>
 <h2 id="021-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.2.0...v0.2.1">0.2.1</a> (2018-12-25)</h2>
-<h3 id="bug-fixes-21">Bug Fixes</h3>
+<h3 id="bug-fixes-22">Bug Fixes</h3>
 <ul>
 <li><strong>other:</strong> Fix schematics build script (<a href="https://github.com/TNG/ngqp/commit/1cd8dfa">1cd8dfa</a>)</li>
 </ul>
 <p><a name="0.2.0"></a></p>
 <h1 id="020-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.1.1...v0.2.0">0.2.0</a> (2018-12-25)</h1>
-<h3 id="bug-fixes-22">Bug Fixes</h3>
+<h3 id="bug-fixes-23">Bug Fixes</h3>
 <ul>
 <li><strong>other:</strong> Move collection file into correct location (<a href="https://github.com/TNG/ngqp/commit/4518232">4518232</a>)</li>
 </ul>
-<h3 id="features-8">Features</h3>
+<h3 id="features-9">Features</h3>
 <ul>
 <li><strong>other:</strong> Create release script (<a href="https://github.com/TNG/ngqp/commit/3ed6e3e">3ed6e3e</a>)</li>
 </ul>
@@ -319,7 +346,7 @@
 <h2 id="011-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.1.0...v0.1.1">0.1.1</a> (2018-12-25)</h2>
 <p><a name="0.1.0"></a></p>
 <h1 id="010-2018-12-25"><a href="https://github.com/TNG/ngqp/compare/v0.0.3...v0.1.0">0.1.0</a> (2018-12-25)</h1>
-<h3 id="bug-fixes-23">Bug Fixes</h3>
+<h3 id="bug-fixes-24">Bug Fixes</h3>
 <ul>
 <li><strong>core:</strong> Assert that emptyOn isn&#39;t used in multi-mode. (<a href="https://github.com/TNG/ngqp/commit/718c789">718c789</a>)</li>
 <li><strong>core:</strong> Avoid buffering on the queue (<a href="https://github.com/TNG/ngqp/commit/9c2a369">9c2a369</a>), closes <a href="https://github.com/TNG/ngqp/issues/23">#23</a></li>
@@ -349,7 +376,7 @@
 <li><strong>docs:</strong> Yet another fix, adding ?sanitize=true. (<a href="https://github.com/TNG/ngqp/commit/b19a81e">b19a81e</a>)</li>
 <li><strong>tests:</strong> Remove yarn test from Travis for now (<a href="https://github.com/TNG/ngqp/commit/ba59419">ba59419</a>)</li>
 </ul>
-<h3 id="features-9">Features</h3>
+<h3 id="features-10">Features</h3>
 <ul>
 <li><strong>core:</strong> Added a directive to provide a control value accessor (<a href="https://github.com/TNG/ngqp/commit/dc45c9a">dc45c9a</a>), closes <a href="https://github.com/TNG/ngqp/issues/28">#28</a></li>
 <li><strong>core:</strong> Added an abstraction for the router access (<a href="https://github.com/TNG/ngqp/commit/226bb25">226bb25</a>), closes <a href="https://github.com/TNG/ngqp/issues/21">#21</a></li>

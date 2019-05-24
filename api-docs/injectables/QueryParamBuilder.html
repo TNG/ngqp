@@ -534,7 +534,7 @@ instances and is the recommended way to set them up.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>partition(queryParams: (QueryParam<unknown> | MultiQueryParam<unknown>)[], opts: PartitionedQueryParamOpts<unknown | unknown[]>)</code>
+                    <code>partition(queryParams: (QueryParam<> | MultiQueryParam<>)[], opts: PartitionedQueryParamOpts<T | G>)</code>
                 </td>
             </tr>
 
@@ -546,6 +546,15 @@ instances and is the recommended way to set them up.</p>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <b>Type parameters :</b>
+                    <ul class="type-parameters">
+                        <li>T</li>
+                        <li>G</li>
+                    </ul>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-4">
@@ -571,7 +580,7 @@ you can define a single query parameter that is partitioned into two others.</p>
                                 <tr>
                                     <td>queryParams</td>
                                     <td>
-                                            <code>(QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt;)[]</code>
+                                            <code>(QueryParam&lt;&gt; | MultiQueryParam&lt;&gt;)[]</code>
                                     </td>
 
                                     <td>
@@ -587,7 +596,7 @@ you can define a single query parameter that is partitioned into two others.</p>
                                 <tr>
                                     <td>opts</td>
                                     <td>
-                                            <code>PartitionedQueryParamOpts&lt;unknown | unknown[]&gt;</code>
+                                            <code>PartitionedQueryParamOpts&lt;T | G&gt;</code>
                                     </td>
 
                                     <td>
@@ -606,7 +615,7 @@ you can define a single query parameter that is partitioned into two others.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>PartitionedQueryParam&lt;unknown, unknown[]&gt;</code>
+                        <b>Returns : </b>    <code>PartitionedQueryParam&lt;T, G&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -789,10 +798,10 @@ export class QueryParamBuilder {
      * @param queryParams The query parameters making up this partition.
      * @param opts See {@link PartitionedQueryParamOpts}.
      */
-    public partition(
-        queryParams: (QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt;)[],
-        opts: PartitionedQueryParamOpts&lt;unknown, unknown[]&gt;
-    ): PartitionedQueryParam&lt;unknown, unknown[]&gt; {
+    public partition&lt;T, G extends unknown[]&gt;(
+        queryParams: (QueryParam&lt;G[number]&gt; | MultiQueryParam&lt;G[number]&gt;)[],
+        opts: PartitionedQueryParamOpts&lt;T, G&gt;
+    ): PartitionedQueryParam&lt;T, G&gt; {
         return new PartitionedQueryParam(queryParams, opts);
     }
 

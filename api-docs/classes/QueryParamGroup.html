@@ -473,8 +473,8 @@ if no parameter with that name is found in this group.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="142"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:142</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:144</a></div>
                 </td>
             </tr>
 
@@ -576,8 +576,8 @@ value. If a parameter is not listed, its value remains unchanged.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="110"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:110</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="111"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:111</a></div>
                 </td>
             </tr>
 
@@ -658,8 +658,8 @@ be reported in the value of this group anymore.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="171"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:171</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="173"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:173</a></div>
                 </td>
             </tr>
 
@@ -763,7 +763,7 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/lib/model/query-param-group.ts:126</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/lib/model/query-param-group.ts:128</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -884,6 +884,7 @@ export class QueryParamGroup {
         }
 
         this.queryParams[ queryParamName ] &#x3D; queryParam;
+        queryParam._setParent(this);
         this._queryParamAdded$.next(queryParamName);
     }
 
@@ -903,6 +904,7 @@ export class QueryParamGroup {
         }
 
         delete this.queryParams[ queryParamName ];
+        queryParam._setParent(null);
         queryParam._clearChangeFunctions();
     }
 

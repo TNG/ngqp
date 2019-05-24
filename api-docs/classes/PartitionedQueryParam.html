@@ -132,12 +132,12 @@ be defined which can convert the models between the parameters.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(queryParams, opts: PartitionedQueryParamOpts<T | G>)</code>
+<code>constructor(queryParams: (QueryParam<> | MultiQueryParam<>)[], opts: PartitionedQueryParamOpts<T | G>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="241" class="link-to-prism">src/lib/model/query-param.ts:241</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="238" class="link-to-prism">src/lib/model/query-param.ts:238</a></div>
                             </td>
                         </tr>
 
@@ -158,6 +158,7 @@ be defined which can convert the models between the parameters.</p>
                                                         <td>queryParams</td>
                                                   
                                                         <td>
+                                                                    <code>(QueryParam&lt;&gt; | MultiQueryParam&lt;&gt;)[]</code>
                                                         </td>
                                                   
                                                     <td>
@@ -216,8 +217,8 @@ be defined which can convert the models between the parameters.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="270"
-                            class="link-to-prism">src/lib/model/query-param.ts:270</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="267"
+                            class="link-to-prism">src/lib/model/query-param.ts:267</a></div>
                 </td>
             </tr>
 
@@ -308,7 +309,7 @@ be defined which can convert the models between the parameters.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="266" class="link-to-prism">src/lib/model/query-param.ts:266</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/lib/model/query-param.ts:263</a></div>
                                 </td>
                             </tr>
 
@@ -319,8 +320,9 @@ be defined which can convert the models between the parameters.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Observable, Subject } from &#x27;rxjs&#x27;;
-import { areEqualUsing, isFunction, isMissing, isPresent, wrapTryCatch } from &#x27;../util&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forkJoin, isObservable, Observable, of, Subject } from &#x27;rxjs&#x27;;
+import { first } from &#x27;rxjs/operators&#x27;;
+import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapIntoObservable, wrapTryCatch } from &#x27;../util&#x27;;
 import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from &#x27;../types&#x27;;
 import { QueryParamGroup } from &#x27;./query-param-group&#x27;;
 import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from &#x27;./query-param-opts&#x27;;
@@ -328,10 +330,10 @@ import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryPa
 /** @internal */
 abstract class AbstractQueryParamBase&lt;T&gt; {
 
-    public abstract value: T;
+    public abstract value: T | null;
 
-    protected parent: QueryParamGroup;
-    protected _valueChanges &#x3D; new Subject&lt;T&gt;();
+    protected parent: QueryParamGroup | null &#x3D; null;
+    protected readonly _valueChanges &#x3D; new Subject&lt;T | null&gt;();
     protected changeFunctions: OnChangeFunction&lt;T&gt;[] &#x3D; [];
 
     /**
@@ -339,7 +341,7 @@ abstract class AbstractQueryParamBase&lt;T&gt; {
      *
      * NOTE: This observable does not complete on its own, so ensure to unsubscribe from it.
      */
-    public readonly valueChanges: Observable&lt;T&gt; &#x3D; this._valueChanges.asObservable();
+    public readonly valueChanges: Observable&lt;T | null&gt; &#x3D; this._valueChanges.asObservable();
 
     public _registerOnChange(fn: OnChangeFunction&lt;T&gt;): void {
         this.changeFunctions.push(fn);
@@ -355,8 +357,8 @@ abstract class AbstractQueryParamBase&lt;T&gt; {
         emitModelToViewChange?: boolean,
     }): void;
 
-    public _setParent(parent: QueryParamGroup): void {
-        if (this.parent) {
+    public _setParent(parent: QueryParamGroup | null): void {
+        if (this.parent &amp;&amp; parent) {
             throw new Error(&#x60;Parameter already belongs to a QueryParamGroup.&#x60;);
         }
 
@@ -376,7 +378,7 @@ export abstract class AbstractQueryParam&lt;U, T&gt; extends AbstractQueryParamB
     /**
      * The current value of this parameter.
      */
-    public value: T &#x3D; null;
+    public value: T | null &#x3D; null;
 
     /**
      * The name of the parameter to be used in the URL.
@@ -397,15 +399,15 @@ export abstract class AbstractQueryParam&lt;U, T&gt; extends AbstractQueryParamB
     public readonly debounceTime: number | null;
 
     /** See {@link QueryParamOpts}. */
-    public readonly emptyOn: T;
+    public readonly emptyOn?: T | null;
 
     /** See {@link QueryParamOpts}. */
-    public readonly compareWith: Comparator&lt;T&gt;;
+    public readonly compareWith?: Comparator&lt;T&gt;;
 
     /** See {@link QueryParamOpts}. */
-    public readonly combineWith: ParamCombinator&lt;T&gt;;
+    public readonly combineWith?: ParamCombinator&lt;T&gt;;
 
-    constructor(urlParam: string, opts: QueryParamOptsBase&lt;U, T&gt; &#x3D; {}) {
+    protected constructor(urlParam: string, opts: QueryParamOptsBase&lt;U, T&gt; &#x3D; {}) {
         super();
         const { serialize, deserialize, debounceTime, compareWith, emptyOn, combineWith } &#x3D; opts;
 
@@ -432,17 +434,11 @@ export abstract class AbstractQueryParam&lt;U, T&gt; extends AbstractQueryParamB
         this.urlParam &#x3D; urlParam;
         this.serialize &#x3D; wrapTryCatch(serialize, &#x60;Error while serializing value for ${this.urlParam}&#x60;);
         this.deserialize &#x3D; wrapTryCatch(deserialize, &#x60;Error while deserializing value for ${this.urlParam}&#x60;);
-        this.debounceTime &#x3D; debounceTime;
+        this.debounceTime &#x3D; undefinedToNull(debounceTime);
         this.emptyOn &#x3D; emptyOn;
         this.compareWith &#x3D; compareWith;
         this.combineWith &#x3D; combineWith;
     }
-
-    /** @internal */
-    public abstract serializeValue(value: T): string | string[];
-
-    /** @internal */
-    public abstract deserializeValue(value: string | string[]): T;
 
     /**
      * Updates the value of this parameter.
@@ -482,7 +478,7 @@ export abstract class AbstractQueryParam&lt;U, T&gt; extends AbstractQueryParamB
  * as the glue between its representation in the URL and its connection
  * to a form control.
  */
-export class QueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T&gt; implements Required&lt;Readonly&lt;QueryParamOpts&lt;T&gt;&gt;&gt; {
+export class QueryParam&lt;T&gt; extends AbstractQueryParam&lt;T | null, T | null&gt; implements Readonly&lt;QueryParamOpts&lt;T&gt;&gt; {
 
     /** See {@link QueryParamOpts}. */
     public readonly multi &#x3D; false;
@@ -492,8 +488,8 @@ export class QueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T&gt; implemen
     }
 
     /** @internal */
-    public serializeValue(value: T): string {
-        if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; areEqualUsing(value, this.emptyOn, this.compareWith)) {
+    public serializeValue(value: T | null): string | null {
+        if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
         }
 
@@ -501,12 +497,12 @@ export class QueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T&gt; implemen
     }
 
     /** @internal */
-    public deserializeValue(value: string): T {
+    public deserializeValue(value: string | null): Observable&lt;T | null&gt; {
         if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; value &#x3D;&#x3D;&#x3D; null) {
-            return this.emptyOn;
+            return of(this.emptyOn);
         }
 
-        return this.deserialize(value);
+        return wrapIntoObservable(this.deserialize(value)).pipe(first());
     }
 
 }
@@ -514,7 +510,7 @@ export class QueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T&gt; implemen
 /**
  * Like {@link QueryParam}, but for array-typed parameters
  */
-export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T[]&gt; implements Required&lt;Readonly&lt;MultiQueryParamOpts&lt;T&gt;&gt;&gt; {
+export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T | null, (T | null)[]&gt; implements Readonly&lt;MultiQueryParamOpts&lt;T&gt;&gt; {
 
     /** See {@link QueryParamOpts}. */
     public readonly multi &#x3D; true;
@@ -524,8 +520,8 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T[]&gt; i
     }
 
     /** @internal */
-    public serializeValue(value: T[]): string[] {
-        if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; areEqualUsing(value, this.emptyOn, this.compareWith)) {
+    public serializeValue(value: (T | null)[] | null): (string | null)[] | null {
+        if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
         }
 
@@ -533,12 +529,14 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T[]&gt; i
     }
 
     /** @internal */
-    public deserializeValue(value: string[]): T[] {
-        if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; value.length &#x3D;&#x3D;&#x3D; 0) {
-            return this.emptyOn;
+    public deserializeValue(values: (string | null)[] | null): Observable&lt;(T | null)[] | null&gt; {
+        if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; (values || []).length &#x3D;&#x3D;&#x3D; 0) {
+            return of(this.emptyOn);
         }
 
-        return value.map(this.deserialize.bind(this));
+        return forkJoin&lt;T | null&gt;(...(values || [])
+            .map(value &#x3D;&gt; wrapIntoObservable(this.deserialize(value)).pipe(first()))
+        );
     }
 
 }
@@ -553,7 +551,7 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T, T[]&gt; i
 export class PartitionedQueryParam&lt;T, G extends unknown[] &#x3D; unknown[]&gt; extends AbstractQueryParamBase&lt;T&gt; {
 
     /** @internal */
-    public readonly queryParams: { [I in keyof G]: G[I] extends G[number] ? (QueryParam&lt;G[I]&gt; | MultiQueryParam&lt;G[I]&gt;) : G[I] };
+    public readonly queryParams: (QueryParam&lt;G[number]&gt; | MultiQueryParam&lt;G[number]&gt;)[];
 
     /** @internal */
     public readonly partition: Partitioner&lt;T, G&gt;;
@@ -562,7 +560,7 @@ export class PartitionedQueryParam&lt;T, G extends unknown[] &#x3D; unknown[]&gt
     public readonly reduce: Reducer&lt;G, T&gt;;
 
     constructor(
-        queryParams: { [I in keyof G]: G[I] extends G[number] ? (QueryParam&lt;G[I]&gt; | MultiQueryParam&lt;G[I]&gt;) : G[I] },
+        queryParams: (QueryParam&lt;G[number]&gt; | MultiQueryParam&lt;G[number]&gt;)[],
         opts: PartitionedQueryParamOpts&lt;T, G&gt;,
     ) {
         super();

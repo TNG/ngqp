@@ -203,7 +203,7 @@ export interface RouterAdapter {
     navigate(queryParams: Params, extras?: RouterOptions &amp; { state?: any }): Promise&lt;boolean&gt;;
 
     /** @internal */
-    getCurrentNavigation(): Pick&lt;Navigation, &#x27;trigger&#x27; | &#x27;extras&#x27;&gt;;
+    getCurrentNavigation(): Pick&lt;Navigation, &#x27;trigger&#x27; | &#x27;extras&#x27;&gt; | null;
 
 }
 

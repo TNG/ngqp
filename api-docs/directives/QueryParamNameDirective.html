@@ -117,6 +117,20 @@ It binds this parameter to the host element, which is required to have a [Contro
 
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#name">name</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         </tbody>
     </table>
 </section>
@@ -158,6 +172,83 @@ Note that this does not refer to the <a href="../classes/QueryParam.html#urlPara
 
 
 
+            <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="name"></a>
+                        <span class="name"><b>name</b><a href="#name"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>name()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/directives/query-param-name.directive.ts:28</a></div>
+                                </td>
+                            </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>name(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/lib/directives/query-param-name.directive.ts:24</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>The name of the <a href="../classes/QueryParam.html">QueryParam</a> inside its parent <a href="../classes/QueryParamGroup.html">QueryParamGroup</a>.
+Note that this does not refer to the <a href="../classes/QueryParam.html#urlParam">parameter name</a>.</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>name</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
 
     </div>
 
@@ -186,10 +277,22 @@ export class QueryParamNameDirective implements QueryParamAccessor, OnChanges, O
      * Note that this does not refer to the [parameter name]{@link QueryParam#urlParam}.
      */
     @Input(&#x27;queryParamName&#x27;)
-    public name: string;
+    public set name(name: string) {
+        this._name &#x3D; name;
+    }
+
+    public get name(): string {
+        if (!this._name) {
+            throw new Error(&#x60;No queryParamName has been specified.&#x60;);
+        }
+
+        return this._name;
+    }
 
     /** @internal */
-    public valueAccessor: ControlValueAccessor | null &#x3D; null;
+    public valueAccessor: ControlValueAccessor;
+
+    private _name: string | null &#x3D; null;
 
     /** @internal */
     constructor(

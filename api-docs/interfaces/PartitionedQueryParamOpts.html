@@ -219,7 +219,7 @@ export interface QueryParamOptsBase&lt;U, T&gt; {
      * to the form control. Vice versa, if the form control takes on this value,
      * the URL parameter will be removed.
      */
-    emptyOn?: T;
+    emptyOn?: T | null;
 
     /**
      * The comparator to be used with {@link QueryParamOpts#emptyOn}.
@@ -245,13 +245,13 @@ export interface QueryParamOptsBase&lt;U, T&gt; {
 }
 
 /** See {@link QueryParamOpts}. */
-export interface QueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T, T&gt; {
+export interface QueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T | null, T | null&gt; {
     /** See {@link MultiQueryParamOpts}. */
     multi?: false;
 }
 
 /** See {@link QueryParamOpts}. */
-export interface MultiQueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T, T[]&gt; {
+export interface MultiQueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T | null, (T | null)[]&gt; {
     /**
      * Whether this parameter can take on multiple values at once.
      *
