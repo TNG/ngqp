@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/TNG/ngqp/compare/v0.11.0...v1.0.0) (2019-05-24)
+
+
+### Chores
+
+* v1 ([4abe492](https://github.com/TNG/ngqp/commit/4abe492))
+
+
+### BREAKING CHANGES
+
+* v1
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/TNG/ngqp/compare/v0.10.0...v0.11.0) (2019-05-24)
 
