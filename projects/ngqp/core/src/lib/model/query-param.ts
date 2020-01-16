@@ -212,7 +212,11 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
             return of(this.emptyOn);
         }
 
-        return forkJoin<T | null>(...(values || [])
+        if (!values || values.length === 0) {
+            return of([]);
+        }
+
+        return forkJoin<T | null>(...values
             .map(value => wrapIntoObservable(this.deserialize(value)).pipe(first()))
         );
     }
