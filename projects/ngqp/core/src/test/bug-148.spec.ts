@@ -65,7 +65,7 @@ describe('ngqp', () => {
         fixture.detectChanges();
     });
 
-    fit('emits with single and multi params if the multi param has no value set', fakeAsync(() => {
+    it('emits with single and multi params if the multi param has no value set', fakeAsync(() => {
         scheduler.run(({ expectObservable }) => {
             const valueChange$ = captureObservable(component.paramGroup.valueChanges);
 
