@@ -953,7 +953,11 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T | null, (T
             return of(this.emptyOn);
         }
 
-        return forkJoin&lt;T | null&gt;(...(values || [])
+        if (!values || values.length &#x3D;&#x3D;&#x3D; 0) {
+            return of([]);
+        }
+
+        return forkJoin&lt;T | null&gt;(...values
             .map(value &#x3D;&gt; wrapIntoObservable(this.deserialize(value)).pipe(first()))
         );
     }
@@ -1032,6 +1036,7 @@ export class PartitionedQueryParam&lt;T, G extends unknown[] &#x3D; unknown[]&gt
 
 
 
+                   
 
 
 

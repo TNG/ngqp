@@ -765,7 +765,7 @@ export class QueryParamBuilder {
      * @returns The new {@link QueryParamGroup}.
      */
     public group(
-        queryParams: { [ name: string ]: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt; },
+        queryParams: { [ name: string ]: QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt; | PartitionedQueryParam&lt;any&gt; },
         extras: RouterOptions &#x3D; {}
     ): QueryParamGroup {
         // TODO Maybe we should first validate that no two queryParams defined the same &quot;param&quot;.
@@ -911,7 +911,8 @@ export class QueryParamBuilder {
         }
     }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 
 </div>
@@ -922,6 +923,7 @@ export class QueryParamBuilder {
 
 
 
+                   
 
 
 
