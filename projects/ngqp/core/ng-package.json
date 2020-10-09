@@ -3,8 +3,5 @@
     "dest": "../../../dist/ngqp/core",
     "lib": {
         "entryFile": "src/public_api.ts"
-    },
-    "whitelistedNonPeerDependencies": [
-        "schematics-utilities"
-    ]
+    }
 }

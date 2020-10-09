@@ -15,9 +15,6 @@ cd projects/ngqp/core; standard-version --infile ../../../CHANGELOG.md; cd -
 echo "[4] Building @ngqp/core"
 yarn run core:build
 
-echo "[5] Building schematics"
-yarn run schematics:build
-
-echo "[6] Copy README and LICENSE"
+echo "[5] Copy README and LICENSE"
 cp README.md dist/ngqp/core
 cp LICENSE dist/ngqp/core

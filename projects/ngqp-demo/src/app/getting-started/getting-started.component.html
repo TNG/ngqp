@@ -2,17 +2,9 @@
     <h1>Installation</h1>
 
     <ngb-tabset class="bordered">
-        <ngb-tab title="ng add">
-            <ng-template ngbTabContent>
-                We support schematics for minimum setup effort. Just run the following command:
-                <demo-snippet type="bash" code="ng add @ngqp/core"></demo-snippet>
-                This will take care of installing the appropriate version of ngqp and setting it up in your app.
-            </ng-template>
-        </ngb-tab>
-
         <ngb-tab title="npm / yarn">
             <ng-template ngbTabContent>
-                You can install ngqp manually by installing the package into your app, e.g.:
+                Install the package into your app:
                 <demo-snippet type="bash" code="npm install --save @ngqp/core"></demo-snippet>
                 or
                 <demo-snippet type="bash" code="yarn add @ngqp/core"></demo-snippet>
@@ -24,10 +16,6 @@
 
         <ngb-tab title="Version Compatibility">
             <ng-template ngbTabContent>
-                When installing using <code>ng add</code>, we will take care of installing the correct version based
-                on the version of Angular you are using. Otherwise, or if you update Angular, make sure to use the
-                correct version of ngqp given the following compatibility table:
-
                 <div class="d-flex justify-content-center mt-3">
                     <table class="table table-bordered d-inline-block w-auto">
                         <thead>
