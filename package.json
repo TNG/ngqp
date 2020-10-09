@@ -14,7 +14,6 @@
         "core:test:watch": "ng test @ngqp/core --watch=true",
         "core:release:prepare": "scripts/prepare-release.sh",
         "core:release:publish": "yarn core:release:prepare && scripts/publish-release.sh",
-        "schematics:build": "scripts/build-schematics.sh",
         "demo:build": "ng build ngqp-demo",
         "demo:build:prod": "yarn demo:build --prod",
         "demo:release:prepare": "yarn core:build && yarn demo:build:prod --base-href=\"https://www.ngqp.io\" && yarn api-docs:build",
@@ -50,7 +49,6 @@
         "core-js": "^2.6.2",
         "prismjs": "^1.21.0",
         "rxjs": "~6.3.3",
-        "schematics-utilities": "^1.1.2",
         "tslib": "^1.9.0",
         "yarn": "^1.22.0",
         "zone.js": "~0.8.29"
