@@ -13,7 +13,7 @@ echo "[3] Updating CHANGELOG"
 cd projects/ngqp/core; standard-version --infile ../../../CHANGELOG.md; cd -
 
 echo "[4] Building @ngqp/core"
-yarn run core:build
+yarn run core:build:prod
 
 echo "[5] Copy README and LICENSE"
 cp README.md dist/ngqp/core
