@@ -402,7 +402,7 @@ export abstract class AbstractQueryParam&lt;U, T&gt; extends AbstractQueryParamB
     public readonly emptyOn?: T | null;
 
     /** See {@link QueryParamOpts}. */
-    public readonly compareWith?: Comparator&lt;T&gt;;
+    public readonly compareWith?: Comparator&lt;T | null&gt;;
 
     /** See {@link QueryParamOpts}. */
     public readonly combineWith?: ParamCombinator&lt;T&gt;;
@@ -640,6 +640,7 @@ export class PartitionedQueryParam&lt;T, G extends unknown[] &#x3D; unknown[]&gt
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'PartitionedQueryParam.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

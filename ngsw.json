@@ -1,19 +1,23 @@
 {
   "configVersion": 1,
-  "timestamp": 1602225160321,
+  "timestamp": 1602846787595,
   "index": "https://www.ngqp.io/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
         "https://www.ngqp.io/favicon.ico",
         "https://www.ngqp.io/index.html",
-        "https://www.ngqp.io/main.ac6f5b9dc874c32070f9.js",
-        "https://www.ngqp.io/polyfills.f4b0bee597ee6da50cdf.js",
-        "https://www.ngqp.io/runtime.a5dd35324ddfd942bef1.js",
-        "https://www.ngqp.io/styles.d369fed480ef0605960d.css"
+        "https://www.ngqp.io/main.4a187e22bf56fe15d337.js",
+        "https://www.ngqp.io/polyfills-es5.107ac61e5045aa0b8a53.js",
+        "https://www.ngqp.io/polyfills.68e6432db4d73a03d4ec.js",
+        "https://www.ngqp.io/runtime.076604685350bc36956d.js",
+        "https://www.ngqp.io/styles.4e9a54b49326622f8d8f.css"
       ],
       "patterns": []
     },
@@ -21,6 +25,9 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
       "urls": [
         "https://www.ngqp.io/assets/icons/icon-128x128.png",
         "https://www.ngqp.io/assets/icons/icon-144x144.png",
@@ -49,11 +56,12 @@
     "https://www.ngqp.io/assets/logo.png": "15ee4a615091cf5a5d412ef2c63b5f25331ef29d",
     "https://www.ngqp.io/assets/logo.svg": "1c0429f0ff733d22a9268ed85a6d22210ac86a98",
     "https://www.ngqp.io/favicon.ico": "3a0cdb8a4a0721e58bc49bf7b9736dc820a814da",
-    "https://www.ngqp.io/index.html": "7e9140d6a907ae8d75eb6a3ca2b48a7fd1f6e9bc",
-    "https://www.ngqp.io/main.ac6f5b9dc874c32070f9.js": "b42c90ed85156ab78f60d808910af6a90a9ba762",
-    "https://www.ngqp.io/polyfills.f4b0bee597ee6da50cdf.js": "5b14d88aabd17ec6fa713740d074cd13b37d81a8",
-    "https://www.ngqp.io/runtime.a5dd35324ddfd942bef1.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "https://www.ngqp.io/styles.d369fed480ef0605960d.css": "cf9de666b1d18ffa6d3b2dd8065f49edeeb960bd"
+    "https://www.ngqp.io/index.html": "5b8c881572ed6a8d5f54d4a329dda80a038ff8ab",
+    "https://www.ngqp.io/main.4a187e22bf56fe15d337.js": "3a88253ed4659c0a822fb8711c6f1a4a93262fc2",
+    "https://www.ngqp.io/polyfills-es5.107ac61e5045aa0b8a53.js": "e4b7a833d4fbe08a30d3f8e9de479318ec9df39b",
+    "https://www.ngqp.io/polyfills.68e6432db4d73a03d4ec.js": "46fade8f486a4f86b32d1a01a291103898e9578f",
+    "https://www.ngqp.io/runtime.076604685350bc36956d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://www.ngqp.io/styles.4e9a54b49326622f8d8f.css": "3a3bd6d56fcd0ed128b5373e858ea6bf978561e2"
   },
   "navigationUrls": [
     {
