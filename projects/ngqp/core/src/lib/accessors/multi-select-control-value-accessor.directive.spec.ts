@@ -1,5 +1,5 @@
 import { Component, getDebugNode } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MultiSelectControlValueAccessorDirective } from './multi-select-control-value-accessor.directive';
 import { MultiSelectOptionDirective } from './multi-select-option.directive';
 
@@ -23,7 +23,7 @@ describe(MultiSelectControlValueAccessorDirective.name, () => {
     let option2: HTMLOptionElement;
     let accessor: MultiSelectControlValueAccessorDirective<any>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 MultiSelectControlValueAccessorDirective,

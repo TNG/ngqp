@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { DefaultRouterAdapter } from './default-router-adapter.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ describe(DefaultRouterAdapter.name, () => {
     const mockRoute = {};
     let adapter: DefaultRouterAdapter;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             providers: [
                 { provide: Router, useValue: mockRouter },

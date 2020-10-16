@@ -1,5 +1,5 @@
 import { Component, getDebugNode } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import { CheckboxControlValueAccessorDirective } from './checkbox-control-value-accessor.directive';
 
 @Component({
@@ -15,7 +15,7 @@ describe(CheckboxControlValueAccessorDirective.name, () => {
     let element: HTMLInputElement;
     let accessor: CheckboxControlValueAccessorDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 CheckboxControlValueAccessorDirective,

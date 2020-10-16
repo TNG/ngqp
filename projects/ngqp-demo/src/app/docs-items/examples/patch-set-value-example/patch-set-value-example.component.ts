@@ -11,8 +11,8 @@ export class PatchSetValueExampleComponent {
 
     public paramGroup: QueryParamGroup;
 
-    public markup = require('!raw-loader!./patch-set-value-example.component.html');
-    public typescript = require('!raw-loader!./patch-set-value-example.component.ts');
+    public markup = require('!raw-loader!./patch-set-value-example.component.html').default;
+    public typescript = require('!raw-loader!./patch-set-value-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({

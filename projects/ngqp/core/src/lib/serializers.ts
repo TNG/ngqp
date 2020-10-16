@@ -6,7 +6,7 @@ import { Comparator, ParamDeserializer, ParamSerializer } from './types';
  *
  * @param defaultValue Optional default value to return if the value to serialize is `undefined` or `null`.
  */
-export function createStringSerializer(defaultValue: string | null = null): ParamSerializer<string> {
+export function createStringSerializer(defaultValue: string | null = null): ParamSerializer<string | null> {
     return model => isMissing(model) ? defaultValue : model;
 }
 
@@ -15,7 +15,7 @@ export function createStringSerializer(defaultValue: string | null = null): Para
  *
  * @param defaultValue Optional default value to return if the value to deserialize is `undefined` or `null`.
  */
-export function createStringDeserializer(defaultValue: string | null = null): ParamDeserializer<string> {
+export function createStringDeserializer(defaultValue: string | null = null): ParamDeserializer<string | null> {
     return value => isMissing(value) ? defaultValue : value;
 }
 
@@ -24,7 +24,7 @@ export function createStringDeserializer(defaultValue: string | null = null): Pa
  *
  * @param defaultValue Optional default value to return if the value to serialize is `undefined` or `null`.
  */
-export function createNumberSerializer(defaultValue: string | null = null): ParamSerializer<number> {
+export function createNumberSerializer(defaultValue: string | null = null): ParamSerializer<number | null> {
     return model => isMissing(model) ? defaultValue : `${model}`;
 }
 
@@ -33,7 +33,7 @@ export function createNumberSerializer(defaultValue: string | null = null): Para
  *
  * @param defaultValue Optional default value to return if the value to deserialize is `undefined` or `null`.
  */
-export function createNumberDeserializer(defaultValue: number | null = null): ParamDeserializer<number> {
+export function createNumberDeserializer(defaultValue: number | null = null): ParamDeserializer<number | null> {
     return value => isMissing(value) ? defaultValue : parseFloat(value);
 }
 
@@ -42,7 +42,7 @@ export function createNumberDeserializer(defaultValue: number | null = null): Pa
  *
  * @param defaultValue Optional default value to return if the value to serialize is `undefined` or `null`.
  */
-export function createBooleanSerializer(defaultValue: string | null = null): ParamSerializer<boolean> {
+export function createBooleanSerializer(defaultValue: string | null = null): ParamSerializer<boolean | null> {
     return model => isMissing(model) ? defaultValue : `${model}`;
 }
 
@@ -51,7 +51,7 @@ export function createBooleanSerializer(defaultValue: string | null = null): Par
  *
  * @param defaultValue Optional default value to return if the value to deserialize is `undefined` or `null`.
  */
-export function createBooleanDeserializer(defaultValue: boolean | null = null): ParamDeserializer<boolean> {
+export function createBooleanDeserializer(defaultValue: boolean | null = null): ParamDeserializer<boolean | null> {
     return value => isMissing(value) ? defaultValue : (value === 'true' || value === '1');
 }
 

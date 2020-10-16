@@ -14,8 +14,8 @@ export class ManualWiringExampleComponent implements OnDestroy {
     public paramGroup: QueryParamGroup;
     public currentPage = 1;
 
-    public markup = require('!raw-loader!./manual-wiring-example.component.html');
-    public typescript = require('!raw-loader!./manual-wiring-example.component.ts');
+    public markup = require('!raw-loader!./manual-wiring-example.component.html').default;
+    public typescript = require('!raw-loader!./manual-wiring-example.component.ts').default;
 
     private componentDestroyed$ = new Subject<void>();
 

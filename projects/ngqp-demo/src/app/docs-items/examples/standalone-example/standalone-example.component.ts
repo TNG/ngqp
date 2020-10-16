@@ -11,8 +11,8 @@ export class StandaloneExampleComponent {
 
     public param: QueryParam<string>;
 
-    public markup = require('!raw-loader!./standalone-example.component.html');
-    public typescript = require('!raw-loader!./standalone-example.component.ts');
+    public markup = require('!raw-loader!./standalone-example.component.html').default;
+    public typescript = require('!raw-loader!./standalone-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.param = qpb.stringParam('q');

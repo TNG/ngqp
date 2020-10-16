@@ -10,8 +10,8 @@ export class QueryParamModuleConfigurationDocsComponent {
 
     public readonly DocsPage = DocsPage;
 
-    public readonly withConfigSnippet = require('!raw-loader!./snippets/qpm-with-config.example.ts');
-    public readonly replaceUrlConfigSnippet = require('!raw-loader!./snippets/qpm-config-replaceUrl.example.ts');
-    public readonly preserveFragmentConfigSnippet = require('!raw-loader!./snippets/qpm-config-preserveFragment.example.ts');
+    public readonly withConfigSnippet = require('!raw-loader!./snippets/qpm-with-config.example.ts').default;
+    public readonly replaceUrlConfigSnippet = require('!raw-loader!./snippets/qpm-config-replaceUrl.example.ts').default;
+    public readonly preserveFragmentConfigSnippet = require('!raw-loader!./snippets/qpm-config-preserveFragment.example.ts').default;
 
 }

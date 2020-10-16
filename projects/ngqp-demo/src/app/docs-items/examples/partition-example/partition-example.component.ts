@@ -11,8 +11,8 @@ export class PartitionExampleComponent {
 
     public paramGroup: QueryParamGroup;
 
-    public markup = require('!raw-loader!./partition-example.component.html');
-    public typescript = require('!raw-loader!./partition-example.component.ts');
+    public markup = require('!raw-loader!./partition-example.component.html').default;
+    public typescript = require('!raw-loader!./partition-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({

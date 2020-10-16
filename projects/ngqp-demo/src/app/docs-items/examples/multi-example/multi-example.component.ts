@@ -12,8 +12,8 @@ export class MultiExampleComponent {
     public paramGroup: QueryParamGroup;
     public fruits: string[] = [ 'Apple', 'Banana', 'Strawberry', 'Raspberry', 'Mango', 'Passion Fruit', 'Orange' ];
 
-    public markup = require('!raw-loader!./multi-example.component.html');
-    public typescript = require('!raw-loader!./multi-example.component.ts');
+    public markup = require('!raw-loader!./multi-example.component.html').default;
+    public typescript = require('!raw-loader!./multi-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({

@@ -1,5 +1,5 @@
 import { Component, getDebugNode } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ControlValueAccessorDirective } from './control-value-accessor.directive';
 
 @Component({
@@ -19,7 +19,7 @@ describe(ControlValueAccessorDirective.name, () => {
     let element: HTMLInputElement;
     let accessor: ControlValueAccessorDirective<string>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 ControlValueAccessorDirective,

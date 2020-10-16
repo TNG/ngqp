@@ -12,8 +12,8 @@ export class ReplaceUrlExampleComponent {
     public replaceParamGroup: QueryParamGroup;
     public noReplaceParamGroup: QueryParamGroup;
 
-    public markup = require('!raw-loader!./replace-url-example.component.html');
-    public typescript = require('!raw-loader!./replace-url-example.component.ts');
+    public markup = require('!raw-loader!./replace-url-example.component.html').default;
+    public typescript = require('!raw-loader!./replace-url-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.replaceParamGroup = this.qpb.group({

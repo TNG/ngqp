@@ -48,7 +48,7 @@ export interface QueryParamOptsBase<U, T> {
      *
      * See {@link Comparator}.
      */
-    compareWith?: Comparator<T>;
+    compareWith?: Comparator<T | null>;
 
     /**
      * Execute a side effect on other query parameters.

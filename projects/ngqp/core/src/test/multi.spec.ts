@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
 import { setupNavigationWarnStub } from './util';
@@ -36,7 +36,7 @@ describe('ngqp', () => {
 
     beforeEach(() => setupNavigationWarnStub());
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes([]),
@@ -47,7 +47,7 @@ describe('ngqp', () => {
             ],
         });
 
-        router = TestBed.get(Router);
+        router = TestBed.inject(Router);
         TestBed.compileComponents();
         router.initialNavigation();
     }));
