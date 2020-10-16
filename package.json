@@ -16,7 +16,7 @@
         "core:release:publish": "yarn core:release:prepare && scripts/publish-release.sh",
         "demo:build": "ng build ngqp-demo",
         "demo:build:prod": "yarn demo:build --prod",
-        "demo:release:prepare": "yarn core:build && yarn demo:build:prod --base-href=\"https://www.ngqp.io\" && yarn api-docs:build",
+        "demo:release:prepare": "yarn core:build:prod && yarn demo:build:prod --base-href=\"https://www.ngqp.io\" && yarn api-docs:build",
         "demo:release:publish": "yarn demo:release:prepare && npx ngh --dir=dist/ngqp-demo --cname=\"www.ngqp.io\"",
         "demo:serve": "ng serve ngqp-demo",
         "api-docs:build": "scripts/build-api-docs.sh",
