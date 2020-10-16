@@ -10,7 +10,7 @@ export class QueryParamGroupConfigurationDocsComponent {
 
     public readonly DocsPage = DocsPage;
 
-    public readonly configSnippet = require('!raw-loader!./snippets/qpg-config.example.ts');
-    public readonly preserveFragmentConfigSnippet = require('!raw-loader!./snippets/qpg-config-preserveFragment.example.ts');
+    public readonly configSnippet = require('!raw-loader!./snippets/qpg-config.example.ts').default;
+    public readonly preserveFragmentConfigSnippet = require('!raw-loader!./snippets/qpg-config-preserveFragment.example.ts').default;
 
 }

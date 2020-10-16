@@ -46,7 +46,7 @@ export function wrapTryCatch<T extends Function>(fn: T, msg: string): T {
 }
 
 /** @internal */
-export function areEqualUsing<T>(first: T, second: T, comparator: Comparator<T>): boolean {
+export function areEqualUsing<T>(first: T | null, second: T | null, comparator: Comparator<T | null>): boolean {
     const comparison = comparator(first, second);
     if (typeof comparison === 'boolean') {
         return comparison;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
 import { captureObservable, scheduler, setupNavigationWarnStub } from './util';
@@ -33,7 +33,7 @@ describe('Location', () => {
 
     beforeEach(() => setupNavigationWarnStub());
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes([]),
@@ -44,8 +44,8 @@ describe('Location', () => {
             ],
         });
 
-        router = TestBed.get(Router);
-        location = TestBed.get(Location);
+        router = TestBed.inject(Router);
+        location = TestBed.inject(Location);
 
         TestBed.compileComponents();
         router.initialNavigation();

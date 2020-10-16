@@ -70,7 +70,6 @@
         "no-trailing-whitespace": true,
         "no-unnecessary-initializer": true,
         "no-unused-expression": true,
-        "no-use-before-declare": false,
         "no-var-keyword": true,
         "object-literal-sort-keys": false,
         "one-line": [
@@ -115,9 +114,9 @@
             "check-type"
         ],
         "no-output-on-prefix": true,
-        "use-input-property-decorator": true,
-        "use-output-property-decorator": true,
-        "use-host-property-decorator": true,
+        "no-inputs-metadata-property": true,
+        "no-outputs-metadata-property": true,
+        "no-host-metadata-property": true,
         "no-input-rename": false,
         "no-output-rename": false,
         "use-life-cycle-interface": true,

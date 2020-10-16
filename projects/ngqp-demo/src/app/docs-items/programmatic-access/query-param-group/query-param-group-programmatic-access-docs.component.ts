@@ -10,9 +10,9 @@ export class QueryParamGroupProgrammaticAccessDocsComponent {
 
     public readonly DocsPage = DocsPage;
 
-    public readonly getSnippet = require('!raw-loader!./snippets/qpg-api-get.example.ts');
-    public readonly valueSnippet = require('!raw-loader!./snippets/qpg-api-value.example.ts');
-    public readonly valueChangesSnippet = require('!raw-loader!./snippets/qpg-api-valueChanges.example.ts');
+    public readonly getSnippet = require('!raw-loader!./snippets/qpg-api-get.example.ts').default;
+    public readonly valueSnippet = require('!raw-loader!./snippets/qpg-api-value.example.ts').default;
+    public readonly valueChangesSnippet = require('!raw-loader!./snippets/qpg-api-valueChanges.example.ts').default;
 
 
 }

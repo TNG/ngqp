@@ -11,8 +11,8 @@ export class ControlValueAccessorDirectiveExampleComponent {
 
     public paramGroup: QueryParamGroup;
 
-    public markup = require('!raw-loader!./control-value-accessor-directive-example.component.html');
-    public typescript = require('!raw-loader!./control-value-accessor-directive-example.component.ts');
+    public markup = require('!raw-loader!./control-value-accessor-directive-example.component.html').default;
+    public typescript = require('!raw-loader!./control-value-accessor-directive-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({

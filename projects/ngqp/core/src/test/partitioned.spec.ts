@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PartitionedQueryParam, QueryParam, QueryParamBuilder, QueryParamGroup, QueryParamModule } from '../public_api';
 import { captureObservable, scheduler, setupNavigationWarnStub } from './util';
@@ -39,7 +39,7 @@ describe('Partitioned parameters', () => {
 
     beforeEach(() => setupNavigationWarnStub());
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes([]),
@@ -50,7 +50,7 @@ describe('Partitioned parameters', () => {
             ],
         });
 
-        router = TestBed.get(Router);
+        router = TestBed.inject(Router);
         TestBed.compileComponents();
         router.initialNavigation();
     }));

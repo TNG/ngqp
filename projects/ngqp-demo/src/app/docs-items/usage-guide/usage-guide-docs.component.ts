@@ -10,8 +10,8 @@ export class UsageGuideDocsComponent {
 
     public DocsPage = DocsPage;
 
-    public defineModelSnippet = require('!raw-loader!./snippets/define-model.example.ts');
-    public bindModelSnippet = require('!raw-loader!./snippets/bind-model.example.html');
-    public usingModelSnippet = require('!raw-loader!./snippets/use-model.example.ts');
+    public defineModelSnippet = require('!!raw-loader!./snippets/define-model.example.ts').default;
+    public bindModelSnippet = require('!!raw-loader!./snippets/bind-model.example.html').default;
+    public usingModelSnippet = require('!!raw-loader!./snippets/use-model.example.ts').default;
 
 }

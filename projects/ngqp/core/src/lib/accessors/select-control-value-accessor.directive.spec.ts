@@ -1,5 +1,5 @@
 import { Component, getDebugNode } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectControlValueAccessorDirective } from './select-control-value-accessor.directive';
 import { SelectOptionDirective } from './select-option.directive';
 
@@ -23,7 +23,7 @@ describe(SelectControlValueAccessorDirective.name, () => {
     let option2: HTMLOptionElement;
     let accessor: SelectControlValueAccessorDirective<any>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 SelectControlValueAccessorDirective,

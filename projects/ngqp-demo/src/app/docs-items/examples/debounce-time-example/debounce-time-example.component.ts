@@ -11,8 +11,8 @@ export class DebounceTimeExampleComponent {
 
     public paramGroup: QueryParamGroup;
 
-    public markup = require('!raw-loader!./debounce-time-example.component.html');
-    public typescript = require('!raw-loader!./debounce-time-example.component.ts');
+    public markup = require('!raw-loader!./debounce-time-example.component.html').default;
+    public typescript = require('!raw-loader!./debounce-time-example.component.ts').default;
 
     constructor(private qpb: QueryParamBuilder) {
         this.paramGroup = qpb.group({

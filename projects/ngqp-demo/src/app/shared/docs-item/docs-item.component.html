@@ -12,13 +12,13 @@
             </demo-docs-navigation>
         </div>
 
-        <div *ngIf="fragmentService.fragments.length !== 0"  class="order-2 d-none d-xl-block col-xl-2 toc">
+        <div *ngIf="fragments.length !== 0"  class="order-2 d-none d-xl-block col-xl-2 toc">
             <div class="toc__content">
                 <a class="nav-link text-muted" routerLink="." [preserveFragment]="false">{{ docsPage | docsPageName }}</a>
                 <hr class="toc__hr" />
 
                 <ul class="nav flex-column text-muted pt-1">
-                    <li *ngFor="let fragment of fragmentService.fragments" class="nav-item">
+                    <li *ngFor="let fragment of fragments" class="nav-item">
                         <a class="nav-link" [attr.data-indent]="fragment.indent" routerLink="." [fragment]="fragment.id">
                             {{ fragment.name }}
                         </a>

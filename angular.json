@@ -14,6 +14,11 @@
                     "options": {
                         "tsConfig": "projects/ngqp/core/tsconfig.lib.json",
                         "project": "projects/ngqp/core/ng-package.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "projects/ngqp/core/tsconfig.lib.prod.json"
+                        }
                     }
                 },
                 "test": {
@@ -48,6 +53,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "aot": true,
                         "outputPath": "dist/ngqp-demo",
                         "index": "projects/ngqp-demo/src/index.html",
                         "main": "projects/ngqp-demo/src/main.ts",
@@ -85,6 +91,10 @@
                                     "type": "initial",
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
                                 }
                             ],
                             "serviceWorker": true
@@ -127,7 +137,7 @@
     "defaultProject": "@ngqp/core",
     "schematics": {
         "@schematics/angular:component": {
-            "styleext": "scss"
+            "style": "scss"
         }
     }
 }

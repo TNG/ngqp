@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { QueryParamBuilder, QueryParam, QueryParamGroup, QueryParamModule } from '../public_api';
 import { captureObservable, scheduler, setupNavigationWarnStub } from './util';
@@ -36,7 +36,7 @@ describe('QueryParamGroup#remove', () => {
 
     beforeEach(() => setupNavigationWarnStub());
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes([]),
@@ -47,8 +47,8 @@ describe('QueryParamGroup#remove', () => {
             ],
         });
 
-        router = TestBed.get(Router);
-        qpb = TestBed.get(QueryParamBuilder);
+        router = TestBed.inject(Router);
+        qpb = TestBed.inject(QueryParamBuilder);
         TestBed.compileComponents();
         router.initialNavigation();
     }));

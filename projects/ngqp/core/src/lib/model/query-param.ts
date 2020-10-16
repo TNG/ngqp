@@ -80,7 +80,7 @@ export abstract class AbstractQueryParam<U, T> extends AbstractQueryParamBase<T>
     public readonly emptyOn?: T | null;
 
     /** See {@link QueryParamOpts}. */
-    public readonly compareWith?: Comparator<T>;
+    public readonly compareWith?: Comparator<T | null>;
 
     /** See {@link QueryParamOpts}. */
     public readonly combineWith?: ParamCombinator<T>;

@@ -1,5 +1,5 @@
 import { Component, getDebugNode } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RangeControlValueAccessorDirective } from './range-control-value-accessor.directive';
 
 @Component({
@@ -15,7 +15,7 @@ describe(RangeControlValueAccessorDirective.name, () => {
     let element: HTMLInputElement;
     let accessor: RangeControlValueAccessorDirective;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 RangeControlValueAccessorDirective,

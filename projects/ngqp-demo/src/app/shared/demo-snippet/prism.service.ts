@@ -15,7 +15,7 @@ export class PrismService {
             return code;
         }
 
-        return prism.highlight(code, prism.languages[ language ]);
+        return prism.highlight(code, prism.languages[ language ], language);
     }
 
 }
