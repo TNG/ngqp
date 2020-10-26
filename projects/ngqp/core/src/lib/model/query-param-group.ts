@@ -170,12 +170,12 @@ export class QueryParamGroup {
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public setValue(value: Record<string, any>, opts: {
+    public setValue(value: Record<string, any> | null, opts: {
         emitEvent?: boolean,
         emitModelToViewChange?: boolean,
     } = {}): void {
         Object.keys(this.queryParams).forEach(queryParamName => {
-            this.queryParams[ queryParamName ].setValue(undefinedToNull(value[ queryParamName ]), {
+            this.queryParams[ queryParamName ].setValue(undefinedToNull(value?.[ queryParamName ]), {
                 emitEvent: opts.emitEvent,
                 onlySelf: true,
                 emitModelToViewChange: false,
