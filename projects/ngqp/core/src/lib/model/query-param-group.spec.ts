@@ -127,6 +127,12 @@ describe(QueryParamGroup.name, () => {
             expect(stringParam.value).toBeNull();
         });
 
+        it('allows null as the value', () => {
+            stringParam.value = 'Test';
+            group.setValue(null);
+            expect(stringParam.value).toBeNull();
+        });
+
         it('ignores non-existing parameters', () => {
             expect(() => group.setValue({ foo: 42 })).not.toThrow();
         });
