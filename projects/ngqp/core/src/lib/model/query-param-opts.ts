@@ -1,6 +1,17 @@
 import { Comparator, Reducer, Partitioner, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
 
 /**
+ * Configuration options for a {@link QueryParamGroup}.
+ */
+export interface QueryParamGroupOpts {
+    /**
+     * If set to {@code true} the query parameters will be removed from the URL when the directive
+     * binding it goes out of scope (i.e., is destroyed).
+     */
+    clearOnDestroy?: boolean;
+}
+
+/**
  * List of options which can be passed to {@link QueryParam}.
  */
 export interface QueryParamOptsBase<U, T> {

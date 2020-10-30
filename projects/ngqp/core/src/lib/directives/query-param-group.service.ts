@@ -75,10 +75,20 @@ export class QueryParamGroupService implements OnDestroy {
 
         this.synchronizeRouter$.complete();
 
-        if (this.queryParamGroup) {
-            this.queryParamGroup._clearChangeFunctions();
+        this.queryParamGroup?._clearChangeFunctions();
+        if (this.queryParamGroup?.options?.clearOnDestroy) {
+            const nullParams = Object.values(this.queryParamGroup.queryParams)
+                .map(queryParam => this.wrapIntoPartition(queryParam))
+                .map(partitionedQueryParam => partitionedQueryParam.queryParams.map(queryParam => queryParam.urlParam))
+                .reduce((a, b) => [...a, ...b], [])
+                .map(urlParam => ({[urlParam]: null}))
+                .reduce((a, b) => ({...a, ...b}), {});
+            this.routerAdapter.navigate(nullParams, {
+                replaceUrl: true,
+            }).then();
         }
     }
+
 
     /**
      * Uses the given {@link QueryParamGroup} for synchronization.

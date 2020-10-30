@@ -3,6 +3,7 @@ import { isMissing, undefinedToNull } from '../util';
 import { OnChangeFunction } from '../types';
 import { MultiQueryParam, QueryParam, PartitionedQueryParam } from './query-param';
 import { RouterOptions } from '../router-adapter/router-adapter.interface';
+import {QueryParamGroupOpts} from './query-param-opts';
 
 /**
  * Groups multiple {@link QueryParam} instances to a single unit.
@@ -39,14 +40,18 @@ export class QueryParamGroup {
     /** @internal */
     public readonly routerOptions: RouterOptions;
 
+    /** @internal */
+    public readonly options: QueryParamGroupOpts;
+
     private changeFunctions: OnChangeFunction<Record<string, any>>[] = [];
 
     constructor(
         queryParams: { [ queryParamName: string ]: QueryParam<unknown> | MultiQueryParam<unknown> | PartitionedQueryParam<unknown> },
-        extras: RouterOptions = {}
+        extras: RouterOptions & QueryParamGroupOpts = {}
     ) {
         this.queryParams = queryParams;
         this.routerOptions = extras;
+        this.options = extras;
 
         Object.values(this.queryParams).forEach(queryParam => queryParam._setParent(this));
     }

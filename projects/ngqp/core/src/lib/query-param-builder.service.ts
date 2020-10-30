@@ -11,7 +11,12 @@ import { LOOSE_IDENTITY_COMPARATOR } from './util';
 import { RouterOptions } from './router-adapter/router-adapter.interface';
 import { MultiQueryParam, QueryParam, PartitionedQueryParam } from './model/query-param';
 import { QueryParamGroup } from './model/query-param-group';
-import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts } from './model/query-param-opts';
+import {
+    MultiQueryParamOpts,
+    PartitionedQueryParamOpts,
+    QueryParamGroupOpts,
+    QueryParamOpts
+} from './model/query-param-opts';
 
 function isMultiOpts<T>(opts: QueryParamOpts<T> | MultiQueryParamOpts<T>): opts is MultiQueryParamOpts<T> {
     return opts.multi === true;
@@ -40,7 +45,7 @@ export class QueryParamBuilder {
      */
     public group(
         queryParams: { [ name: string ]: QueryParam<any> | MultiQueryParam<any> | PartitionedQueryParam<any> },
-        extras: RouterOptions = {}
+        extras: RouterOptions & QueryParamGroupOpts = {}
     ): QueryParamGroup {
         // TODO Maybe we should first validate that no two queryParams defined the same "param".
         return new QueryParamGroup(queryParams, extras);
