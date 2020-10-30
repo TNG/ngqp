@@ -12,5 +12,6 @@ export class QueryParamGroupConfigurationDocsComponent {
 
     public readonly configSnippet = require('!raw-loader!./snippets/qpg-config.example.ts').default;
     public readonly preserveFragmentConfigSnippet = require('!raw-loader!./snippets/qpg-config-preserveFragment.example.ts').default;
+    public readonly clearOnDestroyConfigSnippet = require('!raw-loader!./snippets/qpg-config-clearOnDestroy.example.ts').default;
 
 }

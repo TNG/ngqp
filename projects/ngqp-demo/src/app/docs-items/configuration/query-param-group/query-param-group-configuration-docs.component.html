@@ -30,4 +30,14 @@
         Defines whether a possibly set fragment in the URL should be preserved.
     </p>
     <demo-snippet type="typescript" [code]="preserveFragmentConfigSnippet"></demo-snippet>
+
+    <docs-fragment fragment="clearOnDestroy">
+        <h3>clearOnDestroy</h3>
+    </docs-fragment>
+    <p>
+        Remove query parameters from URL when the <span apiDocsLink>QueryParamGroup</span> goes out of scope.
+        This can be useful if you want to temporarily synchronize query parameters in a modal, but remove them
+        when the modal is closed.
+    </p>
+    <demo-snippet type="typescript" [code]="clearOnDestroyConfigSnippet"></demo-snippet>
 </docs-item>
