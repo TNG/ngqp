@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/TNG/ngqp/compare/v1.0.5...v1.1.0) (2020-11-03)
+
+
+### Features
+
+* **core:** added clearOnDestroy ([6928489](https://github.com/TNG/ngqp/commit/69284892adcf6da670a6ae345c89238f60392f35)), closes [#172](https://github.com/TNG/ngqp/issues/172)
+
+
+### Bug Fixes
+
+* **core:** allow QueryParamGroup#setValue to be called with null ([1c71733](https://github.com/TNG/ngqp/commit/1c71733347a038c439bc777727b6edd1ac1311f5)), closes [#172](https://github.com/TNG/ngqp/issues/172)
+
 ### [1.0.5](https://github.com/TNG/ngqp/compare/v1.0.4...v1.0.5) (2020-10-16)
 
 ### [1.0.4](https://github.com/TNG/ngqp/compare/v1.0.3...v1.0.4) (2020-10-09)
