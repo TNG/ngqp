@@ -150,8 +150,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="145"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:145</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="150"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:150</a></div>
                 </td>
             </tr>
 
@@ -236,15 +236,15 @@ instances and is the recommended way to set them up.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>group(queryParams: literal type, extras: <a href="../interfaces/RouterOptions.html">RouterOptions</a>)</code>
+                    <code>group(queryParams: literal type, extras)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:46</a></div>
                 </td>
             </tr>
 
@@ -290,7 +290,6 @@ instances and is the recommended way to set them up.</p>
                                 <tr>
                                     <td>extras</td>
                                     <td>
-                                                <code><a href="../interfaces/RouterOptions.html" target="_self" >RouterOptions</a></code>
                                     </td>
 
                                     <td>
@@ -347,8 +346,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="118"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:118</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:123</a></div>
                 </td>
             </tr>
 
@@ -440,8 +439,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="172"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:172</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="177"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:177</a></div>
                 </td>
             </tr>
 
@@ -541,8 +540,8 @@ instances and is the recommended way to set them up.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:80</a></div>
                 </td>
             </tr>
 
@@ -649,8 +648,8 @@ you can define a single query parameter that is partitioned into two others.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="91"
-                            class="link-to-prism">src/lib/query-param-builder.service.ts:91</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="96"
+                            class="link-to-prism">src/lib/query-param-builder.service.ts:96</a></div>
                 </td>
             </tr>
 
@@ -737,7 +736,12 @@ import { LOOSE_IDENTITY_COMPARATOR } from &#x27;./util&#x27;;
 import { RouterOptions } from &#x27;./router-adapter/router-adapter.interface&#x27;;
 import { MultiQueryParam, QueryParam, PartitionedQueryParam } from &#x27;./model/query-param&#x27;;
 import { QueryParamGroup } from &#x27;./model/query-param-group&#x27;;
-import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts } from &#x27;./model/query-param-opts&#x27;;
+import {
+    MultiQueryParamOpts,
+    PartitionedQueryParamOpts,
+    QueryParamGroupOpts,
+    QueryParamOpts
+} from &#x27;./model/query-param-opts&#x27;;
 
 function isMultiOpts&lt;T&gt;(opts: QueryParamOpts&lt;T&gt; | MultiQueryParamOpts&lt;T&gt;): opts is MultiQueryParamOpts&lt;T&gt; {
     return opts.multi &#x3D;&#x3D;&#x3D; true;
@@ -766,7 +770,7 @@ export class QueryParamBuilder {
      */
     public group(
         queryParams: { [ name: string ]: QueryParam&lt;any&gt; | MultiQueryParam&lt;any&gt; | PartitionedQueryParam&lt;any&gt; },
-        extras: RouterOptions &#x3D; {}
+        extras: RouterOptions &amp; QueryParamGroupOpts &#x3D; {}
     ): QueryParamGroup {
         // TODO Maybe we should first validate that no two queryParams defined the same &quot;param&quot;.
         return new QueryParamGroup(queryParams, extras);

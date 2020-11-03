@@ -158,12 +158,12 @@ to and from the URL.</p>
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(queryParams: literal type, extras: <a href="../interfaces/RouterOptions.html">RouterOptions</a>)</code>
+<code>constructor(queryParams: literal type, extras)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/lib/model/query-param-group.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/lib/model/query-param-group.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -196,7 +196,6 @@ to and from the URL.</p>
                                                         <td>extras</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../interfaces/RouterOptions.html" target="_self" >RouterOptions</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -245,7 +244,7 @@ to and from the URL.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/lib/model/query-param-group.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/lib/model/query-param-group.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -293,8 +292,8 @@ one parameter&#39;s value is changed.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="92"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:92</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:97</a></div>
                 </td>
             </tr>
 
@@ -391,8 +390,8 @@ it is treated just like any other parameter in this group.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:73</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:78</a></div>
                 </td>
             </tr>
 
@@ -473,8 +472,8 @@ if no parameter with that name is found in this group.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="144"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:144</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:149</a></div>
                 </td>
             </tr>
 
@@ -576,8 +575,8 @@ value. If a parameter is not listed, its value remains unchanged.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="111"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:111</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="116"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:116</a></div>
                 </td>
             </tr>
 
@@ -651,15 +650,15 @@ be reported in the value of this group anymore.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setValue(value: Record<string | any>, opts: literal type)</code>
+                    <code>setValue(value: Record<string | any> | null, opts: literal type)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="173"
-                            class="link-to-prism">src/lib/model/query-param-group.ts:173</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="178"
+                            class="link-to-prism">src/lib/model/query-param-group.ts:178</a></div>
                 </td>
             </tr>
 
@@ -687,7 +686,7 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                                 <tr>
                                     <td>value</td>
                                     <td>
-                                            <code>Record&lt;string | any&gt;</code>
+                                            <code>Record&lt;string | any&gt; | null</code>
                                     </td>
 
                                     <td>
@@ -763,7 +762,7 @@ value. If a parameter is not listed, its value is set to <code>undefined</code>.
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/lib/model/query-param-group.ts:128</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/lib/model/query-param-group.ts:133</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -792,6 +791,7 @@ import { isMissing, undefinedToNull } from &#x27;../util&#x27;;
 import { OnChangeFunction } from &#x27;../types&#x27;;
 import { MultiQueryParam, QueryParam, PartitionedQueryParam } from &#x27;./query-param&#x27;;
 import { RouterOptions } from &#x27;../router-adapter/router-adapter.interface&#x27;;
+import {QueryParamGroupOpts} from &#x27;./query-param-opts&#x27;;
 
 /**
  * Groups multiple {@link QueryParam} instances to a single unit.
@@ -828,14 +828,18 @@ export class QueryParamGroup {
     /** @internal */
     public readonly routerOptions: RouterOptions;
 
+    /** @internal */
+    public readonly options: QueryParamGroupOpts;
+
     private changeFunctions: OnChangeFunction&lt;Record&lt;string, any&gt;&gt;[] &#x3D; [];
 
     constructor(
         queryParams: { [ queryParamName: string ]: QueryParam&lt;unknown&gt; | MultiQueryParam&lt;unknown&gt; | PartitionedQueryParam&lt;unknown&gt; },
-        extras: RouterOptions &#x3D; {}
+        extras: RouterOptions &amp; QueryParamGroupOpts &#x3D; {}
     ) {
         this.queryParams &#x3D; queryParams;
         this.routerOptions &#x3D; extras;
+        this.options &#x3D; extras;
 
         Object.values(this.queryParams).forEach(queryParam &#x3D;&gt; queryParam._setParent(this));
     }
@@ -959,12 +963,12 @@ export class QueryParamGroup {
      * @param value See {@link QueryParamGroup#valueChanges} for a description of the format.
      * @param opts Additional options
      */
-    public setValue(value: Record&lt;string, any&gt;, opts: {
+    public setValue(value: Record&lt;string, any&gt; | null, opts: {
         emitEvent?: boolean,
         emitModelToViewChange?: boolean,
     } &#x3D; {}): void {
         Object.keys(this.queryParams).forEach(queryParamName &#x3D;&gt; {
-            this.queryParams[ queryParamName ].setValue(undefinedToNull(value[ queryParamName ]), {
+            this.queryParams[ queryParamName ].setValue(undefinedToNull(value?.[ queryParamName ]), {
                 emitEvent: opts.emitEvent,
                 onlySelf: true,
                 emitModelToViewChange: false,

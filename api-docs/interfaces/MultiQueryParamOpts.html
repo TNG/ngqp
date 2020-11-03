@@ -145,6 +145,17 @@ multiple times, e.g. <code>https://www.app.io?param=A&amp;param=B&amp;param=C</c
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Comparator, Reducer, Partitioner, ParamCombinator, ParamDeserializer, ParamSerializer } from &#x27;../types&#x27;;
 
 /**
+ * Configuration options for a {@link QueryParamGroup}.
+ */
+export interface QueryParamGroupOpts {
+    /**
+     * If set to {@code true} the query parameters will be removed from the URL when the directive
+     * binding it goes out of scope (i.e., is destroyed).
+     */
+    clearOnDestroy?: boolean;
+}
+
+/**
  * List of options which can be passed to {@link QueryParam}.
  */
 export interface QueryParamOptsBase&lt;U, T&gt; {

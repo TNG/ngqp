@@ -143,6 +143,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/PartitionedQueryParamOpts.html" data-type="entity-link">PartitionedQueryParamOpts</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/QueryParamGroupOpts.html" data-type="entity-link">QueryParamGroupOpts</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/QueryParamOpts.html" data-type="entity-link">QueryParamOpts</a>
                             </li>
                             <li class="link">
