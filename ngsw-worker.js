@@ -244,6 +244,12 @@
             return `${error}`;
         }
     }
+    class SwUnrecoverableStateError extends SwCriticalError {
+        constructor() {
+            super(...arguments);
+            this.isUnrecoverableState = true;
+        }
+    }
 
     /**
      * @license
@@ -255,7 +261,7 @@
     /**
      * Compute the SHA1 of the given string
      *
-     * see http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf
+     * see https://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf
      *
      * WARNING: this function has not been designed not tested with security in mind.
      *          DO NOT USE IT IN A SECURITY SENSITIVE CONTEXT.
@@ -725,17 +731,16 @@
                     // without the risk of stale data, at the expense of a duplicate request in the event of
                     // a stale response.
                     // Fetch the resource from the network (possibly hitting the HTTP cache).
-                    const networkResult = yield this.safeFetch(req);
-                    // Decide whether a cache-busted request is necessary. It might be for two independent
-                    // reasons: either the non-cache-busted request failed (hopefully transiently) or if the
-                    // hash of the content retrieved does not match the canonical hash from the manifest. It's
-                    // only valid to access the content of the first response if the request was successful.
-                    let makeCacheBustedRequest = networkResult.ok;
+                    let response = yield this.safeFetch(req);
+                    // Decide whether a cache-busted request is necessary. A cache-busted request is necessary
+                    // only if the request was successful but the hash of the retrieved contents does not match
+                    // the canonical hash from the manifest.
+                    let makeCacheBustedRequest = response.ok;
                     if (makeCacheBustedRequest) {
                         // The request was successful. A cache-busted request is only necessary if the hashes
-                        // don't match. Compare them, making sure to clone the response so it can be used later
-                        // if it proves to be valid.
-                        const fetchedHash = sha1Binary(yield networkResult.clone().arrayBuffer());
+                        // don't match.
+                        // (Make sure to clone the response so it can be used later if it proves to be valid.)
+                        const fetchedHash = sha1Binary(yield response.clone().arrayBuffer());
                         makeCacheBustedRequest = (fetchedHash !== canonicalHash);
                     }
                     // Make a cache busted request to the network, if necessary.
@@ -746,24 +751,27 @@
                         // request will differentiate these two situations.
                         // TODO: handle case where the URL has parameters already (unlikely for assets).
                         const cacheBustReq = this.adapter.newRequest(this.cacheBust(req.url));
-                        const cacheBustedResult = yield this.safeFetch(cacheBustReq);
-                        // If the response was unsuccessful, there's nothing more that can be done.
-                        if (!cacheBustedResult.ok) {
-                            throw new SwCriticalError(`Response not Ok (cacheBustedFetchFromNetwork): cache busted request for ${req.url} returned response ${cacheBustedResult.status} ${cacheBustedResult.statusText}`);
+                        response = yield this.safeFetch(cacheBustReq);
+                        // If the response was successful, check the contents against the canonical hash.
+                        if (response.ok) {
+                            // Hash the contents.
+                            // (Make sure to clone the response so it can be used later if it proves to be valid.)
+                            const cacheBustedHash = sha1Binary(yield response.clone().arrayBuffer());
+                            // If the cache-busted version doesn't match, then the manifest is not an accurate
+                            // representation of the server's current set of files, and the SW should give up.
+                            if (canonicalHash !== cacheBustedHash) {
+                                throw new SwCriticalError(`Hash mismatch (cacheBustedFetchFromNetwork): ${req.url}: expected ${canonicalHash}, got ${cacheBustedHash} (after cache busting)`);
+                            }
                         }
-                        // Hash the contents.
-                        const cacheBustedHash = sha1Binary(yield cacheBustedResult.clone().arrayBuffer());
-                        // If the cache-busted version doesn't match, then the manifest is not an accurate
-                        // representation of the server's current set of files, and the SW should give up.
-                        if (canonicalHash !== cacheBustedHash) {
-                            throw new SwCriticalError(`Hash mismatch (cacheBustedFetchFromNetwork): ${req.url}: expected ${canonicalHash}, got ${cacheBustedHash} (after cache busting)`);
-                        }
-                        // If it does match, then use the cache-busted result.
-                        return cacheBustedResult;
                     }
-                    // Excellent, the version from the network matched on the first try, with no need for
-                    // cache-busting. Use it.
-                    return networkResult;
+                    // At this point, `response` is either successful with a matching hash or is unsuccessful.
+                    // Before returning it, check whether it failed with a 404 status. This would signify an
+                    // unrecoverable state.
+                    if (!response.ok && (response.status === 404)) {
+                        throw new SwUnrecoverableStateError(`Failed to retrieve hashed resource from the server. (AssetGroup: ${this.config.name} | URL: ${url})`);
+                    }
+                    // Return the response (successful or unsuccessful).
+                    return response;
                 }
                 else {
                     // This URL doesn't exist in our hash database, so it must be requested directly.
@@ -1536,6 +1544,18 @@
                 // Next, check if this is a navigation request for a route. Detect circular
                 // navigations by checking if the request URL is the same as the index URL.
                 if (this.adapter.normalizeUrl(req.url) !== this.indexUrl && this.isNavigationRequest(req)) {
+                    if (this.manifest.navigationRequestStrategy === 'freshness') {
+                        // For navigation requests the freshness was configured. The request will always go trough
+                        // the network and fallback to default `handleFetch` behavior in case of failure.
+                        try {
+                            return yield this.scope.fetch(req);
+                        }
+                        catch (_a) {
+                            // Navigation request failed - application is likely offline.
+                            // Proceed forward to the default `handleFetch` behavior, where
+                            // `indexUrl` will be requested and it should be available in the cache.
+                        }
+                    }
                     // This was a navigation request. Re-enter `handleFetch` with a request for
                     // the URL.
                     return this.handleFetch(this.adapter.newRequest(this.indexUrl), context);
@@ -2207,6 +2227,9 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
                     res = yield appVersion.handleFetch(event.request, event);
                 }
                 catch (err) {
+                    if (err.isUnrecoverableState) {
+                        yield this.notifyClientsAboutUnrecoverableState(appVersion, err.message);
+                    }
                     if (err.isCritical) {
                         // Something went wrong with the activation of this version.
                         yield this.versionFailed(appVersion, err);
@@ -2717,6 +2740,23 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
                 hash,
                 appData: manifest.appData,
             };
+        }
+        notifyClientsAboutUnrecoverableState(appVersion, reason) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const broken = Array.from(this.versions.entries()).find(([hash, version]) => version === appVersion);
+                if (broken === undefined) {
+                    // This version is no longer in use anyway, so nobody cares.
+                    return;
+                }
+                const brokenHash = broken[0];
+                const affectedClients = Array.from(this.clientVersionMap.entries())
+                    .filter(([clientId, hash]) => hash === brokenHash)
+                    .map(([clientId]) => clientId);
+                affectedClients.forEach((clientId) => __awaiter(this, void 0, void 0, function* () {
+                    const client = yield this.scope.clients.get(clientId);
+                    client.postMessage({ type: 'UNRECOVERABLE_STATE', reason });
+                }));
+            });
         }
         notifyClientsAboutUpdate(next) {
             return __awaiter(this, void 0, void 0, function* () {

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1604390279322,
+  "timestamp": 1610111721810,
   "index": "https://www.ngqp.io/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "https://www.ngqp.io/favicon.ico",
         "https://www.ngqp.io/index.html",
-        "https://www.ngqp.io/main.6469e78b7ffa97abe73e.js",
-        "https://www.ngqp.io/polyfills-es5.107ac61e5045aa0b8a53.js",
-        "https://www.ngqp.io/polyfills.68e6432db4d73a03d4ec.js",
-        "https://www.ngqp.io/runtime.076604685350bc36956d.js",
+        "https://www.ngqp.io/main.47c7753872a40b3662ad.js",
+        "https://www.ngqp.io/polyfills-es5.03e2cf47944f6d03f7b6.js",
+        "https://www.ngqp.io/polyfills.c5bd725e78a0dc152a69.js",
+        "https://www.ngqp.io/runtime.7b63b9fd40098a2e8207.js",
         "https://www.ngqp.io/styles.4e9a54b49326622f8d8f.css"
       ],
       "patterns": []
@@ -56,11 +56,11 @@
     "https://www.ngqp.io/assets/logo.png": "15ee4a615091cf5a5d412ef2c63b5f25331ef29d",
     "https://www.ngqp.io/assets/logo.svg": "1c0429f0ff733d22a9268ed85a6d22210ac86a98",
     "https://www.ngqp.io/favicon.ico": "3a0cdb8a4a0721e58bc49bf7b9736dc820a814da",
-    "https://www.ngqp.io/index.html": "c337649e4702bc5ff4ad461a399c4f27c030aca1",
-    "https://www.ngqp.io/main.6469e78b7ffa97abe73e.js": "8a9d7ca3889feb7d24b1a901e01b2699b9d33f7b",
-    "https://www.ngqp.io/polyfills-es5.107ac61e5045aa0b8a53.js": "e4b7a833d4fbe08a30d3f8e9de479318ec9df39b",
-    "https://www.ngqp.io/polyfills.68e6432db4d73a03d4ec.js": "46fade8f486a4f86b32d1a01a291103898e9578f",
-    "https://www.ngqp.io/runtime.076604685350bc36956d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://www.ngqp.io/index.html": "0174c23cf7825bdbf317524b6721cca59024c38a",
+    "https://www.ngqp.io/main.47c7753872a40b3662ad.js": "74186aef751fb734a5b3fff20d7167954142f695",
+    "https://www.ngqp.io/polyfills-es5.03e2cf47944f6d03f7b6.js": "82dea8efa4bfe27f0fb36b6c70c9c3307105080a",
+    "https://www.ngqp.io/polyfills.c5bd725e78a0dc152a69.js": "699b2082c052918e9b975e22c1d63bab59b73268",
+    "https://www.ngqp.io/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "https://www.ngqp.io/styles.4e9a54b49326622f8d8f.css": "3a3bd6d56fcd0ed128b5373e858ea6bf978561e2"
   },
   "navigationUrls": [
@@ -80,5 +80,6 @@
       "positive": false,
       "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
     }
-  ]
+  ],
+  "navigationRequestStrategy": "performance"
 }
