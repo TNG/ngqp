@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [12.0.0](https://github.com/TNG/ngqp/compare/v1.2.0...v12.0.0) (2021-05-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* support Angular 12 and drop old versions
+
+### Features
+
+* support Angular 12 and drop old versions ([8045e1e](https://github.com/TNG/ngqp/commit/8045e1e1347a5d84d28a3f7ee3b67cfe2ff06210)), closes [#189](https://github.com/TNG/ngqp/issues/189)
+
 ## [1.2.0](https://github.com/TNG/ngqp/compare/v1.1.0...v1.2.0) (2021-01-08)
 
 
