@@ -1,0 +1,31 @@
+name: ngqp CI
+
+on: [push]
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node 16.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '16.x'
+            - uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - name: Lint
+              run: yarn run lint
+            - name: Build ngqp
+              run: yarn run core:build
+            - name: Execute tests
+              run: yarn run core:test
+            - name: Build demo
+              run: yarn run demo:build:prod
+            - name: Code coverage
+              run: yarn run codecov
