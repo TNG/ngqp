@@ -1,0 +1,17 @@
+name: Lint commit messages
+
+# See https://github.com/conventional-changelog/commitlint/issues/586#issuecomment-657226800
+on: [pull_request]
+jobs:
+    lint-commits:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2.3.1
+              with:
+                  # we actually need "github.event.pull_request.commits + 1" commit
+                  fetch-depth: 0
+            - uses: actions/setup-node@v2.1.0
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+            - name: Run commitlint
+              run: yarn run commitlint --from HEAD~${{ github.event.pull_request.commits }} --to HEAD
