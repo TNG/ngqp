@@ -1,19 +1,22 @@
-<ngb-tabset [destroyOnHide]="false" (tabChange)="onTabChange($event)" class="bordered no-padding">
-    <ngb-tab id="Demo" title="Demo">
-        <ng-template ngbTabContent>
+<ul ngbNav #nav="ngbNav" [destroyOnHide]="false" (activeIdChange)="onTabChange($event)" class="bordered no-padding">
+    <li ngbNavItem="demo">
+        <a ngbNavLink>Demo</a>
+        <ng-template ngbNavContent>
             <ng-content></ng-content>
         </ng-template>
-    </ngb-tab>
-
-    <ngb-tab *ngIf="markup" id="HTML" title="HTML">
-        <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem="HTML">
+        <a ngbNavLink>HTML</a>
+        <ng-template ngbNavContent>
             <demo-snippet type="html" [code]="markup" class="m-0"></demo-snippet>
         </ng-template>
-    </ngb-tab>
-
-    <ngb-tab *ngIf="typescript" id="Typescript" title="Typescript">
-        <ng-template ngbTabContent>
+    </li>
+    <li ngbNavItem="Typescript">
+        <a ngbNavLink>Typescript</a>
+        <ng-template ngbNavContent>
             <demo-snippet type="typescript" [code]="typescript" class="m-0"></demo-snippet>
         </ng-template>
-    </ngb-tab>
-</ngb-tabset>
+    </li>
+</ul>
+
+<div [ngbNavOutlet]="nav"></div>

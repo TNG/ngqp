@@ -1,4 +1,4 @@
-import { forkJoin, isObservable, Observable, of, Subject } from 'rxjs';
+import { forkJoin, Observable, of, Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapIntoObservable, wrapTryCatch } from '../util';
 import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from '../types';
@@ -216,7 +216,7 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
             return of([]);
         }
 
-        return forkJoin<T | null>(...values
+        return forkJoin(values
             .map(value => wrapIntoObservable(this.deserialize(value)).pipe(first()))
         );
     }
