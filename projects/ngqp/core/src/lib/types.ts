@@ -14,6 +14,16 @@ export type ParamSerializer<T> = (model: T | null) => string | null;
 export type ParamDeserializer<T> = (value: string | null) => (T | null) | Observable<T | null>;
 
 /**
+ * Like {@link ParamSerializer}, but for an array of values for multi-values params.
+ */
+export type MultiParamSerializer<T> = (model: (T | null)[] | null) => (string | null)[] | null;
+
+/**
+ * Like {@link ParamDeserializer}, but for an array of values for multi-values params.
+ */
+export type MultiParamDeserializer<T> = (value: (string | null)[] | null) => ((T | null)[] | null) | Observable<(T | null)[] | null>;
+
+/**
  * A partitioner can split a value into an array of parts.
  */
 export type Partitioner<T, R extends unknown[]> = (value: T) => R;
