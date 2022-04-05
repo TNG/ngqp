@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [14.1.0](https://github.com/TNG/ngqp/compare/v14.0.0...v14.1.0) (2022-04-05)
+
+
+### Features
+
+* **core:** add serializeAll / deserializeAll ([460ad28](https://github.com/TNG/ngqp/commit/460ad2896e6710156e3e3af0d56d131e0052c057)), closes [#145](https://github.com/TNG/ngqp/issues/145)
+
 ## [14.0.0](https://github.com/TNG/ngqp/compare/v1.2.0...v14.0.0) (2022-03-03)
 
 
