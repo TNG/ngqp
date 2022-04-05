@@ -187,7 +187,7 @@ to a form control.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/lib/model/query-param.ts:162</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/lib/model/query-param.ts:171</a></div>
                             </td>
                         </tr>
 
@@ -263,7 +263,7 @@ to a form control.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/lib/model/query-param.ts:162</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/lib/model/query-param.ts:171</a></div>
                             </td>
                         </tr>
 
@@ -305,7 +305,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:86</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:95</a></code>
 </div>
                             </td>
                         </tr>
@@ -348,7 +348,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:83</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:92</a></code>
 </div>
                             </td>
                         </tr>
@@ -390,7 +390,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:77</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:86</a></code>
 </div>
                             </td>
                         </tr>
@@ -432,7 +432,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:74</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:83</a></code>
 </div>
                             </td>
                         </tr>
@@ -475,7 +475,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:80</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:89</a></code>
 </div>
                             </td>
                         </tr>
@@ -517,7 +517,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:71</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:80</a></code>
 </div>
                             </td>
                         </tr>
@@ -559,7 +559,7 @@ to a form control.</p>
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:68</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:77</a></code>
 </div>
                             </td>
                         </tr>
@@ -608,7 +608,7 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
                             </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:59</a></code>
+                                    <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:68</a></code>
 </div>
                             </td>
                         </tr>
@@ -659,7 +659,7 @@ the <a href="../classes/QueryParam.html">QueryParam</a> model used inside <a hre
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:127</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/AbstractQueryParam.html#source" target="_self" >AbstractQueryParam:136</a></code>
 </div>
                 </td>
             </tr>
@@ -742,7 +742,16 @@ the value to the URL.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { forkJoin, isObservable, Observable, of, Subject } from &#x27;rxjs&#x27;;
 import { first } from &#x27;rxjs/operators&#x27;;
 import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapIntoObservable, wrapTryCatch } from &#x27;../util&#x27;;
-import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from &#x27;../types&#x27;;
+import {
+    Comparator, MultiParamDeserializer,
+    MultiParamSerializer,
+    OnChangeFunction,
+    ParamCombinator,
+    ParamDeserializer,
+    ParamSerializer,
+    Partitioner,
+    Reducer
+} from &#x27;../types&#x27;;
 import { QueryParamGroup } from &#x27;./query-param-group&#x27;;
 import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from &#x27;./query-param-opts&#x27;;
 
@@ -934,14 +943,41 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T | null, (T
     /** See {@link QueryParamOpts}. */
     public readonly multi &#x3D; true;
 
+    /** See {@link MultiQueryParamOpts}. */
+    public readonly serializeAll?: MultiParamSerializer&lt;T&gt;;
+
+    /** See {@link MultiQueryParamOpts}. */
+    public readonly deserializeAll?: MultiParamDeserializer&lt;T&gt;;
+
     constructor(urlParam: string, opts: MultiQueryParamOpts&lt;T&gt;) {
         super(urlParam, opts);
+        const { serializeAll, deserializeAll } &#x3D; opts;
+
+        if (serializeAll !&#x3D;&#x3D; undefined) {
+            if (!isFunction(serializeAll)) {
+                throw new Error(&#x60;serializeAll must be a function, but received ${serializeAll}&#x60;);
+            }
+
+            this.serializeAll &#x3D; wrapTryCatch(serializeAll, &#x60;Error while serializing value for ${this.urlParam}&#x60;);
+        }
+
+        if (deserializeAll !&#x3D;&#x3D; undefined) {
+            if (!isFunction(deserializeAll)) {
+                throw new Error(&#x60;deserializeAll must be a function, but received ${deserializeAll}&#x60;);
+            }
+
+            this.deserializeAll &#x3D; wrapTryCatch(deserializeAll, &#x60;Error while deserializing value for ${this.urlParam}&#x60;);
+        }
     }
 
     /** @internal */
     public serializeValue(value: (T | null)[] | null): (string | null)[] | null {
         if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
+        }
+
+        if (this.serializeAll !&#x3D;&#x3D; undefined) {
+            return this.serializeAll(value);
         }
 
         return (value || []).map(this.serialize.bind(this));
@@ -951,6 +987,10 @@ export class MultiQueryParam&lt;T&gt; extends AbstractQueryParam&lt;T | null, (T
     public deserializeValue(values: (string | null)[] | null): Observable&lt;(T | null)[] | null&gt; {
         if (this.emptyOn !&#x3D;&#x3D; undefined &amp;&amp; (values || []).length &#x3D;&#x3D;&#x3D; 0) {
             return of(this.emptyOn);
+        }
+
+        if (this.deserializeAll !&#x3D;&#x3D; undefined) {
+            return wrapIntoObservable(this.deserializeAll(values));
         }
 
         if (!values || values.length &#x3D;&#x3D;&#x3D; 0) {

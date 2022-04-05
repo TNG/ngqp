@@ -145,7 +145,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Comparator, Reducer, Partitioner, ParamCombinator, ParamDeserializer, ParamSerializer } from &#x27;../types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+    Comparator,
+    Reducer,
+    Partitioner,
+    ParamCombinator,
+    ParamDeserializer,
+    ParamSerializer,
+    MultiParamSerializer, MultiParamDeserializer
+} from &#x27;../types&#x27;;
 
 /**
  * Configuration options for a {@link QueryParamGroup}.
@@ -237,6 +245,20 @@ export interface MultiQueryParamOpts&lt;T&gt; extends QueryParamOptsBase&lt;T | 
      * multiple times, e.g. &#x60;https://www.app.io?param&#x3D;A&amp;param&#x3D;B&amp;param&#x3D;C&#x60;.
      */
     multi: true;
+
+    /**
+     * Like {@link QueryParamOptsBase#serialize}, but serializes all values at once.
+     *
+     * If set, this overrides any per-value serializer.
+     */
+    serializeAll?: MultiParamSerializer&lt;T&gt;;
+
+    /**
+     * Like {@link QueryParamOptsBase#deserialize}, but deserializes all values at once.
+     *
+     * If set, this overrides any per-value deserializer.
+     */
+    deserializeAll?: MultiParamDeserializer&lt;T&gt;;
 }
 
 /**
