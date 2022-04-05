@@ -1,4 +1,12 @@
-import { Comparator, Reducer, Partitioner, ParamCombinator, ParamDeserializer, ParamSerializer } from '../types';
+import {
+    Comparator,
+    Reducer,
+    Partitioner,
+    ParamCombinator,
+    ParamDeserializer,
+    ParamSerializer,
+    MultiParamSerializer, MultiParamDeserializer
+} from '../types';
 
 /**
  * Configuration options for a {@link QueryParamGroup}.
@@ -90,6 +98,20 @@ export interface MultiQueryParamOpts<T> extends QueryParamOptsBase<T | null, (T 
      * multiple times, e.g. `https://www.app.io?param=A&param=B&param=C`.
      */
     multi: true;
+
+    /**
+     * Like {@link QueryParamOptsBase#serialize}, but serializes all values at once.
+     *
+     * If set, this overrides any per-value serializer.
+     */
+    serializeAll?: MultiParamSerializer<T>;
+
+    /**
+     * Like {@link QueryParamOptsBase#deserialize}, but deserializes all values at once.
+     *
+     * If set, this overrides any per-value deserializer.
+     */
+    deserializeAll?: MultiParamDeserializer<T>;
 }
 
 /**

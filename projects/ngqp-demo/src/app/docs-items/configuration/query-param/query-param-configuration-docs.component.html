@@ -42,8 +42,15 @@
         behavior of the router to have query parameters with multiple values.
     </p>
     <div class="alert alert-info">
-        When using <code>multi: true</code>, APIs such as <span apiDocsLink>QueryParamGroup#get</span> will actually
-        return <span apiDocsLink>MultiQueryParam</span> instead of <span apiDocsLink>QueryParam</span>.
+        <p>
+            When using <code>multi: true</code>, APIs such as <span apiDocsLink>QueryParamGroup#get</span> will actually
+            return <span apiDocsLink>MultiQueryParam</span> instead of <span apiDocsLink>QueryParam</span>.
+        </p>
+        <p>
+            If you want to (de-)serialize values of multi-valued parameters at once, you can define
+            <span apiDocsLink>MultiQueryParamOpts#serializeAll</span> and <span apiDocsLink>MultiQueryParamOpts#deserializeAll</span>
+            instead of individual serializers.
+        </p>
     </div>
     <demo-multi-example></demo-multi-example>
 

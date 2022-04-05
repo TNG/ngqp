@@ -1,7 +1,16 @@
 import { forkJoin, isObservable, Observable, of, Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { areEqualUsing, isFunction, isMissing, isPresent, undefinedToNull, wrapIntoObservable, wrapTryCatch } from '../util';
-import { Comparator, OnChangeFunction, ParamCombinator, ParamDeserializer, ParamSerializer, Partitioner, Reducer } from '../types';
+import {
+    Comparator, MultiParamDeserializer,
+    MultiParamSerializer,
+    OnChangeFunction,
+    ParamCombinator,
+    ParamDeserializer,
+    ParamSerializer,
+    Partitioner,
+    Reducer
+} from '../types';
 import { QueryParamGroup } from './query-param-group';
 import { MultiQueryParamOpts, PartitionedQueryParamOpts, QueryParamOpts, QueryParamOptsBase } from './query-param-opts';
 
@@ -193,14 +202,41 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
     /** See {@link QueryParamOpts}. */
     public readonly multi = true;
 
+    /** See {@link MultiQueryParamOpts}. */
+    public readonly serializeAll?: MultiParamSerializer<T>;
+
+    /** See {@link MultiQueryParamOpts}. */
+    public readonly deserializeAll?: MultiParamDeserializer<T>;
+
     constructor(urlParam: string, opts: MultiQueryParamOpts<T>) {
         super(urlParam, opts);
+        const { serializeAll, deserializeAll } = opts;
+
+        if (serializeAll !== undefined) {
+            if (!isFunction(serializeAll)) {
+                throw new Error(`serializeAll must be a function, but received ${serializeAll}`);
+            }
+
+            this.serializeAll = wrapTryCatch(serializeAll, `Error while serializing value for ${this.urlParam}`);
+        }
+
+        if (deserializeAll !== undefined) {
+            if (!isFunction(deserializeAll)) {
+                throw new Error(`deserializeAll must be a function, but received ${deserializeAll}`);
+            }
+
+            this.deserializeAll = wrapTryCatch(deserializeAll, `Error while deserializing value for ${this.urlParam}`);
+        }
     }
 
     /** @internal */
     public serializeValue(value: (T | null)[] | null): (string | null)[] | null {
         if (this.emptyOn !== undefined && areEqualUsing(value, this.emptyOn, this.compareWith!)) {
             return null;
+        }
+
+        if (this.serializeAll !== undefined) {
+            return this.serializeAll(value);
         }
 
         return (value || []).map(this.serialize.bind(this));
@@ -210,6 +246,10 @@ export class MultiQueryParam<T> extends AbstractQueryParam<T | null, (T | null)[
     public deserializeValue(values: (string | null)[] | null): Observable<(T | null)[] | null> {
         if (this.emptyOn !== undefined && (values || []).length === 0) {
             return of(this.emptyOn);
+        }
+
+        if (this.deserializeAll !== undefined) {
+            return wrapIntoObservable(this.deserializeAll(values));
         }
 
         if (!values || values.length === 0) {
