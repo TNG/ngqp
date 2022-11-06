@@ -7,11 +7,7 @@ declare const gtag: Function;
 @Injectable()
 export class AnalyticsService {
 
-    private readonly enabled: boolean;
-
-    constructor() {
-        this.enabled = window && window.location && window.location.href.includes('ngqp.io');
-    }
+    private readonly enabled = false;
 
     public startTracking(router: Router): void {
         if (!this.enabled) {
