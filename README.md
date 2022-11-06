@@ -5,7 +5,7 @@
 [![Gitter](https://img.shields.io/gitter/room/TNG/ngqp.svg?style=flat-square)](https://gitter.im/ngqp)
 
 <p align="center">
-    <a href="https://ngqp.io">
+    <a href="https://tng.github.io/ngqp">
         <img width="auto" height="72" src="https://raw.githubusercontent.com/TNG/ngqp/master/logo.svg?sanitize=true" alt="ngqp logo">
     </a>
 </p>
@@ -15,7 +15,7 @@
 <p align="center">
     Declaratively synchronize form controls with the URL
     <br>
-    <a href="https://ngqp.io/#/docs"><strong>Documentation</strong></a>
+    <a href="https://tng.github.io/ngqp/#/docs"><strong>Documentation</strong></a>
 </p>
 
 ## Description
@@ -30,7 +30,7 @@ from `@angular/forms`, making it intuitive to work with.
 ng add @ngqp/core
 ```
 
-Read the [Getting Started](https://www.ngqp.io/#/getting-started) page for information on how to use it.
+Read the [Getting Started](https://www.tng.github.io/ngqp/#/getting-started) page for information on how to use it.
 
 ## Contributing
 
