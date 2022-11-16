@@ -1,7 +1,7 @@
 {
   "configVersion": 1,
-  "timestamp": 1668595794805,
-  "index": "https://tng.github.io/ngqp/index.html",
+  "timestamp": 1668595863375,
+  "index": "/ngqp/index.html",
   "assetGroups": [
     {
       "name": "app",
@@ -11,13 +11,13 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://tng.github.io/ngqp/favicon.ico",
-        "https://tng.github.io/ngqp/index.html",
-        "https://tng.github.io/ngqp/main.e68eb14114b755543584.js",
-        "https://tng.github.io/ngqp/polyfills-es5.03e2cf47944f6d03f7b6.js",
-        "https://tng.github.io/ngqp/polyfills.c5bd725e78a0dc152a69.js",
-        "https://tng.github.io/ngqp/runtime.7b63b9fd40098a2e8207.js",
-        "https://tng.github.io/ngqp/styles.b56e2215ad834b299190.css"
+        "/ngqp/favicon.ico",
+        "/ngqp/index.html",
+        "/ngqp/main.e68eb14114b755543584.js",
+        "/ngqp/polyfills-es5.03e2cf47944f6d03f7b6.js",
+        "/ngqp/polyfills.c5bd725e78a0dc152a69.js",
+        "/ngqp/runtime.7b63b9fd40098a2e8207.js",
+        "/ngqp/styles.b56e2215ad834b299190.css"
       ],
       "patterns": []
     },
@@ -29,39 +29,39 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://tng.github.io/ngqp/assets/icons/icon-128x128.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-144x144.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-152x152.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-192x192.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-384x384.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-512x512.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-72x72.png",
-        "https://tng.github.io/ngqp/assets/icons/icon-96x96.png",
-        "https://tng.github.io/ngqp/assets/logo.png",
-        "https://tng.github.io/ngqp/assets/logo.svg"
+        "/ngqp/assets/icons/icon-128x128.png",
+        "/ngqp/assets/icons/icon-144x144.png",
+        "/ngqp/assets/icons/icon-152x152.png",
+        "/ngqp/assets/icons/icon-192x192.png",
+        "/ngqp/assets/icons/icon-384x384.png",
+        "/ngqp/assets/icons/icon-512x512.png",
+        "/ngqp/assets/icons/icon-72x72.png",
+        "/ngqp/assets/icons/icon-96x96.png",
+        "/ngqp/assets/logo.png",
+        "/ngqp/assets/logo.svg"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://tng.github.io/ngqp/assets/icons/icon-128x128.png": "72c967f1aab1dbc351f28cd39bc9f9fd8a9ca6bd",
-    "https://tng.github.io/ngqp/assets/icons/icon-144x144.png": "cf60e45fe24b46f96595445aa57f20175e92670e",
-    "https://tng.github.io/ngqp/assets/icons/icon-152x152.png": "c575917cc5e3b7e6e884b2fcb739787a317481c9",
-    "https://tng.github.io/ngqp/assets/icons/icon-192x192.png": "c85d392a71a27bdd5161db6670d3cc2361203a48",
-    "https://tng.github.io/ngqp/assets/icons/icon-384x384.png": "46d091368338994c97b0126332e51b72dfc79b7c",
-    "https://tng.github.io/ngqp/assets/icons/icon-512x512.png": "2c9efb4d3d5e4550e0d13d9e7e5f9cbc9b3ed31b",
-    "https://tng.github.io/ngqp/assets/icons/icon-72x72.png": "6fcec71e1a474c5732e6458131bc644a50363f27",
-    "https://tng.github.io/ngqp/assets/icons/icon-96x96.png": "c1630af25d5e9abc3c241bcc429c9a60ff61d7c4",
-    "https://tng.github.io/ngqp/assets/logo.png": "15ee4a615091cf5a5d412ef2c63b5f25331ef29d",
-    "https://tng.github.io/ngqp/assets/logo.svg": "1c0429f0ff733d22a9268ed85a6d22210ac86a98",
-    "https://tng.github.io/ngqp/favicon.ico": "3a0cdb8a4a0721e58bc49bf7b9736dc820a814da",
-    "https://tng.github.io/ngqp/index.html": "3dcf5de43f21ef1f021cc00062216921eb0a8f68",
-    "https://tng.github.io/ngqp/main.e68eb14114b755543584.js": "ea0b7da5677695c12f1ccf7d42b4ecba551259bc",
-    "https://tng.github.io/ngqp/polyfills-es5.03e2cf47944f6d03f7b6.js": "82dea8efa4bfe27f0fb36b6c70c9c3307105080a",
-    "https://tng.github.io/ngqp/polyfills.c5bd725e78a0dc152a69.js": "699b2082c052918e9b975e22c1d63bab59b73268",
-    "https://tng.github.io/ngqp/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://tng.github.io/ngqp/styles.b56e2215ad834b299190.css": "be9aef9bc507b68a043850cb0d0dde65e5c2512e"
+    "/ngqp/assets/icons/icon-128x128.png": "72c967f1aab1dbc351f28cd39bc9f9fd8a9ca6bd",
+    "/ngqp/assets/icons/icon-144x144.png": "cf60e45fe24b46f96595445aa57f20175e92670e",
+    "/ngqp/assets/icons/icon-152x152.png": "c575917cc5e3b7e6e884b2fcb739787a317481c9",
+    "/ngqp/assets/icons/icon-192x192.png": "c85d392a71a27bdd5161db6670d3cc2361203a48",
+    "/ngqp/assets/icons/icon-384x384.png": "46d091368338994c97b0126332e51b72dfc79b7c",
+    "/ngqp/assets/icons/icon-512x512.png": "2c9efb4d3d5e4550e0d13d9e7e5f9cbc9b3ed31b",
+    "/ngqp/assets/icons/icon-72x72.png": "6fcec71e1a474c5732e6458131bc644a50363f27",
+    "/ngqp/assets/icons/icon-96x96.png": "c1630af25d5e9abc3c241bcc429c9a60ff61d7c4",
+    "/ngqp/assets/logo.png": "15ee4a615091cf5a5d412ef2c63b5f25331ef29d",
+    "/ngqp/assets/logo.svg": "1c0429f0ff733d22a9268ed85a6d22210ac86a98",
+    "/ngqp/favicon.ico": "3a0cdb8a4a0721e58bc49bf7b9736dc820a814da",
+    "/ngqp/index.html": "498adfa8a5ada904106c117f9702fc6eaae5c089",
+    "/ngqp/main.e68eb14114b755543584.js": "ea0b7da5677695c12f1ccf7d42b4ecba551259bc",
+    "/ngqp/polyfills-es5.03e2cf47944f6d03f7b6.js": "82dea8efa4bfe27f0fb36b6c70c9c3307105080a",
+    "/ngqp/polyfills.c5bd725e78a0dc152a69.js": "699b2082c052918e9b975e22c1d63bab59b73268",
+    "/ngqp/runtime.7b63b9fd40098a2e8207.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/ngqp/styles.b56e2215ad834b299190.css": "be9aef9bc507b68a043850cb0d0dde65e5c2512e"
   },
   "navigationUrls": [
     {
