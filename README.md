@@ -30,7 +30,7 @@ from `@angular/forms`, making it intuitive to work with.
 ng add @ngqp/core
 ```
 
-Read the [Getting Started](https://www.tng.github.io/ngqp/#/getting-started) page for information on how to use it.
+Read the [Getting Started](https://tng.github.io/ngqp/#/getting-started) page for information on how to use it.
 
 ## Contributing
 
